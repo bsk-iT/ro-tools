@@ -19,9 +19,9 @@ class AutoPot:
 
     def run(self) -> None:
         self.running = True
-        threading.Thread(target=self.monitoring_loop, args=(Item.HP_POTION), daemon=True).start()
-        threading.Thread(target=self.monitoring_loop, args=(Item.SP_POTION), daemon=True).start()
-        threading.Thread(target=self.monitoring_loop, args=(Item.YGG), daemon=True).start()
+        threading.Thread(target=self.monitoring_loop, args=(Item.HP_POTION,), daemon=True).start()
+        threading.Thread(target=self.monitoring_loop, args=(Item.SP_POTION,), daemon=True).start()
+        threading.Thread(target=self.monitoring_loop, args=(Item.YGG,), daemon=True).start()
 
     def monitoring_loop(self, item: Item) -> None:
         while self.running:
