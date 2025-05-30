@@ -1,0 +1,65 @@
+from PyQt6.QtWidgets import QPushButton, QSizePolicy, QWidget
+from PyQt6.QtGui import QKeySequence, QKeyEvent, QIcon
+from PyQt6.QtCore import Qt, QSize
+
+from config.app import APP_ICON_SIZE
+from config.icon import ICON_KEYBOARD
+from service.file import CONFIG_FILE
+
+
+class InputKeybind(QPushButton):
+    def __init__(self, parent: QWidget, input_key: str | None = None) -> None:
+        super().__init__(parent)
+        self.listenning = False
+        self.key_sequence = None
+        self.input_key = input_key
+        self.clicked.connect(self._start_listenning)
+        self._config_layout()
+        self._load_value()
+
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        if not self.listenning:
+            return super().keyPressEvent(event)
+        self._on_change_key_sequence(event)
+
+    def _config_layout(self) -> None:
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        self.setMinimumWidth(APP_ICON_SIZE)
+        self.setStyleSheet("padding: 0;")
+        self.setFixedHeight(APP_ICON_SIZE - 3)
+        self.setIconSize(QSize(APP_ICON_SIZE - 6, APP_ICON_SIZE))
+
+    def _load_value(self) -> None:
+        value = CONFIG_FILE.read(self.input_key)
+        if value is None:
+            self._default_label()
+            return
+        self.key_sequence = QKeySequence(value)
+        self.setText(self.key_sequence.toString())
+
+    def _default_label(self) -> None:
+        self.setIcon(QIcon(ICON_KEYBOARD))
+        self.setText("")
+
+    def _start_listenning(self) -> None:
+        self.setText("_")
+        self.setIcon(QIcon())
+        self.listenning = True
+        self.setFocus()
+
+    def _on_change_key_sequence(self, event: QKeyEvent) -> None:
+        key = event.key()
+        if key in (Qt.Key.Key_Control, Qt.Key.Key_Shift, Qt.Key.Key_Alt, Qt.Key.Key_Meta):
+            return
+        self.listenning = False
+        if key == Qt.Key.Key_Escape:
+            self.setText(self.key_sequence.toString())
+            return
+        if key == Qt.Key.Key_Backspace:
+            self._default_label()
+            return
+        modifiers = event.modifiers().value
+        self.key_sequence = QKeySequence(modifiers | key)
+        self.setText(self.key_sequence.toString())
+        CONFIG_FILE.update(self.input_key, self.key_sequence.toString())

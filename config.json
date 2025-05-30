@@ -1,0 +1,21 @@
+{
+    "auto_pot": {
+        "hp_potion": {
+            "delay_active": false,
+            "map_active": false,
+            "delay": 10,
+            "key": "F9"
+        },
+        "sp_potion": {
+            "delay_active": false,
+            "map_active": false,
+            "key": "F8"
+        },
+        "ygg": {
+            "delay_active": false,
+            "map_active": false,
+            "key": "F7",
+            "delay": 1000
+        }
+    }
+}
