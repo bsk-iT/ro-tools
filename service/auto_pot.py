@@ -45,9 +45,13 @@ class AutoPot:
 
     def _potion_rule(self, char_percent: Any, item: Item, key: str):
         percent = self.getConfig(item, Action.PERCENT)
+        ygg_percent = self.getConfig(Item.YGG, Action.HP_PERCENT) if item == Item.HP_POTION else self.getConfig(Item.YGG, Action.SP_PERCENT)
+        char_percent_value = char_percent()
         if not percent or not key or not char_percent:
             return False
-        return char_percent() <= percent
+        if char_percent_value <= ygg_percent:
+            return False
+        return char_percent_value <= percent
 
     def _ygg_rule(self, item: Item, key: str):
         hp_percent = self.getConfig(item, Action.HP_PERCENT)
