@@ -19,23 +19,23 @@ class AutoPot:
 
     def run(self) -> None:
         self.running = True
-        threading.Thread(target=self.monitoring_loop, args=(CHAR.hp_percent, Item.HP_POTION), daemon=True).start()
-        threading.Thread(target=self.monitoring_loop, args=(CHAR.sp_percent, Item.SP_POTION), daemon=True).start()
-        threading.Thread(target=self.monitoring_loop, args=(None, Item.YGG), daemon=True).start()
+        threading.Thread(target=self.monitoring_loop, args=(Item.HP_POTION), daemon=True).start()
+        threading.Thread(target=self.monitoring_loop, args=(Item.SP_POTION), daemon=True).start()
+        threading.Thread(target=self.monitoring_loop, args=(Item.YGG), daemon=True).start()
 
-    def monitoring_loop(self, char_percent: Any, item: Item) -> None:
+    def monitoring_loop(self, item: Item) -> None:
         while self.running:
             if not MEMORY.is_valid():
                 time.sleep(APP_MONITORING_DELAY)
                 continue
-            self.monitoring(char_percent, item)
+            self.monitoring(item)
 
-    def monitoring(self, char_percent: Any, item: Item) -> None:
+    def monitoring(self, item: Item) -> None:
         if not self._is_valid_map(item):
             time.sleep(APP_MONITORING_DELAY)
             return
         key = self.getConfig(item, Action.KEY)
-        is_rule_reached = self._ygg_rule(item, key) if item == Item.YGG else self._potion_rule(char_percent, item, key)
+        is_rule_reached = self._ygg_rule(item, key) if item == Item.YGG else self._potion_rule(item, key)
         if is_rule_reached:
             print(f"Potting {item}!")
             KEYBOARD.press_key(key)
@@ -43,15 +43,13 @@ class AutoPot:
             return
         time.sleep(APP_MONITORING_DELAY)
 
-    def _potion_rule(self, char_percent: Any, item: Item, key: str):
+    def _potion_rule(self, item: Item, key: str):
         percent = self.getConfig(item, Action.PERCENT)
         ygg_percent = self.getConfig(Item.YGG, Action.HP_PERCENT) if item == Item.HP_POTION else self.getConfig(Item.YGG, Action.SP_PERCENT)
-        char_percent_value = char_percent()
-        if not percent or not key or not char_percent:
+        char_percent = CHAR.hp_percent() if item == Item.HP_POTION else CHAR.sp_percent()
+        if not percent or not key or not char_percent or char_percent <= ygg_percent:
             return False
-        if char_percent_value <= ygg_percent:
-            return False
-        return char_percent_value <= percent
+        return char_percent <= percent
 
     def _ygg_rule(self, item: Item, key: str):
         hp_percent = self.getConfig(item, Action.HP_PERCENT)
