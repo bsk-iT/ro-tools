@@ -16,7 +16,6 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event: QEvent) -> None:
         AUTO_POT.stop()
-        CONFIG_FILE.save()
         event.accept()
 
     def changeEvent(self, event: QEvent) -> None:

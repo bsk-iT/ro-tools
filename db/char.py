@@ -38,13 +38,13 @@ class Char:
         max_hp = self.max_hp()
         if max_hp == 0:
             return 100
-        return int(self.hp() * 100 / self.max_hp())
+        return int(self.hp() * 100 / max_hp)
 
     def sp_percent(self) -> int:
         max_sp = self.max_sp()
         if max_sp == 0:
             return 100
-        return int(self.sp() * 100 / self.max_sp())
+        return int(self.sp() * 100 / max_sp)
 
 
 CHAR = Char()

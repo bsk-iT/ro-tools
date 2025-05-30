@@ -21,7 +21,7 @@ class CboxProcess(QWidget):
 
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.layout.setSpacing(0)
+        self.layout.setSpacing(5)
         self.layout.addWidget(QLabel("Selecione o processo:"))
         hbox = QHBoxLayout()
         hbox.addWidget(self.cbox)

@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QToolButton, QSpinBox, QHBoxLayout
+from PyQt6.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout
 from PyQt6.QtGui import QIcon
 
 from config.app import APP_ACTION_DELAY, APP_MAX_DELAY, APP_MIN_DELAY
@@ -37,19 +37,19 @@ class InputDelay(QWidget):
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(ICON_QUICK))
         toggle.setIconSize(ICON_BTN)
-        toggle.setToolTip("Delay de uso em milisegundos")
+        toggle.setToolTip("Delay de uso em segundos")
         return toggle
 
-    def _build_spinbox(self, delay: str) -> QSpinBox:
-        spinbox = QSpinBox()
+    def _build_spinbox(self, delay: str) -> QDoubleSpinBox:
+        spinbox = QDoubleSpinBox()
         spinbox.setRange(APP_MIN_DELAY, APP_MAX_DELAY)
-        delay_ms = self._get_delay_ms(delay)
-        spinbox.setValue(delay_ms)
-        spinbox.setFixedWidth(105)
-        spinbox.setSuffix("ms")
+        delay_s = self._get_delay(delay)
+        spinbox.setValue(delay_s)
+        spinbox.setFixedWidth(95)
+        spinbox.setSuffix("s")
         return spinbox
 
-    def _get_delay_ms(self, delay: str) -> int:
+    def _get_delay(self, delay: str) -> float:
         delay_config = CONFIG_FILE.read(delay)
         if not delay_config:
             return APP_ACTION_DELAY

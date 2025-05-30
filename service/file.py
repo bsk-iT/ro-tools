@@ -13,11 +13,14 @@ class File:
         json_data = self.data
         if key_map is None:
             return self.data
-        for key in key_map.split(":"):
+        keys = key_map.split(":")
+        for key in keys[:-1]:
             json_data = json_data.get(key, None)
             if not json_data:
-                return json_data
-        return json_data
+                return None
+        if keys[-1] not in json_data:
+            return None
+        return json_data[keys[-1]]
 
     def update(self, key_map: str, value: Any) -> None:
         json_data = self.data
@@ -27,6 +30,7 @@ class File:
                 json_data[key] = {}
             json_data = json_data[key]
         json_data[keys[-1]] = value
+        self.save()
 
     def save(self) -> None:
         with open(self.file_path, "w") as f:

@@ -1,21 +1,26 @@
 {
+    "keyboard_type": "virtual",
     "auto_pot": {
         "hp_potion": {
             "delay_active": false,
             "map_active": false,
-            "delay": 10,
-            "key": "F9"
+            "delay": 0.1,
+            "key": "F9",
+            "percent": 90
         },
         "sp_potion": {
             "delay_active": false,
             "map_active": false,
-            "key": "F8"
+            "delay": 0.1,
+            "key": "F8",
+            "percent": 30
         },
         "ygg": {
-            "delay_active": false,
+            "delay_active": true,
             "map_active": false,
             "key": "F7",
-            "delay": 1000
+            "delay": 10,
+            "hp_percent": 5
         }
     }
 }
