@@ -8,7 +8,7 @@ from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
 from service.auto_pot import AUTO_POT
-from util.widgets import build_icon, build_painel, build_spinbox_percentage
+from util.widgets import build_icon, build_label_info, build_painel, build_spinbox_percentage
 
 
 class PainelAutoPot(QWidget):
@@ -30,9 +30,10 @@ class PainelAutoPot(QWidget):
         vbox_potion.addLayout(sp_layout)
         painel_potion.addLayout(vbox_potion)
 
-        painel_ygg = build_painel(self.layout, "Auto Ygg")
+        painel_ygg = build_painel(self.layout, "Auto Ygg/Telar")
         vbox_ygg = QVBoxLayout()
         ygg_layout = self._build_action_layout("YGG", IMG_YGG, Item.YGG, True)
+        vbox_ygg.addWidget(build_label_info("Tem preferência de uso sobre o Auto Potion.\nÉ possível utilizar a tecla da asa de mosca ou macro do jogo (Ex: ALT+1) para telar."))
         vbox_ygg.addLayout(ygg_layout)
         painel_ygg.addLayout(vbox_ygg)
 

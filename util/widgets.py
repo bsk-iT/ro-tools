@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QLabel, QSpinBox, QBoxLayout, QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout
 from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QFont
 
 from config.app import APP_ICON_SIZE
 from service.file import CONFIG_FILE
@@ -20,7 +20,11 @@ def build_painel(layout: QBoxLayout, title: str) -> QVBoxLayout:
     layout.addWidget(widget)
     return painel
 
-
+def build_label_info(text: str) -> QLabel:
+    label = QLabel(text)
+    label.setWordWrap(True)
+    label.setStyleSheet("font-size: 12px; color: gray;")
+    return label
 
 def build_icon(icon: str, tooltip: str = None) -> QLabel:
     label = QLabel()
