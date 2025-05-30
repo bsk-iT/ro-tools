@@ -20,7 +20,8 @@
             "map_active": false,
             "key": "F7",
             "delay": 10,
-            "hp_percent": 5
+            "hp_percent": 5,
+            "sp_percent": 1
         }
     }
 }

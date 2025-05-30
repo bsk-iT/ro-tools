@@ -21,7 +21,7 @@ class PainelAutoPot(QWidget):
 
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        painel_potion = build_painel(self.layout, "Auto Pot")
+        painel_potion = build_painel(self.layout, "Auto Potion")
         vbox_potion = QVBoxLayout()
         vbox_potion.setSpacing(0)
         hp_layout = self._build_action_layout("HP", IMG_RED_POTION, Item.HP_POTION)
