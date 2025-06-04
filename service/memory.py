@@ -1,5 +1,5 @@
 from typing import Any
-from pymem import Pymem
+import pymem
 import win32gui
 import win32process
 import pywintypes
@@ -9,9 +9,9 @@ from service.file import SERVERS_FILE
 
 class Memory:
     def __init__(self) -> None:
-        self.process = Pymem()
+        self.process = pymem.Pymem()
         self.process_name = None
-        self.hp_address = None
+        self.base_address = None
 
     def is_valid(self) -> bool:
         return self.process.process_handle is not None
@@ -19,7 +19,8 @@ class Memory:
     def update_process(self, name: str, pid: int) -> None:
         self.process.open_process_from_id(pid)
         self.process_name = name
-        self.hp_address = self._get_base_address("hp")
+        module = pymem.process.module_from_name(self.process.process_handle, name)
+        self.base_address = module.lpBaseOfDll
 
     def get_hwnd(self) -> None:
         if not self.is_valid():
@@ -38,9 +39,11 @@ class Memory:
         win32gui.EnumWindows(enum_windows_callback, None)
         return hwnds[0] if hwnds else None
 
-    def _get_base_address(self, base_name: str) -> int:
-        hp_address = SERVERS_FILE.read(f"{self.process_name}:{base_name}")
-        return int(hp_address, 16)
+    def get_address(self, offsets):
+        address = self.base_address
+        for offset in offsets[:-1]:
+            address = self.process.read_uint(address + offset)
+        return address + offsets[-1]
 
 
 MEMORY = Memory()

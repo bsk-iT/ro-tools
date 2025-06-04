@@ -1,0 +1,163 @@
+from game.aspd_potion import AWAKENING_POTION, BERSERK_POTION, CONCENTRATION_POTION
+
+
+class Job:
+    def __init__(
+        self,
+        job_id,
+        name,
+        previous_job=None,
+        atk_skills=[],
+        buff_skills=[],
+        aspd_potions=[],
+    ):
+        self.job_id = job_id
+        self.name = name
+        self.previous_job = previous_job
+        self.atk_skills = atk_skills
+        self.buff_skills = buff_skills
+        self.aspd_potions = aspd_potions
+
+    def __str__(self):
+        return self.name
+
+
+NOVICE = Job(0, "Aprendiz", aspd_potions=[CONCENTRATION_POTION])
+SWORDMAN = Job(1, "Espadachim", NOVICE, aspd_potions=[AWAKENING_POTION, BERSERK_POTION])
+MAGICIAN = Job(2, "Mago", NOVICE)
+ARCHER = Job(3, "Arqueiro", NOVICE)
+ACOLYTE = Job(4, "Noviço", NOVICE)
+MERCHANT = Job(5, "Mercador", NOVICE)
+THIEF = Job(6, "Gatuno", NOVICE)
+KNIGHT = Job(7, "Cavaleiro", SWORDMAN)
+PRIEST = Job(8, "Sacerdote", ACOLYTE)
+WIZARD = Job(9, "Bruxo", MAGICIAN)
+BLACKSMITH = Job(10, "Ferreiro", MERCHANT)
+HUNTER = Job(11, "Caçador", ARCHER)
+ASSASSIN = Job(12, "Caçador", THIEF)
+KNIGHT_PECO = KNIGHT
+CRUSADER = Job(14, "Cavaleiro", SWORDMAN)
+MONK = Job(15, "Monge", ACOLYTE)
+SAGE = Job(16, "Sábio", MAGICIAN)
+ROGUE = Job(17, "Arruaceiro", THIEF)
+ALCHEMIST = Job(18, "Alquimista", MERCHANT)
+BARD = Job(19, "Bardo", ARCHER)
+DANCER = Job(20, "Odalisca", ARCHER)
+CRUSADER_PECO = CRUSADER
+SUPERNOVICE = Job(23, "Super Noviço", NOVICE)
+GUNSLINGER = Job(24, "Pistoleiro", NOVICE)
+NINJA = Job(25, "Ninja", NOVICE)
+LORD_KNIGHT = Job(4008, "Lorde", KNIGHT)
+HIGH_PRIEST = Job(4009, "Sumo Sacerdote", PRIEST)
+HIGH_WIZARD = Job(4010, "Arquimago", WIZARD)
+WHITESMITH = Job(4011, "Mestre Ferreiro", BLACKSMITH)
+SNIPER = Job(4012, "Atirador de Elite", BLACKSMITH)
+ASSASSIN_CROSS = Job(4013, "Algoz", BLACKSMITH)
+LORD_KNIGHT_PECO = LORD_KNIGHT
+PALADIN = Job(4015, "Paladino", CRUSADER)
+CHAMPION = Job(4016, "Mestre", MONK)
+SCHOLAR = Job(4017, "Professor", SAGE)
+STALKER = Job(4018, "Desordeiro", ROGUE)
+BIOCHEMIST = Job(4019, "Criador", ALCHEMIST)
+MINSTREL = Job(4020, "Menestrel", BARD)
+GYPSY = Job(4021, "Cigana", DANCER)
+PALADIN_PECO = PALADIN
+RUNE_KNIGHT = Job(4060, "Cavaleiro Rúnico", LORD_KNIGHT)
+WARLOCK = Job(4061, "Arcano", HIGH_WIZARD)
+RANGER = Job(4062, "Sentinela", SNIPER)
+ARCH_BISHOP = Job(4063, "Sentinela", HIGH_PRIEST)
+MECHANIC = Job(4064, "Mecânico", WHITESMITH)
+GUILLOTINE_CROSS = Job(4065, "Sicário", WHITESMITH)
+ROYAL_GUARD = Job(4073, "Guardão Real", PALADIN)
+SORCERER = Job(4074, "Feiticeiro", SCHOLAR)
+MAESTRO = Job(4075, "Maestro", MINSTREL)
+WANDERER = Job(4076, "Musa", GYPSY)
+SURA = Job(4077, "Shura", CHAMPION)
+GENETIC = Job(4078, "Bioquímico", BIOCHEMIST)
+SHADOW_CHASER = Job(4079, "Renegado", STALKER)
+RUNE_KNIGHT_PECO = RUNE_KNIGHT
+ROYAL_GUARD_PECO = ROYAL_GUARD
+RANGER_WOLF = RANGER
+MECHANIC_GEAR = MECHANIC
+RUNE_KNIGHT_PECO_2 = RUNE_KNIGHT
+RUNE_KNIGHT_PECO_3 = RUNE_KNIGHT
+RUNE_KNIGHT_PECO_4 = RUNE_KNIGHT
+RUNE_KNIGHT_PECO_5 = RUNE_KNIGHT
+
+JOB_MAP = {
+    0: NOVICE,
+    4001: NOVICE,
+    1: SWORDMAN,
+    4002: SWORDMAN,
+    2: MAGICIAN,
+    4003: SWORDMAN,
+    3: ARCHER,
+    4004: ARCHER,
+    4: ACOLYTE,
+    4005: ACOLYTE,
+    5: MERCHANT,
+    4006: MERCHANT,
+    6: THIEF,
+    4007: THIEF,
+    7: KNIGHT,
+    4008: LORD_KNIGHT,
+    4060: RUNE_KNIGHT,
+    8: PRIEST,
+    4009: HIGH_PRIEST,
+    4063: ARCH_BISHOP,
+    9: WIZARD,
+    4010: HIGH_WIZARD,
+    4061: WARLOCK,
+    10: BLACKSMITH,
+    4011: WHITESMITH,
+    4064: MECHANIC,
+    4087: MECHANIC_GEAR,
+    11: HUNTER,
+    4012: SNIPER,
+    4062: RANGER,
+    4085: RANGER_WOLF,
+    12: ASSASSIN,
+    4013: ASSASSIN_CROSS,
+    4065: GUILLOTINE_CROSS,
+    13: KNIGHT_PECO,
+    4014: LORD_KNIGHT_PECO,
+    4081: RUNE_KNIGHT_PECO,
+    4089: RUNE_KNIGHT_PECO_2,
+    4091: RUNE_KNIGHT_PECO_3,
+    4093: RUNE_KNIGHT_PECO_4,
+    4095: RUNE_KNIGHT_PECO_5,
+    14: CRUSADER,
+    4015: PALADIN,
+    4073: ROYAL_GUARD,
+    15: MONK,
+    4016: CHAMPION,
+    4077: SURA,
+    16: SAGE,
+    4017: SCHOLAR,
+    4074: SORCERER,
+    17: ROGUE,
+    4018: STALKER,
+    4079: SHADOW_CHASER,
+    18: ALCHEMIST,
+    4019: BIOCHEMIST,
+    4078: GENETIC,
+    19: BARD,
+    4020: MINSTREL,
+    4075: MAESTRO,
+    20: DANCER,
+    4021: GYPSY,
+    4076: WANDERER,
+    21: CRUSADER_PECO,
+    4022: PALADIN_PECO,
+    4083: ROYAL_GUARD_PECO,
+    23: SUPERNOVICE,
+    24: GUNSLINGER,
+    25: NINJA,
+}
+
+JOB_GROUPS = {
+    "Início": [NOVICE],
+    "Classe 1": [SWORDMAN, MAGICIAN, ARCHER, ACOLYTE, MERCHANT, THIEF],
+    "Classe 2": [KNIGHT, PRIEST, WIZARD, BLACKSMITH, HUNTER, ASSASSIN, CRUSADER, MONK, SAGE, ROGUE, ALCHEMIST, BARD, DANCER, SUPERNOVICE, GUNSLINGER, NINJA],
+    "Transclasse": [LORD_KNIGHT, HIGH_PRIEST, HIGH_WIZARD, WHITESMITH, SNIPER, ASSASSIN_CROSS, PALADIN, CHAMPION, SCHOLAR, STALKER, BIOCHEMIST, MINSTREL, GYPSY],
+}

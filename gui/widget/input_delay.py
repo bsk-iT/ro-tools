@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout
 from PyQt6.QtGui import QIcon
 
-from config.app import APP_ACTION_DELAY, APP_MAX_DELAY, APP_MIN_DELAY
+from config.app import APP_DELAY, APP_MAX_DELAY, APP_MIN_DELAY
 from config.icon import ICON_QUICK
 from service.file import CONFIG_FILE
 from util.number import clamp
@@ -52,7 +52,7 @@ class InputDelay(QWidget):
     def _get_delay(self, delay: str) -> float:
         delay_config = CONFIG_FILE.read(delay)
         if not delay_config:
-            return APP_ACTION_DELAY
+            return APP_DELAY
         if delay_config is not None:
             return clamp(delay_config, APP_MIN_DELAY, APP_MAX_DELAY)
         return delay_config

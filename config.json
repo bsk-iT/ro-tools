@@ -3,25 +3,28 @@
     "auto_pot": {
         "hp_potion": {
             "delay_active": false,
-            "map_active": false,
-            "delay": 0.1,
+            "map_active": true,
+            "delay": 0.01,
             "key": "F9",
-            "percent": 90
+            "percent": 80,
+            "map": "pvp"
         },
         "sp_potion": {
             "delay_active": false,
-            "map_active": false,
-            "delay": 0.1,
+            "map_active": true,
+            "delay": 0.01,
             "key": "F8",
-            "percent": 30
+            "percent": 95
         },
         "ygg": {
             "delay_active": true,
             "map_active": false,
             "key": "F7",
-            "delay": 10,
+            "delay": 10.0,
             "hp_percent": 5,
-            "sp_percent": 1
-        }
-    }
+            "sp_percent": 2
+        },
+        "city_active": false
+    },
+    "key_monitoring": "End"
 }

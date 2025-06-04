@@ -1,6 +1,5 @@
 from typing import List
 from service.file import MAPS_FILE
-from service.memory import MEMORY
 
 
 class Maps:
