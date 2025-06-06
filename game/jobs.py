@@ -1,80 +1,82 @@
-from game.aspd_potion import AWAKENING_POTION, BERSERK_POTION, CONCENTRATION_POTION
+from config.icon import PATH_JOB_ICON, get_image
+from game.buffs import AWAKENING_POTION, BERSERK_POTION, CONCENTRATION_POTION
 
 
 class Job:
     def __init__(
         self,
-        job_id,
+        _id,
         name,
         previous_job=None,
-        atk_skills=[],
-        buff_skills=[],
-        aspd_potions=[],
+        spawn_skill=[],
+        buff_skill=[],
+        buff_aspd=[],
     ):
-        self.job_id = job_id
+        self.id = _id
         self.name = name
         self.previous_job = previous_job
-        self.atk_skills = atk_skills
-        self.buff_skills = buff_skills
-        self.aspd_potions = aspd_potions
+        self.spawn_skill = spawn_skill
+        self.buff_skill = buff_skill
+        self.buff_aspd = buff_aspd
+        self.icon = get_image(PATH_JOB_ICON, self.id)
 
     def __str__(self):
         return self.name
 
 
-NOVICE = Job(0, "Aprendiz", aspd_potions=[CONCENTRATION_POTION])
-SWORDMAN = Job(1, "Espadachim", NOVICE, aspd_potions=[AWAKENING_POTION, BERSERK_POTION])
-MAGICIAN = Job(2, "Mago", NOVICE)
-ARCHER = Job(3, "Arqueiro", NOVICE)
-ACOLYTE = Job(4, "Noviço", NOVICE)
-MERCHANT = Job(5, "Mercador", NOVICE)
-THIEF = Job(6, "Gatuno", NOVICE)
-KNIGHT = Job(7, "Cavaleiro", SWORDMAN)
-PRIEST = Job(8, "Sacerdote", ACOLYTE)
-WIZARD = Job(9, "Bruxo", MAGICIAN)
-BLACKSMITH = Job(10, "Ferreiro", MERCHANT)
-HUNTER = Job(11, "Caçador", ARCHER)
-ASSASSIN = Job(12, "Caçador", THIEF)
+NOVICE = Job("NOVICE", "Aprendiz", buff_aspd=[CONCENTRATION_POTION])
+SWORDMAN = Job("SWORDMAN", "Espadachim", NOVICE, buff_aspd=[AWAKENING_POTION, BERSERK_POTION])
+MAGICIAN = Job("MAGICIAN", "Mago", NOVICE)
+ARCHER = Job("ARCHER", "Arqueiro", NOVICE)
+ACOLYTE = Job("ACOLYTE", "Noviço", NOVICE)
+MERCHANT = Job("MERCHANT", "Mercador", NOVICE)
+THIEF = Job("THIEF", "Gatuno", NOVICE)
+KNIGHT = Job("KNIGHT", "Cavaleiro", SWORDMAN)
+PRIEST = Job("PRIEST", "Sacerdote", ACOLYTE)
+WIZARD = Job("WIZARD", "Bruxo", MAGICIAN)
+BLACKSMITH = Job("BLACKSMITH", "Ferreiro", MERCHANT)
+HUNTER = Job("HUNTER", "Caçador", ARCHER)
+ASSASSIN = Job("ASSASSIN", "Caçador", THIEF)
 KNIGHT_PECO = KNIGHT
-CRUSADER = Job(14, "Cavaleiro", SWORDMAN)
-MONK = Job(15, "Monge", ACOLYTE)
-SAGE = Job(16, "Sábio", MAGICIAN)
-ROGUE = Job(17, "Arruaceiro", THIEF)
-ALCHEMIST = Job(18, "Alquimista", MERCHANT)
-BARD = Job(19, "Bardo", ARCHER)
-DANCER = Job(20, "Odalisca", ARCHER)
+CRUSADER = Job("CRUSADER", "Cavaleiro", SWORDMAN)
+MONK = Job("MONK", "Monge", ACOLYTE)
+SAGE = Job("SAGE", "Sábio", MAGICIAN)
+ROGUE = Job("ROGUE", "Arruaceiro", THIEF)
+ALCHEMIST = Job("ALCHEMIST", "Alquimista", MERCHANT)
+BARD = Job("BARD", "Bardo", ARCHER)
+DANCER = Job("DANCER", "Odalisca", ARCHER)
 CRUSADER_PECO = CRUSADER
-SUPERNOVICE = Job(23, "Super Noviço", NOVICE)
-GUNSLINGER = Job(24, "Pistoleiro", NOVICE)
-NINJA = Job(25, "Ninja", NOVICE)
-LORD_KNIGHT = Job(4008, "Lorde", KNIGHT)
-HIGH_PRIEST = Job(4009, "Sumo Sacerdote", PRIEST)
-HIGH_WIZARD = Job(4010, "Arquimago", WIZARD)
-WHITESMITH = Job(4011, "Mestre Ferreiro", BLACKSMITH)
-SNIPER = Job(4012, "Atirador de Elite", BLACKSMITH)
-ASSASSIN_CROSS = Job(4013, "Algoz", BLACKSMITH)
+SUPERNOVICE = Job("SUPERNOVICE", "Super Noviço", NOVICE)
+GUNSLINGER = Job("GUNSLINGER", "Justiceiro", NOVICE)
+NINJA = Job("NINJA", "Ninja", NOVICE)
+LORD_KNIGHT = Job("LORD_KNIGHT", "Lorde", KNIGHT)
+HIGH_PRIEST = Job("HIGH_PRIEST", "Sumo Sacerdote", PRIEST)
+HIGH_WIZARD = Job("HIGH_WIZARD", "Arquimago", WIZARD)
+WHITESMITH = Job("WHITESMITH", "Mestre Ferreiro", BLACKSMITH)
+SNIPER = Job("SNIPER", "Atirador de Elite", BLACKSMITH)
+ASSASSIN_CROSS = Job("ASSASSIN_CROSS", "Algoz", BLACKSMITH)
 LORD_KNIGHT_PECO = LORD_KNIGHT
-PALADIN = Job(4015, "Paladino", CRUSADER)
-CHAMPION = Job(4016, "Mestre", MONK)
-SCHOLAR = Job(4017, "Professor", SAGE)
-STALKER = Job(4018, "Desordeiro", ROGUE)
-BIOCHEMIST = Job(4019, "Criador", ALCHEMIST)
-MINSTREL = Job(4020, "Menestrel", BARD)
-GYPSY = Job(4021, "Cigana", DANCER)
+PALADIN = Job("PALADIN", "Paladino", CRUSADER)
+CHAMPION = Job("CHAMPION", "Mestre", MONK)
+SCHOLAR = Job("SCHOLAR", "Professor", SAGE)
+STALKER = Job("STALKER", "Desordeiro", ROGUE)
+BIOCHEMIST = Job("BIOCHEMIST", "Criador", ALCHEMIST)
+MINSTREL = Job("MINSTREL", "Menestrel", BARD)
+GYPSY = Job("GYPSY", "Cigana", DANCER)
 PALADIN_PECO = PALADIN
-RUNE_KNIGHT = Job(4060, "Cavaleiro Rúnico", LORD_KNIGHT)
-WARLOCK = Job(4061, "Arcano", HIGH_WIZARD)
-RANGER = Job(4062, "Sentinela", SNIPER)
-ARCH_BISHOP = Job(4063, "Sentinela", HIGH_PRIEST)
-MECHANIC = Job(4064, "Mecânico", WHITESMITH)
-GUILLOTINE_CROSS = Job(4065, "Sicário", WHITESMITH)
-ROYAL_GUARD = Job(4073, "Guardão Real", PALADIN)
-SORCERER = Job(4074, "Feiticeiro", SCHOLAR)
-MAESTRO = Job(4075, "Maestro", MINSTREL)
-WANDERER = Job(4076, "Musa", GYPSY)
-SURA = Job(4077, "Shura", CHAMPION)
-GENETIC = Job(4078, "Bioquímico", BIOCHEMIST)
-SHADOW_CHASER = Job(4079, "Renegado", STALKER)
+RUNE_KNIGHT = Job("RUNE_KNIGHT", "Cavaleiro Rúnico", LORD_KNIGHT)
+WARLOCK = Job("WARLOCK", "Arcano", HIGH_WIZARD)
+RANGER = Job("RANGER", "Sentinela", SNIPER)
+ARCH_BISHOP = Job("ARCH_BISHOP", "Sentinela", HIGH_PRIEST)
+MECHANIC = Job("MECHANIC", "Mecânico", WHITESMITH)
+GUILLOTINE_CROSS = Job("GUILLOTINE_CROSS", "Sicário", WHITESMITH)
+ROYAL_GUARD = Job("ROYAL_GUARD", "Guardão Real", PALADIN)
+SORCERER = Job("SORCERER", "Feiticeiro", SCHOLAR)
+MAESTRO = Job("MAESTRO", "Maestro", MINSTREL)
+WANDERER = Job("WANDERER", "Musa", GYPSY)
+SURA = Job("SURA", "Shura", CHAMPION)
+GENETIC = Job("GENETIC", "Bioquímico", BIOCHEMIST)
+SHADOW_CHASER = Job("SHADOW_CHASER", "Renegado", STALKER)
 RUNE_KNIGHT_PECO = RUNE_KNIGHT
 ROYAL_GUARD_PECO = ROYAL_GUARD
 RANGER_WOLF = RANGER

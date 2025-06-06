@@ -1,9 +1,10 @@
+from abc import ABC
 import json
 import os
 from typing import Any
 
 
-class File:
+class File(ABC):
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
         self._ensure_file()
@@ -44,8 +45,3 @@ class File:
     def _read_all(self) -> None:
         with open(self.file_path, "r") as f:
             return json.load(f)
-
-
-CONFIG_FILE = File("config.json")
-SERVERS_FILE = File("servers.json")
-MAPS_FILE = File("maps.json")

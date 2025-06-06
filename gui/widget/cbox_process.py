@@ -4,8 +4,8 @@ import psutil
 from PyQt6.QtWidgets import QVBoxLayout, QComboBox, QPushButton, QSizePolicy, QWidget, QLabel, QHBoxLayout
 from PyQt6.QtCore import Qt
 from config.app import APP_ICON_SIZE
-from service.file import SERVERS_FILE
 from service.memory import MEMORY
+from service.servers_file import SERVERS_FILE
 
 
 class CboxProcess(QWidget):
@@ -48,6 +48,7 @@ class CboxProcess(QWidget):
             return
         process = self.process_options[index]
         MEMORY.update_process(process["name"], process["pid"])
+        self.focusNextChild()
 
     def _list_allowed_process(self) -> List[str]:
         server_file = SERVERS_FILE.read(None)
@@ -57,6 +58,7 @@ class CboxProcess(QWidget):
         self.process_options = self._list_process_options()
         self.cbox.clear()
         self.cbox.addItems(self._label_options())
+        self.focusNextChild()
 
     def _list_process_options(self) -> List[Any]:
         options = []

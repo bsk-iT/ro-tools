@@ -4,7 +4,7 @@ import threading
 import time
 
 from config.app import APP_MONITORING_DELAY
-from service.event import EventType, Resource
+from service.config_file import EventConfig, ResourceConfig
 
 
 class Priority(Enum):
@@ -15,12 +15,12 @@ class Priority(Enum):
 
 
 class BaseEvent:
-    def __init__(self, game, name, event_type: EventType, resource: Resource, priority=Priority.LOW):
+    def __init__(self, game, name, event_config: EventConfig, resource_config: ResourceConfig, priority=Priority.LOW):
         self.game = game
         self.name = name
         self.priority = priority
-        self.event_type = event_type
-        self.resource = resource
+        self.event_config = event_config
+        self.resource_config = resource_config
         self.running = False
 
     def start(self):

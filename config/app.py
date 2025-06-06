@@ -12,7 +12,6 @@ APP_MIN_DELAY = 0.01
 APP_MAX_DELAY = 60
 APP_FONT = resource_path("assets/font/JetBrainsMono-Regular.ttf")
 APP_FONT_SIZE = 10
-APP_MAP_CRITERIA = ["BG", "WoE", "PvP"]
 APP_STYLE = """
     #painel {
         border: 1px solid gray;

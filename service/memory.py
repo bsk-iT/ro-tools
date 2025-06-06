@@ -4,14 +4,17 @@ import win32gui
 import win32process
 import pywintypes
 
-from service.file import SERVERS_FILE
+from service.servers_file import SERVERS_FILE, PropServer
 
 
 class Memory:
     def __init__(self) -> None:
         self.process = pymem.Pymem()
+        self.process_handle = self.process.process_handle
         self.process_name = None
         self.base_address = None
+        self.hp_address = None
+        self.map_address = None
 
     def is_valid(self) -> bool:
         return self.process.process_handle is not None
@@ -19,8 +22,16 @@ class Memory:
     def update_process(self, name: str, pid: int) -> None:
         self.process.open_process_from_id(pid)
         self.process_name = name
-        module = pymem.process.module_from_name(self.process.process_handle, name)
+        SERVERS_FILE.syn_data(self.process_name)
+        self.sync_addresses()
+
+    def sync_addresses(self):
+        module = pymem.process.module_from_name(self.process.process_handle, self.process_name)
+        hp_offset = int(SERVERS_FILE.get_value(self.process_name, PropServer.HP_OFFSET), 16)
+        map_offset = int(SERVERS_FILE.get_value(self.process_name, PropServer.MAP_OFFSET), 16)
         self.base_address = module.lpBaseOfDll
+        self.hp_address = self.get_address([hp_offset])
+        self.map_address = self.get_address([map_offset])
 
     def get_hwnd(self) -> None:
         if not self.is_valid():
@@ -39,8 +50,8 @@ class Memory:
         win32gui.EnumWindows(enum_windows_callback, None)
         return hwnds[0] if hwnds else None
 
-    def get_address(self, offsets):
-        address = self.base_address
+    def get_address(self, offsets, address=None):
+        address = self.base_address if address is None else address
         for offset in offsets[:-1]:
             address = self.process.read_uint(address + offset)
         return address + offsets[-1]

@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QComboBox
-from PyQt6.QtGui import QStandardItemModel, QStandardItem, QFont
+from PyQt6.QtGui import QStandardItemModel, QStandardItem, QFont, QIcon
 from PyQt6.QtCore import Qt
 
 from game.jobs import JOB_GROUPS
@@ -17,8 +17,9 @@ class CboxJobs(QComboBox):
         item.setFont(QFont(None, weight=QFont.Weight.Bold))
         self.model.appendRow(item)
 
-    def add_item(self, label, data=None):
-        item = QStandardItem(f"  {label}")
+    def add_item(self, job, data=None):
+        item = QStandardItem(job.name)
+        item.setIcon(QIcon(job.icon))
         item.setData(data)
         self.model.appendRow(item)
 

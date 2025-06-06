@@ -6,7 +6,7 @@ from PyQt6.QtCore import Qt
 from config.icon import ICON_OFF, ICON_ON
 from events.game import GAME
 from gui.widget.input_keybind import InputKeybind
-from service.event import EVENT, Prop
+from service.config_file import CONFIG_FILE, PropConfig
 from service.memory import MEMORY
 from util.widgets import ICON_STATUS
 
@@ -17,7 +17,7 @@ class StatusController:
         self.layout = None
         self.status_toggle = None
         self.input_keybind = None
-        self.status_key = EVENT.get_config(Prop.KEY_MONITORING)
+        self.status_key = CONFIG_FILE.get_value(PropConfig.KEY_MONITORING)
         if self.status_key:
             self.on_change_keybind(self.status_key)
 
@@ -37,7 +37,7 @@ class StatusController:
         toggle.setIconSize(ICON_STATUS)
         toggle.setToolTip("LIGAR/DESLIGAR o monitoramento e eventos do RO Tools")
         self.status_toggle = toggle
-        self.input_keybind = InputKeybind(None, EVENT.get_config_key(Prop.KEY_MONITORING))
+        self.input_keybind = InputKeybind(None, CONFIG_FILE.get_key(PropConfig.KEY_MONITORING))
         vbox = QVBoxLayout()
         vbox.setSpacing(0)
         vbox.addWidget(QLabel("Status"))

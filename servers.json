@@ -1,7 +1,54 @@
 {
   "LegionBR.exe": {
-    "hp": "0x010DCE10",
-    "name": "0x010DF5D8",
-    "base": "0x00A43F44"
+    "name": "LegionBR",
+    "hp_offset": "0xCDCE10",
+    "map_offset": "0xCD856C",
+    "bg": [ ],
+    "woe": [ ],
+    "pvp": [ ],
+    "pvm": [ ],
+    "city": [ "prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis" ],
+    "buffs": {
+      "-1": "CONCENTRATION_POTION",
+      "-2": "AWAKENING_POTION",
+      "-3": "BERSERK_POTION",
+      "-4": "SM_MAGNUM",
+      "-5": "SM_ENDURE",
+      "-6": "SM_AUTOBERSERK",
+      "-7": "MG_ENERGYCOAT",
+      "-8": "MC_LOUD",
+      "-9": "AL_ANGELUS",
+      "-10": "AC_CONCENTRATION",
+      "-11": "KN_TWOHANDQUICKEN",
+      "-12": "KN_ONEHAND",
+      "-13": "CR_AUTOGUARD",
+      "-14": "CR_DEFENDER",
+      "-15": "CR_SPEARQUICKEN",
+      "-16": "CR_REFLECTSHIELD",
+      "-17": "CR_SHRINK",
+      "-18": "WZ_SIGHTBLASTER",
+      "-19": "SA_AUTOSPELL",
+      "-20": "AS_CLOAKING",
+      "-21": "AS_POISONREACT",
+      "-22": "BS_ADRENALINE",
+      "-23": "BS_MAXIMIZE",
+      "-24": "BS_OVERTHRUST",
+      "-25": "BS_WEAPONPERFECT",
+      "-26": "BS_ADRENALINE2",
+      "-27": "AM_RESURRECTHOMUN",
+      "10": "BLESS_SCROLL",
+      "12": "INCAGI_SCROLL",
+      "86": "FURY"
+    }
+  },
+  "Jogar.exe": {
+    "name": "NostalgicRO",
+    "hp_offset": "0xDD0A14",
+    "map_offset": "0xDD0A14",
+    "bg": [ ],
+    "woe": [ ],
+    "pvp": [ ],
+    "pvm": [ ],
+    "city": [ "prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis" ]
   }
 }

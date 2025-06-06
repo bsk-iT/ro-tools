@@ -1,8 +1,8 @@
 import os
-from game.buffs import BUFF_MAP
 from game.jobs import JOB_MAP
 from service.memory import MEMORY
 from service.offsets import Offsets
+from service.servers_file import SERVERS_FILE
 from util.number import calculate_percent
 
 
@@ -24,14 +24,14 @@ class Char:
 
     def update(self):
         try:
-            self.hp = MEMORY.process.read_int(MEMORY.get_address(Offsets.HP))
-            self.hp_max = MEMORY.process.read_int(MEMORY.get_address(Offsets.MAX_HP))
+            self.hp = MEMORY.process.read_int(MEMORY.hp_address)
+            self.hp_max = MEMORY.process.read_int(MEMORY.hp_address + Offsets.MAX_HP)
             self.hp_percent = calculate_percent(self.hp, self.hp_max)
-            self.sp = MEMORY.process.read_int(MEMORY.get_address(Offsets.SP))
-            self.sp_max = MEMORY.process.read_int(MEMORY.get_address(Offsets.MAX_SP))
+            self.sp = MEMORY.process.read_int(MEMORY.hp_address + Offsets.SP)
+            self.sp_max = MEMORY.process.read_int(MEMORY.hp_address + Offsets.MAX_SP)
             self.sp_percent = calculate_percent(self.sp, self.sp_max)
-            self.current_map = MEMORY.process.read_string(MEMORY.get_address(Offsets.MAP))
-            self.job_id = MEMORY.process.read_int(MEMORY.get_address(Offsets.JOB_ID))
+            self.current_map = MEMORY.process.read_string(MEMORY.map_address)
+            self.job_id = MEMORY.process.read_int(MEMORY.hp_address + Offsets.JOB_ID)
             self.buffs = self._get_buffs()
             os.system("cls")
             print(self)
@@ -42,7 +42,7 @@ class Char:
         buffs = []
         buff_index = 0
         while True:
-            buff = MEMORY.process.read_int(MEMORY.get_address(Offsets.BUFF_LIST) + 0x4 * buff_index)
+            buff = MEMORY.process.read_int(MEMORY.hp_address + Offsets.BUFF_LIST + (0x4 * buff_index))
             if buff == -1:
                 break
             buffs.append(buff)
@@ -50,4 +50,4 @@ class Char:
         return buffs
 
     def __str__(self):
-        return f'HP: {self.hp}/{self.hp_max}\nSP: {self.sp}/{self.sp_max}\nJOB: {JOB_MAP.get(self.job_id, self.job_id) if JOB_MAP[self.job_id] else "Montaria"}\nMAP: {self.current_map}\nbuffs:{[BUFF_MAP.get(buff, buff).__str__()  for buff in self.buffs]}'
+        return f'HP: {self.hp}/{self.hp_max}\nSP: {self.sp}/{self.sp_max}\nJOB: {JOB_MAP.get(self.job_id, self.job_id) if JOB_MAP[self.job_id] else "Montaria"}\nMAP: {self.current_map}\nbuffs:{[SERVERS_FILE.buffs.get(str(buff), buff)  for buff in self.buffs]}'

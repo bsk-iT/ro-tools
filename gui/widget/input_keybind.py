@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, QSize, pyqtSignal
 
 from config.app import APP_ICON_SIZE
 from config.icon import ICON_KEYBOARD
-from service.file import CONFIG_FILE
+from service.config_file import CONFIG_FILE
 
 
 class InputKeybind(QPushButton):

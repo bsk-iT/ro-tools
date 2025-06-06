@@ -3,19 +3,19 @@ from PyQt6.QtGui import QIcon
 
 from config.app import APP_DELAY, APP_MAX_DELAY, APP_MIN_DELAY
 from config.icon import ICON_QUICK
-from service.file import CONFIG_FILE
+from service.config_file import CONFIG_FILE
 from util.number import clamp
 from util.widgets import ICON_BTN
 
 
 class InputDelay(QWidget):
-    def __init__(self, parent: QWidget, active: str, delay: str) -> None:
+    def __init__(self, parent: QWidget, active_prop: str, delay_prop: str) -> None:
         super().__init__(parent)
-        self.active = active
-        self.delay = delay
+        self.active_prop = active_prop
+        self.delay_prop = delay_prop
         self.layout = QHBoxLayout(self)
-        self.toggle = self._build_toggle(active)
-        self.spinbox = self._build_spinbox(delay)
+        self.toggle = self._build_toggle(active_prop)
+        self.spinbox = self._build_spinbox(delay_prop)
         self._config_layout()
         self._config_events()
 
@@ -27,14 +27,14 @@ class InputDelay(QWidget):
 
     def _config_events(self) -> None:
         self.toggle.toggled.connect(self._on_active_delay)
-        self.spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(self.delay, value))
+        self.spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(self.delay_prop, value))
         self._on_active_delay(self.toggle.isChecked())
 
-    def _build_toggle(self, active: str) -> QToolButton:
+    def _build_toggle(self, active_prop: str) -> QToolButton:
         toggle = QToolButton()
         toggle.setCheckable(True)
-        active = CONFIG_FILE.read(active)
-        toggle.setChecked(active if active else False)
+        active_prop = CONFIG_FILE.read(active_prop)
+        toggle.setChecked(active_prop if active_prop else False)
         toggle.setIcon(QIcon(ICON_QUICK))
         toggle.setIconSize(ICON_BTN)
         toggle.setToolTip("Delay de uso em segundos")
@@ -59,4 +59,4 @@ class InputDelay(QWidget):
 
     def _on_active_delay(self, value: bool) -> None:
         self.spinbox.setVisible(value)
-        CONFIG_FILE.update(self.active, value)
+        CONFIG_FILE.update(self.active_prop, value)

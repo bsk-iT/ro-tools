@@ -4,7 +4,8 @@ from PyQt6.QtCore import QSize, Qt, QUrl
 from PyQt6.QtGui import QPixmap, QDesktopServices
 
 from config.app import APP_ICON_SIZE
-from service.file import CONFIG_FILE, File
+from service.config_file import CONFIG_FILE
+from service.file import File
 from util.number import clamp
 
 ICON_BTN = QSize(24, 24)
@@ -47,17 +48,17 @@ def build_icon(icon: str, tooltip: str = None) -> QLabel:
     return label
 
 
-def build_spinbox_percentage(percentage: str, label: str = None) -> QWidget:
+def build_spinbox_percentage(percentage_prop: str, label: str = None) -> QWidget:
     widget = QWidget()
     hbox = QHBoxLayout(widget)
     spinbox = QSpinBox()
     spinbox.setFixedWidth(80)
     spinbox.setRange(0, 100)
     spinbox.setSuffix("%")
-    value = CONFIG_FILE.read(percentage)
+    value = CONFIG_FILE.read(percentage_prop)
     if value is not None:
         spinbox.setValue(clamp(value))
-    spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(percentage, value))
+    spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(percentage_prop, value))
     if label:
         hbox.addWidget(QLabel(label))
     hbox.addWidget(spinbox)
