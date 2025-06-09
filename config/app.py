@@ -5,6 +5,7 @@ APP_NAME = "RO - Tools"
 APP_ICON = resource_path("assets/icon/icon.png")
 APP_DELAY = 0.01
 APP_MONITORING_DELAY = 0.2
+APP_CBOX_WIDTH = 300
 APP_WIDTH = 800
 APP_HEIGHT = 600
 APP_ICON_SIZE = 32

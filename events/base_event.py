@@ -2,9 +2,9 @@ from abc import abstractmethod
 from enum import Enum
 import threading
 import time
+from typing import List
 
 from config.app import APP_MONITORING_DELAY
-from service.config_file import EventConfig, ResourceConfig
 
 
 class Priority(Enum):
@@ -15,12 +15,11 @@ class Priority(Enum):
 
 
 class BaseEvent:
-    def __init__(self, game, name, event_config: EventConfig, resource_config: ResourceConfig, priority=Priority.LOW):
+    def __init__(self, game, name, prop_seq: List[str], priority=Priority.LOW):
         self.game = game
         self.name = name
         self.priority = priority
-        self.event_config = event_config
-        self.resource_config = resource_config
+        self.prop_seq = prop_seq
         self.running = False
 
     def start(self):
@@ -31,7 +30,7 @@ class BaseEvent:
 
     def run(self):
         self.running = True
-        time.sleep(APP_MONITORING_DELAY)
+        time.sleep(0.1)
         self.execute_action()
         while self.running and self.check_condition():
             self.execute_action()

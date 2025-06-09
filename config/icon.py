@@ -22,6 +22,7 @@ ICON_MAP = resource_path(PATH_ICON + "map.png")
 ICON_REFRESH = resource_path(PATH_ICON + "refresh.png")
 ICON_ON = resource_path(PATH_ICON + "on.png")
 ICON_OFF = resource_path(PATH_ICON + "off.png")
+ICON_DELETE = resource_path(PATH_ICON + "delete.png")
 
 IMG_RED_POTION = resource_path(PATH_ITEM + "red_potion.gif")
 IMG_BLUE_POTION = resource_path(PATH_ITEM + "blue_potion.gif")

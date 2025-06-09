@@ -1,5 +1,6 @@
 from config.icon import PATH_JOB_ICON, get_image
-from game.buffs import AWAKENING_POTION, BERSERK_POTION, CONCENTRATION_POTION
+from game.buff import *
+from game.spawn_skill import *
 
 
 class Job:
@@ -8,15 +9,15 @@ class Job:
         _id,
         name,
         previous_job=None,
-        spawn_skill=[],
-        buff_skill=[],
+        spawn_skills=[],
+        buff_skills=[],
         buff_aspd=[],
     ):
         self.id = _id
         self.name = name
         self.previous_job = previous_job
-        self.spawn_skill = spawn_skill
-        self.buff_skill = buff_skill
+        self.spawn_skills = spawn_skills
+        self.buff_skills = buff_skills
         self.buff_aspd = buff_aspd
         self.icon = get_image(PATH_JOB_ICON, self.id)
 
@@ -24,59 +25,315 @@ class Job:
         return self.name
 
 
-NOVICE = Job("NOVICE", "Aprendiz", buff_aspd=[CONCENTRATION_POTION])
-SWORDMAN = Job("SWORDMAN", "Espadachim", NOVICE, buff_aspd=[AWAKENING_POTION, BERSERK_POTION])
-MAGICIAN = Job("MAGICIAN", "Mago", NOVICE)
-ARCHER = Job("ARCHER", "Arqueiro", NOVICE)
-ACOLYTE = Job("ACOLYTE", "Noviço", NOVICE)
-MERCHANT = Job("MERCHANT", "Mercador", NOVICE)
-THIEF = Job("THIEF", "Gatuno", NOVICE)
-KNIGHT = Job("KNIGHT", "Cavaleiro", SWORDMAN)
-PRIEST = Job("PRIEST", "Sacerdote", ACOLYTE)
-WIZARD = Job("WIZARD", "Bruxo", MAGICIAN)
-BLACKSMITH = Job("BLACKSMITH", "Ferreiro", MERCHANT)
-HUNTER = Job("HUNTER", "Caçador", ARCHER)
-ASSASSIN = Job("ASSASSIN", "Caçador", THIEF)
+NOVICE = Job(
+    "novice",
+    "Aprendiz",
+    spawn_skills=[ATTACK_1, ATTACK_2, ATTACK_3, ATTACK_4, NV_FIRSTAID],
+    buff_aspd=[CONCENTRATION_POTION],
+)
+SWORDMAN = Job(
+    "swordman",
+    "Espadachim",
+    NOVICE,
+    spawn_skills=[SM_BASH, SM_PROVOKE],
+    buff_skills=[SM_AUTOBERSERK, SM_ENDURE, SM_MAGNUM],
+    buff_aspd=[AWAKENING_POTION, BERSERK_POTION],
+)
+MAGICIAN = Job(
+    "magician",
+    "Mago",
+    NOVICE,
+    spawn_skills=[MG_FIREBOLT, MG_FIREBALL, MG_FIREWALL, MG_COLDBOLT, MG_FROSTDIVER, MG_LIGHTNINGBOLT, MG_THUNDERSTORM, MG_NAPALMBEAT, MG_SOULSTRIKE, MG_SAFETYWALL, MG_STONECURSE],
+    buff_skills=[MG_ENERGYCOAT],
+    buff_aspd=[AWAKENING_POTION, BERSERK_POTION],
+)
+ARCHER = Job(
+    "archer",
+    "Arqueiro",
+    NOVICE,
+    spawn_skills=[AC_DOUBLE, AC_SHOWER, AC_CHARGEARROW],
+    buff_skills=[AC_CONCENTRATION],
+    buff_aspd=[AWAKENING_POTION],
+)
+ACOLYTE = Job(
+    "acolyte",
+    "Noviço",
+    NOVICE,
+    spawn_skills=[AL_BLESSING, AL_HEAL, AL_CURE, AL_INCAGI, AL_DECAGI, AL_PNEUMA, AL_HOLYWATER, AL_HOLYLIGHT],
+    buff_skills=[AL_ANGELUS],
+)
+MERCHANT = Job(
+    "merchant",
+    "Mercador",
+    NOVICE,
+    spawn_skills=[MC_MAMMONITE, MC_CARTREVOLUTION],
+    buff_skills=[MC_LOUD],
+    buff_aspd=[AWAKENING_POTION, BERSERK_POTION],
+)
+THIEF = Job(
+    "thief",
+    "Gatuno",
+    NOVICE,
+    spawn_skills=[TF_SPRINKLESAND, TF_BACKSLIDING, TF_PICKSTONE, TF_THROWSTONE, TF_POISON, TF_DETOXIFY, TF_STEAL],
+    buff_aspd=[AWAKENING_POTION],
+)
+KNIGHT = Job(
+    "knight",
+    "Cavaleiro",
+    SWORDMAN,
+    spawn_skills=[KN_BOWLINGBASH, KN_PIERCE, KN_SPEARSTAB, KN_SPEARBOOMERANG, KN_BRANDISHSPEAR, KN_CHARGEATK],
+    buff_skills=[KN_TWOHANDQUICKEN, KN_ONEHAND],
+)
+PRIEST = Job(
+    "priest",
+    "Sacerdote",
+    ACOLYTE,
+    spawn_skills=[PR_KYRIE, PR_IMPOSITIO, PR_SUFFRAGIUM, PR_ASPERSIO, PR_BENEDICTIO, PR_MAGNUS, PR_LEXDIVINA, PR_TURNUNDEAD, PR_LEXAETERNA, PR_STRECOVERY, PR_SLOWPOISON, ALL_RESURRECTION, MG_SAFETYWALL, PR_SANCTUARY, PR_REDEMPTIO],
+    buff_skills=[PR_GLORIA, PR_MAGNIFICAT, PR_IMPOSITIO, PR_SUFFRAGIUM],
+)
+WIZARD = Job(
+    "wizard",
+    "Bruxo",
+    MAGICIAN,
+    spawn_skills=[WZ_EARTHSPIKE, WZ_QUAGMIRE, WZ_HEAVENDRIVE, WZ_FROSTNOVA, WZ_ICEWALL, WZ_STORMGUST, WZ_WATERBALL, WZ_METEOR, WZ_SIGHTRASHER, WZ_FIREPILLAR, WZ_JUPITEL, WZ_VERMILION],
+    buff_skills=[WZ_SIGHTBLASTER],
+)
+BLACKSMITH = Job(
+    "blacksmith",
+    "Ferreiro",
+    MERCHANT,
+    spawn_skills=[BS_HAMMERFALL, BS_REPAIRWEAPON, BS_GREED],
+    buff_skills=[BS_ADRENALINE, BS_MAXIMIZE, BS_OVERTHRUST, BS_WEAPONPERFECT, BS_ADRENALINE2],
+)
+HUNTER = Job(
+    "hunter",
+    "Caçador",
+    ARCHER,
+    spawn_skills=[HT_LANDMINE, HT_FREEZINGTRAP, HT_BLASTMINE, HT_CLAYMORETRAP, HT_SKIDTRAP, HT_FLASHER, HT_SHOCKWAVE, HT_SANDMAN, HT_BLITZBEAT, HT_DETECTING, HT_REMOVETRAP, HT_SPRINGTRAP, HT_PHANTASMIC, HT_POWER],
+)
+ASSASSIN = Job(
+    "assassin",
+    "Mercenário",
+    THIEF,
+    spawn_skills=[AS_SONICBLOW, AS_GRIMTOOTH, AS_ENCHANTPOISON, AS_VENOMDUST, AS_SPLASHER, AS_VENOMKNIFE],
+    buff_skills=[AS_CLOAKING, AS_POISONREACT],
+)
 KNIGHT_PECO = KNIGHT
-CRUSADER = Job("CRUSADER", "Cavaleiro", SWORDMAN)
-MONK = Job("MONK", "Monge", ACOLYTE)
-SAGE = Job("SAGE", "Sábio", MAGICIAN)
-ROGUE = Job("ROGUE", "Arruaceiro", THIEF)
-ALCHEMIST = Job("ALCHEMIST", "Alquimista", MERCHANT)
-BARD = Job("BARD", "Bardo", ARCHER)
-DANCER = Job("DANCER", "Odalisca", ARCHER)
+CRUSADER = Job(
+    "crusader",
+    "Templário",
+    SWORDMAN,
+    spawn_skills=[CR_HOLYCROSS, CR_GRANDCROSS, CR_DEVOTION, AL_HEAL, AL_CURE, CR_SHIELDCHARGE, CR_SHIELDBOOMERANG, CR_PROVIDENCE],
+    buff_skills=[CR_AUTOGUARD, CR_DEFENDER, CR_SPEARQUICKEN, CR_REFLECTSHIELD, CR_SHRINK],
+)
+MONK = Job(
+    "monk",
+    "Monge",
+    ACOLYTE,
+    spawn_skills=[MO_EXTREMITYFIST, MO_INVESTIGATE, MO_BODYRELOCATION, MO_ABSORBSPIRITS, MO_CALLSPIRITS, MO_FINGEROFFENSIVE, MO_KITRANSLATION, MO_BALKYOUNG],
+    buff_skills=[MO_EXPLOSIONSPIRITS],
+)
+SAGE = Job(
+    "sage",
+    "Sábio",
+    MAGICIAN,
+    spawn_skills=[SA_ABRACADABRA, SA_VIOLENTGALE, SA_VOLCANO, SA_DELUGE, SA_FLAMELAUNCHER, SA_FROSTWEAPON, SA_LIGHTNINGLOADER, SA_SEISMICWEAPON, WZ_EARTHSPIKE, WZ_HEAVENDRIVE, SA_SPELLBREAKER, SA_DISPELL, SA_LANDPROTECTOR, SA_ELEMENT],
+    buff_skills=[SA_AUTOSPELL],
+)
+ROGUE = Job(
+    "rogue",
+    "Arruaceiro",
+    THIEF,
+    spawn_skills=[RG_BACKSTAP, RG_RAID, RG_INTIMIDATE, RG_STEALCOIN, RG_STRIPARMOR, RG_STRIPHELM, RG_STRIPSHIELD, RG_STRIPWEAPON, HT_REMOVETRAP, AC_DOUBLE, RG_CLOSECONFINE],
+)
+ALCHEMIST = Job(
+    "alchemist",
+    "Alquimista",
+    MERCHANT,
+    spawn_skills=[AM_DEMONSTRATION, AM_ACIDTERROR, AM_CANNIBALIZE, AM_SPHEREMINE, AM_POTIONPITCHER, AM_CP_HELM, AM_CP_WEAPON, AM_CP_ARMOR, AM_CP_SHIELD, AM_BERSERKPITCHER],
+    buff_skills=[AM_RESURRECTHOMUN],
+)
+BARD = Job(
+    "bard",
+    "Bardo",
+    ARCHER,
+    spawn_skills=[BA_FROSTJOKE, BA_MUSICALSTRIKE, BA_PANGVOICE],
+    buff_skills=[BD_ADAPTATION],
+)
+DANCER = Job(
+    "dancer",
+    "Odalisca",
+    ARCHER,
+    spawn_skills=[DC_SCREAM, DC_THROWARROW, DC_WINKCHARM],
+    buff_skills=[BD_ADAPTATION],
+)
 CRUSADER_PECO = CRUSADER
-SUPERNOVICE = Job("SUPERNOVICE", "Super Noviço", NOVICE)
-GUNSLINGER = Job("GUNSLINGER", "Justiceiro", NOVICE)
-NINJA = Job("NINJA", "Ninja", NOVICE)
-LORD_KNIGHT = Job("LORD_KNIGHT", "Lorde", KNIGHT)
-HIGH_PRIEST = Job("HIGH_PRIEST", "Sumo Sacerdote", PRIEST)
-HIGH_WIZARD = Job("HIGH_WIZARD", "Arquimago", WIZARD)
-WHITESMITH = Job("WHITESMITH", "Mestre Ferreiro", BLACKSMITH)
-SNIPER = Job("SNIPER", "Atirador de Elite", BLACKSMITH)
-ASSASSIN_CROSS = Job("ASSASSIN_CROSS", "Algoz", BLACKSMITH)
+SUPERNOVICE = Job(
+    "supernovice",
+    "Super Noviço",
+    NOVICE,
+    spawn_skills=[
+        SM_BASH,
+        SM_PROVOKE,
+        MG_FIREBOLT,
+        MG_FIREBALL,
+        MG_FIREWALL,
+        MG_COLDBOLT,
+        MG_FROSTDIVER,
+        MG_LIGHTNINGBOLT,
+        MG_THUNDERSTORM,
+        MG_NAPALMBEAT,
+        MG_SOULSTRIKE,
+        MG_SAFETYWALL,
+        MG_STONECURSE,
+        AL_BLESSING,
+        AL_HEAL,
+        AL_CURE,
+        AL_INCAGI,
+        AL_DECAGI,
+        AL_PNEUMA,
+        AL_HOLYWATER,
+        MC_MAMMONITE,
+        TF_POISON,
+        TF_DETOXIFY,
+        TF_STEAL,
+    ],
+    buff_skills=[SM_ENDURE, SM_MAGNUM, AC_CONCENTRATION, AL_ANGELUS, MC_LOUD],
+    buff_aspd=[AWAKENING_POTION],
+)
+GUNSLINGER = Job(
+    "gunslinger",
+    "Justiceiro",
+    NOVICE,
+    spawn_skills=[GS_FLING, GS_CRACKER, GS_TRIPLEACTION, GS_BULLSEYE, GS_RAPIDSHOWER, GS_DESPERADO, GS_TRACKING, GS_DISARM, GS_PIERCINGSHOT, GS_DUST, GS_FULLBUSTER, GS_SPREADATTACK, GS_GROUNDDRIFT, GS_GLITTERIN],
+    buff_skills=[GS_GATLINGFEVER, GS_ADJUSTMENT, GS_INCREASING, GS_MAGICALBULLET],
+    buff_aspd=[AWAKENING_POTION, BERSERK_POTION],
+)
+NINJA = Job(
+    "ninja",
+    "Ninja",
+    NOVICE,
+    spawn_skills=[NJ_KOUENKA, NJ_KAENSIN, NJ_BAKUENRYU, NJ_ISSEN, NJ_HYOUSENSOU, NJ_SUITON, NJ_HYOUSYOURAKU, NJ_SYURIKEN, NJ_KUNAI, NJ_HUUMA, NJ_ZENYNAGE, NJ_TATAMIGAESHI, NJ_HUUJIN, NJ_RAIGEKISAI, NJ_KAMAITACHI, NJ_KIRIKAGE, NJ_KASUMIKIRI],
+    buff_skills=[NJ_UTSUSEMI, NJ_BUNSINJYUTSU, NJ_NEN],
+    buff_aspd=[AWAKENING_POTION],
+)
+TAEKWON = Job(
+    "taekwon",
+    "Taekwon",
+    NOVICE,
+    spawn_skills=[TK_JUMPKICK],
+    buff_skills=[TK_READYSTORM, TK_READYDOWN, TK_READYTURN, TK_READYCOUNTER, TK_DODGE, TK_SEVENWIND_EARTH, TK_SEVENWIND_WIND, TK_SEVENWIND_WATER, TK_SEVENWIND_FIRE, TK_SEVENWIND_GHOST, TK_SEVENWIND_DARK, TK_SEVENWIND_HOLY],
+    buff_aspd=[AWAKENING_POTION, BERSERK_POTION],
+)
+MASTER_TAEKWON = Job("master_taekwon", "Mestre Taekwon", TAEKWON)
+SOUL_LINKER = Job(
+    "soul_linker",
+    "Espiritualistas",
+    TAEKWON,
+    spawn_skills=[SL_ALCHEMIST, SL_ROGUE, SL_BARDDANCER, SL_WIZARD, SL_HUNTER, SL_KNIGHT, SL_SOULLINKER, SL_BLACKSMITH, SL_ASSASIN, SL_STAR, SL_MONK, SL_SAGE, SL_PRIEST, SL_SUPERNOVICE, SL_CRUSADER, SL_HIGH, SL_SMA, SL_STIN, SL_STUN, SL_SKA, SL_SKE, SL_SWOO, SL_KAAHI, SL_KAITE, SL_KAIZEL, SL_KAUPE],
+    buff_aspd=[AWAKENING_POTION, BERSERK_POTION],
+)
+LORD_KNIGHT = Job(
+    "lord_knight",
+    "Lorde",
+    KNIGHT,
+    spawn_skills=[LK_SPIRALPIERCE, LK_HEADCRUSH, LK_JOINTBEAT],
+    buff_skills=[LK_AURABLADE, LK_PARRYING, LK_CONCENTRATION],
+)
+HIGH_PRIEST = Job(
+    "high_priest",
+    "Sumo Sacerdote",
+    PRIEST,
+    spawn_skills=[HP_ASSUMPTIO],
+    buff_skills=[HP_BASILICA],
+)
+HIGH_WIZARD = Job(
+    "high_wizard",
+    "Arquimago",
+    WIZARD,
+    spawn_skills=[HW_GANBANTEIN, HW_GRAVITATION, HW_NAPALMVULCAN, HW_MAGICCRASHER],
+    buff_skills=[HW_MAGICPOWER],
+)
+WHITESMITH = Job(
+    "whitesmith",
+    "Mestre Ferreiro",
+    BLACKSMITH,
+    spawn_skills=[WS_CARTTERMINATION],
+    buff_skills=[WS_CARTBOOST, WS_MELTDOWN, WS_OVERTHRUSTMAX],
+)
+SNIPER = Job(
+    "sniper",
+    "Atirador de Elite",
+    HUNTER,
+    spawn_skills=[SN_SHARPSHOOTING, SN_FALCONASSAULT],
+    buff_skills=[SN_SIGHT, SN_WINDWALK],
+)
+ASSASSIN_CROSS = Job(
+    "assassin_cross",
+    "Algoz",
+    ASSASSIN,
+    spawn_skills=[ASC_METEORASSAULT, ASC_BREAKER],
+    buff_skills=[ASC_EDP],
+)
 LORD_KNIGHT_PECO = LORD_KNIGHT
-PALADIN = Job("PALADIN", "Paladino", CRUSADER)
-CHAMPION = Job("CHAMPION", "Mestre", MONK)
-SCHOLAR = Job("SCHOLAR", "Professor", SAGE)
-STALKER = Job("STALKER", "Desordeiro", ROGUE)
-BIOCHEMIST = Job("BIOCHEMIST", "Criador", ALCHEMIST)
-MINSTREL = Job("MINSTREL", "Menestrel", BARD)
-GYPSY = Job("GYPSY", "Cigana", DANCER)
+PALADIN = Job(
+    "paladin",
+    "Paladino",
+    CRUSADER,
+    spawn_skills=[PA_SHIELDCHAIN, PA_PRESSURE],
+)
+CHAMPION = Job(
+    "champion",
+    "Mestre",
+    MONK,
+    spawn_skills=[CH_PALMSTRIKE],
+)
+PROFESSOR = Job(
+    "professor",
+    "Professor",
+    SAGE,
+    spawn_skills=[PF_FOGWALL, PF_SPIDERWEB, PF_HPCONVERSION, PF_SOULCHANGE, PF_MINDBREAKER, PF_SOULBURN],
+    buff_skills=[PF_DOUBLECASTING, PF_MEMORIZE],
+)
+STALKER = Job(
+    "stalker",
+    "Desordeiro",
+    ROGUE,
+    spawn_skills=[ST_FULLSTRIP],
+    buff_skills=[ST_REJECTSWORD, ST_PRESERVE],
+)
+BIOCHEMIST = Job(
+    "biochemist",
+    "Criador",
+    ALCHEMIST,
+    spawn_skills=[CR_ACIDDEMONSTRATION, CR_SLIMPITCHER, CR_FULLPROTECTION],
+)
+CLOWN = Job(
+    "clown",
+    "Menestrel",
+    BARD,
+    spawn_skills=[CG_ARROWVULCAN, CG_TAROTCARD],
+)
+GYPSY = Job(
+    "gypsy",
+    "Cigana",
+    DANCER,
+    spawn_skills=[CG_ARROWVULCAN, CG_TAROTCARD],
+)
 PALADIN_PECO = PALADIN
-RUNE_KNIGHT = Job("RUNE_KNIGHT", "Cavaleiro Rúnico", LORD_KNIGHT)
-WARLOCK = Job("WARLOCK", "Arcano", HIGH_WIZARD)
-RANGER = Job("RANGER", "Sentinela", SNIPER)
-ARCH_BISHOP = Job("ARCH_BISHOP", "Sentinela", HIGH_PRIEST)
-MECHANIC = Job("MECHANIC", "Mecânico", WHITESMITH)
-GUILLOTINE_CROSS = Job("GUILLOTINE_CROSS", "Sicário", WHITESMITH)
-ROYAL_GUARD = Job("ROYAL_GUARD", "Guardão Real", PALADIN)
-SORCERER = Job("SORCERER", "Feiticeiro", SCHOLAR)
-MAESTRO = Job("MAESTRO", "Maestro", MINSTREL)
-WANDERER = Job("WANDERER", "Musa", GYPSY)
-SURA = Job("SURA", "Shura", CHAMPION)
-GENETIC = Job("GENETIC", "Bioquímico", BIOCHEMIST)
-SHADOW_CHASER = Job("SHADOW_CHASER", "Renegado", STALKER)
+RUNE_KNIGHT = Job("rune_knight", "Cavaleiro Rúnico", LORD_KNIGHT)
+WARLOCK = Job("warlock", "Arcano", HIGH_WIZARD)
+RANGER = Job("ranger", "Sentinela", SNIPER)
+ARCH_BISHOP = Job("arch_bishop", "Sentinela", HIGH_PRIEST)
+MECHANIC = Job("mechanic", "Mecânico", WHITESMITH)
+GUILLOTINE_CROSS = Job("guillotine_cross", "Sicário", WHITESMITH)
+ROYAL_GUARD = Job("royal_guard", "Guardão Real", PALADIN)
+SORCERER = Job("sorcerer", "Feiticeiro", PROFESSOR)
+MAESTRO = Job("maestro", "Maestro", CLOWN)
+WANDERER = Job("wanderer", "Musa", GYPSY)
+SURA = Job("sura", "Shura", CHAMPION)
+GENETIC = Job("genetic", "Bioquímico", BIOCHEMIST)
+SHADOW_CHASER = Job("shadow_chaser", "Renegado", STALKER)
 RUNE_KNIGHT_PECO = RUNE_KNIGHT
 ROYAL_GUARD_PECO = ROYAL_GUARD
 RANGER_WOLF = RANGER
@@ -135,7 +392,7 @@ JOB_MAP = {
     4016: CHAMPION,
     4077: SURA,
     16: SAGE,
-    4017: SCHOLAR,
+    4017: PROFESSOR,
     4074: SORCERER,
     17: ROGUE,
     4018: STALKER,
@@ -144,7 +401,7 @@ JOB_MAP = {
     4019: BIOCHEMIST,
     4078: GENETIC,
     19: BARD,
-    4020: MINSTREL,
+    4020: CLOWN,
     4075: MAESTRO,
     20: DANCER,
     4021: GYPSY,
@@ -160,6 +417,7 @@ JOB_MAP = {
 JOB_GROUPS = {
     "Início": [NOVICE],
     "Classe 1": [SWORDMAN, MAGICIAN, ARCHER, ACOLYTE, MERCHANT, THIEF],
-    "Classe 2": [KNIGHT, PRIEST, WIZARD, BLACKSMITH, HUNTER, ASSASSIN, CRUSADER, MONK, SAGE, ROGUE, ALCHEMIST, BARD, DANCER, SUPERNOVICE, GUNSLINGER, NINJA],
-    "Transclasse": [LORD_KNIGHT, HIGH_PRIEST, HIGH_WIZARD, WHITESMITH, SNIPER, ASSASSIN_CROSS, PALADIN, CHAMPION, SCHOLAR, STALKER, BIOCHEMIST, MINSTREL, GYPSY],
+    "Classe 2": [KNIGHT, PRIEST, WIZARD, BLACKSMITH, HUNTER, ASSASSIN, CRUSADER, MONK, SAGE, ROGUE, ALCHEMIST, BARD, DANCER],
+    "Transclasse": [LORD_KNIGHT, HIGH_PRIEST, HIGH_WIZARD, WHITESMITH, SNIPER, ASSASSIN_CROSS, PALADIN, CHAMPION, PROFESSOR, STALKER, BIOCHEMIST, CLOWN, GYPSY],
+    "Classe Expandida": [SUPERNOVICE, GUNSLINGER, NINJA, TAEKWON, MASTER_TAEKWON, SOUL_LINKER],
 }

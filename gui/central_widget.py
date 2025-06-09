@@ -1,7 +1,7 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 from PyQt6.QtCore import Qt
 
-from gui.status_controller import STATUS_CONTROLLER
+from gui.widget.input_app_status import InputAppStatus
 from gui.widget.cbox_process import CboxProcess
 from gui.widget.painel_auto_item import PainelAutoItem
 from gui.widget.painel_auto_pot import PainelAutoPot
@@ -20,10 +20,10 @@ class CentralWidget(QWidget):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         header_hbox = QHBoxLayout()
         header_hbox.addWidget(self.cbox_process)
-        header_hbox.addLayout(STATUS_CONTROLLER.layout)
+        header_hbox.addWidget(InputAppStatus(self))
         self.layout.addLayout(header_hbox)
         body_hbox = QHBoxLayout()
-        body_hbox.addWidget(self.gui_autopot)
+        body_hbox.addWidget(self.gui_autopot, alignment=Qt.AlignmentFlag.AlignLeft)
         body_hbox.addWidget(PainelJobTools(self))
         self.layout.addLayout(body_hbox)
         self.layout.addWidget(PainelAutoItem(self))

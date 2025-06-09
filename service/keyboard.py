@@ -6,7 +6,7 @@ import time
 import ctypes
 
 from config.app import APP_DELAY
-from service.config_file import CONFIG_FILE, PropConfig
+from service.config_file import CONFIG_FILE, KEYBOARD_TYPE
 from service.memory import MEMORY
 
 QT_TO_VK = {
@@ -36,11 +36,11 @@ class Keyboard:
 
     def _key_event(self, vk_code: Any, is_key_up: bool) -> None:
         time.sleep(APP_DELAY)
-        if CONFIG_FILE.get_value(PropConfig.KEYBOARD_TYPE) == "physical":
+        if CONFIG_FILE.get_value([KEYBOARD_TYPE]) == "physical":
             action = win32con.KEYEVENTF_KEYUP if is_key_up else 0
             win32api.keybd_event(vk_code, 0, action, 0)
             return
-        if CONFIG_FILE.get_value(PropConfig.KEYBOARD_TYPE) == "virtual" and MEMORY.is_valid():
+        if CONFIG_FILE.get_value([KEYBOARD_TYPE]) == "virtual" and MEMORY.is_valid():
             action = win32con.WM_KEYUP if is_key_up else win32con.WM_KEYDOWN
             ctypes.windll.user32.PostMessageW(MEMORY.get_hwnd(), action, vk_code, 0)
 

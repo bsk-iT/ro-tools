@@ -4,14 +4,13 @@ import win32gui
 import win32process
 import pywintypes
 
-from service.servers_file import SERVERS_FILE, PropServer
+from service.servers_file import HP_OFFSET, MAP_OFFSET, SERVERS_FILE
 
 
 class Memory:
     def __init__(self) -> None:
         self.process = pymem.Pymem()
         self.process_handle = self.process.process_handle
-        self.process_name = None
         self.base_address = None
         self.hp_address = None
         self.map_address = None
@@ -21,14 +20,12 @@ class Memory:
 
     def update_process(self, name: str, pid: int) -> None:
         self.process.open_process_from_id(pid)
-        self.process_name = name
-        SERVERS_FILE.syn_data(self.process_name)
-        self.sync_addresses()
+        self.sync_addresses(name)
 
-    def sync_addresses(self):
-        module = pymem.process.module_from_name(self.process.process_handle, self.process_name)
-        hp_offset = int(SERVERS_FILE.get_value(self.process_name, PropServer.HP_OFFSET), 16)
-        map_offset = int(SERVERS_FILE.get_value(self.process_name, PropServer.MAP_OFFSET), 16)
+    def sync_addresses(self, name):
+        module = pymem.process.module_from_name(self.process.process_handle, name)
+        hp_offset = int(SERVERS_FILE.get_value(HP_OFFSET), 16)
+        map_offset = int(SERVERS_FILE.get_value(MAP_OFFSET), 16)
         self.base_address = module.lpBaseOfDll
         self.hp_address = self.get_address([hp_offset])
         self.map_address = self.get_address([map_offset])

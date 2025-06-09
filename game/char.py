@@ -2,7 +2,7 @@ import os
 from game.jobs import JOB_MAP
 from service.memory import MEMORY
 from service.offsets import Offsets
-from service.servers_file import SERVERS_FILE
+from service.servers_file import BUFF_SKILL, SERVERS_FILE
 from util.number import calculate_percent
 
 
@@ -50,4 +50,11 @@ class Char:
         return buffs
 
     def __str__(self):
-        return f'HP: {self.hp}/{self.hp_max}\nSP: {self.sp}/{self.sp_max}\nJOB: {JOB_MAP.get(self.job_id, self.job_id) if JOB_MAP[self.job_id] else "Montaria"}\nMAP: {self.current_map}\nbuffs:{[SERVERS_FILE.buffs.get(str(buff), buff)  for buff in self.buffs]}'
+        buff_skills = [SERVERS_FILE.get_value(BUFF_SKILL).get(str(buff), buff) for buff in self.buffs]
+        return f"""
+            HP: {self.hp}/{self.hp_max}
+            SP: {self.sp}/{self.sp_max}
+            JOB: {JOB_MAP.get(self.job_id, self.job_id) if JOB_MAP[self.job_id] else "Montaria"}
+            MAP: {self.current_map}
+            BUFFS:{buff_skills}
+        """

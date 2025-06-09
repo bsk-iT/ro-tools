@@ -3,8 +3,8 @@ import psutil
 
 from PyQt6.QtWidgets import QVBoxLayout, QComboBox, QPushButton, QSizePolicy, QWidget, QLabel, QHBoxLayout
 from PyQt6.QtCore import Qt
-from config.app import APP_ICON_SIZE
-from service.memory import MEMORY
+from config.app import APP_CBOX_WIDTH, APP_ICON_SIZE
+from gui.app_controller import APP_CONTROLLER
 from service.servers_file import SERVERS_FILE
 
 
@@ -31,8 +31,8 @@ class CboxProcess(QWidget):
     def _build_cbox_process(self) -> QComboBox:
         cbox = QComboBox()
         cbox.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        cbox.setMinimumWidth(200)
-        cbox.currentIndexChanged.connect(self._on_change_process)
+        cbox.setMinimumWidth(APP_CBOX_WIDTH)
+        cbox.currentIndexChanged.connect(lambda index: APP_CONTROLLER.on_change_process(cbox, index, self.process_options))
         return cbox
 
     def _build_btn_refresh(self) -> QPushButton:
@@ -41,14 +41,6 @@ class CboxProcess(QWidget):
         btn_refresh.clicked.connect(self._update_cbox_process)
         btn_refresh.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         return btn_refresh
-
-    def _on_change_process(self, index) -> None:
-        if not self.process_options:
-            MEMORY.process.close_process()
-            return
-        process = self.process_options[index]
-        MEMORY.update_process(process["name"], process["pid"])
-        self.focusNextChild()
 
     def _list_allowed_process(self) -> List[str]:
         server_file = SERVERS_FILE.read(None)
