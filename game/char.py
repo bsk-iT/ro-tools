@@ -1,5 +1,6 @@
 import os
-from game.jobs import JOB_MAP
+from game.jobs import JOB_MAP, Job
+from gui.app_controller import APP_CONTROLLER
 from service.memory import MEMORY
 from service.offsets import Offsets
 from service.servers_file import BUFF_SKILL, SERVERS_FILE
@@ -33,6 +34,9 @@ class Char:
             self.current_map = MEMORY.process.read_string(MEMORY.map_address)
             self.job_id = MEMORY.process.read_int(MEMORY.hp_address + Offsets.JOB_ID)
             self.buffs = self._get_buffs()
+            self.job = JOB_MAP.get(self.job_id, self.job_id)
+            if APP_CONTROLLER.job.id != self.job_id and isinstance(self.job, Job):
+                APP_CONTROLLER.emit_change_job(self.job)
             os.system("cls")
             print(self)
         except BaseException:
@@ -54,7 +58,7 @@ class Char:
         return f"""
             HP: {self.hp}/{self.hp_max}
             SP: {self.sp}/{self.sp_max}
-            JOB: {JOB_MAP.get(self.job_id, self.job_id) if JOB_MAP[self.job_id] else "Montaria"}
+            JOB: {self.job}
             MAP: {self.current_map}
             BUFFS:{buff_skills}
         """

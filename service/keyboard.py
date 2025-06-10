@@ -27,7 +27,10 @@ class Keyboard:
         [self._key_event(vk_code, False) for vk_code in vk_codes]
         [self._key_event(vk_code, True) for vk_code in vk_codes[::-1]]
 
-    def is_key_pressed(self, vk_codes: List[Any]) -> bool:
+    def is_key_pressed(self, key_sequence: str) -> bool:
+        if not key_sequence:
+            return False
+        vk_codes = self._key_sequence_to_vk(key_sequence)
         return reduce(
             lambda result, vk_code: result and win32api.GetAsyncKeyState(vk_code) & 0x8000 != 0,
             vk_codes,

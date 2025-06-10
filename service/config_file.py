@@ -5,8 +5,8 @@ from service.file import File
 from service.servers_file import CITY, SERVERS_FILE
 
 # Events
-AUTO_POT = "auto_pot"
-SKIL_SPAWNNER = "skill_spawnner"
+AUTO_ITEM = "auto_item"
+SKILL_SPAWNNER = "skill_spawnner"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -20,6 +20,7 @@ PERCENT = "percent"
 KEY = "key"
 DELAY = "delay"
 DELAY_ACTIVE = "delay_active"
+MOUSE_CLICK = "mouse_click"
 MAP = "map"
 MAP_ACTIVE = "map_active"
 KEY_MONITORING = "key_monitoring"
@@ -33,7 +34,7 @@ class ConfigFile(File):
         super().__init__(file_path)
 
     def get_value(self, prop_seq: List[str]) -> Any:
-        return self.read(self.get_key(prop_seq))
+        return self.read(":".join(prop_seq))
 
     def get_delay(self, prop_seq: List[str]) -> float:
         delay_item = self.get_value([*prop_seq, DELAY])
@@ -54,23 +55,21 @@ class ConfigFile(File):
         return game.char.current_map in SERVERS_FILE.get_value(map_prop)
 
     def update_config(self, value: Any, prop_seq: List[str]):
-        config_key = self.get_key(prop_seq)
+        config_key = ":".join(prop_seq)
         self.update(config_key, value)
 
-    def get_spawn_skills(self, job, has_key=False):
-        spawn_skills = []
+    def get_job_spawn_skills(self, job, has_key=False):
+        job_spawn_skills = {}
         while job is not None:
-            skills_data = self.get_value([SKIL_SPAWNNER, job.id])
+            skills_data = self.get_value([SKILL_SPAWNNER, job.id])
             if skills_data is None:
+                job_spawn_skills[job.id] = []
                 job = job.previous_job
                 continue
             skills_id = [_id for _id, skill in skills_data.items() if skill[ACTIVE] and (not has_key or skill[KEY])]
-            spawn_skills.extend([SPAWN_SKILL_MAP[_id] for _id in skills_id])
+            job_spawn_skills[job.id] = [SPAWN_SKILL_MAP[_id] for _id in skills_id] or []
             job = job.previous_job
-        return spawn_skills
-
-    def get_key(self, prop_seq: List[str]) -> str:
-        return ":".join(prop_seq)
+        return job_spawn_skills
 
 
 CONFIG_FILE = ConfigFile("config.json")

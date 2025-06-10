@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout
 from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import Qt
 
 from config.app import APP_DELAY, APP_MAX_DELAY, APP_MIN_DELAY
 from config.icon import ICON_QUICK
@@ -21,6 +22,7 @@ class InputDelay(QWidget):
 
     def _config_layout(self) -> None:
         self.layout.setSpacing(5)
+        self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.addWidget(self.toggle)
         self.layout.addWidget(self.spinbox)

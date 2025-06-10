@@ -4,7 +4,7 @@ import threading
 import time
 from typing import List
 
-from config.app import APP_MONITORING_DELAY
+from service.config_file import SKILL_SPAWNNER
 
 
 class Priority(Enum):
@@ -30,7 +30,8 @@ class BaseEvent:
 
     def run(self):
         self.running = True
-        time.sleep(0.1)
+        if self.name not in [SKILL_SPAWNNER]:
+            time.sleep(0.1)
         self.execute_action()
         while self.running and self.check_condition():
             self.execute_action()
@@ -38,7 +39,8 @@ class BaseEvent:
 
     @abstractmethod
     def check_condition(self) -> bool:
-        self.game.sync_game_data()
+        if self.name not in [SKILL_SPAWNNER]:
+            self.game.sync_game_data()
         return False
 
     @abstractmethod

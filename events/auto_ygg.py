@@ -1,12 +1,12 @@
 import time
 from events.base_event import BaseEvent, Priority
-from service.config_file import AUTO_POT, CONFIG_FILE, HP_PERCENT, KEY, SP_PERCENT, YGG
+from service.config_file import AUTO_ITEM, CONFIG_FILE, HP_PERCENT, KEY, SP_PERCENT, YGG
 from service.keyboard import KEYBOARD
 
 
 class AutoYgg(BaseEvent):
 
-    def __init__(self, game, name="AUTO_YGG", prop_seq=[AUTO_POT, YGG], priority=Priority.REALTIME):
+    def __init__(self, game, name=f"{AUTO_ITEM}:{YGG}", prop_seq=[AUTO_ITEM, YGG], priority=Priority.REALTIME):
         super().__init__(game, name, prop_seq, priority)
 
     def check_condition(self) -> bool:
@@ -14,7 +14,7 @@ class AutoYgg(BaseEvent):
         hp_percent = CONFIG_FILE.get_value([*self.prop_seq, HP_PERCENT])
         sp_percent = CONFIG_FILE.get_value([*self.prop_seq, SP_PERCENT])
         is_valid_map = CONFIG_FILE.is_valid_map(self.game, self.prop_seq)
-        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game, [AUTO_POT])
+        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game, [AUTO_ITEM])
         return is_valid_map and not is_blocked_in_city and (self.game.char.sp_percent < sp_percent or self.game.char.hp_percent < hp_percent)
 
     def execute_action(self):

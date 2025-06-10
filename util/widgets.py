@@ -19,7 +19,7 @@ def build_painel(layout: QBoxLayout, title: str) -> QVBoxLayout:
     widget.setObjectName("painel")
     painel = QVBoxLayout(widget)
     painel.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
-    painel.setSpacing(8)
+    painel.setSpacing(20)
     painel.addWidget(QLabel(title))
     layout.addWidget(widget)
     return painel

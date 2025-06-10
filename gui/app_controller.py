@@ -1,4 +1,3 @@
-from events.game import GAME
 from game.jobs import NOVICE, Job
 from service.config_file import CONFIG_FILE
 from service.memory import MEMORY
@@ -15,7 +14,7 @@ class AppController:
 
     def sync_data(self, job):
         self.job: Job = job
-        self.spawn_skills = CONFIG_FILE.get_spawn_skills(self.job)
+        self.job_spawn_skills = CONFIG_FILE.get_job_spawn_skills(self.job)
 
     def on_change_process(self, cbox, index, process_options) -> None:
         if not process_options:
@@ -30,8 +29,15 @@ class AppController:
         job = cbox.model.item(index, 0).data()
         self.sync_data(job)
         cbox.updated_job.emit(job)
+        cbox.clearFocus()
+
+    def emit_change_job(self, job):
+        index = self.cbox_job.model.findItems(job.name).pop().row()
+        self.cbox_job.setCurrentIndex(index)
 
     def on_togle_monitoring(self, status_toggle, value=None):
+        from events.game import GAME
+
         if not MEMORY.is_valid():
             return
         if value is None:

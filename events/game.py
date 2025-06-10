@@ -6,6 +6,7 @@ from events.auto_pot_hp import AutoPotHP
 from events.auto_pot_sp import AutoPotSP
 from events.auto_ygg import AutoYgg
 from events.base_event import BaseEvent
+from events.skill_spawnner import SkillSpawnner
 from game.char import Char
 
 
@@ -13,6 +14,7 @@ class Game:
     def __init__(self):
         self.char = Char()
         self.events_item: List[BaseEvent] = [AutoPotHP(self), AutoPotSP(self), AutoYgg(self)]
+        self.events_skill: List[BaseEvent] = [SkillSpawnner(self)]
         self.running = False
 
     def start(self):
@@ -21,12 +23,14 @@ class Game:
     def stop(self):
         self.running = False
         [event.stop() for event in self.events_item]
+        [event.stop() for event in self.events_skill]
 
     def run(self):
         self.running = True
         while self.running:
             self.sync_game_data()
             self.monitoring(self.events_item)
+            self.monitoring(self.events_skill)
             time.sleep(APP_MONITORING_DELAY)
         self.running = False
 

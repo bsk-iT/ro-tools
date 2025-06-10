@@ -7,7 +7,7 @@
     "woe": [ ],
     "pvp": [ ],
     "pvm": [ ],
-    "city": [ "prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis" ],
+    "city": [ "prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis", "serene" ],
     "buff_skill": {
       "-4": "sm_magnum",
       "-5": "sm_endure",

@@ -18,6 +18,7 @@ class CboxJobs(QComboBox):
         self.setFixedWidth(APP_CBOX_WIDTH)
         self.build_cbox()
         self.currentIndexChanged.connect(lambda index: APP_CONTROLLER.on_change_job(self, index))
+        APP_CONTROLLER.cbox_job = self
 
     def build_cbox(self):
         for group in JOB_GROUPS:

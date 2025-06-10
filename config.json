@@ -1,111 +1,62 @@
 {
     "keyboard_type": "virtual",
-    "key_monitoring": "End",
-    "auto_pot": {
+    "auto_item": {
         "hp_potion": {
             "delay_active": false,
-            "map_active": false,
-            "key": "F9",
-            "percent": 95
+            "map_active": true
         },
         "sp_potion": {
             "delay_active": false,
-            "map_active": false,
-            "key": "F8",
-            "percent": 80
+            "map_active": false
         },
         "ygg": {
-            "delay_active": true,
-            "map_active": false,
-            "key": "F7",
-            "hp_percent": 5,
-            "sp_percent": 5,
-            "delay": 10.0
-        },
-        "city_active": true
+            "delay_active": false,
+            "map_active": false
+        }
     },
     "skill_spawnner": {
+        "sniper": {
+            "sn_sharpshooting": {
+                "active": true,
+                "delay_active": false,
+                "key": "F1"
+            }
+        },
+        "archer": {
+            "ac_double": {
+                "active": true,
+                "delay_active": false,
+                "key": "F2"
+            }
+        },
+        "hunter": {
+            "ht_removetrap": {
+                "active": true,
+                "delay_active": false,
+                "key": "F3"
+            }
+        },
         "novice": {
             "attack_2": {
-                "active": false
-            },
-            "attack_4": {
-                "active": false
-            },
-            "attack_1": {
-                "active": false
-            },
-            "nv_firstaid": {
-                "active": false
+                "active": true,
+                "delay_active": false,
+                "mouse_click": true,
+                "key": "F1"
             },
             "attack_3": {
-                "active": false
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "key": "F2"
             }
         },
-        "swordman": {
-            "sm_bash": {
-                "active": true
-            },
-            "sm_provoke": {
-                "active": false
-            }
-        },
-        "magician": {
-            "mg_firebolt": {
-                "active": true
-            },
-            "mg_frostdiver": {
-                "active": true
-            },
-            "mg_soulstrike": {
-                "active": true
-            },
-            "mg_lightningbolt": {
-                "active": true
-            },
-            "mg_firewall": {
-                "active": true
-            },
-            "mg_coldbolt": {
-                "active": true
-            },
-            "mg_fireball": {
-                "active": true
-            },
-            "mg_napalmbeat": {
-                "active": true
-            },
-            "mg_thunderstorm": {
-                "active": true
-            },
-            "mg_safetywall": {
-                "active": true
-            },
-            "mg_stonecurse": {
-                "active": true
-            }
-        },
-        "acolyte": {
-            "al_blessing": {
-                "active": false
-            },
-            "al_cure": {
-                "active": false
-            },
-            "al_heal": {
-                "active": false
-            },
-            "al_pneuma": {
-                "active": false
-            }
-        },
-        "biochemist": {
-            "cr_aciddemonstration": {
-                "active": true
-            },
-            "cr_fullprotection": {
-                "active": true
+        "thief": {
+            "tf_backsliding": {
+                "active": true,
+                "mouse_click": false,
+                "delay_active": false
             }
         }
-    }
+    },
+    "key_monitoring": "End"
 }

@@ -21,6 +21,7 @@ class InputAppStatus(QWidget):
             self.on_change_keybind(self.status_key)
         self.status_toggle.toggled.connect(lambda value: APP_CONTROLLER.on_togle_monitoring(self.status_toggle, value))
         self.input_keybind.updated_key.connect(self.on_change_keybind)
+        APP_CONTROLLER.status_widget = self
 
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignRight)
