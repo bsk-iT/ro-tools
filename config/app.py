@@ -24,4 +24,8 @@ APP_STYLE = """
         border: none;
         background-color: transparent;
     }
+    
+    #skill_inputs {
+        border-bottom: 1px solid gray;
+    }
 """

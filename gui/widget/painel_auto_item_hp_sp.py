@@ -5,7 +5,7 @@ from config.icon import IMG_BLUE_POTION, IMG_RED_POTION, IMG_YGG
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
-from service.config_file import AUTO_ITEM, CITY_ACTIVE, CONFIG_FILE, DELAY, DELAY_ACTIVE, HP_PERCENT, HP_POTION, KEY, MAP, MAP_ACTIVE, PERCENT, SP_PERCENT, SP_POTION, YGG
+from service.config_file import AUTO_ITEM, CITY_ACTIVE, CONFIG_FILE, HP_PERCENT, HP_POTION, KEY, MAP, MAP_ACTIVE, PERCENT, SP_PERCENT, SP_POTION, YGG
 from util.widgets import build_icon, build_label_info, build_label_subtitle, build_spinbox_percentage
 
 
@@ -44,22 +44,20 @@ class PainelAutoItemHpSp(QWidget):
     def _build_action_layout(self, tooltip: str, icon: str, resource: str, is_ygg=False) -> QHBoxLayout:
         layout = QHBoxLayout()
         layout.setSpacing(0)
+        key_seq = f"{AUTO_ITEM}:{resource}:"
         layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        key = f"{AUTO_ITEM}:{resource}:{KEY}"
         percentage = f"{AUTO_ITEM}:{resource}:{PERCENT}"
-        delay_active = f"{AUTO_ITEM}:{resource}:{DELAY_ACTIVE}"
-        delay = f"{AUTO_ITEM}:{resource}:{DELAY}"
         map_active = f"{AUTO_ITEM}:{resource}:{MAP_ACTIVE}"
         _map = f"{AUTO_ITEM}:{resource}:{MAP}"
 
         layout.addWidget(build_icon(icon))
-        layout.addWidget(InputKeybind(self, key))
+        layout.addWidget(InputKeybind(self, key_seq + KEY))
         if percentage:
             widget = self._build_ygg_widget(resource) if is_ygg else build_spinbox_percentage(percentage, tooltip)
             layout.addWidget(widget)
-        layout.addWidget(InputDelay(self, delay_active, delay))
+        layout.addWidget(InputDelay(self, key_seq))
         if map_active and _map:
-            layout.addWidget(InputMapCriteria(self, map_active, _map))
+            layout.addWidget(InputMapCriteria(self, key_seq))
         return layout
 
     def _build_ygg_widget(self, resource: str) -> QSpinBox:

@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt, QSize, pyqtSignal
 
 from config.app import APP_ICON_SIZE
 from config.icon import ICON_KEYBOARD
+from gui.app_controller import APP_CONTROLLER
 from service.config_file import CONFIG_FILE
 
 
@@ -11,11 +12,12 @@ class InputKeybind(QPushButton):
 
     updated_key = pyqtSignal(str)
 
-    def __init__(self, parent: QWidget, input_key: str | None = None) -> None:
+    def __init__(self, parent: QWidget, key_config=None, sync_skill_spawner=False) -> None:
         super().__init__(parent)
         self.listenning = False
+        self.sync_skill_spawner = sync_skill_spawner
         self.key_sequence = None
-        self.input_key = input_key
+        self.key_config = key_config
         self.clicked.connect(self._start_listenning)
         self._config_layout()
         self._load_value()
@@ -34,7 +36,7 @@ class InputKeybind(QPushButton):
         self.setIconSize(QSize(APP_ICON_SIZE - 6, APP_ICON_SIZE))
 
     def _load_value(self) -> None:
-        value = CONFIG_FILE.read(self.input_key)
+        value = CONFIG_FILE.read(self.key_config)
         if value is None:
             self._default_label()
             return
@@ -61,10 +63,16 @@ class InputKeybind(QPushButton):
             return
         if key == Qt.Key.Key_Backspace:
             self._default_label()
-            return
+            CONFIG_FILE.update(self.key_config, None)
+        else:
+            self._update_input_keybind(key, event)
+        if self.sync_skill_spawner:
+            APP_CONTROLLER.sync_skill_spawmmer()
+
+    def _update_input_keybind(self, key, event):
         modifiers = event.modifiers().value
         self.key_sequence = QKeySequence(modifiers | key)
         key_str = self.key_sequence.toString()
         self.setText(key_str)
-        CONFIG_FILE.update(self.input_key, key_str)
+        CONFIG_FILE.update(self.key_config, key_str)
         self.updated_key.emit(key_str)

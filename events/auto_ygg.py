@@ -11,8 +11,8 @@ class AutoYgg(BaseEvent):
 
     def check_condition(self) -> bool:
         super().check_condition()
-        hp_percent = CONFIG_FILE.get_value([*self.prop_seq, HP_PERCENT])
-        sp_percent = CONFIG_FILE.get_value([*self.prop_seq, SP_PERCENT])
+        hp_percent = CONFIG_FILE.get_value([*self.prop_seq, HP_PERCENT]) or 0
+        sp_percent = CONFIG_FILE.get_value([*self.prop_seq, SP_PERCENT]) or 0
         is_valid_map = CONFIG_FILE.is_valid_map(self.game, self.prop_seq)
         is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game, [AUTO_ITEM])
         return is_valid_map and not is_blocked_in_city and (self.game.char.sp_percent < sp_percent or self.game.char.hp_percent < hp_percent)

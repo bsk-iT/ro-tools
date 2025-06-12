@@ -15,7 +15,7 @@ class InputAppStatus(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
         self.layout = QHBoxLayout(self)
-        self.status_key = CONFIG_FILE.get_value([KEY_MONITORING])
+        self.status_key = CONFIG_FILE.read(KEY_MONITORING)
         self._config_layout()
         if self.status_key:
             self.on_change_keybind(self.status_key)

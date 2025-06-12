@@ -1,9 +1,10 @@
 {
-    "keyboard_type": "virtual",
+    "keyboard_type": "physical",
+    "key_monitoring": "End",
     "auto_item": {
         "hp_potion": {
             "delay_active": false,
-            "map_active": true
+            "map_active": false
         },
         "sp_potion": {
             "delay_active": false,
@@ -12,51 +13,62 @@
         "ygg": {
             "delay_active": false,
             "map_active": false
-        }
+        },
+        "city_active": false
     },
-    "skill_spawnner": {
+    "skill_spawmmer": {
+        "novice": {
+            "attack_3": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_active": false,
+                "key": "F2",
+                "atk_0_key": "J"
+            },
+            "attack_1": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_active": false,
+                "key": "A"
+            },
+            "attack_2": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_active": false,
+                "key": "F1"
+            },
+            "attack_4": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_active": false,
+                "key": "F4"
+            }
+        },
         "sniper": {
             "sn_sharpshooting": {
                 "active": true,
+                "mouse_click": true,
                 "delay_active": false,
-                "key": "F1"
+                "swap_active": true,
+                "atk_0_key": "1",
+                "atk_1_key": "2",
+                "atk_2_key": "3",
+                "def_0_key": "4",
+                "def_1_key": "5",
+                "def_2_key": "6"
             }
         },
         "archer": {
             "ac_double": {
                 "active": true,
-                "delay_active": false,
-                "key": "F2"
-            }
-        },
-        "hunter": {
-            "ht_removetrap": {
-                "active": true,
-                "delay_active": false,
-                "key": "F3"
-            }
-        },
-        "novice": {
-            "attack_2": {
-                "active": true,
-                "delay_active": false,
-                "mouse_click": true,
-                "key": "F1"
-            },
-            "attack_3": {
-                "active": true,
                 "mouse_click": true,
                 "delay_active": false,
-                "key": "F2"
-            }
-        },
-        "thief": {
-            "tf_backsliding": {
-                "active": true,
-                "mouse_click": false,
-                "delay_active": false
+                "swap_active": false
             }
         }
-    },
-    "key_monitoring": "End"
+    }
 }

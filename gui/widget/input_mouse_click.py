@@ -3,17 +3,17 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
 
 from config.icon import ICON_MOUSE
-from service.config_file import CONFIG_FILE
+from service.config_file import CONFIG_FILE, MOUSE_CLICK
 from util.widgets import ICON_BTN
 
 
 class InputMouseClick(QWidget):
-    def __init__(self, parent: QWidget, active_prop: str, active: bool) -> None:
+    def __init__(self, parent: QWidget, key_base: str, active: bool) -> None:
         super().__init__(parent)
-        self.active_prop = active_prop
+        self.key_base = key_base
         self.active = active
         self.layout = QHBoxLayout(self)
-        self.toggle = self._build_toggle(active_prop)
+        self.toggle = self._build_toggle()
         self._config_layout()
         self._config_events()
 
@@ -26,9 +26,10 @@ class InputMouseClick(QWidget):
         self.toggle.toggled.connect(self._on_active_delay)
         self._on_active_delay(self.toggle.isChecked())
 
-    def _build_toggle(self, active: str) -> QToolButton:
+    def _build_toggle(self) -> QToolButton:
         toggle = QToolButton()
-        active = CONFIG_FILE.read(active) or self.active
+        active = CONFIG_FILE.read(self.key_base + MOUSE_CLICK)
+        active = self.active if active is None else active
         toggle.setCheckable(active)
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(ICON_MOUSE))
@@ -37,4 +38,4 @@ class InputMouseClick(QWidget):
 
     def _on_active_delay(self, value: bool) -> None:
         self.toggle.setToolTip(f"Mouse click {"ON" if value else "OFF"}")
-        CONFIG_FILE.update(self.active_prop, value)
+        CONFIG_FILE.update(self.key_base + MOUSE_CLICK, value)

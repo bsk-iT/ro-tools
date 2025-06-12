@@ -24,6 +24,7 @@ ICON_ON = resource_path(PATH_ICON + "on.png")
 ICON_OFF = resource_path(PATH_ICON + "off.png")
 ICON_DELETE = resource_path(PATH_ICON + "delete.png")
 ICON_MOUSE = resource_path(PATH_ICON + "mouse.png")
+ICON_SWAP = resource_path(PATH_ICON + "swap.png")
 
 IMG_RED_POTION = resource_path(PATH_ITEM + "red_potion.gif")
 IMG_BLUE_POTION = resource_path(PATH_ITEM + "blue_potion.gif")

@@ -1,6 +1,6 @@
 from itertools import chain
 from tkinter import ACTIVE
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QScrollArea, QGridLayout, QFrame
+from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QScrollArea, QFrame
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 
@@ -11,7 +11,8 @@ from gui.widget.cbox_skill import CboxSkill
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_mouse_click import InputMouseClick
-from service.config_file import CONFIG_FILE, DELAY, DELAY_ACTIVE, KEY, MOUSE_CLICK, SKILL_SPAWNNER
+from gui.widget.input_swap import InputSwap
+from service.config_file import CONFIG_FILE, KEY, SKILL_SPAWMMER
 from util.widgets import build_icon, build_label_info, clear_layout
 
 
@@ -37,12 +38,12 @@ class PainelJobSpawnSkill(QWidget):
         active_spawn_skills = list(chain.from_iterable(APP_CONTROLLER.job_spawn_skills.values()))
         (vbox, scroll) = self._build_scroll_vbox()
         while job is not None:
-            has_skill = False 
+            has_skill = False
             vbox_spawn_skill = QVBoxLayout()
             vbox_spawn_skill.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
             for skill in filter(lambda skill: skill in active_spawn_skills, job.spawn_skills):
                 has_skill = True
-                vbox_spawn_skill.addLayout(self._build_hbox_skill(skill, job.id))
+                vbox_spawn_skill.addWidget(self._build_skill_inputs(skill, job.id))
             if has_skill:
                 vbox.addWidget(build_label_info(job.name))
                 vbox.addLayout(vbox_spawn_skill)
@@ -59,16 +60,18 @@ class PainelJobSpawnSkill(QWidget):
         vbox_spawn_skill.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         return (vbox_spawn_skill, scroll)
 
-    def _build_hbox_skill(self, skill: SpawnSkill, job_id):
-        hbox = QHBoxLayout()
+    def _build_skill_inputs(self, skill: SpawnSkill, job_id):
+        widget = QWidget()
+        hbox = QHBoxLayout(widget)
         hbox.setSpacing(5)
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(self._build_skill_icon(skill, job_id))
-        key_base = f"{SKILL_SPAWNNER}:{job_id}:{skill.id}:"
-        hbox.addWidget(InputKeybind(self, key_base + KEY))
-        hbox.addWidget(InputMouseClick(self, key_base + MOUSE_CLICK, skill.is_clicked))
-        hbox.addWidget(InputDelay(self, key_base + DELAY_ACTIVE, key_base + DELAY))
-        return hbox
+        key_base = f"{SKILL_SPAWMMER}:{job_id}:{skill.id}:"
+        hbox.addWidget(InputKeybind(self, key_base + KEY, True))
+        hbox.addWidget(InputMouseClick(self, key_base, skill.is_clicked))
+        hbox.addWidget(InputDelay(self, key_base))
+        hbox.addWidget(InputSwap(self, key_base))
+        return widget
 
     def _build_skill_icon(self, skill: SpawnSkill, job_id) -> QFrame:
         frame = QFrame()
@@ -85,9 +88,9 @@ class PainelJobSpawnSkill(QWidget):
         return frame
 
     def _active_skill(self, skill: SpawnSkill, job_id, active=True):
-        APP_CONTROLLER.job_spawn_skills[job_id].append(skill) if active else APP_CONTROLLER.job_spawn_skills[job_id].remove(skill)
+        APP_CONTROLLER.update_skill_spawmmer(skill, active)
         self.update_skills_spawnner()
-        CONFIG_FILE.update_config(active, [SKILL_SPAWNNER, job_id, skill.id, ACTIVE])
+        CONFIG_FILE.update_config(active, [SKILL_SPAWMMER, job_id, skill.id, ACTIVE])
         self.cbox_skill.build_cbox(APP_CONTROLLER.job)
 
     def _on_add_skill(self, skill: SpawnSkill, job_id):

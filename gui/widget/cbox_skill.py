@@ -6,7 +6,7 @@ from PyQt6.QtCore import pyqtSignal
 from config.app import APP_CBOX_WIDTH
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_jobs import CboxJobs
-from service.config_file import ACTIVE, CONFIG_FILE, SKILL_SPAWNNER
+from service.config_file import ACTIVE, CONFIG_FILE, SKILL_SPAWMMER
 from util.widgets import build_cbox_category
 
 
@@ -14,7 +14,7 @@ class CboxSkill(QComboBox):
 
     updated_skill = pyqtSignal(object, str)
 
-    def __init__(self, parent, cbox_job: CboxJobs, resource: str = SKILL_SPAWNNER):
+    def __init__(self, parent, cbox_job: CboxJobs, resource: str = SKILL_SPAWMMER):
         super().__init__(parent)
         self.setFixedWidth(APP_CBOX_WIDTH)
         self.resource = resource
@@ -44,7 +44,7 @@ class CboxSkill(QComboBox):
         active_spawn_skills = list(chain.from_iterable(APP_CONTROLLER.job_spawn_skills.values()))
         while job is not None:
             build_cbox_category(self.model, job.name)
-            skill_list = job.spawn_skills if self.resource == SKILL_SPAWNNER else job.buff_skill
+            skill_list = job.spawn_skills if self.resource == SKILL_SPAWMMER else job.buff_skill
             for skill in skill_list:
                 if skill in active_spawn_skills:
                     continue

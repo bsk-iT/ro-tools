@@ -4,8 +4,6 @@ import threading
 import time
 from typing import List
 
-from service.config_file import SKILL_SPAWNNER
-
 
 class Priority(Enum):
     REALTIME = 4
@@ -30,8 +28,7 @@ class BaseEvent:
 
     def run(self):
         self.running = True
-        if self.name not in [SKILL_SPAWNNER]:
-            time.sleep(0.1)
+        time.sleep(0.1)
         self.execute_action()
         while self.running and self.check_condition():
             self.execute_action()
@@ -39,8 +36,7 @@ class BaseEvent:
 
     @abstractmethod
     def check_condition(self) -> bool:
-        if self.name not in [SKILL_SPAWNNER]:
-            self.game.sync_game_data()
+        self.game.sync_game_data()
         return False
 
     @abstractmethod

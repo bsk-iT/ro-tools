@@ -14,7 +14,7 @@ ATTACK_1 = SpawnSkill("attack_1", "Ataque 1")
 ATTACK_2 = SpawnSkill("attack_2", "Ataque 2")
 ATTACK_3 = SpawnSkill("attack_3", "Ataque 3")
 ATTACK_4 = SpawnSkill("attack_4", "Ataque 4")
-NV_FIRSTAID = SpawnSkill("nv_firstaid", "Primeiros Socorros")
+NV_FIRSTAID = SpawnSkill("nv_firstaid", "Primeiros Socorros", False)
 
 # Swordman
 SM_BASH = SpawnSkill("sm_bash", "Golpe Fulminante")

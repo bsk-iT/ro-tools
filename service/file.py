@@ -30,7 +30,12 @@ class File(ABC):
             if key not in json_data or not isinstance(json_data[key], dict):
                 json_data[key] = {}
             json_data = json_data[key]
-        json_data[keys[-1]] = value
+        if value is None:
+            if keys[-1] not in json_data:
+                return
+            del json_data[keys[-1]]
+        else:
+            json_data[keys[-1]] = value
         self.save()
 
     def save(self) -> None:

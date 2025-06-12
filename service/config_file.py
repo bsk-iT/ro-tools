@@ -6,7 +6,7 @@ from service.servers_file import CITY, SERVERS_FILE
 
 # Events
 AUTO_ITEM = "auto_item"
-SKILL_SPAWNNER = "skill_spawnner"
+SKILL_SPAWMMER = "skill_spawmmer"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -27,6 +27,7 @@ KEY_MONITORING = "key_monitoring"
 KEYBOARD_TYPE = "keyboard_type"
 CITY_ACTIVE = "city_active"
 ACTIVE = "active"
+SWAP_ACTIVE = "swap_active"
 
 
 class ConfigFile(File):
@@ -61,7 +62,7 @@ class ConfigFile(File):
     def get_job_spawn_skills(self, job, has_key=False):
         job_spawn_skills = {}
         while job is not None:
-            skills_data = self.get_value([SKILL_SPAWNNER, job.id])
+            skills_data = self.get_value([SKILL_SPAWMMER, job.id])
             if skills_data is None:
                 job_spawn_skills[job.id] = []
                 job = job.previous_job

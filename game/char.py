@@ -35,6 +35,7 @@ class Char:
             self.job_id = MEMORY.process.read_int(MEMORY.hp_address + Offsets.JOB_ID)
             self.buffs = self._get_buffs()
             self.job = JOB_MAP.get(self.job_id, self.job_id)
+            self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.base_address + Offsets.CHAT_BAR_ENABLED)
             if APP_CONTROLLER.job.id != self.job_id and isinstance(self.job, Job):
                 APP_CONTROLLER.emit_change_job(self.job)
             os.system("cls")
@@ -60,5 +61,6 @@ class Char:
             SP: {self.sp}/{self.sp_max}
             JOB: {self.job}
             MAP: {self.current_map}
-            BUFFS:{buff_skills}
+            BUFFS: {buff_skills}
+            CHAT_BAR_ENABLED: {self.chat_bar_enabled}
         """
