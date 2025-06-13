@@ -3,7 +3,7 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import QEvent
 
 from config.app import APP_NAME, APP_ICON
-from events.game import GAME
+from events.game_event import GAME_EVENT
 from gui.central_widget import CentralWidget
 from gui.widget.tray_menu import TrayMenu
 
@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
         self._config_layout()
 
     def closeEvent(self, event: QEvent) -> None:
-        GAME.stop()
+        GAME_EVENT.stop()
         event.accept()
 
     def changeEvent(self, event: QEvent) -> None:

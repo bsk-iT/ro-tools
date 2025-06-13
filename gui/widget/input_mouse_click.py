@@ -8,10 +8,10 @@ from util.widgets import ICON_BTN
 
 
 class InputMouseClick(QWidget):
-    def __init__(self, parent: QWidget, key_base: str, active: bool) -> None:
+    def __init__(self, parent: QWidget, key_base: str, skill_click: bool) -> None:
         super().__init__(parent)
         self.key_base = key_base
-        self.active = active
+        self.skill_click = skill_click
         self.layout = QHBoxLayout(self)
         self.toggle = self._build_toggle()
         self._config_layout()
@@ -28,9 +28,9 @@ class InputMouseClick(QWidget):
 
     def _build_toggle(self) -> QToolButton:
         toggle = QToolButton()
+        toggle.setCheckable(True)
         active = CONFIG_FILE.read(self.key_base + MOUSE_CLICK)
-        active = self.active if active is None else active
-        toggle.setCheckable(active)
+        active = self.skill_click if active is None else active
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(ICON_MOUSE))
         toggle.setIconSize(ICON_BTN)

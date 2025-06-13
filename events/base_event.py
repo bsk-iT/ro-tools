@@ -13,8 +13,8 @@ class Priority(Enum):
 
 
 class BaseEvent:
-    def __init__(self, game, name, prop_seq: List[str], priority=Priority.LOW):
-        self.game = game
+    def __init__(self, game_event, name, prop_seq: List[str], priority=Priority.LOW):
+        self.game_event = game_event
         self.name = name
         self.priority = priority
         self.prop_seq = prop_seq
@@ -36,7 +36,7 @@ class BaseEvent:
 
     @abstractmethod
     def check_condition(self) -> bool:
-        self.game.sync_game_data()
+        self.game_event.sync_game_data()
         return False
 
     @abstractmethod

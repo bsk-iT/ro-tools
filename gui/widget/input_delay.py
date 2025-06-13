@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout
+from PyQt6.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout, QSizePolicy
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
 
@@ -20,6 +20,7 @@ class InputDelay(QWidget):
         self._config_events()
 
     def _config_layout(self) -> None:
+        self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         self.layout.setSpacing(5)
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.layout.setContentsMargins(0, 0, 0, 0)
@@ -28,7 +29,7 @@ class InputDelay(QWidget):
 
     def _config_events(self) -> None:
         self.toggle.toggled.connect(self._on_active_delay)
-        self.spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(self.delay_prop, value))
+        self.spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(self.key_seq + DELAY, value))
         self._on_active_delay(self.toggle.isChecked())
 
     def _build_toggle(self) -> QToolButton:

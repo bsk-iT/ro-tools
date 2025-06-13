@@ -1,10 +1,10 @@
 from itertools import chain
 from tkinter import ACTIVE
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QScrollArea, QFrame
+from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QFrame
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 
-from config.icon import ICON_DELETE
+from config.icon import ICON_DELETE, ICON_SHIELD, ICON_SWORD
 from game.spawn_skill import SpawnSkill
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_skill import CboxSkill
@@ -13,10 +13,10 @@ from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_mouse_click import InputMouseClick
 from gui.widget.input_swap import InputSwap
 from service.config_file import CONFIG_FILE, KEY, SKILL_SPAWMMER
-from util.widgets import build_icon, build_label_info, clear_layout
+from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
 
-class PainelJobSpawnSkill(QWidget):
+class PainelJobSkillSpawmmer(QWidget):
 
     def __init__(self, parent, cbox_job):
         super().__init__(parent)
@@ -36,7 +36,7 @@ class PainelJobSpawnSkill(QWidget):
         clear_layout(self.layout.takeAt(1))
         job = APP_CONTROLLER.job
         active_spawn_skills = list(chain.from_iterable(APP_CONTROLLER.job_spawn_skills.values()))
-        (vbox, scroll) = self._build_scroll_vbox()
+        (vbox, scroll) = build_scroll_vbox()
         while job is not None:
             has_skill = False
             vbox_spawn_skill = QVBoxLayout()
@@ -50,19 +50,10 @@ class PainelJobSpawnSkill(QWidget):
             job = job.previous_job
         self.layout.addWidget(scroll)
 
-    def _build_scroll_vbox(self):
-        content_widget = QWidget()
-        scroll = QScrollArea()
-        scroll.setFixedHeight(300)
-        scroll.setWidgetResizable(True)
-        scroll.setWidget(content_widget)
-        vbox_spawn_skill = QVBoxLayout(content_widget)
-        vbox_spawn_skill.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
-        return (vbox_spawn_skill, scroll)
-
     def _build_skill_inputs(self, skill: SpawnSkill, job_id):
         widget = QWidget()
-        hbox = QHBoxLayout(widget)
+        vbox = QVBoxLayout(widget)
+        hbox = QHBoxLayout()
         hbox.setSpacing(5)
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(self._build_skill_icon(skill, job_id))
@@ -70,12 +61,15 @@ class PainelJobSpawnSkill(QWidget):
         hbox.addWidget(InputKeybind(self, key_base + KEY, True))
         hbox.addWidget(InputMouseClick(self, key_base, skill.is_clicked))
         hbox.addWidget(InputDelay(self, key_base))
-        hbox.addWidget(InputSwap(self, key_base))
+        hbox.addWidget(InputSwap(self, "atk", key_base, ICON_SWORD))
+        hbox.addWidget(InputSwap(self, "def", key_base, ICON_SHIELD))
+        vbox.addLayout(hbox)
+        vbox.addWidget(build_hr())
         return widget
 
     def _build_skill_icon(self, skill: SpawnSkill, job_id) -> QFrame:
         frame = QFrame()
-        icon = build_icon(skill.icon, skill.id, 5, frame)
+        icon = build_icon(skill.icon, skill.id, 25, frame)
         icon.move(9, 9)
         frame.setFixedSize(35, 40)
         btn_delete = QPushButton(frame)

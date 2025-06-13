@@ -28,4 +28,20 @@ APP_STYLE = """
     #skill_inputs {
         border-bottom: 1px solid gray;
     }
+    
+    #attack_1, #defense_1 {
+        color: rgb(72, 133, 237);
+    }
+    
+    #attack_2, #defense_2 {
+        color: rgb(123, 104, 238);
+    }
+    
+    #attack_3, #defense_3 {
+        color: rgb(199, 80, 255);
+    }
+    
+    #attack_4, #defense_4 {
+        color: rgb(255, 99, 171);
+    }
 """

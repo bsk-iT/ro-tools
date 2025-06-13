@@ -2,8 +2,10 @@ from PyQt6.QtWidgets import QVBoxLayout, QWidget, QTabWidget
 from PyQt6.QtCore import Qt
 
 from gui.widget.cbox_jobs import CboxJobs
-from gui.widget.painel_job_buff import PainelJobBuff
-from gui.widget.painel_job_spawm_skill import PainelJobSpawnSkill
+from gui.widget.painel_job_skill_buff import PainelJobSkillBuff
+from gui.widget.painel_job_hotkey import PainelJobHotkey
+from gui.widget.painel_job_skill_equip import PainelJobEquipBuff
+from gui.widget.painel_job_skill_spawmmer import PainelJobSkillSpawmmer
 from gui.widget.painel_job_macro import PainelJobMacro
 from util.widgets import build_painel
 
@@ -20,8 +22,9 @@ class PainelJob(QWidget):
         cbox_job = CboxJobs(self)
         painel.addWidget(cbox_job)
         tab_panel = QTabWidget()
-        tab_panel.addTab(PainelJobSpawnSkill(self, cbox_job), "Skill Spawmmer")
-        tab_panel.addTab(PainelJobBuff(self, cbox_job), "Hotkey")
-        tab_panel.addTab(PainelJobBuff(self, cbox_job), "Buff")
+        tab_panel.addTab(PainelJobSkillSpawmmer(self, cbox_job), "Skill Spawmmer")
+        tab_panel.addTab(PainelJobSkillBuff(self, cbox_job), "Skill Buff")
+        tab_panel.addTab(PainelJobEquipBuff(self, cbox_job), "Equip. Buff")
+        tab_panel.addTab(PainelJobHotkey(self, cbox_job), "Hotkey")
         tab_panel.addTab(PainelJobMacro(self, cbox_job), "Macro")
         painel.addWidget(tab_panel)

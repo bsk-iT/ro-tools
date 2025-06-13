@@ -1,10 +1,9 @@
 from functools import lru_cache
 import os
-from PyQt6.QtWidgets import QLabel, QSpinBox, QBoxLayout, QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QWidgetItem
+from PyQt6.QtWidgets import QLabel, QSpinBox, QBoxLayout, QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QWidgetItem, QScrollArea, QFrame, QPushButton
 from PyQt6.QtCore import QSize, Qt, QUrl
-from PyQt6.QtGui import QPixmap, QDesktopServices, QStandardItem, QFont
+from PyQt6.QtGui import QPixmap, QDesktopServices, QStandardItem, QFont, QColor, QIcon
 
-from config.app import APP_ICON_SIZE
 from service.config_file import CONFIG_FILE
 from service.file import File
 from util.number import clamp
@@ -32,6 +31,53 @@ def build_label_subtitle(text: str) -> QLabel:
     return label
 
 
+def get_color_by_id(_id) -> QColor:
+    color = QColor()
+    for _type in ["attack", "defense"]:
+        if _id in [f"{_type}_1", f"{type}_1"]:
+            color.setRgb(72, 133, 237)
+            return color
+        if _id in [f"{_type}_2", f"{type}_2"]:
+            color.setRgb(123, 104, 238)
+            return color
+        if _id in [f"{_type}_3", f"{type}_3"]:
+            color.setRgb(199, 80, 255)
+            return color
+        if _id in [f"{_type}_4", f"{type}_4"]:
+            color.setRgb(255, 99, 171)
+            return color
+    return None
+
+
+def build_scroll_vbox(heigth = 300):
+    content_widget = QWidget()
+    scroll = QScrollArea()
+    scroll.setFixedHeight(heigth)
+    scroll.setWidgetResizable(True)
+    scroll.setWidget(content_widget)
+    vbox = QVBoxLayout(content_widget)
+    vbox.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+    return (vbox, scroll)
+
+def build_action_badge():
+    widget = QWidget()
+    widget.setFixedSize(30, 40)
+    widget.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+    layout = QHBoxLayout(widget)
+    layout.setAlignment(Qt.AlignmentFlag.AlignBottom)
+    layout.setContentsMargins(0, 0, 0, 0)
+    return (widget, layout)
+
+def build_badge_btn(parent, icon):
+    btn = QPushButton(parent)
+    btn.setFixedSize(20, 20)
+    btn.move(0, 0)
+    btn.setIcon(QIcon(icon))
+    btn.setIconSize(QSize(10, 10))
+    btn.setContentsMargins(0, 0, 0, 0)
+    btn.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+    return btn
+
 def build_label_info(text: str) -> QLabel:
     label = QLabel(text)
     label.setWordWrap(True)
@@ -46,14 +92,20 @@ def build_label(text: str, font=12, word_wrap=True) -> QLabel:
     return label
 
 
-def build_icon(icon: str, tooltip: str = None, size=APP_ICON_SIZE, parent: QWidget = None) -> QLabel:
+def build_icon(icon: str, tooltip: str = None, size=25, parent: QWidget = None) -> QLabel:
     label = QLabel(parent)
     if tooltip:
         label.setToolTip(tooltip)
-    pixmap = QPixmap(icon)
-    pixmap.scaledToWidth(size)
-    label.setPixmap(pixmap)
+    label.setPixmap(QPixmap(icon).scaled(size, size))
     return label
+
+
+def build_hr() -> QFrame:
+    line = QFrame()
+    line.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+    line.setFrameShape(QFrame.Shape.HLine)
+    line.setFrameShadow(QFrame.Shadow.Sunken)
+    return line
 
 
 @lru_cache(maxsize=None)

@@ -11,8 +11,8 @@ from service.mouse import MOUSE
 
 class SkillSpawmmer(BaseEvent):
 
-    def __init__(self, game, name=SKILL_SPAWMMER, prop_seq=[SKILL_SPAWMMER], priority=Priority.REALTIME):
-        super().__init__(game, name, prop_seq, priority)
+    def __init__(self, game_event, name=SKILL_SPAWMMER, prop_seq=[SKILL_SPAWMMER], priority=Priority.REALTIME):
+        super().__init__(game_event, name, prop_seq, priority)
         self.job_id = None
         self.skill: SpawnSkill = None
 

@@ -12,12 +12,14 @@ class AppController:
     def __init__(self):
         self.process_name = None
         self.cbox_job = None
+        self.cbox_macro = None
         self.press_key_handler = {}
         self.running = False
         self.sync_data(NOVICE)
 
     def sync_data(self, job):
         self.job: Job = job
+        self.job_macros = CONFIG_FILE.get_job_macros(self.job)
         self.job_spawn_skills = CONFIG_FILE.get_job_spawn_skills(self.job)
 
     def update_skill_spawmmer(self, skill, active):
@@ -29,10 +31,18 @@ class AppController:
             self.job_spawn_skills[self.job.id].remove(skill)
             self.remove_press_key(key)
 
-    def add_press_key_skill_spawmmer(self, skill, key, skill_spawmmer = None):
+    def update_macros(self, macro, active):
+        if active:
+            self.job_macros[self.job.id].append(macro)
+        else:
+            self.job_macros[self.job.id].remove(macro)
+
+    def add_press_key_skill_spawmmer(self, skill, key, skill_spawmmer=None):
+        from events.game_event import GAME_EVENT
+
         if key is None:
             return
-        event = SkillSpawmmer(None) if skill_spawmmer is None else skill_spawmmer
+        event = SkillSpawmmer(GAME_EVENT) if skill_spawmmer is None else skill_spawmmer
         handler = keyboard.on_press_key(key, lambda _: event.start(key, self.job.id, skill))
         self.press_key_handler[key] = (handler, event)
         keyboard.on_release_key(key, lambda _: event.stop())
@@ -76,17 +86,27 @@ class AppController:
         self.cbox_job.setCurrentIndex(index)
 
     def on_togle_monitoring(self, status_toggle, value=None):
-        from events.game import GAME
-
         if not MEMORY.is_valid():
             return
         if value is None:
             status_toggle.toggle()
             return
         self.running = status_toggle.isChecked()
-        GAME.start() if self.running else GAME.stop()
-        self.sync_skill_spawmmer() if self.running else self.remove_all_press_key_handler()
-        status_toggle.setIcon(QIcon(ICON_ON if self.running else ICON_OFF))
+        self.start_all_events(status_toggle) if self.running else self.stop_all_events(status_toggle)
+
+    def stop_all_events(self, status_toggle):
+        from events.game_event import GAME_EVENT
+
+        GAME_EVENT.stop()
+        self.remove_all_press_key_handler()
+        status_toggle.setIcon(QIcon(ICON_OFF))
+
+    def start_all_events(self, status_toggle):
+        from events.game_event import GAME_EVENT
+
+        GAME_EVENT.start()
+        self.sync_skill_spawmmer()
+        status_toggle.setIcon(QIcon(ICON_ON))
 
 
 APP_CONTROLLER = AppController()

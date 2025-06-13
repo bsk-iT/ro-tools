@@ -9,7 +9,7 @@ from events.base_event import BaseEvent
 from game.char import Char
 
 
-class Game:
+class GameEvent:
     def __init__(self):
         self.char = Char()
         self.events_item: List[BaseEvent] = [AutoPotHP(self), AutoPotSP(self), AutoYgg(self)]
@@ -17,7 +17,7 @@ class Game:
         self.running = False
 
     def start(self):
-        threading.Thread(target=self.run, name="GAME", daemon=True).start()
+        threading.Thread(target=self.run, name="event_controller", daemon=True).start()
 
     def stop(self):
         self.running = False
@@ -50,4 +50,4 @@ class Game:
         self.char.update()
 
 
-GAME = Game()
+GAME_EVENT = GameEvent()

@@ -1,5 +1,6 @@
 from typing import Any, List
 from config.app import APP_DELAY
+from game.macro import MACRO_MAP
 from game.spawn_skill import SPAWN_SKILL_MAP
 from service.file import File
 from service.servers_file import CITY, SERVERS_FILE
@@ -7,6 +8,7 @@ from service.servers_file import CITY, SERVERS_FILE
 # Events
 AUTO_ITEM = "auto_item"
 SKILL_SPAWMMER = "skill_spawmmer"
+MACRO = "macro"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -71,6 +73,19 @@ class ConfigFile(File):
             job_spawn_skills[job.id] = [SPAWN_SKILL_MAP[_id] for _id in skills_id] or []
             job = job.previous_job
         return job_spawn_skills
+
+    def get_job_macros(self, job):
+        job_macros = {}
+        while job is not None:
+            macro_data = self.get_value([MACRO, job.id])
+            if macro_data is None:
+                job_macros[job.id] = []
+                job = job.previous_job
+                continue
+            macros_id = [_id for _id, macro in macro_data.items() if macro[ACTIVE]]
+            job_macros[job.id] = [MACRO_MAP[_id] for _id in macros_id] or []
+            job = job.previous_job
+        return job_macros
 
 
 CONFIG_FILE = ConfigFile("config.json")
