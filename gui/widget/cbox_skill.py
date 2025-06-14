@@ -1,27 +1,23 @@
 from itertools import chain
 from PyQt6.QtWidgets import QComboBox
 from PyQt6.QtGui import QStandardItemModel, QStandardItem, QIcon
-from PyQt6.QtCore import pyqtSignal
 
 from config.app import APP_CBOX_WIDTH
 from gui.app_controller import APP_CONTROLLER
-from gui.widget.cbox_jobs import CboxJobs
 from service.config_file import ACTIVE, CONFIG_FILE, SKILL_SPAWMMER
 from util.widgets import build_cbox_category, get_color_by_id
 
 
 class CboxSkill(QComboBox):
 
-    updated_skill = pyqtSignal(object, str)
-
-    def __init__(self, parent, cbox_job: CboxJobs, resource: str = SKILL_SPAWMMER):
+    def __init__(self, parent, resource: str = SKILL_SPAWMMER):
         super().__init__(parent)
         self.setFixedWidth(APP_CBOX_WIDTH)
         self.resource = resource
         self.model = QStandardItemModel()
         self.currentIndexChanged.connect(self._on_changed)
         self.build_cbox(APP_CONTROLLER.job)
-        cbox_job.updated_job.connect(self.build_cbox)
+        APP_CONTROLLER.updated_job.connect(self.build_cbox)
 
     def _on_changed(self, index):
         if index < 1:
@@ -29,8 +25,8 @@ class CboxSkill(QComboBox):
         (skill, job_id) = self.model.takeItem(index, 0).data()
         self.model.takeRow(index)
         CONFIG_FILE.update_config(True, [self.resource, job_id, skill.id, ACTIVE])
-        self.updated_skill.emit(skill, job_id)
-        APP_CONTROLLER.status_widget.setFocus()
+        APP_CONTROLLER.added_skill.emit(skill, job_id)
+        APP_CONTROLLER.status_toggle.setFocus()
 
     def add_item(self, skill, job):
         if not skill and not job:

@@ -1,4 +1,3 @@
-from enum import Enum
 from typing import List
 from service.file import File
 

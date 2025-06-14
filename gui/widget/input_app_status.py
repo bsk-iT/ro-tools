@@ -19,9 +19,9 @@ class InputAppStatus(QWidget):
         self._config_layout()
         if self.status_key:
             self.on_change_keybind(self.status_key)
-        self.status_toggle.toggled.connect(lambda value: APP_CONTROLLER.on_togle_monitoring(self.status_toggle, value))
+        self.status_toggle.toggled.connect(lambda value: APP_CONTROLLER.on_togle_monitoring(value))
         self.input_keybind.updated_key.connect(self.on_change_keybind)
-        APP_CONTROLLER.status_widget = self
+        APP_CONTROLLER.status_toggle = self.status_toggle
 
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignRight)
@@ -45,4 +45,4 @@ class InputAppStatus(QWidget):
         if self.status_key != key and not self.status_key is None:
             keyboard.remove_hotkey(self.status_key)
         self.status_key = key
-        keyboard.add_hotkey(key, lambda: APP_CONTROLLER.on_togle_monitoring(self.status_toggle, None))
+        keyboard.add_hotkey(key, lambda: APP_CONTROLLER.on_togle_monitoring(None))

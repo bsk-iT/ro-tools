@@ -1,11 +1,12 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame
+import copy
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame, QScrollArea
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QIcon
 
+from config.app import APP_ICON_SIZE
 from config.icon import ICON_ARROW_DOWN, ICON_ARROW_RIGHT, ICON_DELETE
-from game.macro import MACRO_MAP
+from game.macro import MACRO_MAP, MAX_HOTKEY
 from gui.app_controller import APP_CONTROLLER
-from gui.widget.cbox_jobs import CboxJobs
 from gui.widget.cbox_macro import CboxMacro
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
@@ -13,35 +14,36 @@ from service.config_file import ACTIVE, CONFIG_FILE, KEY, MACRO
 from util.widgets import build_action_badge, build_badge_btn, build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
 
-MAX_HOTKEY = 10
 DEFAULT_SIZE = 25
 
 
 class PainelJobMacro(QWidget):
-    def __init__(self, parent, cbox_jobs: CboxJobs):
+    def __init__(self, parent):
         super().__init__(parent)
         self.layout: QVBoxLayout = QVBoxLayout(self)
-        self.cbox_macro: CboxMacro = CboxMacro(self, cbox_jobs)
-        cbox_jobs.updated_job.connect(self.update_macros)
+        self.cbox_macro: CboxMacro = CboxMacro(self)
         self._config_layout()
+        APP_CONTROLLER.updated_job.connect(self.update_macros)
 
     def _config_layout(self):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.layout.addWidget(self.cbox_macro)
-        self.cbox_macro.updated_macro.connect(self.update_macros)
+        APP_CONTROLLER.added_macro.connect(self.update_macros)
         self.update_macros()
 
-    def update_macros(self):
+    def update_macros(self, _=None):
         clear_layout(self.layout.takeAt(1))
-        job = APP_CONTROLLER.job
+        job = copy.deepcopy(APP_CONTROLLER.job)
         (vbox, scroll) = build_scroll_vbox()
         while job is not None:
             has_macro = False
             active_macros = APP_CONTROLLER.job_macros[job.id]
             vbox_macro = QVBoxLayout()
             vbox_macro.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
-            for macro in filter(lambda macro: macro in active_macros, MACRO_MAP.values()):
+            for macro in MACRO_MAP.values():
+                if macro.id not in [a_macro.id for a_macro in active_macros]:
+                    continue
                 has_macro = True
                 vbox_macro.addWidget(self._build_macro_inputs(macro, job.id))
             if has_macro:
@@ -55,12 +57,12 @@ class PainelJobMacro(QWidget):
         key_seq = f"{MACRO}:{job_id}:{macro.id}:"
         vbox = QVBoxLayout(widget)
         vbox.setSpacing(10)
-        vbox.addLayout(self._build_title_macro(key_seq, macro))
-        vbox.addLayout(self._build_frame_input_delay(key_seq, macro, job_id))
+        vbox.addLayout(self._build_title_macro(job_id, key_seq, macro))
+        vbox.addLayout(self._build_frame_input_delay(key_seq, macro))
         vbox.addWidget(build_hr())
         return widget
 
-    def _build_frame_input_delay(self, key_seq, macro, job_id):
+    def _build_frame_input_delay(self, key_seq, macro):
         hbox = QHBoxLayout()
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.setContentsMargins(0, 0, 0, 0)
@@ -122,14 +124,20 @@ class PainelJobMacro(QWidget):
         CONFIG_FILE.update(key_seq + ACTIVE, active)
         self.update_macros()
 
-    def _build_btn_remove_macro(self, key_seq, macro, parent):
-        btn = build_badge_btn(parent, ICON_DELETE)
-        btn.clicked.connect(lambda: self._on_add_remove_macro(key_seq, macro, False))
+    def _build_btn_remove_macro(self, job_id, key_seq, macro):
+        btn = QPushButton()
+        btn.setIcon(QIcon(ICON_DELETE))
+        btn.setFixedSize(APP_ICON_SIZE, APP_ICON_SIZE)
+        btn.setContentsMargins(0, 0, 0, 0)
+        btn.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        btn.clicked.connect(lambda: self._on_remove_macro(job_id, key_seq, macro))
+        return btn
 
-    def _on_add_remove_macro(self, key_seq, macro, active):
-        CONFIG_FILE.update(key_seq + ACTIVE, active)
-        APP_CONTROLLER.update_macros(macro, active)
-        self.cbox_macro.build_cbox()
+    def _on_remove_macro(self, job_id, key_seq, macro):
+        CONFIG_FILE.update(key_seq + ACTIVE, False)
+        APP_CONTROLLER.update_macros(job_id, macro, False)
+        APP_CONTROLLER.removed_macro.emit(macro)
+        self.cbox_macro.build_cbox(APP_CONTROLLER.job)
         self.update_macros()
 
     def _build_input_keybind(self, new_key_seq, next_is_active) -> QFrame:
@@ -145,18 +153,14 @@ class PainelJobMacro(QWidget):
         vbox.addWidget(label)
         vbox.addWidget(label)
 
-    def _build_title_macro(self, key_seq, macro):
-        (widget, layout) = build_action_badge()
-        icon = build_icon(macro.icon, None, 25, widget)
-        icon.setFixedSize(DEFAULT_SIZE, DEFAULT_SIZE)
-        layout.addWidget(icon)
-        self._build_btn_remove_macro(key_seq, macro, widget)
-
+    def _build_title_macro(self, job_id, key_seq, macro):
         hbox = QHBoxLayout()
         hbox.setSpacing(0)
         hbox.setContentsMargins(0, 0, 0, 0)
+        hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         label = QLabel(macro.name)
         label.setObjectName(macro.id)
-        hbox.addWidget(widget)
+        hbox.addWidget(self._build_btn_remove_macro(job_id, key_seq, macro))
+        hbox.addWidget(build_icon(macro.icon))
         hbox.addWidget(label)
         return hbox

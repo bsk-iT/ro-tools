@@ -2,7 +2,8 @@ from itertools import chain
 from PyQt6.QtWidgets import QComboBox
 from PyQt6.QtGui import QStandardItemModel, QStandardItem, QIcon
 
-from game.macro import MACRO_MAP, MACRO_TYPES
+from config.app import APP_CBOX_WIDTH
+from game.macro import MACRO_MAP, MACRO_TYPES, Macro
 from gui.app_controller import APP_CONTROLLER
 from service.config_file import CONFIG_FILE
 from util.widgets import build_cbox_category, get_color_by_id
@@ -12,12 +13,19 @@ class CboxMacroSelect(QComboBox):
 
     def __init__(self, parent, key_base):
         super().__init__(parent)
+        self.setFixedWidth(APP_CBOX_WIDTH)
         self.key_base = key_base
         self.model = QStandardItemModel()
         self.update_cbox()
-        # APP_CONTROLLER.cbox_macro.updated_macro.connect(self.update_cbox)
+        APP_CONTROLLER.added_macro.connect(self.update_cbox)
+        APP_CONTROLLER.removed_macro.connect(self.remove_macro)
 
-    def update_cbox(self):
+    def remove_macro(self, macro: Macro):
+        if self.currentText() == macro.name:
+            CONFIG_FILE.update(self.key_base, None)
+        self.update_cbox(macro)
+
+    def update_cbox(self, _=None):
         self.currentIndexChanged.connect(self._on_changed)
         self.currentIndexChanged.disconnect()
         self.build_cbox()
@@ -39,7 +47,7 @@ class CboxMacroSelect(QComboBox):
             return
         macro_id = self.model.item(index, 0).data()
         CONFIG_FILE.update(self.key_base, macro_id)
-        APP_CONTROLLER.status_widget.setFocus()
+        APP_CONTROLLER.status_toggle.setFocus()
 
     def add_item(self, macro):
         if not macro:

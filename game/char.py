@@ -1,4 +1,5 @@
 import os
+
 from game.jobs import JOB_MAP, Job
 from gui.app_controller import APP_CONTROLLER
 from service.memory import MEMORY
@@ -36,12 +37,15 @@ class Char:
             self.buffs = self._get_buffs()
             self.job = JOB_MAP.get(self.job_id, self.job_id)
             self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.base_address + Offsets.CHAT_BAR_ENABLED)
-            if APP_CONTROLLER.job.id != self.job_id and isinstance(self.job, Job):
-                APP_CONTROLLER.emit_change_job(self.job)
-            os.system("cls")
-            print(self)
+            self.monitoring_job_change_gui()
+            # os.system("cls")
+            # print(self)
         except BaseException:
             self.reset()
+
+    def monitoring_job_change_gui(self):
+        if APP_CONTROLLER.job.id != JOB_MAP[self.job_id].id and isinstance(self.job, Job):
+            APP_CONTROLLER.updated_job.emit(self.job)
 
     def _get_buffs(self):
         buffs = []

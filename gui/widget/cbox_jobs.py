@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QComboBox
 from PyQt6.QtGui import QStandardItemModel, QStandardItem, QIcon
-from PyQt6.QtCore import pyqtSignal
 
 from config.app import APP_CBOX_WIDTH
 from game.jobs import JOB_GROUPS, Job
@@ -10,15 +9,17 @@ from util.widgets import build_cbox_category
 
 class CboxJobs(QComboBox):
 
-    updated_job = pyqtSignal(Job)
-
     def __init__(self, parent):
         super().__init__(parent)
         self.model: QStandardItemModel = QStandardItemModel()
         self.setFixedWidth(APP_CBOX_WIDTH)
         self.build_cbox()
-        self.currentIndexChanged.connect(lambda index: APP_CONTROLLER.on_change_job(self, index))
-        APP_CONTROLLER.cbox_job = self
+        self.currentIndexChanged.connect(self.on_change_job)
+        APP_CONTROLLER.updated_job.connect(self.set_current_job)
+
+    def set_current_job(self, job: Job):
+        index = self.model.findItems(job.name).pop().row()
+        self.setCurrentIndex(index)
 
     def build_cbox(self):
         for group in JOB_GROUPS:
@@ -26,6 +27,11 @@ class CboxJobs(QComboBox):
             for job in JOB_GROUPS[group]:
                 self._add_item(job)
         self.setModel(self.model)
+
+    def on_change_job(self, index):
+        job = self.model.item(index, 0).data()
+        APP_CONTROLLER.status_toggle.setFocus()
+        APP_CONTROLLER.updated_job.emit(job)
 
     def _add_item(self, job: Job):
         item = QStandardItem(job.name)

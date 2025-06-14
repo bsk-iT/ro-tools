@@ -30,6 +30,8 @@ KEYBOARD_TYPE = "keyboard_type"
 CITY_ACTIVE = "city_active"
 ACTIVE = "active"
 SWAP_ACTIVE = "swap_active"
+SWAP_ATK = "swap_atk"
+SWAP_DEF = "swap_def"
 
 
 class ConfigFile(File):

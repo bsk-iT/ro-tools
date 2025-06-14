@@ -67,7 +67,7 @@ class InputKeybind(QPushButton):
         else:
             self._update_input_keybind(key, event)
         if self.sync_skill_spawner:
-            APP_CONTROLLER.sync_skill_spawmmer()
+            APP_CONTROLLER.sync_hotkeys()
 
     def _update_input_keybind(self, key, event):
         modifiers = event.modifiers().value

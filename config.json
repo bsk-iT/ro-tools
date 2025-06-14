@@ -1,6 +1,5 @@
 {
     "keyboard_type": "physical",
-    "key_monitoring": "End",
     "auto_item": {
         "hp_potion": {
             "delay_active": false,
@@ -13,10 +12,71 @@
         "ygg": {
             "delay_active": false,
             "map_active": false
-        },
-        "city_active": false
+        }
     },
+    "key_monitoring": "End",
     "skill_spawmmer": {
+        "blacksmith": {
+            "bs_hammerfall": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": true,
+                    "macro": "attack_1"
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F4"
+            },
+            "bs_repairweapon": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                }
+            },
+            "bs_greed": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                }
+            }
+        },
+        "merchant": {
+            "mc_cartrevolution": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                }
+            },
+            "mc_mammonite": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                }
+            }
+        },
         "novice": {
             "attack_1": {
                 "active": true,
@@ -27,15 +87,96 @@
                     "macro": "attack_1"
                 },
                 "swap_def": {
-                    "active": true,
-                    "macro": "attack_1"
+                    "active": false
+                },
+                "key": "F2"
+            },
+            "attack_2": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                }
+            },
+            "nv_firstaid": {
+                "active": false,
+                "mouse_click": false,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                }
+            },
+            "attack_4": {
+                "active": false,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                }
+            }
+        },
+        "magician": {
+            "mg_firebolt": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
                 }
             }
         }
     },
     "macro": {
+        "blacksmith": {
+            "horong": {
+                "active": false,
+                "seq_0_delay_active": false
+            },
+            "attack_1": {
+                "active": false,
+                "seq_0_delay_active": false
+            },
+            "smokie": {
+                "active": false,
+                "seq_0_delay_active": false
+            },
+            "attack_2": {
+                "active": false,
+                "seq_0_delay_active": false
+            }
+        },
         "novice": {
             "attack_1": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_1_key": "A",
+                "seq_2_active": true,
+                "seq_2_delay_active": false,
+                "seq_2_key": "B",
+                "seq_3_active": true,
+                "seq_3_delay_active": false,
+                "seq_3_key": "C"
+            },
+            "attack_3": {
+                "active": false,
+                "seq_0_delay_active": false
+            },
+            "attack_2": {
                 "active": false,
                 "seq_0_delay_active": false
             }

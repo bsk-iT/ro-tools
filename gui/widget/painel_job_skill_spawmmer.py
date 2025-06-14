@@ -18,21 +18,21 @@ from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vb
 
 class PainelJobSkillSpawmmer(QWidget):
 
-    def __init__(self, parent, cbox_job):
+    def __init__(self, parent):
         super().__init__(parent)
         self.layout: QVBoxLayout = QVBoxLayout(self)
-        self.cbox_skill: CboxSkill = CboxSkill(self, cbox_job)
+        self.cbox_skill: CboxSkill = CboxSkill(self)
         self._config_layout()
-        cbox_job.updated_job.connect(lambda job: self.update_skills_spawnner())
+        APP_CONTROLLER.updated_job.connect(self.update_skills_spawnner)
 
     def _config_layout(self):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.layout.addWidget(self.cbox_skill)
         self.update_skills_spawnner()
-        self.cbox_skill.updated_skill.connect(self._on_add_skill)
+        APP_CONTROLLER.added_skill.connect(self._on_add_skill)
 
-    def update_skills_spawnner(self):
+    def update_skills_spawnner(self, _ = None):
         clear_layout(self.layout.takeAt(1))
         job = APP_CONTROLLER.job
         active_spawn_skills = list(chain.from_iterable(APP_CONTROLLER.job_spawn_skills.values()))
@@ -41,7 +41,9 @@ class PainelJobSkillSpawmmer(QWidget):
             has_skill = False
             vbox_spawn_skill = QVBoxLayout()
             vbox_spawn_skill.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
-            for skill in filter(lambda skill: skill in active_spawn_skills, job.spawn_skills):
+            for skill in job.spawn_skills:
+                if skill.id not in [a_skill.id for a_skill in active_spawn_skills]:
+                    continue
                 has_skill = True
                 vbox_spawn_skill.addWidget(self._build_skill_inputs(skill, job.id))
             if has_skill:
@@ -82,14 +84,14 @@ class PainelJobSkillSpawmmer(QWidget):
         return frame
 
     def _active_skill(self, skill: SpawnSkill, job_id, active=True):
-        APP_CONTROLLER.update_skill_spawmmer(skill, active)
+        APP_CONTROLLER.update_skill_spawmmer(job_id, skill, active)
         self.update_skills_spawnner()
         CONFIG_FILE.update_config(active, [SKILL_SPAWMMER, job_id, skill.id, ACTIVE])
         self.cbox_skill.build_cbox(APP_CONTROLLER.job)
 
     def _on_add_skill(self, skill: SpawnSkill, job_id):
         self._active_skill(skill, job_id)
-        self.cbox_skill.clearFocus()
+        APP_CONTROLLER.status_toggle.setFocus()
 
     def _on_remove_skill(self, skill: SpawnSkill, job_id):
         self._active_skill(skill, job_id, False)

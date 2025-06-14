@@ -1,4 +1,4 @@
-from config.icon import PATH_ITEM, get_image
+from config.icon import ICON_SHIELD, ICON_SWORD, PATH_ITEM, get_image
 
 
 class Macro:
@@ -8,18 +8,17 @@ class Macro:
         self.icon = icon
 
 
-ICON_ATK = get_image(PATH_ITEM, "NOVICE_KNIFE")
-ICON_DEF = get_image(PATH_ITEM, "NOVICE_GUARD")
+MAX_HOTKEY = 10
 ICON_CLIP = get_image(PATH_ITEM, "CLIP")
 
-ATK_1 = Macro("attack_1", "Equipes de Ataque 1", ICON_ATK)
-ATK_2 = Macro("attack_2", "Equipes de Ataque 2", ICON_ATK)
-ATK_3 = Macro("attack_3", "Equipes de Ataque 3", ICON_ATK)
-ATK_4 = Macro("attack_4", "Equipes de Ataque 4", ICON_ATK)
-DEF_1 = Macro("defense_1", "Equipes de Defesa 1", ICON_DEF)
-DEF_2 = Macro("defense_2", "Equipes de Defesa 2", ICON_DEF)
-DEF_3 = Macro("defense_3", "Equipes de Defesa 3", ICON_DEF)
-DEF_4 = Macro("defense_4", "Equipes de Defesa 4", ICON_DEF)
+ATK_1 = Macro("attack_1", "Equipes de Ataque 1", ICON_SWORD)
+ATK_2 = Macro("attack_2", "Equipes de Ataque 2", ICON_SWORD)
+ATK_3 = Macro("attack_3", "Equipes de Ataque 3", ICON_SWORD)
+ATK_4 = Macro("attack_4", "Equipes de Ataque 4", ICON_SWORD)
+DEF_1 = Macro("defense_1", "Equipes de Defesa 1", ICON_SHIELD)
+DEF_2 = Macro("defense_2", "Equipes de Defesa 2", ICON_SHIELD)
+DEF_3 = Macro("defense_3", "Equipes de Defesa 3", ICON_SHIELD)
+DEF_4 = Macro("defense_4", "Equipes de Defesa 4", ICON_SHIELD)
 SMOKIE = Macro("smokie", "Acessório c/ Fumacento", ICON_CLIP)
 HORONG = Macro("horong", "Acessório c/ Horong", ICON_CLIP)
 

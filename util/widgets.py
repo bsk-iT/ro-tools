@@ -49,7 +49,7 @@ def get_color_by_id(_id) -> QColor:
     return None
 
 
-def build_scroll_vbox(heigth = 300):
+def build_scroll_vbox(heigth=300):
     content_widget = QWidget()
     scroll = QScrollArea()
     scroll.setFixedHeight(heigth)
@@ -58,6 +58,7 @@ def build_scroll_vbox(heigth = 300):
     vbox = QVBoxLayout(content_widget)
     vbox.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
     return (vbox, scroll)
+
 
 def build_action_badge():
     widget = QWidget()
@@ -68,6 +69,7 @@ def build_action_badge():
     layout.setContentsMargins(0, 0, 0, 0)
     return (widget, layout)
 
+
 def build_badge_btn(parent, icon):
     btn = QPushButton(parent)
     btn.setFixedSize(20, 20)
@@ -77,6 +79,7 @@ def build_badge_btn(parent, icon):
     btn.setContentsMargins(0, 0, 0, 0)
     btn.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
     return btn
+
 
 def build_label_info(text: str) -> QLabel:
     label = QLabel(text)
@@ -110,8 +113,15 @@ def build_hr() -> QFrame:
 
 @lru_cache(maxsize=None)
 def clear_layout(layout):
+    new_layout = None
     if isinstance(layout, QWidgetItem):
-        layout = layout.layout()
+        new_layout = layout.layout()
+    if not new_layout and layout:
+        return clean_widget(layout.widget())
+    execute_clean_layout(new_layout)
+
+
+def execute_clean_layout(layout):
     while layout and layout.count():
         item = layout.takeAt(0)
         if item is None:
@@ -120,10 +130,13 @@ def clear_layout(layout):
         if child_layout:
             clear_layout(child_layout)
             continue
-        widget = item.widget()
-        if widget:
-            widget.setParent(None)
-            widget.deleteLater()
+        clean_widget(item.widget())
+
+
+def clean_widget(widget):
+    if widget:
+        widget.setParent(None)
+        widget.deleteLater()
 
 
 def build_spinbox_percentage(percentage_prop: str, label: str = None) -> QWidget:

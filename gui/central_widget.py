@@ -4,7 +4,6 @@ from PyQt6.QtCore import Qt
 from gui.widget.input_app_status import InputAppStatus
 from gui.widget.cbox_process import CboxProcess
 from gui.widget.painel_auto_item import PainelAutoItem
-from gui.widget.painel_auto_item_hp_sp import PainelAutoItemHpSp
 from gui.widget.painel_job import PainelJob
 
 
