@@ -1,24 +1,29 @@
 {
-    "keyboard_type": "physical",
+    "keyboard_type": "virtual",
     "auto_item": {
         "hp_potion": {
             "delay_active": false,
-            "map_active": false
+            "map_active": false,
+            "key": "F9",
+            "percent": 80
         },
         "sp_potion": {
             "delay_active": false,
-            "map_active": false
+            "map_active": false,
+            "key": "F8",
+            "percent": 10
         },
         "ygg": {
             "delay_active": false,
             "map_active": false
-        }
+        },
+        "city_active": true
     },
     "key_monitoring": "End",
     "skill_spawmmer": {
         "blacksmith": {
             "bs_hammerfall": {
-                "active": true,
+                "active": false,
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
@@ -66,7 +71,7 @@
                 }
             },
             "mc_mammonite": {
-                "active": false,
+                "active": true,
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
@@ -74,12 +79,13 @@
                 },
                 "swap_def": {
                     "active": false
-                }
+                },
+                "key": "F1"
             }
         },
         "novice": {
             "attack_1": {
-                "active": true,
+                "active": false,
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
@@ -92,7 +98,7 @@
                 "key": "F2"
             },
             "attack_2": {
-                "active": true,
+                "active": false,
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
@@ -180,6 +186,60 @@
             "attack_2": {
                 "active": false,
                 "seq_0_delay_active": false
+            }
+        }
+    },
+    "skill_buff": {
+        "swordman": {
+            "sm_autoberserk": {
+                "active": true,
+                "delay_active": false,
+                "map_active": false
+            },
+            "sm_endure": {
+                "active": false,
+                "delay_active": true,
+                "map_active": true,
+                "key": "2"
+            },
+            "sm_magnum": {
+                "active": false,
+                "delay_active": false,
+                "map_active": false
+            }
+        },
+        "merchant": {
+            "mc_loud": {
+                "active": true,
+                "delay_active": false,
+                "map_active": false,
+                "key": "9"
+            }
+        },
+        "blacksmith": {
+            "bs_adrenaline": {
+                "active": true,
+                "delay_active": false,
+                "map_active": false,
+                "key": "7"
+            },
+            "bs_maximize": {
+                "active": true,
+                "delay_active": false,
+                "map_active": false,
+                "key": "5"
+            },
+            "bs_weaponperfect": {
+                "active": true,
+                "delay_active": false,
+                "map_active": false,
+                "key": "6"
+            },
+            "bs_overthrust": {
+                "active": true,
+                "delay_active": false,
+                "map_active": false,
+                "key": "8"
             }
         }
     }

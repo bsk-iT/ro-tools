@@ -8,7 +8,7 @@
     "pvp": [ ],
     "pvm": [ ],
     "city": [ "prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis", "serene" ],
-    "buff_skill": {
+    "skill_buff": {
       "-4": "sm_magnum",
       "-5": "sm_endure",
       "-6": "sm_autoberserk",
@@ -28,8 +28,8 @@
       "-20": "as_cloaking",
       "-21": "as_poisonreact",
       "23": "bs_adrenaline",
-      "25": "bs_maximize",
-      "26": "bs_overthrust",
+      "26": "bs_maximize",
+      "25": "bs_overthrust",
       "24": "bs_weaponperfect",
       "-26": "bs_adrenaline2",
       "-27": "am_resurrecthomun",
@@ -74,11 +74,9 @@
       "-66": "nj_nen",
       "86": "mo_explosionspiritS"
     },
-    "buff_item": {
+    "item_buff": {
       "10": "bless_scroll",
-      "12": "incagi_scroll"
-    },
-    "buff_aspd": {
+      "12": "incagi_scroll",
       "-1": "concentration_potion",
       "-2": "awakening_potion",
       "-3": "berserk_potion"

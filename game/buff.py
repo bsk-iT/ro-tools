@@ -2,53 +2,41 @@ from config.icon import PATH_BUFF_ASPD, PATH_BUFF_ITEM, PATH_BUFF_SKILL, get_ima
 
 
 class Buff:
-    def __init__(self, id, name):
+    def __init__(self, id, name, priority=0):
         self.id = id
         self.name = name
         self.icon = None
+        self.priority = priority
 
     def __str__(self):
         return self.name
 
 
-class ASPD(Buff):
-    def __init__(self, buff_id, name, min_lvl):
-        super().__init__(buff_id, name)
-        self.min_lvl = min_lvl
-        self.icon = get_image(PATH_BUFF_ASPD, self.id)
-
-
 class Item(Buff):
-    def __init__(self, buff_id, name):
-        super().__init__(buff_id, name)
+    def __init__(self, buff_id, name, priority=0):
+        super().__init__(buff_id, name, priority)
         self.icon = get_image(PATH_BUFF_ITEM, self.id)
 
 
 class Skill(Buff):
-    def __init__(self, buff_id, name):
-        super().__init__(buff_id, name)
+    def __init__(self, buff_id, name, priority=0):
+        super().__init__(buff_id, name, priority)
         self.icon = get_image(PATH_BUFF_SKILL, self.id)
-
-
-# ---- ASPD ----
-CONCENTRATION_POTION = ASPD("concentration_potion", "Poção da Concentração", 0)
-AWAKENING_POTION = ASPD("awakening_potion", "Poção do Despertar", 40)
-BERSERK_POTION = ASPD("berserk_potion", "Poção da Fúria", 85)
-
-ASPD_BUFF_MAP = {
-    "concentration_potion": CONCENTRATION_POTION,
-    "awakening_potion": AWAKENING_POTION,
-    "berserk_potion": BERSERK_POTION,
-}
 
 
 # ----- Item -----
 BLESS_SCROLL = Item("bless_scroll", "Scroll de Benção")
 AGI_UP_SCROLL = Item("agi_up_scroll", "Scroll de Agilidade")
+CONCENTRATION_POTION = Item("concentration_potion", "Poção da Concentração")
+AWAKENING_POTION = Item("awakening_potion", "Poção do Despertar")
+BERSERK_POTION = Item("berserk_potion", "Poção da Fúria")
 
 ITEM_BUFF_MAP = {
     "bless_scroll": BLESS_SCROLL,
     "agi_up_scroll": AGI_UP_SCROLL,
+    "concentration_potion": CONCENTRATION_POTION,
+    "awakening_potion": AWAKENING_POTION,
+    "berserk_potion": BERSERK_POTION,
 }
 
 
@@ -56,20 +44,20 @@ ITEM_BUFF_MAP = {
 
 # Swordman
 SM_MAGNUM = Skill("sm_magnum", "Impacto Explosivo")
-SM_ENDURE = Skill("sm_endure", "Provocar")
+SM_ENDURE = Skill("sm_endure", "Vigor", 1)
 SM_AUTOBERSERK = Skill("sm_autoberserk", "Instinto de Sobrevivência")
 
 # Mage
 MG_ENERGYCOAT = Skill("mg_energycoat", "Proteção Arcana")
 
 # Merchat
-MC_LOUD = Skill("mc_loud", "Grito de Guerra")
+MC_LOUD = Skill("mc_loud", "Grito de Guerra", 5)
 
 # Acolyte
 AL_ANGELUS = Skill("al_angelus", "Angelus")
 
 # Archer
-AC_CONCENTRATION = Skill("ac_concentration", "Concentrar")
+AC_CONCENTRATION = Skill("ac_concentration", "Concentrar", 5)
 
 # Knight
 KN_TWOHANDQUICKEN = Skill("kn_twohandquicken", "Rapidez com Duas Mãos")
@@ -142,7 +130,7 @@ WS_OVERTHRUSTMAX = Skill("ws_overthrustmax", "Força Violentíssima")
 HP_BASILICA = Skill("hp_basilica", "Basílica")
 
 # Sniper
-SN_SIGHT = Skill("sn_sight", "Visão Real")
+SN_SIGHT = Skill("sn_sight", "Visão Real", 4)
 SN_WINDWALK = Skill("sn_windwalk", "Caminho do Vento")
 
 # Taekwon

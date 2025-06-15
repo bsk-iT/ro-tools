@@ -25,7 +25,7 @@ class CboxSkill(QComboBox):
         (skill, job_id) = self.model.takeItem(index, 0).data()
         self.model.takeRow(index)
         CONFIG_FILE.update_config(True, [self.resource, job_id, skill.id, ACTIVE])
-        APP_CONTROLLER.added_skill.emit(skill, job_id)
+        self._emit_add_event(skill, job_id)
         APP_CONTROLLER.status_toggle.setFocus()
 
     def add_item(self, skill, job):
@@ -39,17 +39,32 @@ class CboxSkill(QComboBox):
         item.setData((skill, job.id))
         self.model.appendRow(item)
 
+    def _emit_add_event(self, skill, job_id):
+        if self.resource == SKILL_SPAWMMER:
+            return APP_CONTROLLER.added_skill_spawmmer.emit(skill, job_id)
+        APP_CONTROLLER.added_skill_buff.emit(skill, job_id)
+
+    def _get_active_skills(self):
+        skills = APP_CONTROLLER.job_buff_skills
+        if self.resource == SKILL_SPAWMMER:
+            skills = APP_CONTROLLER.job_spawn_skills
+        return list(chain.from_iterable(skills.values()))
+
+    def _get_job_skills(self, job):
+        if self.resource == SKILL_SPAWMMER:
+            return job.spawn_skills
+        return job.buff_skills
+
     def build_cbox(self, job):
         self.model.clear()
         self.currentIndexChanged.disconnect()
         self.add_item(None, None)
         self.setCurrentIndex(0)
-        active_spawn_skills = list(chain.from_iterable(APP_CONTROLLER.job_spawn_skills.values()))
+        active_skills = self._get_active_skills()
         while job is not None:
             build_cbox_category(self.model, job.name)
-            skill_list = job.spawn_skills if self.resource == SKILL_SPAWMMER else job.buff_skill
-            for skill in skill_list:
-                if skill in active_spawn_skills:
+            for skill in self._get_job_skills(job):
+                if skill in active_skills:
                     continue
                 self.add_item(skill, job)
             job = job.previous_job

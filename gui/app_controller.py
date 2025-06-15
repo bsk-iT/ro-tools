@@ -3,7 +3,7 @@ from PyQt6.QtCore import pyqtSignal, QObject
 from events.skill_spawmmer import SkillSpawmmer
 from game.jobs import NOVICE, Job
 from game.macro import Macro
-from service.config_file import CONFIG_FILE, KEY, KEY_MONITORING, SKILL_SPAWMMER
+from service.config_file import CONFIG_FILE, KEY, KEY_MONITORING, SKILL_BUFF, SKILL_SPAWMMER
 from service.memory import MEMORY
 from PyQt6.QtGui import QIcon
 from config.icon import ICON_OFF, ICON_ON
@@ -14,7 +14,8 @@ class AppController(QObject):
     added_macro = pyqtSignal(Macro)
     removed_macro = pyqtSignal(Macro)
     updated_job = pyqtSignal(Job)
-    added_skill = pyqtSignal(object, str)
+    added_skill_spawmmer = pyqtSignal(object, str)
+    added_skill_buff = pyqtSignal(object, str)
 
     def __init__(self):
         super().__init__(None)
@@ -29,7 +30,8 @@ class AppController(QObject):
     def sync_data(self, job, sync_hotkeys=True):
         self.job: Job = job
         self.job_macros = CONFIG_FILE.get_job_macros(self.job)
-        self.job_spawn_skills = CONFIG_FILE.get_job_spawn_skills(self.job)
+        self.job_spawn_skills = CONFIG_FILE.get_job_skills(self.job)
+        self.job_buff_skills = CONFIG_FILE.get_job_skills(self.job, SKILL_BUFF)
         if sync_hotkeys:
             self.sync_hotkeys()
 

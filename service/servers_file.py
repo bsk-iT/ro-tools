@@ -9,9 +9,8 @@ WOE = "woe"
 PVP = "pvp"
 PVM = "pvm"
 CITY = "city"
-BUFF_SKILL = "buff_skill"
-BUFF_ASPD = "buff_aspd"
-BUFF_ITEM = "buff_item"
+SKILL_BUFF = "skill_buff"
+ITEM_BUFF = "item_buff"
 
 
 TYPE_MAPS = ["BG", "WoE", "PvP", "PvM", "Cidade"]

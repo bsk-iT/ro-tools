@@ -1,5 +1,6 @@
 from typing import Any, List
 from config.app import APP_DELAY
+from game.buff import AUTO_BUFF_MAP
 from game.macro import MACRO_MAP
 from game.spawn_skill import SPAWN_SKILL_MAP
 from service.file import File
@@ -8,6 +9,7 @@ from service.servers_file import CITY, SERVERS_FILE
 # Events
 AUTO_ITEM = "auto_item"
 SKILL_SPAWMMER = "skill_spawmmer"
+SKILL_BUFF = "skill_buff"
 MACRO = "macro"
 
 # Resources
@@ -41,10 +43,10 @@ class ConfigFile(File):
     def get_value(self, prop_seq: List[str]) -> Any:
         return self.read(":".join(prop_seq))
 
-    def get_delay(self, prop_seq: List[str]) -> float:
+    def get_delay(self, prop_seq: List[str], default_delay = APP_DELAY) -> float:
         delay_item = self.get_value([*prop_seq, DELAY])
         delay_active = self.get_value([*prop_seq, DELAY_ACTIVE])
-        return delay_item if (delay_active and delay_item) else APP_DELAY
+        return delay_item if (delay_active and delay_item) else default_delay
 
     def is_blocked_in_city(self, game, prop_seq: List[str]) -> bool:
         city_active = self.get_value([*prop_seq, CITY_ACTIVE])
@@ -75,18 +77,19 @@ class ConfigFile(File):
             job = job.previous_job
         return hotkeys
 
-    def get_job_spawn_skills(self, job, has_key=False):
-        job_spawn_skills = {}
+    def get_job_skills(self, job, resource=SKILL_SPAWMMER):
+        job_skills = {}
+        map_resource = SPAWN_SKILL_MAP if resource == SKILL_SPAWMMER else AUTO_BUFF_MAP
         while job is not None:
-            skills_data = self.get_value([SKILL_SPAWMMER, job.id])
+            skills_data = self.get_value([resource, job.id])
             if skills_data is None:
-                job_spawn_skills[job.id] = []
+                job_skills[job.id] = []
                 job = job.previous_job
                 continue
-            skills_id = [_id for _id, skill in skills_data.items() if skill[ACTIVE] and (not has_key or skill[KEY])]
-            job_spawn_skills[job.id] = [SPAWN_SKILL_MAP[_id] for _id in skills_id] or []
+            skills_id = [_id for _id, skill in skills_data.items() if skill[ACTIVE]]
+            job_skills[job.id] = [map_resource[_id] for _id in skills_id] or []
             job = job.previous_job
-        return job_spawn_skills
+        return job_skills
 
     def get_job_macros(self, job):
         job_macros = {}

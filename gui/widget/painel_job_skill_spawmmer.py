@@ -30,7 +30,7 @@ class PainelJobSkillSpawmmer(QWidget):
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.layout.addWidget(self.cbox_skill)
         self.update_skills_spawnner()
-        APP_CONTROLLER.added_skill.connect(self._on_add_skill)
+        APP_CONTROLLER.added_skill_spawmmer.connect(self._on_add_skill)
 
     def update_skills_spawnner(self, _ = None):
         clear_layout(self.layout.takeAt(1))

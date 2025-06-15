@@ -1,10 +1,11 @@
+from itertools import chain
 import os
 
 from game.jobs import JOB_MAP, Job
 from gui.app_controller import APP_CONTROLLER
 from service.memory import MEMORY
 from service.offsets import Offsets
-from service.servers_file import BUFF_SKILL, SERVERS_FILE
+from service.servers_file import SKILL_BUFF, SERVERS_FILE
 from util.number import calculate_percent
 
 
@@ -38,10 +39,20 @@ class Char:
             self.job = JOB_MAP.get(self.job_id, self.job_id)
             self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.base_address + Offsets.CHAT_BAR_ENABLED)
             self.monitoring_job_change_gui()
-            # os.system("cls")
-            # print(self)
+            os.system("cls")
+            print(self)
         except BaseException:
             self.reset()
+
+    def next_buff_to_use(self, list_buff) -> bool:
+        buffs_to_use = []
+        for job, buffs in list_buff.items():
+            for buff in buffs:
+                if buff.id not in self.buffs:
+                    buffs_to_use.append((job, buff.id, buff.priority))
+        if len(buffs_to_use) == 0:
+            return None
+        return sorted(buffs_to_use, key=lambda x: x[2], reverse=True)[0]
 
     def monitoring_job_change_gui(self):
         if APP_CONTROLLER.job.id != JOB_MAP[self.job_id].id and isinstance(self.job, Job):
@@ -56,15 +67,14 @@ class Char:
                 break
             buffs.append(buff)
             buff_index += 1
-        return buffs
+        return [SERVERS_FILE.get_value(SKILL_BUFF).get(str(buff), buff) for buff in buffs]
 
     def __str__(self):
-        buff_skills = [SERVERS_FILE.get_value(BUFF_SKILL).get(str(buff), buff) for buff in self.buffs]
         return f"""
             HP: {self.hp}/{self.hp_max}
             SP: {self.sp}/{self.sp_max}
             JOB: {self.job}
             MAP: {self.current_map}
-            BUFFS: {buff_skills}
+            BUFFS: {self.buffs}
             CHAT_BAR_ENABLED: {self.chat_bar_enabled}
         """
