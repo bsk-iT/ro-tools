@@ -3,7 +3,7 @@ from PyQt6.QtCore import pyqtSignal, QObject
 from events.skill_spawmmer import SkillSpawmmer
 from game.jobs import NOVICE, Job
 from game.macro import Macro
-from service.config_file import CONFIG_FILE, KEY, SKILL_SPAWMMER
+from service.config_file import CONFIG_FILE, KEY, KEY_MONITORING, SKILL_SPAWMMER
 from service.memory import MEMORY
 from PyQt6.QtGui import QIcon
 from config.icon import ICON_OFF, ICON_ON
@@ -73,6 +73,8 @@ class AppController(QObject):
             self.remove_hotkey(key)
 
     def sync_hotkeys(self):
+        if not self.running:
+            return
         self.remove_all_hotkeys()
         for job_id, skills in self.job_spawn_skills.items():
             for skill in skills:
@@ -89,6 +91,13 @@ class AppController(QObject):
         self.process_name = process["name"]
         MEMORY.update_process(self.process_name, process["pid"])
         cbox.focusNextChild()
+
+    def get_all_hotkeys(self):
+        hotkeys = CONFIG_FILE.get_hotkeys(APP_CONTROLLER.job)
+        status_key = CONFIG_FILE.read(KEY_MONITORING)
+        if status_key:
+            hotkeys.append(status_key)
+        return hotkeys
 
     def on_togle_monitoring(self, value=None):
         if not MEMORY.is_valid():

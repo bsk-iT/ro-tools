@@ -12,10 +12,10 @@ class InputKeybind(QPushButton):
 
     updated_key = pyqtSignal(str)
 
-    def __init__(self, parent: QWidget, key_config=None, sync_skill_spawner=False) -> None:
+    def __init__(self, parent: QWidget, key_config=None, sync_hotkeys=False) -> None:
         super().__init__(parent)
         self.listenning = False
-        self.sync_skill_spawner = sync_skill_spawner
+        self.sync_hotkeys = sync_hotkeys
         self.key_sequence = None
         self.key_config = key_config
         self.clicked.connect(self._start_listenning)
@@ -62,17 +62,23 @@ class InputKeybind(QPushButton):
             self.setText(self.key_sequence.toString())
             return
         if key == Qt.Key.Key_Backspace:
-            self._default_label()
-            CONFIG_FILE.update(self.key_config, None)
+            self._remove_hotkey()
         else:
             self._update_input_keybind(key, event)
-        if self.sync_skill_spawner:
+        if self.sync_hotkeys:
             APP_CONTROLLER.sync_hotkeys()
+
+    def _remove_hotkey(self):
+        self._default_label()
+        CONFIG_FILE.update(self.key_config, None)
 
     def _update_input_keybind(self, key, event):
         modifiers = event.modifiers().value
         self.key_sequence = QKeySequence(modifiers | key)
         key_str = self.key_sequence.toString()
+        if self.sync_hotkeys and key_str in APP_CONTROLLER.get_all_hotkeys():
+            self._remove_hotkey()
+            return
         self.setText(key_str)
         CONFIG_FILE.update(self.key_config, key_str)
         self.updated_key.emit(key_str)

@@ -92,7 +92,7 @@
                 "key": "F2"
             },
             "attack_2": {
-                "active": false,
+                "active": true,
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
@@ -100,7 +100,8 @@
                 },
                 "swap_def": {
                     "active": false
-                }
+                },
+                "key": "F3"
             },
             "nv_firstaid": {
                 "active": false,

@@ -63,6 +63,18 @@ class ConfigFile(File):
         config_key = ":".join(prop_seq)
         self.update(config_key, value)
 
+    def get_hotkeys(self, job):
+        hotkeys = []
+        while job is not None:
+            skills_data = self.get_value([SKILL_SPAWMMER, job.id])
+            if skills_data is None:
+                job = job.previous_job
+                continue
+            key = [skill[KEY] for skill in skills_data.values() if skill[ACTIVE] and skill.get(KEY, False)]
+            hotkeys.extend(key)
+            job = job.previous_job
+        return hotkeys
+
     def get_job_spawn_skills(self, job, has_key=False):
         job_spawn_skills = {}
         while job is not None:
