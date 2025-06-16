@@ -17,7 +17,14 @@
             "delay_active": false,
             "map_active": false
         },
-        "city_active": true
+        "city_active": true,
+        "item_buff": {
+            "concentration_potion": {
+                "active": true,
+                "map_active": false,
+                "key": "1"
+            }
+        }
     },
     "key_monitoring": "End",
     "skill_spawmmer": {
@@ -85,7 +92,7 @@
         },
         "novice": {
             "attack_1": {
-                "active": false,
+                "active": true,
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
@@ -220,7 +227,7 @@
             "bs_adrenaline": {
                 "active": true,
                 "delay_active": false,
-                "map_active": false,
+                "map_active": true,
                 "key": "7"
             },
             "bs_maximize": {

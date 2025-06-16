@@ -16,12 +16,14 @@ class AppController(QObject):
     updated_job = pyqtSignal(Job)
     added_skill_spawmmer = pyqtSignal(object, str)
     added_skill_buff = pyqtSignal(object, str)
+    added_item_buff = pyqtSignal(object)
 
     def __init__(self):
         super().__init__(None)
         self.process_name = None
         self.status_toggle = None
         self.cbox_macro = None
+        self.item_buffs = CONFIG_FILE.get_item_buffs()
         self.hotkeys_handler = {}
         self.running = False
         self.sync_data(NOVICE, False)

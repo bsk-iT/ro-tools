@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
 
     def _config_layout(self) -> None:
         self.setWindowTitle(APP_NAME)
-        self.setFixedSize(APP_WIDTH, APP_HEIGHT)
+        # self.setFixedSize(APP_WIDTH, APP_HEIGHT)
         self.setWindowIcon(QIcon(APP_ICON))
         self.setCentralWidget(CentralWidget(self))
         self.tray_menu = TrayMenu(self)

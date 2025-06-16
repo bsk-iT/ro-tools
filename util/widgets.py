@@ -52,7 +52,7 @@ def get_color_by_id(_id) -> QColor:
 def build_scroll_vbox(heigth=300):
     content_widget = QWidget()
     scroll = QScrollArea()
-    scroll.setFixedHeight(heigth)
+    scroll.setMinimumHeight(heigth)
     scroll.setWidgetResizable(True)
     scroll.setWidget(content_widget)
     vbox = QVBoxLayout(content_widget)

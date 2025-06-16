@@ -11,8 +11,6 @@ def resource_path(relative_path: str) -> str:
 PATH_ICON = resource_path("assets/icon/")
 PATH_ITEM = resource_path("assets/items/")
 PATH_SPAWN_SKILL = resource_path("assets/spawn_skill/")
-PATH_BUFF_ASPD = resource_path("assets/buff_aspd/")
-PATH_BUFF_ITEM = resource_path("assets/buff_item/")
 PATH_BUFF_SKILL = resource_path("assets/buff_skill/")
 PATH_JOB_ICON = resource_path("assets/job_icon/")
 
@@ -31,7 +29,7 @@ ICON_ARROW_DOWN = resource_path(PATH_ICON + "arrow_down.png")
 
 IMG_RED_POTION = resource_path(PATH_ITEM + "red_potion.gif")
 IMG_BLUE_POTION = resource_path(PATH_ITEM + "blue_potion.gif")
-IMG_YGG = resource_path(PATH_ITEM + "ygg.png")
+IMG_YGG = resource_path(PATH_ITEM + "ygg_berry.png")
 
 
 def get_image(path: str, file_name: str):

@@ -1,6 +1,6 @@
 from typing import Any, List
 from config.app import APP_DELAY
-from game.buff import AUTO_BUFF_MAP
+from game.buff import AUTO_BUFF_MAP, ITEM_BUFF_MAP
 from game.macro import MACRO_MAP
 from game.spawn_skill import SPAWN_SKILL_MAP
 from service.file import File
@@ -11,6 +11,7 @@ AUTO_ITEM = "auto_item"
 SKILL_SPAWMMER = "skill_spawmmer"
 SKILL_BUFF = "skill_buff"
 MACRO = "macro"
+ITEM_BUFF = "item_buff"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -43,7 +44,7 @@ class ConfigFile(File):
     def get_value(self, prop_seq: List[str]) -> Any:
         return self.read(":".join(prop_seq))
 
-    def get_delay(self, prop_seq: List[str], default_delay = APP_DELAY) -> float:
+    def get_delay(self, prop_seq: List[str], default_delay=APP_DELAY) -> float:
         delay_item = self.get_value([*prop_seq, DELAY])
         delay_active = self.get_value([*prop_seq, DELAY_ACTIVE])
         return delay_item if (delay_active and delay_item) else default_delay
@@ -103,6 +104,13 @@ class ConfigFile(File):
             job_macros[job.id] = [MACRO_MAP[_id] for _id in macros_id] or []
             job = job.previous_job
         return job_macros
+
+    def get_item_buffs(self):
+        items_data = self.get_value([ITEM_BUFF])
+        if items_data is None:
+            return []
+        items_id = [_id for _id, item in items_data.items() if item[ACTIVE]]
+        return [ITEM_BUFF_MAP[_id] for _id in items_id] or []
 
 
 CONFIG_FILE = ConfigFile("config.json")

@@ -11,6 +11,7 @@ PVM = "pvm"
 CITY = "city"
 SKILL_BUFF = "skill_buff"
 ITEM_BUFF = "item_buff"
+STATUS_DEBUFF = "status_debuff"
 
 
 TYPE_MAPS = ["BG", "WoE", "PvP", "PvM", "Cidade"]

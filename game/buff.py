@@ -1,7 +1,7 @@
-from config.icon import PATH_BUFF_ASPD, PATH_BUFF_ITEM, PATH_BUFF_SKILL, get_image
+from config.icon import PATH_BUFF_SKILL, PATH_ITEM, get_image
 
 
-class Buff:
+class Item:
     def __init__(self, id, name, priority=0):
         self.id = id
         self.name = name
@@ -12,13 +12,13 @@ class Buff:
         return self.name
 
 
-class Item(Buff):
+class Item(Item):
     def __init__(self, buff_id, name, priority=0):
         super().__init__(buff_id, name, priority)
-        self.icon = get_image(PATH_BUFF_ITEM, self.id)
+        self.icon = get_image(PATH_ITEM, self.id)
 
 
-class Skill(Buff):
+class Skill(Item):
     def __init__(self, buff_id, name, priority=0):
         super().__init__(buff_id, name, priority)
         self.icon = get_image(PATH_BUFF_SKILL, self.id)
@@ -26,19 +26,33 @@ class Skill(Buff):
 
 # ----- Item -----
 BLESS_SCROLL = Item("bless_scroll", "Scroll de Benção")
-AGI_UP_SCROLL = Item("agi_up_scroll", "Scroll de Agilidade")
+INC_AGI_UP_SCROLL = Item("inc_agi_up_scroll", "Scroll de Aumentar Agilidade")
 CONCENTRATION_POTION = Item("concentration_potion", "Poção da Concentração")
 AWAKENING_POTION = Item("awakening_potion", "Poção do Despertar")
 BERSERK_POTION = Item("berserk_potion", "Poção da Fúria")
+RESENTMENT_BOX = Item("resentment_box", "Caixa do Ressentimento")
+THUNDER_BOX = Item("thunder_box", "Caixa do Trovão")
+ALOE_VERA = Item("aloe_vera", "Aloe Vera")
+PAIN_KILLER = Item("pain_killer", "Analgésico")
 
 ITEM_BUFF_MAP = {
     "bless_scroll": BLESS_SCROLL,
-    "agi_up_scroll": AGI_UP_SCROLL,
+    "inc_agi_up_scroll": INC_AGI_UP_SCROLL,
     "concentration_potion": CONCENTRATION_POTION,
     "awakening_potion": AWAKENING_POTION,
     "berserk_potion": BERSERK_POTION,
+    "resentment_box": RESENTMENT_BOX,
+    "thunder_box": THUNDER_BOX,
+    "aloe_vera": ALOE_VERA,
+    "pain_killer": PAIN_KILLER,
 }
 
+ITEM_BUF_GROUP = {
+    "APSD Potion": [CONCENTRATION_POTION, AWAKENING_POTION, BERSERK_POTION],
+    "Caixas": [RESENTMENT_BOX, THUNDER_BOX],
+    "Consumíveis": [ALOE_VERA, PAIN_KILLER],
+    "Buff - Scrolls": [BLESS_SCROLL, INC_AGI_UP_SCROLL],
+}
 
 # ----- Skill -----
 
