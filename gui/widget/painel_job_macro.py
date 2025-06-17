@@ -29,7 +29,7 @@ class PainelJobMacro(QWidget):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.layout.addWidget(self.cbox_macro)
-        APP_CONTROLLER.added_macro.connect(self.update_macros)
+        APP_CONTROLLER.added_macro.connect(self._on_add_macro)
         self.update_macros()
 
     def update_macros(self, _=None):
@@ -135,9 +135,14 @@ class PainelJobMacro(QWidget):
 
     def _on_remove_macro(self, job_id, key_seq, macro):
         CONFIG_FILE.update(key_seq + ACTIVE, False)
-        APP_CONTROLLER.update_macros(job_id, macro, False)
+        APP_CONTROLLER.job_macros[job_id].remove(macro)
         APP_CONTROLLER.removed_macro.emit(macro)
         self.cbox_macro.build_cbox(APP_CONTROLLER.job)
+        self.update_macros()
+
+    def _on_add_macro(self, job_id, macro):
+        CONFIG_FILE.update_config(True, [MACRO, job_id, macro.id, ACTIVE])
+        APP_CONTROLLER.job_macros[job_id].append(macro)
         self.update_macros()
 
     def _build_input_keybind(self, new_key_seq, next_is_active) -> QFrame:

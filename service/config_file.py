@@ -11,6 +11,7 @@ AUTO_ITEM = "auto_item"
 SKILL_SPAWMMER = "skill_spawmmer"
 SKILL_BUFF = "skill_buff"
 MACRO = "macro"
+HOTKEY = "hotkey"
 ITEM_BUFF = "item_buff"
 ITEM_DEBUFF = "item_debuff"
 
@@ -79,32 +80,30 @@ class ConfigFile(File):
             job = job.previous_job
         return hotkeys
 
-    def get_job_skills(self, job, resource=SKILL_SPAWMMER):
-        job_skills = {}
-        map_resource = SPAWN_SKILL_MAP if resource == SKILL_SPAWMMER else AUTO_BUFF_MAP
+    def _get_job_resource(self, job, resource, resource_map):
+        job_resource = {}
         while job is not None:
-            skills_data = self.get_value([resource, job.id])
-            if skills_data is None:
-                job_skills[job.id] = []
+            resource_data = self.get_value([resource, job.id])
+            if resource_data is None:
+                job_resource[job.id] = []
                 job = job.previous_job
                 continue
-            skills_id = [_id for _id, skill in skills_data.items() if skill[ACTIVE]]
-            job_skills[job.id] = [map_resource[_id] for _id in skills_id] or []
+            resource_id = [_id for _id, resource in resource_data.items() if resource[ACTIVE]]
+            job_resource[job.id] = [resource_map[_id] for _id in resource_id] or []
             job = job.previous_job
-        return job_skills
+        return job_resource
 
     def get_job_macros(self, job):
-        job_macros = {}
-        while job is not None:
-            macro_data = self.get_value([MACRO, job.id])
-            if macro_data is None:
-                job_macros[job.id] = []
-                job = job.previous_job
-                continue
-            macros_id = [_id for _id, macro in macro_data.items() if macro[ACTIVE]]
-            job_macros[job.id] = [MACRO_MAP[_id] for _id in macros_id] or []
-            job = job.previous_job
-        return job_macros
+        return self._get_job_resource(job, MACRO, MACRO_MAP)
+    
+    def get_job_hotkeys(self, job):
+        return self._get_job_resource(job, HOTKEY, MACRO_MAP)
+
+    def get_job_buff_skills(self, job):
+        return self._get_job_resource(job, SKILL_BUFF, AUTO_BUFF_MAP)
+
+    def get_job_spawm_skills(self, job):
+        return self._get_job_resource(job, SKILL_SPAWMMER, SPAWN_SKILL_MAP)
 
     def _get_items(self, resource, map_item):
         items_data = self.get_value([AUTO_ITEM, resource])

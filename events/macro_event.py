@@ -41,4 +41,4 @@ class MacroEvent(BaseEvent):
     def get_delay(self, prop_seq: List[str], delay_key, active_key) -> float:
         delay_item = CONFIG_FILE.get_value([*prop_seq, delay_key])
         delay_active = CONFIG_FILE.get_value([*prop_seq, active_key])
-        return delay_item if (delay_active and delay_item) else APP_DELAY
+        return delay_item if (delay_active and delay_item) else 0.1

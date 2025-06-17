@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import QEvent
 
-from config.app import APP_HEIGHT, APP_NAME, APP_ICON, APP_WIDTH
+from config.app import APP_NAME, APP_ICON
 from events.game_event import GAME_EVENT
 from gui.central_widget import CentralWidget
 from gui.widget.tray_menu import TrayMenu
@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
 
     def _config_layout(self) -> None:
         self.setWindowTitle(APP_NAME)
-        # self.setFixedSize(APP_WIDTH, APP_HEIGHT)
+        self.setMinimumWidth(1000)
         self.setWindowIcon(QIcon(APP_ICON))
         self.setCentralWidget(CentralWidget(self))
         self.tray_menu = TrayMenu(self)

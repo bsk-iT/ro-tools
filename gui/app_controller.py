@@ -1,9 +1,10 @@
 import keyboard
 from PyQt6.QtCore import pyqtSignal, QObject
+from events.hotkey_event import HotkeyEvent
 from events.skill_spawmmer import SkillSpawmmer
 from game.jobs import NOVICE, Job
 from game.macro import Macro
-from service.config_file import CONFIG_FILE, KEY, KEY_MONITORING, SKILL_BUFF, SKILL_SPAWMMER
+from service.config_file import CONFIG_FILE, HOTKEY, KEY, KEY_MONITORING, SKILL_SPAWMMER
 from service.memory import MEMORY
 from PyQt6.QtGui import QIcon
 from config.icon import ICON_OFF, ICON_ON
@@ -11,7 +12,8 @@ from config.icon import ICON_OFF, ICON_ON
 
 class AppController(QObject):
 
-    added_macro = pyqtSignal(Macro)
+    added_hotkey = pyqtSignal(str, Macro)
+    added_macro = pyqtSignal(str, Macro)
     removed_macro = pyqtSignal(Macro)
     updated_job = pyqtSignal(Job)
     added_skill_spawmmer = pyqtSignal(object, str)
@@ -29,13 +31,15 @@ class AppController(QObject):
         self.hotkeys_handler = {}
         self.running = False
         self.sync_data(NOVICE, False)
+        self.sync_hotkeys()
         self.updated_job.connect(self.sync_data)
 
     def sync_data(self, job, sync_hotkeys=True):
         self.job: Job = job
         self.job_macros = CONFIG_FILE.get_job_macros(self.job)
-        self.job_spawn_skills = CONFIG_FILE.get_job_skills(self.job)
-        self.job_buff_skills = CONFIG_FILE.get_job_skills(self.job, SKILL_BUFF)
+        self.job_hotkeys = CONFIG_FILE.get_job_hotkeys(self.job)
+        self.job_spawn_skills = CONFIG_FILE.get_job_spawm_skills(self.job)
+        self.job_buff_skills = CONFIG_FILE.get_job_buff_skills(self.job)
         if sync_hotkeys:
             self.sync_hotkeys()
 
@@ -48,25 +52,35 @@ class AppController(QObject):
             self.job_spawn_skills[job_id].remove(skill)
             self.remove_hotkey(key)
 
+    def update_hotkey(self, job_id, macro, active):
+        key = CONFIG_FILE.get_value([HOTKEY, job_id, macro.id, KEY])
+        if active:
+            self.job_hotkeys[job_id].append(macro)
+            self.add_hotkey_macro(job_id, macro, key)
+        else:
+            self.job_hotkeys[job_id].remove(macro)
+            self.remove_hotkey(key)
+
     def get_job_id_by(self, macro_id):
         for job, macros in self.job_macros.items():
             if macro_id in [a_macro.id for a_macro in macros]:
                 return job
         return None
 
-    def update_macros(self, job_id, macro, active):
-        if active:
-            self.job_macros[job_id].append(macro)
-        else:
-            self.job_macros[job_id].remove(macro)
+    def add_hotkey_macro(self, job_id, macro, key, hotkey_event=None):
+        event_ctrl = HotkeyEvent(None) if hotkey_event is None else hotkey_event
+        self._add_hotkey(job_id, macro, key, event_ctrl)
 
     def add_hotkey_skill_spawmmer(self, job_id, skill, key, skill_spawmmer=None):
-        if key is None:
+        event_ctrl = SkillSpawmmer(None) if skill_spawmmer is None else skill_spawmmer
+        self._add_hotkey(job_id, skill, key, event_ctrl)
+
+    def _add_hotkey(self, job_id, event, key, event_ctrl):
+        if key is None and self.running:
             return
-        event = SkillSpawmmer(None) if skill_spawmmer is None else skill_spawmmer
-        handler = keyboard.on_press_key(key, lambda _: event.start(key, job_id, skill))
-        self.hotkeys_handler[key] = (handler, event)
-        keyboard.on_release_key(key, lambda _: event.stop(job_id, skill))
+        handler = keyboard.on_press_key(key, lambda _: event_ctrl.start(key, job_id, event))
+        self.hotkeys_handler[key] = (handler, event_ctrl)
+        keyboard.on_release_key(key, lambda _: event_ctrl.stop(job_id, event))
 
     def remove_hotkey(self, key):
         if key not in self.hotkeys_handler:
@@ -82,12 +96,16 @@ class AppController(QObject):
         if not self.running:
             return
         self.remove_all_hotkeys()
-        for job_id, skills in self.job_spawn_skills.items():
-            for skill in skills:
-                key = CONFIG_FILE.get_value([SKILL_SPAWMMER, job_id, skill.id, KEY])
+        self.sync_hotkey_events(self.job_spawn_skills, SKILL_SPAWMMER, SkillSpawmmer(None))
+        self.sync_hotkey_events(self.job_hotkeys, HOTKEY, HotkeyEvent(None))
+
+    def sync_hotkey_events(self, events, resource, event_ctrl):
+        for job_id, events in events.items():
+            for event in events:
+                key = CONFIG_FILE.get_value([resource, job_id, event.id, KEY])
                 if key is None or key in self.hotkeys_handler:
                     continue
-                self.add_hotkey_skill_spawmmer(job_id, skill, key)
+                self._add_hotkey(job_id, event, key, event_ctrl)
 
     def on_change_process(self, cbox, index, process_options) -> None:
         if not process_options:

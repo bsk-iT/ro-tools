@@ -5,7 +5,7 @@ from PyQt6.QtGui import QStandardItemModel, QStandardItem, QIcon
 from config.app import APP_CBOX_WIDTH
 from gui.app_controller import APP_CONTROLLER
 from game.macro import MACRO_TYPES
-from service.config_file import ACTIVE, CONFIG_FILE, MACRO
+from service.config_file import HOTKEY, MACRO
 from util.widgets import build_cbox_category, get_color_by_id
 
 
@@ -25,10 +25,13 @@ class CboxMacro(QComboBox):
             return
         (macro, job_id) = self.model.takeItem(index, 0).data()
         self.model.takeRow(index)
-        CONFIG_FILE.update_config(True, [self.resource, job_id, macro.id, ACTIVE])
-        APP_CONTROLLER.update_macros(job_id, macro, True)
-        APP_CONTROLLER.added_macro.emit(macro)
+        self._emit_event(job_id, macro)
         APP_CONTROLLER.status_toggle.setFocus()
+
+    def _emit_event(self, job_id, macro):
+        if self.resource == MACRO:
+            return APP_CONTROLLER.added_macro.emit(job_id, macro)
+        APP_CONTROLLER.added_hotkey.emit(job_id, macro)
 
     def add_item(self, macro, job):
         if not macro and not job:
@@ -41,16 +44,21 @@ class CboxMacro(QComboBox):
         item.setData((macro, job.id))
         self.model.appendRow(item)
 
+    def _get_active_macros(self):
+        macros = APP_CONTROLLER.job_macros
+        if self.resource == HOTKEY:
+            macros = APP_CONTROLLER.job_hotkeys
+        return list(chain.from_iterable(macros.values()))
+
     def build_cbox(self, job):
         self.model.clear()
         self.currentIndexChanged.disconnect()
-        active_macros = list(chain.from_iterable(APP_CONTROLLER.job_macros.values()))
         self.add_item(None, None)
         self.setCurrentIndex(0)
         for group, macros in MACRO_TYPES.items():
             build_cbox_category(self.model, group)
             for macro in macros:
-                if macro in active_macros:
+                if macro in self._get_active_macros():
                     continue
                 self.add_item(macro, job)
         self.setModel(self.model)
