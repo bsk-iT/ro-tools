@@ -3,6 +3,8 @@
     "name": "LegionBR",
     "hp_offset": "0xCDCE10",
     "map_offset": "0xCD856C",
+    "job_offset": "0xCD93D8",
+    "chat_offset": "0xB33B48",
     "bg": [ ],
     "woe": [ ],
     "pvp": [ ],
@@ -122,15 +124,5 @@
       "887": "blind",
       "1141": "misty_frost"
     }
-  },
-  "Projeto_Yufa.exe": {
-    "name": "Projeto Yufa",
-    "hp_offset": "0x1061D7C",
-    "map_offset": "0x1061D7C"
-  },
-  "Jogar.exe": {
-    "name": "NostalgicRO",
-    "hp_offset": "0xDD0A14",
-    "map_offset": "0xDD0A14"
   }
 }

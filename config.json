@@ -5,7 +5,7 @@
             "delay_active": false,
             "map_active": false,
             "key": "F9",
-            "percent": 80
+            "percent": 30
         },
         "sp_potion": {
             "delay_active": false,
@@ -14,15 +14,36 @@
             "percent": 10
         },
         "ygg": {
-            "delay_active": false,
-            "map_active": false
+            "delay_active": true,
+            "map_active": false,
+            "delay": 3.0
         },
         "city_active": true,
         "item_buff": {
             "concentration_potion": {
-                "active": true,
+                "active": false,
                 "map_active": false,
                 "key": "1"
+            },
+            "awakening_potion": {
+                "active": true,
+                "map_active": false,
+                "key": "O"
+            },
+            "resentment_box": {
+                "active": false,
+                "map_active": false
+            },
+            "thunder_box": {
+                "active": false,
+                "map_active": false
+            }
+        },
+        "item_debuff": {
+            "panacea": {
+                "active": true,
+                "map_active": false,
+                "key": "F7"
             }
         }
     },
@@ -92,17 +113,16 @@
         },
         "novice": {
             "attack_1": {
-                "active": true,
+                "active": false,
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
-                    "active": true,
-                    "macro": "attack_1"
+                    "active": false
                 },
                 "swap_def": {
                     "active": false
                 },
-                "key": "F2"
+                "key": "F1"
             },
             "attack_2": {
                 "active": false,
@@ -151,6 +171,34 @@
                     "active": false
                 }
             }
+        },
+        "sniper": {
+            "sn_sharpshooting": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F2"
+            }
+        },
+        "archer": {
+            "ac_double": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F1"
+            }
         }
     },
     "macro": {
@@ -174,7 +222,7 @@
         },
         "novice": {
             "attack_1": {
-                "active": true,
+                "active": false,
                 "seq_0_delay_active": false,
                 "seq_1_active": true,
                 "seq_1_delay_active": false,
@@ -193,6 +241,14 @@
             "attack_2": {
                 "active": false,
                 "seq_0_delay_active": false
+            }
+        },
+        "assassin_cross": {
+            "defense_1": {
+                "active": false,
+                "seq_0_delay_active": false,
+                "seq_1_active": false,
+                "seq_1_delay_active": false
             }
         }
     },
@@ -247,6 +303,25 @@
                 "delay_active": false,
                 "map_active": false,
                 "key": "8"
+            }
+        },
+        "archer": {
+            "ac_concentration": {
+                "active": true,
+                "map_active": false,
+                "key": "9"
+            }
+        },
+        "sniper": {
+            "sn_sight": {
+                "active": true,
+                "map_active": false,
+                "key": "8"
+            },
+            "sn_windwalk": {
+                "active": true,
+                "map_active": false,
+                "key": "7"
             }
         }
     }

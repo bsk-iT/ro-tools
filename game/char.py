@@ -35,13 +35,13 @@ class Char:
             self.sp_max = MEMORY.process.read_int(MEMORY.hp_address + Offsets.MAX_SP)
             self.sp_percent = calculate_percent(self.sp, self.sp_max)
             self.current_map = MEMORY.process.read_string(MEMORY.map_address)
-            self.job_id = MEMORY.process.read_int(MEMORY.hp_address + Offsets.JOB_ID)
+            self.job_id = MEMORY.process.read_int(MEMORY.job_address)
             self.raw_buffs = self._get_buffs()
             self.skill_buffs = self._get_id_buffs(SKILL_BUFF)
             self.item_buffs = self._get_id_buffs(ITEM_BUFF)
             self.status_debuff = self._get_id_buffs(STATUS_DEBUFF)
             self.job = JOB_MAP.get(self.job_id, self.job_id)
-            self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.base_address + Offsets.CHAT_BAR_ENABLED)
+            self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.chat_address)
             self.monitoring_job_change_gui()
             os.system("cls")
             print(self)
@@ -62,6 +62,16 @@ class Char:
             if item.id not in self.item_buffs:
                 return item
         return None
+
+    def next_item_debuff_to_use(self, list_items) -> bool:
+        items_to_use = []
+        for item in list_items:
+            for status in item.recover_status:
+                if status in self.status_debuff:
+                    items_to_use.append(item)
+        if len(items_to_use) == 0:
+            return None
+        return sorted(items_to_use, key=lambda item: item.priority, reverse=True)[0]
 
     def next_skill_buff_to_use(self, list_buff) -> bool:
         buffs_to_use = []

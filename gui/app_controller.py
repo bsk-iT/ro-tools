@@ -17,6 +17,7 @@ class AppController(QObject):
     added_skill_spawmmer = pyqtSignal(object, str)
     added_skill_buff = pyqtSignal(object, str)
     added_item_buff = pyqtSignal(object)
+    added_item_debuff = pyqtSignal(object)
 
     def __init__(self):
         super().__init__(None)
@@ -24,6 +25,7 @@ class AppController(QObject):
         self.status_toggle = None
         self.cbox_macro = None
         self.item_buffs = CONFIG_FILE.get_item_buffs()
+        self.item_debuffs = CONFIG_FILE.get_item_debuffs()
         self.hotkeys_handler = {}
         self.running = False
         self.sync_data(NOVICE, False)

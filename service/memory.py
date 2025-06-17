@@ -4,7 +4,7 @@ import win32gui
 import win32process
 import pywintypes
 
-from service.servers_file import HP_OFFSET, MAP_OFFSET, SERVERS_FILE
+from service.servers_file import CHAT_OFFSET, HP_OFFSET, JOB_OFFSET, MAP_OFFSET, SERVERS_FILE
 
 
 class Memory:
@@ -14,6 +14,8 @@ class Memory:
         self.base_address = None
         self.hp_address = None
         self.map_address = None
+        self.job_address = None
+        self.chat_address = None
 
     def is_valid(self) -> bool:
         return self.process.process_handle is not None
@@ -26,9 +28,13 @@ class Memory:
         module = pymem.process.module_from_name(self.process.process_handle, name)
         hp_offset = int(SERVERS_FILE.get_value(HP_OFFSET), 16)
         map_offset = int(SERVERS_FILE.get_value(MAP_OFFSET), 16)
+        job_offset = int(SERVERS_FILE.get_value(JOB_OFFSET), 16)
+        chat_offset = int(SERVERS_FILE.get_value(CHAT_OFFSET), 16)
         self.base_address = module.lpBaseOfDll
         self.hp_address = self.get_address([hp_offset])
         self.map_address = self.get_address([map_offset])
+        self.job_address = self.get_address([job_offset])
+        self.chat_address = self.get_address([chat_offset])
 
     def get_hwnd(self) -> None:
         if not self.is_valid():

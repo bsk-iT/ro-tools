@@ -1,6 +1,6 @@
 from typing import Any, List
 from config.app import APP_DELAY
-from game.buff import AUTO_BUFF_MAP, ITEM_BUFF_MAP
+from game.buff import AUTO_BUFF_MAP, ITEM_BUFF_MAP, ITEM_DEBUFF_MAP
 from game.macro import MACRO_MAP
 from game.spawn_skill import SPAWN_SKILL_MAP
 from service.file import File
@@ -12,6 +12,7 @@ SKILL_SPAWMMER = "skill_spawmmer"
 SKILL_BUFF = "skill_buff"
 MACRO = "macro"
 ITEM_BUFF = "item_buff"
+ITEM_DEBUFF = "item_debuff"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -105,12 +106,18 @@ class ConfigFile(File):
             job = job.previous_job
         return job_macros
 
-    def get_item_buffs(self):
-        items_data = self.get_value([ITEM_BUFF])
+    def _get_items(self, resource, map_item):
+        items_data = self.get_value([AUTO_ITEM, resource])
         if items_data is None:
             return []
         items_id = [_id for _id, item in items_data.items() if item[ACTIVE]]
-        return [ITEM_BUFF_MAP[_id] for _id in items_id] or []
+        return [map_item[_id] for _id in items_id] or []
+
+    def get_item_buffs(self):
+        return self._get_items(ITEM_BUFF, ITEM_BUFF_MAP)
+
+    def get_item_debuffs(self):
+        return self._get_items(ITEM_DEBUFF, ITEM_DEBUFF_MAP)
 
 
 CONFIG_FILE = ConfigFile("config.json")

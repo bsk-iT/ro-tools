@@ -1,7 +1,7 @@
 from config.icon import PATH_BUFF_SKILL, PATH_ITEM, get_image
 
 
-class Item:
+class Buff:
     def __init__(self, id, name, priority=0):
         self.id = id
         self.name = name
@@ -12,16 +12,23 @@ class Item:
         return self.name
 
 
-class Item(Item):
+class Item(Buff):
     def __init__(self, buff_id, name, priority=0):
         super().__init__(buff_id, name, priority)
         self.icon = get_image(PATH_ITEM, self.id)
 
 
-class Skill(Item):
+class Skill(Buff):
     def __init__(self, buff_id, name, priority=0):
         super().__init__(buff_id, name, priority)
         self.icon = get_image(PATH_BUFF_SKILL, self.id)
+
+
+class Debuff(Buff):
+    def __init__(self, buff_id, name, recover_status, priority=0):
+        super().__init__(buff_id, name, priority)
+        self.icon = get_image(PATH_ITEM, self.id)
+        self.recover_status = recover_status
 
 
 # ----- Item -----
@@ -47,11 +54,35 @@ ITEM_BUFF_MAP = {
     "pain_killer": PAIN_KILLER,
 }
 
-ITEM_BUF_GROUP = {
+ITEM_BUFF_GROUP = {
     "APSD Potion": [CONCENTRATION_POTION, AWAKENING_POTION, BERSERK_POTION],
     "Caixas": [RESENTMENT_BOX, THUNDER_BOX],
     "Consumíveis": [ALOE_VERA, PAIN_KILLER],
     "Buff - Scrolls": [BLESS_SCROLL, INC_AGI_UP_SCROLL],
+}
+
+# ----- Item cura debuff -----
+BLIND = "blind"
+CONFUSION = "confusion"
+CURSE = "curse"
+POISON = "poison"
+SILENCE = "silence"
+HALLUCINATION = "hallucination"
+HALLUCINATION_WALK = "hallucination_walk"
+SILENCE = "silence"
+
+PANACEA = Debuff("panacea", "Panacea", [BLIND, CONFUSION, CURSE, POISON, SILENCE, HALLUCINATION, HALLUCINATION_WALK])
+GREEN_POTION = Debuff("green_potion", "Poção Verde", [BLIND, CONFUSION, POISON, SILENCE], 1)
+GREEN_HERB = Debuff("green_herb", "Erva Verde", [POISON], 2)
+
+ITEM_DEBUFF_GROUP = {
+    "Básico": [PANACEA, GREEN_POTION, GREEN_HERB],
+}
+
+ITEM_DEBUFF_MAP = {
+    "panacea": PANACEA,
+    "green_potion": GREEN_POTION,
+    "green_herb": GREEN_HERB,
 }
 
 # ----- Skill -----

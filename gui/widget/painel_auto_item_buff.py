@@ -3,7 +3,7 @@ from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 
 from config.icon import ICON_DELETE
-from game.buff import ITEM_BUF_GROUP, Item, Item
+from game.buff import ITEM_BUFF_GROUP, Buff, Buff
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_item import CboxItem
 from gui.widget.input_keybind import InputKeybind
@@ -29,7 +29,7 @@ class PainelAutoItemBuff(QWidget):
     def update_item_buffs(self):
         clear_layout(self.layout.takeAt(1))
         (vbox, scroll) = build_scroll_vbox()
-        for group, items in ITEM_BUF_GROUP.items():
+        for group, items in ITEM_BUFF_GROUP.items():
             has_item = False
             vbox_item_buff = QVBoxLayout()
             vbox_item_buff.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
@@ -43,7 +43,7 @@ class PainelAutoItemBuff(QWidget):
                 vbox.addLayout(vbox_item_buff)
         self.layout.addWidget(scroll)
 
-    def _build_item_inputs(self, item: Item):
+    def _build_item_inputs(self, item: Buff):
         widget = QWidget()
         vbox = QVBoxLayout(widget)
         hbox = QHBoxLayout()
@@ -57,7 +57,7 @@ class PainelAutoItemBuff(QWidget):
         vbox.addWidget(build_hr())
         return widget
 
-    def _build_item_icon(self, item: Item) -> QFrame:
+    def _build_item_icon(self, item: Buff) -> QFrame:
         frame = QFrame()
         icon = build_icon(item.icon, item.id, 25, frame)
         icon.move(9, 9)
@@ -71,16 +71,16 @@ class PainelAutoItemBuff(QWidget):
         btn_delete.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         return frame
 
-    def _active_skill(self, item: Item, active=True):
+    def _active_skill(self, item: Buff, active=True):
         self.update_item_buffs()
         CONFIG_FILE.update_config(active, [AUTO_ITEM, ITEM_BUFF, item.id, ACTIVE])
         self.cbox_item.build_cbox()
 
-    def _on_add_skill(self, item: Item):
+    def _on_add_skill(self, item: Buff):
         APP_CONTROLLER.item_buffs.append(item)
         self._active_skill(item)
         APP_CONTROLLER.status_toggle.setFocus()
 
-    def _on_remove_item(self, item: Item):
+    def _on_remove_item(self, item: Buff):
         APP_CONTROLLER.item_buffs.remove(item)
         self._active_skill(item, False)

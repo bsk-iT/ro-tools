@@ -4,6 +4,8 @@ from service.file import File
 # Properties
 HP_OFFSET = "hp_offset"
 MAP_OFFSET = "map_offset"
+JOB_OFFSET = "job_offset"
+CHAT_OFFSET = "chat_offset"
 BG = "bg"
 WOE = "woe"
 PVP = "pvp"

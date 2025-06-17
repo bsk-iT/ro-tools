@@ -22,7 +22,7 @@ class PainelAutoItem(QWidget):
         tab_panel = QTabWidget()
         tab_panel.addTab(PainelAutoItemHpSp(self), "HP/SP")
         tab_panel.addTab(PainelAutoItemBuff(self), "Buff")
-        tab_panel.addTab(PainelAutoItemDebuff(self), "Debuff")
+        tab_panel.addTab(PainelAutoItemDebuff(self), "Curar Debuff")
         painel.addWidget(tab_panel)
 
     def _build_layout_config(self):
