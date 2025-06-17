@@ -1,5 +1,5 @@
 import copy
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame, QScrollArea
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap, QIcon
 
@@ -144,6 +144,7 @@ class PainelJobMacro(QWidget):
         CONFIG_FILE.update_config(True, [MACRO, job_id, macro.id, ACTIVE])
         APP_CONTROLLER.job_macros[job_id].append(macro)
         self.update_macros()
+        APP_CONTROLLER.add_macro_select.emit(job_id, macro)
 
     def _build_input_keybind(self, new_key_seq, next_is_active) -> QFrame:
         (widget, layout) = build_action_badge()

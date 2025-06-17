@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QLabel
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 
@@ -8,7 +8,7 @@ from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_macro import CboxMacro
 from gui.widget.input_keybind import InputKeybind
 from service.config_file import ACTIVE, CONFIG_FILE, HOTKEY, KEY
-from util.widgets import build_hr, build_icon, build_label, build_label_info, build_scroll_vbox, clear_layout
+from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
 
 class PainelJobHotkey(QWidget):
@@ -53,7 +53,9 @@ class PainelJobHotkey(QWidget):
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(self._build_hotkey_icon(macro, job_id))
         key_base = f"{HOTKEY}:{job_id}:{macro.id}:"
-        hbox.addWidget(build_label(macro.name, 12, True))
+        label = QLabel(macro.name)
+        label.setObjectName(macro.id)
+        hbox.addWidget(label)
         hbox.addWidget(InputKeybind(self, key_base + KEY))
         vbox.addLayout(hbox)
         vbox.addWidget(build_hr())

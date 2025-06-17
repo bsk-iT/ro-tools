@@ -21,11 +21,12 @@ DEF_3 = Macro("defense_3", "Equipes de Defesa 3", ICON_SHIELD)
 DEF_4 = Macro("defense_4", "Equipes de Defesa 4", ICON_SHIELD)
 SMOKIE = Macro("smokie", "Acessório c/ Fumacento", ICON_CLIP)
 HORONG = Macro("horong", "Acessório c/ Horong", ICON_CLIP)
+JAGUAR_HAT = Macro("jaguar_hat", "Máscara de Onça-Pintada", get_image(PATH_ITEM, "JAGUAR_HAT"))
 
 MACRO_TYPES = {
     "Ataque": [ATK_1, ATK_2, ATK_3, ATK_4],
     "Defesa": [DEF_1, DEF_2, DEF_3, DEF_4],
-    "Outros": [SMOKIE, HORONG],
+    "Outros": [JAGUAR_HAT, SMOKIE, HORONG],
 }
 
 MACRO_MAP = {
@@ -37,6 +38,7 @@ MACRO_MAP = {
     "defense_2": DEF_2,
     "defense_3": DEF_3,
     "defense_4": DEF_4,
+    "jaguar_hat": JAGUAR_HAT,
     "smokie": SMOKIE,
     "horong": HORONG,
 }

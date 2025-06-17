@@ -10,6 +10,7 @@ from service.servers_file import CITY, SERVERS_FILE
 AUTO_ITEM = "auto_item"
 SKILL_SPAWMMER = "skill_spawmmer"
 SKILL_BUFF = "skill_buff"
+SKILL_EQUIP = "skill_equip"
 MACRO = "macro"
 HOTKEY = "hotkey"
 ITEM_BUFF = "item_buff"
@@ -95,7 +96,7 @@ class ConfigFile(File):
 
     def get_job_macros(self, job):
         return self._get_job_resource(job, MACRO, MACRO_MAP)
-    
+
     def get_job_hotkeys(self, job):
         return self._get_job_resource(job, HOTKEY, MACRO_MAP)
 
@@ -104,6 +105,9 @@ class ConfigFile(File):
 
     def get_job_spawm_skills(self, job):
         return self._get_job_resource(job, SKILL_SPAWMMER, SPAWN_SKILL_MAP)
+
+    def get_job_equip_skills(self, job):
+        return self._get_job_resource(job, SKILL_EQUIP, AUTO_BUFF_MAP)
 
     def _get_items(self, resource, map_item):
         items_data = self.get_value([AUTO_ITEM, resource])

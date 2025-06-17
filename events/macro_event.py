@@ -2,7 +2,6 @@ import threading
 import time
 from typing import List
 
-from config.app import APP_DELAY
 from events.base_event import BaseEvent, Priority
 
 from game.macro import MAX_HOTKEY

@@ -14,10 +14,12 @@ class AppController(QObject):
 
     added_hotkey = pyqtSignal(str, Macro)
     added_macro = pyqtSignal(str, Macro)
+    add_macro_select = pyqtSignal(str, Macro)
     removed_macro = pyqtSignal(Macro)
     updated_job = pyqtSignal(Job)
     added_skill_spawmmer = pyqtSignal(object, str)
     added_skill_buff = pyqtSignal(object, str)
+    added_skill_equip = pyqtSignal(object, str)
     added_item_buff = pyqtSignal(object)
     added_item_debuff = pyqtSignal(object)
 
@@ -40,6 +42,7 @@ class AppController(QObject):
         self.job_hotkeys = CONFIG_FILE.get_job_hotkeys(self.job)
         self.job_spawn_skills = CONFIG_FILE.get_job_spawm_skills(self.job)
         self.job_buff_skills = CONFIG_FILE.get_job_buff_skills(self.job)
+        self.job_equip_skills = CONFIG_FILE.get_job_equip_skills(self.job)
         if sync_hotkeys:
             self.sync_hotkeys()
 
@@ -76,7 +79,7 @@ class AppController(QObject):
         self._add_hotkey(job_id, skill, key, event_ctrl)
 
     def _add_hotkey(self, job_id, event, key, event_ctrl):
-        if key is None and self.running:
+        if key is None or not self.running:
             return
         handler = keyboard.on_press_key(key, lambda _: event_ctrl.start(key, job_id, event))
         self.hotkeys_handler[key] = (handler, event_ctrl)

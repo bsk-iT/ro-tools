@@ -17,7 +17,7 @@ class CboxMacroSelect(QComboBox):
         self.key_base = key_base
         self.model = QStandardItemModel()
         self.update_cbox()
-        APP_CONTROLLER.added_macro.connect(self.update_cbox)
+        APP_CONTROLLER.add_macro_select.connect(self.update_cbox)
         APP_CONTROLLER.removed_macro.connect(self.remove_macro)
 
     def remove_macro(self, macro: Macro):

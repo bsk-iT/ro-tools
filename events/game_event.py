@@ -9,6 +9,7 @@ from events.auto_pot_sp import AutoPotSP
 from events.auto_ygg import AutoYgg
 from events.base_event import BaseEvent
 from events.skill_buff import SkillBuff
+from events.skill_equip import SkillEquip
 from game.char import Char
 
 
@@ -16,7 +17,7 @@ class GameEvent:
     def __init__(self):
         self.char = Char()
         self.events_item: List[BaseEvent] = [AutoPotHP(self), AutoPotSP(self), AutoYgg(self), AutoItemBuff(self), AutoItemDebuff(self)]
-        self.events_skill: List[BaseEvent] = [SkillBuff(self)]
+        self.events_skill: List[BaseEvent] = [SkillBuff(self), SkillEquip(self)]
         self.running = False
 
     def start(self):

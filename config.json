@@ -190,10 +190,12 @@
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
-                    "active": false
+                    "active": true,
+                    "macro": "attack_1"
                 },
                 "swap_def": {
-                    "active": false
+                    "active": true,
+                    "macro": "defense_1"
                 },
                 "key": "F2"
             }
@@ -257,6 +259,26 @@
             "smokie": {
                 "active": false,
                 "seq_0_delay_active": false
+            },
+            "jaguar_hat": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_1_key": "U",
+                "seq_2_active": true,
+                "seq_2_delay_active": true,
+                "seq_2_key": "I",
+                "seq_3_active": true,
+                "seq_3_delay_active": false,
+                "seq_3_key": "R",
+                "seq_4_active": true,
+                "seq_4_delay_active": false,
+                "seq_4_key": "T",
+                "seq_5_active": true,
+                "seq_5_delay_active": false,
+                "seq_5_key": "Y",
+                "seq_2_delay": 0.2
             }
         },
         "assassin_cross": {
@@ -277,6 +299,16 @@
                 "seq_2_active": true,
                 "seq_2_delay_active": false,
                 "seq_2_key": "T"
+            },
+            "defense_1": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_1_key": "1",
+                "seq_2_active": true,
+                "seq_2_delay_active": false,
+                "seq_2_key": "2"
             }
         }
     },
@@ -351,12 +383,18 @@
                 "map_active": false,
                 "key": "7"
             }
+        },
+        "magician": {
+            "mg_energycoat": {
+                "active": true,
+                "map_active": false
+            }
         }
     },
     "hotkey": {
         "novice": {
             "attack_1": {
-                "active": false,
+                "active": true,
                 "key": "F5"
             },
             "smokie": {
@@ -367,16 +405,33 @@
             },
             "horong": {
                 "active": false
+            },
+            "jaguar_hat": {
+                "active": false
             }
         },
         "sniper": {
             "attack_1": {
-                "active": true,
+                "active": false,
                 "key": "1"
             },
             "attack_2": {
-                "active": true,
+                "active": false,
                 "key": "Q"
+            },
+            "jaguar_hat": {
+                "active": true,
+                "key": "1"
+            }
+        }
+    },
+    "skill_equip": {
+        "novice": {
+            "mc_loud": {
+                "active": true,
+                "macro": "jaguar_hat",
+                "map_active": false,
+                "map": "cidade"
             }
         }
     }

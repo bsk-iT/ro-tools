@@ -203,6 +203,8 @@ NJ_UTSUSEMI = Skill("nj_utsusemi", "Troca de Pele")
 NJ_BUNSINJYUTSU = Skill("nj_bunsinjyutsu", "Imagem Falsa")
 NJ_NEN = Skill("nj_nen", "Aura Ninja")
 
+EQUIP_BUFFS = [MC_LOUD]
+
 AUTO_BUFF_MAP = {
     "sm_magnum": SM_MAGNUM,
     "sm_endure": SM_ENDURE,

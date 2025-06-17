@@ -1,4 +1,3 @@
-from itertools import chain
 import os
 
 from game.jobs import JOB_MAP, Job
@@ -37,6 +36,7 @@ class Char:
             self.current_map = MEMORY.process.read_string(MEMORY.map_address)
             self.job_id = MEMORY.process.read_int(MEMORY.job_address)
             self.raw_buffs = self._get_buffs()
+            self.buffs = self._get_id_buffs_all()
             self.skill_buffs = self._get_id_buffs(SKILL_BUFF)
             self.item_buffs = self._get_id_buffs(ITEM_BUFF)
             self.status_debuff = self._get_id_buffs(STATUS_DEBUFF)
@@ -48,10 +48,21 @@ class Char:
         except BaseException:
             self.reset()
 
+    def _get_id_buffs_all(self):
+        skill_buffs = []
+        skill_buff_map = SERVERS_FILE.get_value(SKILL_BUFF)
+        item_buff_map = SERVERS_FILE.get_value(ITEM_BUFF)
+        status_debuff_map = SERVERS_FILE.get_value(STATUS_DEBUFF)
+        for buff in self.raw_buffs:
+            skill_buff = skill_buff_map.get(str(buff), None) or item_buff_map.get(str(buff), None) or status_debuff_map.get(str(buff), buff)
+            skill_buffs.append(skill_buff)
+        return skill_buffs
+
     def _get_id_buffs(self, resource):
         skill_buffs = []
+        skills_map = SERVERS_FILE.get_value(resource)
         for buff in self.raw_buffs:
-            skill_buff = SERVERS_FILE.get_value(resource).get(str(buff), None)
+            skill_buff = skills_map.get(str(buff), None)
             if not skill_buff:
                 continue
             skill_buffs.append(skill_buff)
@@ -104,9 +115,6 @@ class Char:
             SP: {self.sp}/{self.sp_max}
             JOB: {self.job}
             MAP: {self.current_map}
-            RAW BUFFS: {self.raw_buffs}
-            SKILL_BUFFS: {self.skill_buffs}
-            ITEM_BUFFS: {self.item_buffs}
-            STATUS_DEBUFF: {self.status_debuff}
+            BUFFS: {self.buffs}
             CHAT_BAR_ENABLED: {self.chat_bar_enabled}
         """
