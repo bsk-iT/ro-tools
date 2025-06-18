@@ -191,7 +191,7 @@
                 "delay_active": false,
                 "swap_atk": {
                     "active": true,
-                    "macro": "attack_1"
+                    "macro": "attack_2"
                 },
                 "swap_def": {
                     "active": true,
@@ -264,10 +264,10 @@
                 "active": true,
                 "seq_0_delay_active": false,
                 "seq_1_active": true,
-                "seq_1_delay_active": false,
+                "seq_1_delay_active": true,
                 "seq_1_key": "U",
                 "seq_2_active": true,
-                "seq_2_delay_active": true,
+                "seq_2_delay_active": false,
                 "seq_2_key": "I",
                 "seq_3_active": true,
                 "seq_3_delay_active": false,
@@ -278,19 +278,26 @@
                 "seq_5_active": true,
                 "seq_5_delay_active": false,
                 "seq_5_key": "Y",
-                "seq_2_delay": 0.2
+                "seq_2_delay": 0.2,
+                "seq_1_delay": 0.2
             },
             "song_1": {
                 "active": true,
                 "seq_0_delay_active": false,
                 "seq_1_active": true,
                 "seq_1_delay_active": false,
-                "knife_key": "1",
+                "knife_key": "2",
                 "violin_key": "1",
-                "seq_1_key": "F3",
-                "seq_2_active": false,
+                "seq_1_key": "F2",
+                "seq_2_active": true,
                 "seq_2_delay_active": false,
-                "seq_2_key": "F3"
+                "seq_2_key": "F3",
+                "seq_3_active": false,
+                "seq_3_delay_active": false,
+                "seq_3_key": "F5",
+                "seq_4_active": false,
+                "seq_4_delay_active": false,
+                "seq_4_key": "F5"
             }
         },
         "assassin_cross": {
@@ -310,17 +317,17 @@
                 "seq_1_key": "S",
                 "seq_2_active": true,
                 "seq_2_delay_active": false,
-                "seq_2_key": "T"
+                "seq_2_key": "H"
             },
             "defense_1": {
                 "active": true,
                 "seq_0_delay_active": false,
                 "seq_1_active": true,
                 "seq_1_delay_active": false,
-                "seq_1_key": "1",
+                "seq_1_key": "D",
                 "seq_2_active": true,
                 "seq_2_delay_active": false,
-                "seq_2_key": "2"
+                "seq_2_key": "G"
             }
         }
     },
@@ -386,12 +393,12 @@
         },
         "sniper": {
             "sn_sight": {
-                "active": true,
+                "active": false,
                 "map_active": false,
                 "key": "8"
             },
             "sn_windwalk": {
-                "active": true,
+                "active": false,
                 "map_active": false,
                 "key": "7"
             }
@@ -439,6 +446,12 @@
                 "active": true,
                 "key": "1"
             }
+        },
+        "dancer": {
+            "jaguar_hat": {
+                "active": true,
+                "key": "1"
+            }
         }
     },
     "skill_equip": {
@@ -448,6 +461,13 @@
                 "macro": "jaguar_hat",
                 "map_active": false,
                 "map": "cidade"
+            }
+        },
+        "sniper": {
+            "mc_loud": {
+                "active": true,
+                "map_active": false,
+                "macro": "jaguar_hat"
             }
         }
     }

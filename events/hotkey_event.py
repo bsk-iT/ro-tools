@@ -1,5 +1,4 @@
 import threading
-import time
 
 from events.base_event import BaseEvent, Priority
 
@@ -17,7 +16,7 @@ class HotkeyEvent(BaseEvent):
 
     def start(self, key, job_id, macro):
         if self.running:
-          return
+            return
         threading.Thread(target=self.run, args=(macro,), name=f"{self.name}:{job_id}:{macro.id}", daemon=True).start()
 
     def run(self, macro):
@@ -26,4 +25,3 @@ class HotkeyEvent(BaseEvent):
 
     def execute_action(self, macro):
         MacroEvent(self.game_event).start(macro.id)
-        time.sleep(0.5)

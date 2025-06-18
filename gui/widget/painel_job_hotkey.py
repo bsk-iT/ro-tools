@@ -56,7 +56,7 @@ class PainelJobHotkey(QWidget):
         label = QLabel(macro.name)
         label.setObjectName(macro.id)
         hbox.addWidget(label)
-        hbox.addWidget(InputKeybind(self, key_base + KEY))
+        hbox.addWidget(InputKeybind(self, key_base + KEY, True))
         vbox.addLayout(hbox)
         vbox.addWidget(build_hr())
         return widget

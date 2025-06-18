@@ -34,17 +34,17 @@ class MacroEvent(BaseEvent):
             if not active:
                 break
             if "song" in macro_id:
-                self._swap_violin(prop_seq)
+                self._swap_weapon(prop_seq, VIOLIN_KEY)
             key = CONFIG_FILE.get_value([*prop_seq, f"seq_{index}_{KEY}"])
             KEYBOARD.press_key(key)
             self.execute_delay(prop_seq, f"seq_{index}_{DELAY}", f"seq_{index}_{DELAY_ACTIVE}")
             if "song" in macro_id:
-                self._swap_violin(prop_seq)
+                self._swap_weapon(prop_seq, KNIFE_KEY)
 
-    def _swap_violin(self, prop_seq):
-        violin_key = CONFIG_FILE.get_value([*prop_seq, VIOLIN_KEY])
-        KEYBOARD.press_key(violin_key)
-        time.sleep(0.3)
+    def _swap_weapon(self, prop_seq, weapon_key):
+        key = CONFIG_FILE.get_value([*prop_seq, weapon_key])
+        KEYBOARD.press_key(key)
+        time.sleep(0.12)
 
     def execute_delay(self, prop_seq: List[str], delay_key, active_key) -> float:
         delay_item = CONFIG_FILE.get_value([*prop_seq, delay_key])

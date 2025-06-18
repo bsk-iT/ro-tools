@@ -189,4 +189,6 @@ class PainelJobMacro(QWidget):
         hbox_weapon.setAlignment(Qt.AlignmentFlag.AlignRight)
         hbox_weapon.addWidget(build_icon(get_image(PATH_ITEM, "violin")))
         hbox_weapon.addWidget(InputKeybind(self, key_seq + VIOLIN_KEY))
+        hbox_weapon.addWidget(build_icon(get_image(PATH_ITEM, "novice_knife")))
+        hbox_weapon.addWidget(InputKeybind(self, key_seq + KNIFE_KEY))
         return hbox_weapon
