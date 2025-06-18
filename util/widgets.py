@@ -33,7 +33,7 @@ def build_label_subtitle(text: str) -> QLabel:
 
 def get_color_by_id(_id) -> QColor:
     color = QColor()
-    for _type in ["attack", "defense"]:
+    for _type in ["attack", "defense", "song"]:
         if _id in [f"{_type}_1", f"{type}_1"]:
             color.setRgb(72, 133, 237)
             return color

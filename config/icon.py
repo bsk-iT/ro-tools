@@ -26,7 +26,7 @@ ICON_SWORD = resource_path(PATH_ICON + "sword.png")
 ICON_SHIELD = resource_path(PATH_ICON + "shield.png")
 ICON_ARROW_RIGHT = resource_path(PATH_ICON + "arrow_right.png")
 ICON_ARROW_DOWN = resource_path(PATH_ICON + "arrow_down.png")
-ICON_MACRO = resource_path(PATH_ICON + "macro.png")
+ICON_SONG = resource_path(PATH_ICON + "song.png")
 
 IMG_RED_POTION = resource_path(PATH_ITEM + "red_potion.gif")
 IMG_BLUE_POTION = resource_path(PATH_ITEM + "blue_potion.gif")

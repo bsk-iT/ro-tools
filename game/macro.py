@@ -1,4 +1,4 @@
-from config.icon import ICON_SHIELD, ICON_SWORD, PATH_ITEM, get_image
+from config.icon import ICON_SHIELD, ICON_SONG, ICON_SWORD, PATH_ITEM, get_image
 
 
 class Macro:
@@ -19,6 +19,10 @@ DEF_1 = Macro("defense_1", "Equipes de Defesa 1", ICON_SHIELD)
 DEF_2 = Macro("defense_2", "Equipes de Defesa 2", ICON_SHIELD)
 DEF_3 = Macro("defense_3", "Equipes de Defesa 3", ICON_SHIELD)
 DEF_4 = Macro("defense_4", "Equipes de Defesa 4", ICON_SHIELD)
+SONG_1 = Macro("song_1", "Playlist 1", ICON_SONG)
+SONG_2 = Macro("song_2", "Playlist 2", ICON_SONG)
+SONG_3 = Macro("song_3", "Playlist 3", ICON_SONG)
+SONG_4 = Macro("song_4", "Playlist 4", ICON_SONG)
 SMOKIE = Macro("smokie", "Acessório c/ Fumacento", ICON_CLIP)
 HORONG = Macro("horong", "Acessório c/ Horong", ICON_CLIP)
 JAGUAR_HAT = Macro("jaguar_hat", "Máscara de Onça-Pintada", get_image(PATH_ITEM, "JAGUAR_HAT"))
@@ -26,6 +30,7 @@ JAGUAR_HAT = Macro("jaguar_hat", "Máscara de Onça-Pintada", get_image(PATH_ITE
 MACRO_TYPES = {
     "Ataque": [ATK_1, ATK_2, ATK_3, ATK_4],
     "Defesa": [DEF_1, DEF_2, DEF_3, DEF_4],
+    "Songs Clown | Gypsy": [SONG_1, SONG_2, SONG_3, SONG_4],
     "Outros": [JAGUAR_HAT, SMOKIE, HORONG],
 }
 
@@ -38,6 +43,10 @@ MACRO_MAP = {
     "defense_2": DEF_2,
     "defense_3": DEF_3,
     "defense_4": DEF_4,
+    "song_1": SONG_1,
+    "song_2": SONG_2,
+    "song_3": SONG_3,
+    "song_4": SONG_4,
     "jaguar_hat": JAGUAR_HAT,
     "smokie": SMOKIE,
     "horong": HORONG,

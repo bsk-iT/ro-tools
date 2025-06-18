@@ -38,6 +38,8 @@ ACTIVE = "active"
 SWAP_ACTIVE = "swap_active"
 SWAP_ATK = "swap_atk"
 SWAP_DEF = "swap_def"
+KNIFE_KEY = "knife_key"
+VIOLIN_KEY = "violin_key"
 
 
 class ConfigFile(File):

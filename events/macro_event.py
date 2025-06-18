@@ -6,7 +6,7 @@ from events.base_event import BaseEvent, Priority
 
 from game.macro import MAX_HOTKEY
 
-from service.config_file import ACTIVE, CONFIG_FILE, DELAY, DELAY_ACTIVE, KEY, MACRO
+from service.config_file import ACTIVE, CONFIG_FILE, DELAY, DELAY_ACTIVE, KEY, KNIFE_KEY, MACRO, VIOLIN_KEY
 from service.keyboard import KEYBOARD
 
 
@@ -28,16 +28,26 @@ class MacroEvent(BaseEvent):
         if not macro_id and not job_id:
             return
         prop_seq = [*self.prop_seq, job_id, macro_id]
+        self.execute_delay(prop_seq, f"seq_{0}_{DELAY}", f"seq_{0}_{DELAY_ACTIVE}")
         for index in range(1, MAX_HOTKEY):
             active = CONFIG_FILE.get_value([*prop_seq, f"seq_{index}_{ACTIVE}"])
             if not active:
                 break
+            if "song" in macro_id:
+                self._swap_violin(prop_seq)
             key = CONFIG_FILE.get_value([*prop_seq, f"seq_{index}_{KEY}"])
             KEYBOARD.press_key(key)
-            delay = self.get_delay(prop_seq, f"seq_{index}_{DELAY}", f"seq_{index}_{DELAY_ACTIVE}")
-            time.sleep(delay)
+            self.execute_delay(prop_seq, f"seq_{index}_{DELAY}", f"seq_{index}_{DELAY_ACTIVE}")
+            if "song" in macro_id:
+                self._swap_violin(prop_seq)
 
-    def get_delay(self, prop_seq: List[str], delay_key, active_key) -> float:
+    def _swap_violin(self, prop_seq):
+        violin_key = CONFIG_FILE.get_value([*prop_seq, VIOLIN_KEY])
+        KEYBOARD.press_key(violin_key)
+        time.sleep(0.3)
+
+    def execute_delay(self, prop_seq: List[str], delay_key, active_key) -> float:
         delay_item = CONFIG_FILE.get_value([*prop_seq, delay_key])
         delay_active = CONFIG_FILE.get_value([*prop_seq, active_key])
-        return delay_item if (delay_active and delay_item) else 0.1
+        delay = delay_item if (delay_active and delay_item) else 0.1
+        time.sleep(delay)

@@ -1,16 +1,15 @@
 import copy
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QPixmap, QIcon
 
-from config.app import APP_ICON_SIZE
-from config.icon import ICON_ARROW_DOWN, ICON_ARROW_RIGHT, ICON_DELETE
+from config.icon import ICON_ARROW_DOWN, ICON_ARROW_RIGHT, ICON_DELETE, PATH_ITEM, get_image
 from game.macro import MACRO_MAP, MAX_HOTKEY
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_macro import CboxMacro
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
-from service.config_file import ACTIVE, CONFIG_FILE, KEY, MACRO
+from service.config_file import ACTIVE, CONFIG_FILE, KEY, KNIFE_KEY, MACRO, VIOLIN_KEY
 from util.widgets import build_action_badge, build_badge_btn, build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
 
@@ -57,7 +56,7 @@ class PainelJobMacro(QWidget):
         key_seq = f"{MACRO}:{job_id}:{macro.id}:"
         vbox = QVBoxLayout(widget)
         vbox.setSpacing(10)
-        vbox.addLayout(self._build_title_macro(job_id, key_seq, macro))
+        vbox.addWidget(self._build_title_macro(job_id, key_seq, macro))
         vbox.addLayout(self._build_frame_input_delay(key_seq, macro))
         vbox.addWidget(build_hr())
         return widget
@@ -125,13 +124,18 @@ class PainelJobMacro(QWidget):
         self.update_macros()
 
     def _build_btn_remove_macro(self, job_id, key_seq, macro):
-        btn = QPushButton()
-        btn.setIcon(QIcon(ICON_DELETE))
-        btn.setFixedSize(APP_ICON_SIZE, APP_ICON_SIZE)
-        btn.setContentsMargins(0, 0, 0, 0)
-        btn.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        btn.clicked.connect(lambda: self._on_remove_macro(job_id, key_seq, macro))
-        return btn
+        frame = QFrame()
+        icon = build_icon(macro.icon, macro.id, 25, frame)
+        icon.move(9, 9)
+        frame.setFixedSize(35, 40)
+        btn_delete = QPushButton(frame)
+        btn_delete.move(0, 0)
+        btn_delete.setIcon(QIcon(ICON_DELETE))
+        btn_delete.setIconSize(QSize(10, 10))
+        btn_delete.setContentsMargins(0, 0, 0, 0)
+        btn_delete.clicked.connect(lambda: self._on_remove_macro(job_id, key_seq, macro))
+        btn_delete.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        return frame
 
     def _on_remove_macro(self, job_id, key_seq, macro):
         CONFIG_FILE.update(key_seq + ACTIVE, False)
@@ -160,13 +164,29 @@ class PainelJobMacro(QWidget):
         vbox.addWidget(label)
 
     def _build_title_macro(self, job_id, key_seq, macro):
-        hbox = QHBoxLayout()
+        widget = QWidget()
+        widget.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        hbox = QHBoxLayout(widget)
         hbox.setSpacing(0)
         hbox.setContentsMargins(0, 0, 0, 0)
-        hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        hbox_title = QHBoxLayout()
+        hbox_title.setSpacing(5)
+        hbox_title.setContentsMargins(0, 0, 0, 0)
+        hbox_title.setAlignment(Qt.AlignmentFlag.AlignLeft)
         label = QLabel(macro.name)
         label.setObjectName(macro.id)
-        hbox.addWidget(self._build_btn_remove_macro(job_id, key_seq, macro))
-        hbox.addWidget(build_icon(macro.icon))
-        hbox.addWidget(label)
-        return hbox
+        hbox_title.addWidget(self._build_btn_remove_macro(job_id, key_seq, macro))
+        hbox_title.addWidget(label)
+        hbox.addLayout(hbox_title)
+        if "song" in macro.id:
+            hbox.addLayout(self._build_knife_violin_keys(key_seq))
+        return widget
+
+    def _build_knife_violin_keys(self, key_seq):
+        hbox_weapon = QHBoxLayout()
+        hbox_weapon.setSpacing(5)
+        hbox_weapon.setContentsMargins(0, 0, 0, 0)
+        hbox_weapon.setAlignment(Qt.AlignmentFlag.AlignRight)
+        hbox_weapon.addWidget(build_icon(get_image(PATH_ITEM, "violin")))
+        hbox_weapon.addWidget(InputKeybind(self, key_seq + VIOLIN_KEY))
+        return hbox_weapon

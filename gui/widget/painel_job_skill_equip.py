@@ -1,4 +1,3 @@
-from itertools import chain
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
