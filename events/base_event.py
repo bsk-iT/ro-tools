@@ -4,6 +4,9 @@ import threading
 import time
 from typing import List
 
+from service.config_file import AUTO_ITEM, CONFIG_FILE, FLY_WING, KEY
+from service.keyboard import KEYBOARD
+
 
 class Priority(Enum):
     REALTIME = 4
@@ -41,4 +44,7 @@ class BaseEvent:
 
     @abstractmethod
     def execute_action(self):
+        if CONFIG_FILE.is_using_fly_wing():
+            time.sleep(0.1)
+            KEYBOARD.press_key(CONFIG_FILE.get_value([AUTO_ITEM, FLY_WING, KEY]))
         pass

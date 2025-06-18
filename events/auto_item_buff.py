@@ -24,6 +24,7 @@ class AutoItemBuff(BaseEvent):
     def execute_action(self):
         from gui.app_controller import APP_CONTROLLER
 
+        super().execute_action()
         item = self.game_event.char.next_item_buff_to_use(APP_CONTROLLER.item_buffs)
         base_prop_seq = [*self.prop_seq, item.id]
         KEYBOARD.press_key(CONFIG_FILE.get_value([*base_prop_seq, KEY]))

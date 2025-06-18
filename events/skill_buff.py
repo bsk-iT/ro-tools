@@ -1,7 +1,7 @@
 import time
 from events.base_event import BaseEvent, Priority
 
-from service.config_file import AUTO_ITEM, CONFIG_FILE, KEY, SKILL_BUFF
+from service.config_file import CONFIG_FILE, KEY, SKILL_BUFF
 from service.keyboard import KEYBOARD
 
 
@@ -18,7 +18,7 @@ class SkillBuff(BaseEvent):
         if buff is None:
             return False
         is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, self.prop_seq)
-        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [AUTO_ITEM])
+        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [SKILL_BUFF])
         return is_valid_map and not is_blocked_in_city
 
     def execute_action(self):

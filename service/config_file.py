@@ -15,11 +15,13 @@ MACRO = "macro"
 HOTKEY = "hotkey"
 ITEM_BUFF = "item_buff"
 ITEM_DEBUFF = "item_debuff"
+CONFIG = "config"
 
 # Resources
 HP_POTION = "hp_potion"
 SP_POTION = "sp_potion"
 YGG = "ygg"
+FLY_WING = "fly_wing"
 
 # Properties
 HP_PERCENT = "hp_percent"
@@ -33,7 +35,7 @@ MAP = "map"
 MAP_ACTIVE = "map_active"
 KEY_MONITORING = "key_monitoring"
 KEYBOARD_TYPE = "keyboard_type"
-CITY_ACTIVE = "city_active"
+CITY_BLOCK = "city_block"
 ACTIVE = "active"
 SWAP_ACTIVE = "swap_active"
 SWAP_ATK = "swap_atk"
@@ -55,10 +57,18 @@ class ConfigFile(File):
         return delay_item if (delay_active and delay_item) else default_delay
 
     def is_blocked_in_city(self, game, prop_seq: List[str]) -> bool:
-        city_active = self.get_value([*prop_seq, CITY_ACTIVE])
-        if city_active or not game:
+        city_block = self.get_value([*prop_seq, CITY_BLOCK])
+        if not city_block or not game:
             return False
         return game.char.current_map in SERVERS_FILE.get_value(CITY)
+
+    def is_using_fly_wing(self) -> bool:
+        from service.keyboard import KEYBOARD
+
+        fly_wing_key = self.get_value([AUTO_ITEM, FLY_WING, KEY])
+        if not fly_wing_key:
+            return False
+        return KEYBOARD.is_key_pressed(fly_wing_key)
 
     def is_valid_map(self, game, prop_seq: List[str]) -> bool:
         map_active = self.get_value([*prop_seq, MAP_ACTIVE])

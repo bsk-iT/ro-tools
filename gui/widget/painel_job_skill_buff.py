@@ -1,5 +1,5 @@
 from itertools import chain
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QCheckBox
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon
 
@@ -9,7 +9,7 @@ from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_skill import CboxSkill
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
-from service.config_file import ACTIVE, CONFIG_FILE, KEY, SKILL_BUFF
+from service.config_file import ACTIVE, CITY_BLOCK, CONFIG_FILE, KEY, SKILL_BUFF
 from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
 
@@ -23,13 +23,25 @@ class PainelJobSkillBuff(QWidget):
 
     def _config_layout(self):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        self.layout.setSpacing(10)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        self.layout.addWidget(self._build_check_block_city())
         self.layout.addWidget(self.cbox_skill)
         self.update_skill_buffs(APP_CONTROLLER.job)
         APP_CONTROLLER.added_skill_buff.connect(self._on_add_skill)
 
+    def _build_check_block_city(self):
+        check_city = QCheckBox("Bloquear uso em cidades?")
+        city_block = CONFIG_FILE.get_value([SKILL_BUFF, CITY_BLOCK])
+        check_city.setChecked(True if city_block else False)
+        check_city.checkStateChanged.connect(self._update_city_block)
+        return check_city
+
+    def _update_city_block(self, state):
+        CONFIG_FILE.update_config(state.value == 2, [SKILL_BUFF, CITY_BLOCK])
+
     def update_skill_buffs(self, job):
-        clear_layout(self.layout.takeAt(1))
+        clear_layout(self.layout.takeAt(2))
         active_buff_skills = list(chain.from_iterable(APP_CONTROLLER.job_buff_skills.values()))
         (vbox, scroll) = build_scroll_vbox()
         while job is not None:

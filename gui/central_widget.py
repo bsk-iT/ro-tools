@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt
 from gui.widget.input_app_status import InputAppStatus
 from gui.widget.cbox_process import CboxProcess
 from gui.widget.painel_auto_item import PainelAutoItem
+from gui.widget.painel_config import PainelConfig
 from gui.widget.painel_job import PainelJob
 
 
@@ -20,6 +21,7 @@ class CentralWidget(QWidget):
         header_hbox.addWidget(self.cbox_process)
         header_hbox.addWidget(InputAppStatus(self))
         self.layout.addLayout(header_hbox)
+        self.layout.addWidget(PainelConfig(self))
         body_hbox = QHBoxLayout()
         body_hbox.addWidget(PainelAutoItem(self), alignment=Qt.AlignmentFlag.AlignLeft)
         body_hbox.addWidget(PainelJob(self))

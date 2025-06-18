@@ -21,6 +21,7 @@ class PainelJobHotkey(QWidget):
 
     def _config_layout(self):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        self.layout.setSpacing(10)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.layout.addWidget(self.cbox_macro)
         APP_CONTROLLER.added_hotkey.connect(self._on_add_hotkey)

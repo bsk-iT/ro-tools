@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt
 from gui.widget.painel_auto_item_buff import PainelAutoItemBuff
 from gui.widget.painel_auto_item_debuff import PainelAutoItemDebuff
 from gui.widget.painel_auto_item_hp_sp import PainelAutoItemHpSp
-from service.config_file import AUTO_ITEM, CITY_ACTIVE, CONFIG_FILE
+from service.config_file import AUTO_ITEM, CITY_BLOCK, CONFIG_FILE
 from service.servers_file import SERVERS_FILE
 from util.widgets import build_link_file, build_painel
 
@@ -29,14 +29,14 @@ class PainelAutoItem(QWidget):
         vbox = QVBoxLayout()
         vbox.setContentsMargins(0, 0, 0, 0)
         hbox_city = QHBoxLayout()
-        check_city = QCheckBox("Ativo em cidades")
-        active_city = CONFIG_FILE.get_value([AUTO_ITEM, CITY_ACTIVE])
-        check_city.setChecked(True if active_city else False)
-        check_city.checkStateChanged.connect(self._update_active_city)
+        check_city = QCheckBox("Bloquear uso em cidades?")
+        city_block = CONFIG_FILE.get_value([AUTO_ITEM, CITY_BLOCK])
+        check_city.setChecked(True if city_block else False)
+        check_city.checkStateChanged.connect(self._update_city_block)
         hbox_city.addWidget(check_city)
         hbox_city.addWidget(build_link_file(SERVERS_FILE))
         vbox.addLayout(hbox_city)
         return vbox
 
-    def _update_active_city(self, state):
-        CONFIG_FILE.update_config(state.value == 2, [AUTO_ITEM, CITY_ACTIVE])
+    def _update_city_block(self, state):
+        CONFIG_FILE.update_config(state.value == 2, [AUTO_ITEM, CITY_BLOCK])

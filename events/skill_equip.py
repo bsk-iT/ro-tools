@@ -1,7 +1,7 @@
 from events.base_event import BaseEvent, Priority
 
 from events.macro_event import MacroEvent
-from service.config_file import AUTO_ITEM, CONFIG_FILE, MACRO, SKILL_EQUIP
+from service.config_file import CONFIG, CONFIG_FILE, MACRO, SKILL_EQUIP
 
 
 class SkillEquip(BaseEvent):
@@ -17,7 +17,7 @@ class SkillEquip(BaseEvent):
         if buff is None:
             return False
         is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, self.prop_seq)
-        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [AUTO_ITEM])
+        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [CONFIG])
         return is_valid_map and not is_blocked_in_city
 
     def execute_action(self):

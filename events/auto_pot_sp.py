@@ -17,5 +17,6 @@ class AutoPotSP(BaseEvent):
         return is_valid_map and not is_blocked_in_city and self.game_event.char.sp_percent < sp_percent
 
     def execute_action(self):
+        super().execute_action()
         KEYBOARD.press_key(CONFIG_FILE.get_value([*self.prop_seq, KEY]))
         time.sleep(CONFIG_FILE.get_delay(self.prop_seq))

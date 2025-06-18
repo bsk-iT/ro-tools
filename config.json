@@ -11,7 +11,7 @@
             "delay_active": false,
             "map_active": false,
             "key": "F8",
-            "percent": 10
+            "percent": 94
         },
         "ygg": {
             "delay_active": true,
@@ -45,6 +45,9 @@
                 "map_active": false,
                 "key": "F7"
             }
+        },
+        "fly_wing": {
+            "key": "Space"
         }
     },
     "key_monitoring": "End",
@@ -362,7 +365,7 @@
             "bs_adrenaline": {
                 "active": true,
                 "delay_active": false,
-                "map_active": true,
+                "map_active": false,
                 "key": "7"
             },
             "bs_maximize": {
@@ -408,7 +411,8 @@
                 "active": true,
                 "map_active": false
             }
-        }
+        },
+        "city_block": true
     },
     "hotkey": {
         "novice": {
@@ -469,6 +473,7 @@
                 "map_active": false,
                 "macro": "jaguar_hat"
             }
-        }
+        },
+        "city_block": true
     }
 }

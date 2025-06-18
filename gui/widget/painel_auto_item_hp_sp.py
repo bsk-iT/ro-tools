@@ -1,11 +1,11 @@
 from PyQt6.QtWidgets import QVBoxLayout, QWidget, QHBoxLayout, QSpinBox
 from PyQt6.QtCore import Qt
 
-from config.icon import IMG_BLUE_POTION, IMG_RED_POTION, IMG_YGG
+from config.icon import IMG_BLUE_POTION, IMG_RED_POTION, IMG_YGG, PATH_ITEM, get_image
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
-from service.config_file import AUTO_ITEM, CITY_ACTIVE, CONFIG_FILE, HP_PERCENT, HP_POTION, KEY, MAP, MAP_ACTIVE, PERCENT, SP_PERCENT, SP_POTION, YGG
+from service.config_file import AUTO_ITEM, CITY_BLOCK, CONFIG_FILE, FLY_WING, HP_PERCENT, HP_POTION, KEY, MAP, MAP_ACTIVE, PERCENT, SP_PERCENT, SP_POTION, YGG
 from util.widgets import build_icon, build_label_info, build_label_subtitle, build_spinbox_percentage
 
 
@@ -17,13 +17,17 @@ class PainelAutoItemHpSp(QWidget):
 
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        self.layout.setSpacing(15)
+        self.layout.setContentsMargins(10, 15, 10, 10)
         self.layout.addWidget(build_label_subtitle("Potions"))
         self.layout.addLayout(self._build_layout_auto_potions())
-        self.layout.addWidget(build_label_subtitle("YGG / Telar"))
+        self.layout.addWidget(build_label_subtitle("YGG"))
         self.layout.addLayout(self._build_layout_auto_ygg())
+        self.layout.addWidget(build_label_subtitle("Asa de Mosca"))
+        self.layout.addLayout(self._build_layout_fly_wing())
 
     def _update_active_city(self, state):
-        CONFIG_FILE.update_config(state.value == 2, [AUTO_ITEM, CITY_ACTIVE])
+        CONFIG_FILE.update_config(state.value == 2, [AUTO_ITEM, CITY_BLOCK])
 
     def _build_layout_auto_potions(self):
         vbox_potion = QVBoxLayout()
@@ -37,7 +41,6 @@ class PainelAutoItemHpSp(QWidget):
     def _build_layout_auto_ygg(self):
         vbox_ygg = QVBoxLayout()
         ygg_layout = self._build_action_layout("YGG", IMG_YGG, YGG, True)
-        vbox_ygg.addWidget(build_label_info("Tem preferência de uso sobre as Potions.\nÉ possível utilizar a tecla da asa de mosca ou macro do jogo (Ex: ALT+1) para telar."))
         vbox_ygg.addLayout(ygg_layout)
         return vbox_ygg
 
@@ -74,3 +77,14 @@ class PainelAutoItemHpSp(QWidget):
         hbox_sp.addWidget(build_spinbox_percentage(sp_percent, "SP"))
         vbox.addLayout(hbox_sp)
         return widget
+
+    def _build_layout_fly_wing(self):
+        vbox = QVBoxLayout()
+        vbox.addWidget(build_label_info("Configurar a tecla do item abaixo, irá evitar o 'lock' do Auto Pot devido ao jogo não permitir utilizar mais de um item ao mesmo tempo"))
+        hbox = QHBoxLayout()
+        hbox.setSpacing(0)
+        hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        hbox.addWidget(build_icon(get_image(PATH_ITEM, "fly_wing")))
+        hbox.addWidget(InputKeybind(self, f"{AUTO_ITEM}:{FLY_WING}:{KEY}"))
+        vbox.addLayout(hbox)
+        return vbox
