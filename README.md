@@ -4,11 +4,20 @@
   <span>RO - Tools</span>
 </h1>
 
-Ferramenta de automação para jogadores de **Ragnarok Online** focada em buffs, uso de itens automáticos, execução de macros e habilidades.
+---
+
+## 📦 Download
+
+Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
+
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.0.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.0.0/RO_Tools_v1.0.0.zip)
 
 ## 🎮 Visão Geral
 
+Ferramenta de automação para jogadores de **Ragnarok Online** focada em buffs, uso de itens automáticos, execução de macros e habilidades.
+
 O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok Online (pré-renovação). Ele automatiza ações como uso de poções, buffs, macros e alternância de equipamentos com base em condições personalizadas.
+
 
 ## 📸 Interface Principal
 
@@ -118,6 +127,17 @@ Para iniciar a aplicação, execute o seguinte comando:
 ```bash
 python main.py
 ```
+
+---
+
+## 🙏 Agradecimentos e Projeto Base
+
+Este projeto foi desenvolvido com base no excelente trabalho realizado pelo [4RTools](https://github.com/4RTools/4RTools).
+
+Muitos dos conceitos, estruturas e ideias iniciais foram inspirados ou adaptados a partir desse projeto.  
+Agradecemos à comunidade do 4RTools por tornar seu código aberto e servir como referência para a evolução de ferramentas voltadas ao Ragnarok Online.
+
+> Este repositório visa expandir e adaptar funcionalidades específicas para o cenário **pré-renovação**, com foco em automações personalizadas e extensibilidade do sistema de eventos.
 
 ## ⚠️ Aviso Legal
 
