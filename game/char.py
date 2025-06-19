@@ -43,8 +43,8 @@ class Char:
             self.job = JOB_MAP.get(self.job_id, self.job_id)
             self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.chat_address)
             self.monitoring_job_change_gui()
-            os.system("cls")
-            print(self)
+            # os.system("cls")
+            # print(self)
         except BaseException:
             self.reset()
 

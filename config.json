@@ -2,27 +2,55 @@
     "auto_item": {
         "hp_potion": {
             "delay_active": false,
-            "map_active": false
+            "map_active": false,
+            "key": "F9",
+            "percent": 50
         },
         "sp_potion": {
             "delay_active": false,
             "map_active": false,
-            "percent": 95
+            "key": "F8",
+            "percent": 10
         },
         "ygg": {
             "delay_active": false,
-            "map_active": false,
-            "sp_percent": 0
+            "map_active": false
         },
-        "fly_wing": {},
-        "item_buff": {
-            "str_food": {
-                "active": false,
-                "map_active": false
-            }
+        "fly_wing": {
+            "key": "Space"
         }
     },
     "keyboard_type": "virtual",
     "block_chat_input": "default",
-    "key_monitoring": "End"
+    "key_monitoring": "End",
+    "skill_spawmmer": {
+        "novice": {
+            "attack_1": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F2"
+            }
+        },
+        "archer": {
+            "ac_double": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F1"
+            }
+        }
+    }
 }

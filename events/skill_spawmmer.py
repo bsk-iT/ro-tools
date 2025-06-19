@@ -19,7 +19,7 @@ class SkillSpawmmer(BaseEvent):
         if swap_def and swap_def[ACTIVE] and self.running:
             time.sleep(0.3)
             MacroEvent(self.game_event).start(swap_def[MACRO])
-            self.running = False
+        self.running = False
 
     def start(self, key, job_id, skill):
         threading.Thread(target=self.run, args=(key, job_id, skill), name=f"{self.name}:{job_id}:{skill.id}", daemon=True).start()
@@ -28,6 +28,8 @@ class SkillSpawmmer(BaseEvent):
             MacroEvent(self.game_event).start(swap_attack[MACRO])
 
     def run(self, key, job_id, skill):
+        if self.running:
+            return
         self.running = True
         self.execute_action(key, job_id, skill)
 
