@@ -31,7 +31,8 @@ class SkillSpawmmer(BaseEvent):
         if self.running:
             return
         self.running = True
-        self.execute_action(key, job_id, skill)
+        while self.running:
+            self.execute_action(key, job_id, skill)
 
     def execute_action(self, key, job_id, skill):
         from gui.app_controller import APP_CONTROLLER
