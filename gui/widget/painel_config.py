@@ -1,7 +1,9 @@
-from PyQt6.QtWidgets import QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QVBoxLayout, QWidget, QLabel
 from PyQt6.QtCore import Qt
 
-from util.widgets import build_painel
+from service.config_file import AUTO_CLOSE, BLOCK_CHAT_INPUT, CONFIG_FILE, DEFAULT, KEYBOARD_TYPE, PHYSICAL, VIRTUAL, WAITING
+from service.servers_file import SERVERS_FILE
+from util.widgets import build_link_file, build_radio_btn, build_scroll_vbox
 
 
 class PainelConfig(QWidget):
@@ -9,9 +11,88 @@ class PainelConfig(QWidget):
         super().__init__(parent)
         self.layout: QVBoxLayout = QVBoxLayout(self)
         self._config_layout()
+        self.sync_radio_keyboard_type()
+        self.sync_radio_block_chat_input()
 
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        painel = build_painel(self.layout, "Configuração")
-        vbox = QVBoxLayout()
-        painel.addLayout(vbox)
+        self.layout.setSpacing(15)
+        (vbox, scroll) = build_scroll_vbox(100)
+        vbox.setSpacing(15)
+        self._build_file_server(vbox)
+        self._build_radio_keyboard_type(vbox)
+        self._build_radio_block_chat_input(vbox)
+        self.layout.addWidget(scroll)
+
+    def _build_file_server(self, layout):
+        widget = QWidget()
+        vbox = QVBoxLayout(widget)
+        vbox.setSpacing(5)
+        vbox.addWidget(QLabel("Arquivo configuração do server:"))
+        vbox.addWidget(build_link_file(SERVERS_FILE))
+        layout.addWidget(widget)
+
+    def _build_radio_keyboard_type(self, layout):
+        widget = QWidget()
+        vbox = QVBoxLayout(widget)
+        vbox.setSpacing(5)
+        vbox.addWidget(QLabel("Tipo de simulação do teclado:"))
+        self.rad_virtual = build_radio_btn("Virtual - Ações serão enviadas somente para o jogo | Não funciona combinações de tecla Ex: ALT+1")
+        self.rad_physical = build_radio_btn("Físico - Afeta qualquer programa | Combinações de tecla são aceito Ex: ALT+1")
+        self.rad_virtual.toggled.connect(self.on_radio_keyboard_type)
+        self.rad_physical.toggled.connect(lambda: self.on_radio_keyboard_type)
+        vbox.addWidget(self.rad_virtual)
+        vbox.addWidget(self.rad_physical)
+        layout.addWidget(widget)
+
+    def on_radio_keyboard_type(self):
+        if self.rad_virtual.isChecked():
+            CONFIG_FILE.update(KEYBOARD_TYPE, VIRTUAL)
+        if self.rad_physical.isChecked():
+            CONFIG_FILE.update(KEYBOARD_TYPE, PHYSICAL)
+
+    def sync_radio_keyboard_type(self):
+        keyboard_type = CONFIG_FILE.read(KEYBOARD_TYPE)
+        if keyboard_type is None:
+            keyboard_type = VIRTUAL
+            CONFIG_FILE.update(KEYBOARD_TYPE, keyboard_type)
+        if keyboard_type == VIRTUAL:
+            self.rad_virtual.setChecked(True)
+        if keyboard_type == PHYSICAL:
+            self.rad_physical.setChecked(True)
+
+    def _build_radio_block_chat_input(self, layout):
+        widget = QWidget()
+        vbox = QVBoxLayout(widget)
+        vbox.setSpacing(5)
+        vbox.addWidget(QLabel("Comportamento da ferramenta quando o chat do jogo estiver aberto:"))
+        self.rad_chat_default = build_radio_btn("Continuar executando")
+        self.rad_chat_auto_close = build_radio_btn("Bloquear automáticamente o chat do jogo")
+        self.rad_chat_waiting = build_radio_btn("Aguardar o chat ser fechado para continuar executando")
+        self.rad_chat_default.toggled.connect(self.on_radio_block_chat_input)
+        self.rad_chat_auto_close.toggled.connect(self.on_radio_block_chat_input)
+        self.rad_chat_waiting.toggled.connect(self.on_radio_block_chat_input)
+        vbox.addWidget(self.rad_chat_default)
+        vbox.addWidget(self.rad_chat_auto_close)
+        vbox.addWidget(self.rad_chat_waiting)
+        layout.addWidget(widget)
+
+    def on_radio_block_chat_input(self):
+        if self.rad_chat_default.isChecked():
+            CONFIG_FILE.update(BLOCK_CHAT_INPUT, DEFAULT)
+        if self.rad_chat_auto_close.isChecked():
+            CONFIG_FILE.update(BLOCK_CHAT_INPUT, AUTO_CLOSE)
+        if self.rad_chat_waiting.isChecked():
+            CONFIG_FILE.update(BLOCK_CHAT_INPUT, WAITING)
+
+    def sync_radio_block_chat_input(self):
+        block_chat = CONFIG_FILE.read(BLOCK_CHAT_INPUT)
+        if block_chat is None:
+            block_chat = DEFAULT
+            CONFIG_FILE.update(BLOCK_CHAT_INPUT, block_chat)
+        if block_chat == DEFAULT:
+            self.rad_chat_default.setChecked(True)
+        if block_chat == AUTO_CLOSE:
+            self.rad_chat_auto_close.setChecked(True)
+        if block_chat == WAITING:
+            self.rad_chat_waiting.setChecked(True)

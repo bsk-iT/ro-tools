@@ -5,8 +5,7 @@ from gui.widget.painel_auto_item_buff import PainelAutoItemBuff
 from gui.widget.painel_auto_item_debuff import PainelAutoItemDebuff
 from gui.widget.painel_auto_item_hp_sp import PainelAutoItemHpSp
 from service.config_file import AUTO_ITEM, CITY_BLOCK, CONFIG_FILE
-from service.servers_file import SERVERS_FILE
-from util.widgets import build_link_file, build_painel
+from util.widgets import  build_painel
 
 
 class PainelAutoItem(QWidget):
@@ -34,7 +33,6 @@ class PainelAutoItem(QWidget):
         check_city.setChecked(True if city_block else False)
         check_city.checkStateChanged.connect(self._update_city_block)
         hbox_city.addWidget(check_city)
-        hbox_city.addWidget(build_link_file(SERVERS_FILE))
         vbox.addLayout(hbox_city)
         return vbox
 

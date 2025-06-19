@@ -4,7 +4,7 @@ import threading
 import time
 from typing import List
 
-from service.config_file import AUTO_ITEM, CONFIG_FILE, FLY_WING, KEY
+from service.config_file import AUTO_CLOSE, AUTO_ITEM, CONFIG_FILE, FLY_WING, KEY
 from service.keyboard import KEYBOARD
 
 
@@ -47,4 +47,5 @@ class BaseEvent:
         if CONFIG_FILE.is_using_fly_wing():
             time.sleep(0.1)
             KEYBOARD.press_key(CONFIG_FILE.get_value([AUTO_ITEM, FLY_WING, KEY]))
-        pass
+        if CONFIG_FILE.is_block_chat_open(self.game_event, AUTO_CLOSE):
+            self.game_event.char.close_chat_bar()

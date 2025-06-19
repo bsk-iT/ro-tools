@@ -1,11 +1,14 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTabWidget
 from PyQt6.QtCore import Qt
 
+from config.icon import ICON_GITHUB
 from gui.widget.input_app_status import InputAppStatus
 from gui.widget.cbox_process import CboxProcess
 from gui.widget.painel_auto_item import PainelAutoItem
 from gui.widget.painel_config import PainelConfig
 from gui.widget.painel_job import PainelJob
+from gui.widget.painel_links import PainelLinks
+from util.widgets import build_link_icon
 
 
 class CentralWidget(QWidget):
@@ -18,11 +21,22 @@ class CentralWidget(QWidget):
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         header_hbox = QHBoxLayout()
-        header_hbox.addWidget(self.cbox_process)
+        hbox = QHBoxLayout()
+        hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        hbox.addWidget(build_link_icon(ICON_GITHUB, "https://github.com/uniaodk/ro-tools", 50))
+        hbox.addWidget(self.cbox_process)
+        header_hbox.addLayout(hbox)
         header_hbox.addWidget(InputAppStatus(self))
         self.layout.addLayout(header_hbox)
-        self.layout.addWidget(PainelConfig(self))
-        body_hbox = QHBoxLayout()
+        tab_panel = QTabWidget()
+        tab_panel.addTab(self._build_main_painel(), "Início")
+        tab_panel.addTab(PainelLinks(self), "Links")
+        tab_panel.addTab(PainelConfig(self), "Configurações")
+        self.layout.addWidget(tab_panel)
+
+    def _build_main_painel(self):
+        widget = QWidget()
+        body_hbox = QHBoxLayout(widget)
         body_hbox.addWidget(PainelAutoItem(self), alignment=Qt.AlignmentFlag.AlignLeft)
         body_hbox.addWidget(PainelJob(self))
-        self.layout.addLayout(body_hbox)
+        return widget

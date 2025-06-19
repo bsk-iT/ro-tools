@@ -15,7 +15,6 @@ MACRO = "macro"
 HOTKEY = "hotkey"
 ITEM_BUFF = "item_buff"
 ITEM_DEBUFF = "item_debuff"
-CONFIG = "config"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -35,6 +34,7 @@ MAP = "map"
 MAP_ACTIVE = "map_active"
 KEY_MONITORING = "key_monitoring"
 KEYBOARD_TYPE = "keyboard_type"
+BLOCK_CHAT_INPUT = "block_chat_input"
 CITY_BLOCK = "city_block"
 ACTIVE = "active"
 SWAP_ACTIVE = "swap_active"
@@ -42,6 +42,11 @@ SWAP_ATK = "swap_atk"
 SWAP_DEF = "swap_def"
 KNIFE_KEY = "knife_key"
 VIOLIN_KEY = "violin_key"
+VIRTUAL = "virtual"
+PHYSICAL = "physical"
+DEFAULT = "default"
+AUTO_CLOSE = "auto_close"
+WAITING = "waiting"
 
 
 class ConfigFile(File):
@@ -61,6 +66,10 @@ class ConfigFile(File):
         if not city_block or not game:
             return False
         return game.char.current_map in SERVERS_FILE.get_value(CITY)
+
+    def is_block_chat_open(self, game, condition) -> bool:
+        block_chat = self.read(BLOCK_CHAT_INPUT)
+        return block_chat == condition and game.char.chat_bar_enabled
 
     def is_using_fly_wing(self) -> bool:
         from service.keyboard import KEYBOARD

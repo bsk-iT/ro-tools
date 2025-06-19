@@ -48,6 +48,9 @@ class Char:
         except BaseException:
             self.reset()
 
+    def close_chat_bar(self):
+        MEMORY.process.write_bool(MEMORY.chat_address, False)
+
     def _get_id_buffs_all(self):
         skill_buffs = []
         skill_buff_map = SERVERS_FILE.get_value(SKILL_BUFF)

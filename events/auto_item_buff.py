@@ -1,7 +1,7 @@
 import time
 from events.base_event import BaseEvent, Priority
 
-from service.config_file import AUTO_ITEM, CONFIG_FILE, ITEM_BUFF, KEY
+from service.config_file import AUTO_ITEM, CONFIG_FILE, ITEM_BUFF, KEY, WAITING
 from service.keyboard import KEYBOARD
 
 
@@ -19,7 +19,8 @@ class AutoItemBuff(BaseEvent):
             return False
         is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, self.prop_seq)
         is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [AUTO_ITEM])
-        return is_valid_map and not is_blocked_in_city
+        is_block_chat_waiting = CONFIG_FILE.is_block_chat_open(self.game_event, WAITING)
+        return is_valid_map and not is_blocked_in_city and not is_block_chat_waiting
 
     def execute_action(self):
         from gui.app_controller import APP_CONTROLLER
