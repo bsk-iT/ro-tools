@@ -7,16 +7,19 @@
         "sp_potion": {
             "delay_active": false,
             "map_active": false,
-            "percent": 95,
-            "key": "F8"
+            "percent": 95
         },
         "ygg": {
             "delay_active": false,
             "map_active": false,
             "sp_percent": 0
         },
-        "fly_wing": {
-            "key": "Space"
+        "fly_wing": {},
+        "item_buff": {
+            "str_food": {
+                "active": false,
+                "map_active": false
+            }
         }
     },
     "keyboard_type": "virtual",

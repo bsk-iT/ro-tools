@@ -39,8 +39,29 @@ AWAKENING_POTION = Item("awakening_potion", "Poção do Despertar")
 BERSERK_POTION = Item("berserk_potion", "Poção da Fúria")
 RESENTMENT_BOX = Item("resentment_box", "Caixa do Ressentimento")
 THUNDER_BOX = Item("thunder_box", "Caixa do Trovão")
+DROWSINESS_BOX = Item("drowsiness_box", "Caixa da Sonolência")
+GLOOM_BOX = Item("gloom_box", "Caixa da Escuridão")
+SUNLIGHT_BOX = Item("sunlight_box", "Caixa da Luz do Sol")
 ALOE_VERA = Item("aloe_vera", "Aloe Vera")
 PAIN_KILLER = Item("pain_killer", "Analgésico")
+ASPERSION_SCROLL = Item("aspersion", "Aspersion")
+SPEED_POTION = Item("speed_potion", "Poção do Vento")
+FIRE_ENCHANT_SCROLL = Item("fire_enchant_scroll", "Conversor Elemental Fogo")
+WATER_ENCHANT_SCROLL = Item("water_enchant_scroll", "Conversor Elemental Água")
+GROUND_ENCHANT_SCROLL = Item("ground_enchant_scroll", "Conversor Elemental Terra")
+WIND_ENCHANT_SCROLL = Item("wind_enchant_scroll", "Conversor Elemental Vento")
+DARK_WATER = Item("dark_water", "Água Amaldiçoada")
+ABRASIVE = Item("abrasive", "Abrasivo")
+RESIST_PROPERTY_WATER = Item("resist_property_water", "Poção Anti-Água")
+RESIST_PROPERTY_GROUND = Item("resist_property_ground", "Poção Anti-Terra")
+RESIST_PROPERTY_FIRE = Item("resist_property_fire", "Poção Anti-Fogo")
+RESIST_PROPERTY_WIND = Item("resist_property_wind", "Poção Anti-Vento")
+STR_FOOD = Item("str_food", "STR Food")
+AGI_FOOD = Item("agi_food", "AGI Food")
+VIT_FOOD = Item("vit_food", "VIT Food")
+INT_FOOD = Item("int_food", "INT Food")
+DEX_FOOD = Item("dex_food", "DEX Food")
+LUK_FOOD = Item("luk_food", "LUK Food")
 
 ITEM_BUFF_MAP = {
     "bless_scroll": BLESS_SCROLL,
@@ -52,13 +73,37 @@ ITEM_BUFF_MAP = {
     "thunder_box": THUNDER_BOX,
     "aloe_vera": ALOE_VERA,
     "pain_killer": PAIN_KILLER,
+    "aspersion": ASPERSION_SCROLL,
+    "speed_potion": SPEED_POTION,
+    "fire_enchant_scroll": FIRE_ENCHANT_SCROLL,
+    "water_enchant_scroll": WATER_ENCHANT_SCROLL,
+    "wind_enchant_scroll": WIND_ENCHANT_SCROLL,
+    "ground_enchant_scroll": GROUND_ENCHANT_SCROLL,
+    "dark_water": DARK_WATER,
+    "drowsiness_box": DROWSINESS_BOX,
+    "gloom_box": GLOOM_BOX,
+    "sunlight_box": SUNLIGHT_BOX,
+    "abrasive": ABRASIVE,
+    "resist_property_water": RESIST_PROPERTY_WATER,
+    "resist_property_ground": RESIST_PROPERTY_GROUND,
+    "resist_property_fire": RESIST_PROPERTY_FIRE,
+    "resist_property_wind": RESIST_PROPERTY_WIND,
+    "str_food": STR_FOOD,
+    "agi_food": AGI_FOOD,
+    "vit_food": VIT_FOOD,
+    "int_food": INT_FOOD,
+    "dex_food": DEX_FOOD,
+    "luk_food": LUK_FOOD,
 }
 
 ITEM_BUFF_GROUP = {
     "APSD Potion": [CONCENTRATION_POTION, AWAKENING_POTION, BERSERK_POTION],
-    "Caixas": [RESENTMENT_BOX, THUNDER_BOX],
-    "Consumíveis": [ALOE_VERA, PAIN_KILLER],
-    "Buff - Scrolls": [BLESS_SCROLL, INC_AGI_UP_SCROLL],
+    "Caixas": [RESENTMENT_BOX, THUNDER_BOX, DROWSINESS_BOX, GLOOM_BOX, SUNLIGHT_BOX],
+    "Consumíveis": [ALOE_VERA, PAIN_KILLER, SPEED_POTION, ABRASIVE],
+    # "Scrolls": [BLESS_SCROLL, INC_AGI_UP_SCROLL],
+    "Elemento - Arma": [FIRE_ENCHANT_SCROLL, WATER_ENCHANT_SCROLL, WIND_ENCHANT_SCROLL, GROUND_ENCHANT_SCROLL, DARK_WATER],
+    "Elemento - Resistência": [RESIST_PROPERTY_WATER, RESIST_PROPERTY_GROUND, RESIST_PROPERTY_FIRE, RESIST_PROPERTY_WIND],
+    "Comidas": [STR_FOOD, AGI_FOOD, VIT_FOOD, INT_FOOD, DEX_FOOD, LUK_FOOD],
 }
 
 # ----- Item cura debuff -----

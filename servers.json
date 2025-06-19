@@ -93,6 +93,7 @@
       "146": "dark_water",
       "150": "resentment_box",
       "151": "drowsiness_box",
+      "3": "gloom_box",
       "184": "sunlight_box",
       "289": "thunder_box",
       "295": "abrasive",
@@ -101,12 +102,12 @@
       "909": "resist_property_ground",
       "910": "resist_property_fire",
       "911": "resist_property_wind",
-      "-1": "str_food",
-      "-2": "agi_food",
-      "-3": "vit_food",
-      "-4": "int_food",
-      "-5": "dex_food",
-      "-6": "luk_food"
+      "241": "str_food",
+      "242": "agi_food",
+      "243": "vit_food",
+      "244": "int_food",
+      "245": "dex_food",
+      "246": "luk_food"
     },
     "status_debuff": {
       "0": "provoke",
