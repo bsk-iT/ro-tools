@@ -30,6 +30,8 @@ class AppController(QObject):
         self.cbox_macro = None
         self.item_buffs = CONFIG_FILE.get_item_buffs()
         self.item_debuffs = CONFIG_FILE.get_item_debuffs()
+        self.skill_spammer_event = SkillSpawmmer(None)
+        self.hotkey_event = HotkeyEvent(None)
         self.hotkeys_handler = {}
         self.running = False
         self.sync_data(NOVICE, False)
@@ -71,11 +73,11 @@ class AppController(QObject):
         return None
 
     def add_hotkey_macro(self, job_id, macro, key, hotkey_event=None):
-        event_ctrl = HotkeyEvent(None) if hotkey_event is None else hotkey_event
+        event_ctrl = self.hotkey_event if hotkey_event is None else hotkey_event
         self._add_hotkey(job_id, macro, key, event_ctrl)
 
     def add_hotkey_skill_spawmmer(self, job_id, skill, key, skill_spawmmer=None):
-        event_ctrl = SkillSpawmmer(None) if skill_spawmmer is None else skill_spawmmer
+        event_ctrl = self.skill_spammer_event if skill_spawmmer is None else skill_spawmmer
         self._add_hotkey(job_id, skill, key, event_ctrl)
 
     def _add_hotkey(self, job_id, event, key, event_ctrl):
@@ -139,6 +141,7 @@ class AppController(QObject):
         from events.game_event import GAME_EVENT
 
         GAME_EVENT.stop()
+        self.skill_spammer_event.force_stop()
         self.remove_all_hotkeys()
         self.status_toggle.setIcon(QIcon(ICON_OFF))
 

@@ -15,6 +15,7 @@ MACRO = "macro"
 HOTKEY = "hotkey"
 ITEM_BUFF = "item_buff"
 ITEM_DEBUFF = "item_debuff"
+ABRACADABRA = "abracadabra"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -47,6 +48,7 @@ PHYSICAL = "physical"
 DEFAULT = "default"
 AUTO_CLOSE = "auto_close"
 WAITING = "waiting"
+MVP_ACTIVE = "mvp_active"
 
 
 class ConfigFile(File):

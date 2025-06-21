@@ -93,6 +93,7 @@ WZ_VERMILION = SpawnSkill("wz_vermilion", "Ira de Thor")
 
 # Sage
 SA_ABRACADABRA = SpawnSkill("sa_abracadabra", "Abracadabra", False)
+SA_CASTCANCEL = SpawnSkill("sa_castcancel", "Cancelar Magia", False)
 SA_VIOLENTGALE = SpawnSkill("sa_violentgale", "Furacão")
 SA_VOLCANO = SpawnSkill("sa_volcano", "Vulcão")
 SA_DELUGE = SpawnSkill("sa_deluge", "Dilúvio")
@@ -375,6 +376,7 @@ SPAWN_SKILL_MAP = {
     "wz_jupitel": WZ_JUPITEL,
     "wz_vermilion": WZ_VERMILION,
     "sa_abracadabra": SA_ABRACADABRA,
+    "sa_castcancel": SA_CASTCANCEL,
     "sa_violentgale": SA_VIOLENTGALE,
     "sa_volcano": SA_VOLCANO,
     "sa_deluge": SA_DELUGE,

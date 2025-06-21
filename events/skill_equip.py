@@ -13,8 +13,8 @@ class SkillEquip(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         super().check_condition()
-        buff = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills)
-        if buff is None:
+        (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills)
+        if buff_id is None:
             return False
         is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, self.prop_seq)
         is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [SKILL_EQUIP])
@@ -26,5 +26,7 @@ class SkillEquip(BaseEvent):
 
         super().execute_action()
         (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills)
+        if buff_id is None:
+            return
         macro_id = CONFIG_FILE.get_value([*self.prop_seq, job_id, buff_id, MACRO])
         MacroEvent(self.game_event).start(macro_id)

@@ -9,23 +9,62 @@
         "sp_potion": {
             "delay_active": false,
             "map_active": false,
-            "key": "F8",
-            "percent": 10
+            "percent": 7,
+            "key": "F8"
         },
         "ygg": {
             "delay_active": false,
             "map_active": false
+        },
+        "item_buff": {
+            "awakening_potion": {
+                "active": true,
+                "map_active": false,
+                "key": "9"
+            },
+            "concentration_potion": {
+                "active": false,
+                "map_active": false,
+                "key": "9"
+            }
         },
         "fly_wing": {
             "key": "Space"
         }
     },
     "keyboard_type": "virtual",
-    "block_chat_input": "default",
+    "block_chat_input": "auto_close",
     "key_monitoring": "End",
     "skill_spawmmer": {
-        "novice": {
-            "attack_1": {
+        "sage": {
+            "sa_abracadabra": {
+                "active": true,
+                "mouse_click": false,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F1",
+                "mvp_active": true
+            },
+            "sa_castcancel": {
+                "active": true,
+                "mouse_click": false,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F2"
+            }
+        },
+        "sniper": {
+            "sn_sharpshooting": {
                 "active": true,
                 "mouse_click": true,
                 "delay_active": false,
@@ -50,6 +89,96 @@
                     "active": false
                 },
                 "key": "F1"
+            },
+            "ac_shower": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F3"
+            }
+        },
+        "novice": {
+            "attack_1": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F2"
+            }
+        }
+    },
+    "skill_buff": {
+        "sniper": {
+            "sn_sight": {
+                "active": true,
+                "map_active": false,
+                "key": "8"
+            },
+            "sn_windwalk": {
+                "active": true,
+                "map_active": false,
+                "key": "7"
+            }
+        },
+        "archer": {
+            "ac_concentration": {
+                "active": true,
+                "map_active": false,
+                "key": "8"
+            }
+        },
+        "city_block": false
+    },
+    "skill_equip": {
+        "sniper": {
+            "mc_loud": {
+                "active": true,
+                "map_active": false,
+                "macro": "jaguar_hat"
+            }
+        },
+        "city_block": false
+    },
+    "macro": {
+        "sniper": {
+            "jaguar_hat": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": true,
+                "seq_1_key": "U",
+                "seq_1_delay": 0.2,
+                "seq_2_active": true,
+                "seq_2_delay_active": false,
+                "seq_2_key": "I",
+                "seq_3_active": true,
+                "seq_3_delay_active": false,
+                "seq_3_key": "R",
+                "seq_4_active": true,
+                "seq_4_delay_active": false,
+                "seq_4_key": "T",
+                "seq_5_active": true,
+                "seq_5_delay_active": false,
+                "seq_5_key": "Y"
+            }
+        }
+    },
+    "hotkey": {
+        "sniper": {
+            "jaguar_hat": {
+                "active": true,
+                "key": "1"
             }
         }
     }

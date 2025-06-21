@@ -41,6 +41,7 @@ class Char:
             self.item_buffs = self._get_id_buffs(ITEM_BUFF)
             self.status_debuff = self._get_id_buffs(STATUS_DEBUFF)
             self.job = JOB_MAP.get(self.job_id, self.job_id)
+            self.skill_using = MEMORY.process.read_int(MEMORY.skill_address)
             self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.chat_address)
             self.monitoring_job_change_gui()
             # os.system("cls")
@@ -94,7 +95,7 @@ class Char:
                 if buff.id not in self.skill_buffs:
                     buffs_to_use.append((job, buff.id, buff.priority))
         if len(buffs_to_use) == 0:
-            return None
+            return (None, None, None)
         return sorted(buffs_to_use, key=lambda x: x[2], reverse=True)[0]
 
     def monitoring_job_change_gui(self):

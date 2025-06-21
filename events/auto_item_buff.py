@@ -27,6 +27,8 @@ class AutoItemBuff(BaseEvent):
 
         super().execute_action()
         item = self.game_event.char.next_item_buff_to_use(APP_CONTROLLER.item_buffs)
+        if not item:
+            return
         base_prop_seq = [*self.prop_seq, item.id]
         KEYBOARD.press_key(CONFIG_FILE.get_value([*base_prop_seq, KEY]))
         time.sleep(CONFIG_FILE.get_delay(base_prop_seq, 0.2))
