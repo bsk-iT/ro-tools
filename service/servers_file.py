@@ -15,6 +15,9 @@ CITY = "city"
 SKILL_BUFF = "skill_buff"
 ITEM_BUFF = "item_buff"
 STATUS_DEBUFF = "status_debuff"
+LINKS = "links"
+NAME = "name"
+URL = "url"
 
 
 TYPE_MAPS = ["BG", "WoE", "PvP", "PvM"]

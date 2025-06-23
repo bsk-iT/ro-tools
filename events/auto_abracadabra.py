@@ -42,4 +42,4 @@ class AutoAbracadabra(BaseEvent):
         KEYBOARD.press_key(cast_cancel_key)
         time.sleep(0.1)
         KEYBOARD.press_key(key)
-        time.sleep(0.2)
+        time.sleep(0.3)

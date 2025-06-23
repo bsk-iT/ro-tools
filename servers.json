@@ -125,7 +125,14 @@
       "886": "confusion",
       "887": "blind",
       "1141": "misty_frost"
-    }
+    },
+    "links": [
+      { "name": "Site", "url": "https://www.legionbr.net/" },
+      { "name": "Vote 4 Point", "url": "https://www.legionbr.net/master-account/vote4points" },
+      { "name": "Wiki", "url": "https://wiki.legionbr.net/" },
+      { "name": "Daily Quests", "url": "https://uniaodk.github.io/ro-tools/assets/view/daily_quest.html" },
+      { "name": "Item Quest Simulator", "url": "https://uniaodk.github.io/ro-item-quest-simulator/" }
+    ]
   },
   "Jogar.exe": {
     "name": "NostalgicRO",
@@ -253,6 +260,9 @@
       "886": "confusion",
       "887": "blind",
       "1141": "misty_frost"
-    }
+    },
+    "links": [
+      { "name": "Site", "url": "https://www.nostalgicrag.com/" }
+    ]
   }
 }

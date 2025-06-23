@@ -8,10 +8,12 @@ from service.config_file import CONFIG_FILE, HOTKEY, KEY, KEY_MONITORING, SKILL_
 from service.memory import MEMORY
 from PyQt6.QtGui import QIcon
 from config.icon import ICON_OFF, ICON_ON
+from service.servers_file import LINKS, SERVERS_FILE
 
 
 class AppController(QObject):
 
+    updated_process = pyqtSignal()
     added_hotkey = pyqtSignal(str, Macro)
     added_macro = pyqtSignal(str, Macro)
     add_macro_select = pyqtSignal(str, Macro)
@@ -34,6 +36,7 @@ class AppController(QObject):
         self.running = False
         self.sync_data(NOVICE, False)
         self.sync_hotkeys()
+        self.links = []
         self.updated_job.connect(self.sync_data)
 
     def sync_data(self, job, sync_hotkeys=True):
@@ -119,7 +122,9 @@ class AppController(QObject):
         process = process_options[index]
         self.process_name = process["name"]
         MEMORY.update_process(self.process_name, process["pid"])
+        self.links = SERVERS_FILE.get_value(LINKS)
         cbox.focusNextChild()
+        self.updated_process.emit()
 
     def get_all_hotkeys(self):
         hotkeys = CONFIG_FILE.get_hotkeys(APP_CONTROLLER.job)

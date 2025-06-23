@@ -218,5 +218,48 @@
                 "key": "F1"
             }
         }
+    },
+    "sage": {
+        "auto_item": {
+            "hp_potion": {
+                "delay_active": false,
+                "map_active": false
+            },
+            "sp_potion": {
+                "delay_active": false,
+                "map_active": false
+            },
+            "ygg": {
+                "delay_active": false,
+                "map_active": false
+            }
+        },
+        "skill_spawmmer": {
+            "sa_abracadabra": {
+                "active": true,
+                "mouse_click": false,
+                "delay_active": false,
+                "mvp_active": true,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F1"
+            },
+            "sa_castcancel": {
+                "active": true,
+                "mouse_click": false,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F2"
+            }
+        }
     }
 }
