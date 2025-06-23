@@ -25,7 +25,7 @@ class CboxSkill(QComboBox):
             return
         (skill, job_id) = self.model.takeItem(index, 0).data()
         self.model.takeRow(index)
-        CONFIG_FILE.update_config(True, [self.resource, job_id, skill.id, ACTIVE])
+        CONFIG_FILE.update_config(True, [job_id, self.resource, skill.id, ACTIVE])
         self._emit_add_event(skill, job_id)
         APP_CONTROLLER.status_toggle.setFocus()
 
@@ -42,10 +42,10 @@ class CboxSkill(QComboBox):
 
     def _emit_add_event(self, skill, job_id):
         if self.resource == SKILL_EQUIP:
-            return APP_CONTROLLER.added_skill_equip.emit(skill, job_id)
+            return APP_CONTROLLER.added_skill_equip.emit(job_id, skill)
         if self.resource == SKILL_SPAWMMER:
-            return APP_CONTROLLER.added_skill_spawmmer.emit(skill, job_id)
-        APP_CONTROLLER.added_skill_buff.emit(skill, job_id)
+            return APP_CONTROLLER.added_skill_spawmmer.emit(job_id, skill)
+        APP_CONTROLLER.added_skill_buff.emit(job_id, skill)
 
     def _get_active_skills(self):
         skills = APP_CONTROLLER.job_buff_skills

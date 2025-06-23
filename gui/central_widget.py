@@ -4,9 +4,8 @@ from PyQt6.QtCore import Qt
 from config.icon import ICON_GITHUB
 from gui.widget.input_app_status import InputAppStatus
 from gui.widget.cbox_process import CboxProcess
-from gui.widget.painel_auto_item import PainelAutoItem
 from gui.widget.painel_config import PainelConfig
-from gui.widget.painel_job import PainelJob
+from gui.widget.painel_home import PainelHome
 from gui.widget.painel_links import PainelLinks
 from util.widgets import build_link_icon
 
@@ -29,14 +28,7 @@ class CentralWidget(QWidget):
         header_hbox.addWidget(InputAppStatus(self))
         self.layout.addLayout(header_hbox)
         tab_panel = QTabWidget()
-        tab_panel.addTab(self._build_main_painel(), "Início")
+        tab_panel.addTab(PainelHome(self), "Home")
         tab_panel.addTab(PainelLinks(self), "Links")
-        tab_panel.addTab(PainelConfig(self), "Configurações")
+        tab_panel.addTab(PainelConfig(self), "Settings")
         self.layout.addWidget(tab_panel)
-
-    def _build_main_painel(self):
-        widget = QWidget()
-        body_hbox = QHBoxLayout(widget)
-        body_hbox.addWidget(PainelAutoItem(self), alignment=Qt.AlignmentFlag.AlignLeft)
-        body_hbox.addWidget(PainelJob(self))
-        return widget

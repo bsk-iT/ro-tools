@@ -23,7 +23,7 @@ class CboxItem(QComboBox):
             return
         item = self.model.takeItem(index, 0).data()
         self.model.takeRow(index)
-        CONFIG_FILE.update_config(True, [AUTO_ITEM, self.resource, item.id, ACTIVE])
+        CONFIG_FILE.update_config(True, [APP_CONTROLLER.job.id, AUTO_ITEM, self.resource, item.id, ACTIVE])
         self._emit_event(item)
         APP_CONTROLLER.status_toggle.setFocus()
 
@@ -47,8 +47,8 @@ class CboxItem(QComboBox):
 
     def _get_active_items(self):
         if self.resource == ITEM_BUFF:
-            return APP_CONTROLLER.item_buffs
-        return APP_CONTROLLER.item_debuffs
+            return APP_CONTROLLER.job_item_buffs
+        return APP_CONTROLLER.job_item_debuffs
 
     def build_cbox(self):
         self.model.clear()

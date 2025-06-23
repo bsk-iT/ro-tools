@@ -40,11 +40,13 @@ class InputMapCriteria(QWidget):
 
     def _build_cbox_map(self) -> QComboBox:
         cbox = QComboBox()
+        cbox.addItem(None)
+        cbox.setCurrentIndex(0)
         cbox.addItems(TYPE_MAPS)
         cbox.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         map_selected = CONFIG_FILE.read(self.key_seq + MAP)
         if map_selected:
-            cbox.setCurrentIndex([m.lower() for m in TYPE_MAPS].index(map_selected))
+            cbox.setCurrentIndex([m.lower() for m in TYPE_MAPS if m is not None].index(map_selected))
         return cbox
 
     def _on_active_map(self, value: bool) -> None:

@@ -53,7 +53,7 @@ class PainelJobHotkey(QWidget):
         hbox.setSpacing(5)
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(self._build_hotkey_icon(macro, job_id))
-        key_base = f"{HOTKEY}:{job_id}:{macro.id}:"
+        key_base = f"{job_id}:{HOTKEY}:{macro.id}:"
         label = QLabel(macro.name)
         label.setObjectName(macro.id)
         hbox.addWidget(label)
@@ -78,7 +78,7 @@ class PainelJobHotkey(QWidget):
 
     def _active_hotkey(self, job_id, macro: Macro, active=True):
         self.update_hotkeys(APP_CONTROLLER.job)
-        CONFIG_FILE.update_config(active, [HOTKEY, job_id, macro.id, ACTIVE])
+        CONFIG_FILE.update_config(active, [job_id, HOTKEY, macro.id, ACTIVE])
         self.cbox_macro.build_cbox(APP_CONTROLLER.job)
 
     def _on_add_hotkey(self, job_id, macro: Macro):

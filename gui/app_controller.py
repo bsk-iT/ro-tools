@@ -17,9 +17,9 @@ class AppController(QObject):
     add_macro_select = pyqtSignal(str, Macro)
     removed_macro = pyqtSignal(Macro)
     updated_job = pyqtSignal(Job)
-    added_skill_spawmmer = pyqtSignal(object, str)
-    added_skill_buff = pyqtSignal(object, str)
-    added_skill_equip = pyqtSignal(object, str)
+    added_skill_spawmmer = pyqtSignal(str, object)
+    added_skill_buff = pyqtSignal(str, object)
+    added_skill_equip = pyqtSignal(str, object)
     added_item_buff = pyqtSignal(object)
     added_item_debuff = pyqtSignal(object)
 
@@ -28,8 +28,6 @@ class AppController(QObject):
         self.process_name = None
         self.status_toggle = None
         self.cbox_macro = None
-        self.item_buffs = CONFIG_FILE.get_item_buffs()
-        self.item_debuffs = CONFIG_FILE.get_item_debuffs()
         self.skill_spammer_event = SkillSpawmmer(None)
         self.hotkey_event = HotkeyEvent(None)
         self.hotkeys_handler = {}
@@ -40,6 +38,8 @@ class AppController(QObject):
 
     def sync_data(self, job, sync_hotkeys=True):
         self.job: Job = job
+        self.job_item_buffs = CONFIG_FILE.get_job_item_buffs(self.job)
+        self.job_item_debuffs = CONFIG_FILE.get_job_item_debuffs(self.job)
         self.job_macros = CONFIG_FILE.get_job_macros(self.job)
         self.job_hotkeys = CONFIG_FILE.get_job_hotkeys(self.job)
         self.job_spawn_skills = CONFIG_FILE.get_job_spawm_skills(self.job)
@@ -49,7 +49,7 @@ class AppController(QObject):
             self.sync_hotkeys()
 
     def update_skill_spawmmer(self, job_id, skill, active):
-        key = CONFIG_FILE.get_value([SKILL_SPAWMMER, job_id, skill.id, KEY])
+        key = CONFIG_FILE.get_value([job_id, SKILL_SPAWMMER, skill.id, KEY])
         if active:
             self.job_spawn_skills[job_id].append(skill)
             self.add_hotkey_skill_spawmmer(job_id, skill, key)
@@ -58,7 +58,7 @@ class AppController(QObject):
             self.remove_hotkey(key)
 
     def update_hotkey(self, job_id, macro, active):
-        key = CONFIG_FILE.get_value([HOTKEY, job_id, macro.id, KEY])
+        key = CONFIG_FILE.get_value([job_id, HOTKEY, macro.id, KEY])
         if active:
             self.job_hotkeys[job_id].append(macro)
             self.add_hotkey_macro(job_id, macro, key)
@@ -107,7 +107,7 @@ class AppController(QObject):
     def sync_hotkey_events(self, events, resource, event_ctrl):
         for job_id, events in events.items():
             for event in events:
-                key = CONFIG_FILE.get_value([resource, job_id, event.id, KEY])
+                key = CONFIG_FILE.get_value([job_id, resource, event.id, KEY])
                 if key is None or key in self.hotkeys_handler:
                     continue
                 self._add_hotkey(job_id, event, key, event_ctrl)

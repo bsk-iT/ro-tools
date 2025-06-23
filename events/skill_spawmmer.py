@@ -18,6 +18,8 @@ class SkillSpawmmer(BaseEvent):
 
     def __init__(self, game_event, name=SKILL_SPAWMMER, prop_seq=[SKILL_SPAWMMER], priority=Priority.REALTIME):
         super().__init__(game_event, name, prop_seq, priority)
+        self.macro_atk = MacroEvent(self.game_event)
+        self.macro_def = MacroEvent(self.game_event)
 
     def force_stop(self):
         self.running = False
@@ -25,10 +27,10 @@ class SkillSpawmmer(BaseEvent):
             self.auto_abracadabra.stop()
 
     def stop(self, job_id, skill):
-        swap_def = CONFIG_FILE.get_value([*self.prop_seq, job_id, skill.id, SWAP_DEF])
+        swap_def = CONFIG_FILE.get_value([job_id, *self.prop_seq, skill.id, SWAP_DEF])
         if swap_def and swap_def[ACTIVE] and self.running:
-            time.sleep(0.3)
-            MacroEvent(self.game_event).start(swap_def[MACRO])
+            time.sleep(0.1)
+            self.macro_def.start(swap_def[MACRO])
         self.running = False
 
     def execute_abracadabra(self, key, job_id, skill):
@@ -42,10 +44,10 @@ class SkillSpawmmer(BaseEvent):
         self.running = True
         if skill.id == SA_ABRACADABRA.id:
             return self.execute_abracadabra(key, job_id, skill)
-        threading.Thread(target=self.run, args=(key, job_id, skill), name=f"{self.name}:{job_id}:{skill.id}", daemon=True).start()
-        swap_attack = CONFIG_FILE.get_value([*self.prop_seq, job_id, skill.id, SWAP_ATK])
+        threading.Thread(target=self.run, args=(key, job_id, skill), name=f"{job_id}:{self.name}:{skill.id}", daemon=True).start()
+        swap_attack = CONFIG_FILE.get_value([job_id, *self.prop_seq, skill.id, SWAP_ATK])
         if swap_attack and swap_attack[ACTIVE]:
-            MacroEvent(self.game_event).start(swap_attack[MACRO])
+            self.macro_atk.start(swap_attack[MACRO])
 
     def run(self, key, job_id, skill):
         while self.running:
@@ -56,7 +58,7 @@ class SkillSpawmmer(BaseEvent):
 
         if not job_id or not skill:
             return
-        base_prop_key = [*self.prop_seq, job_id, skill.id]
+        base_prop_key = [job_id, *self.prop_seq, skill.id]
         APP_CONTROLLER.remove_hotkey(key)
         KEYBOARD.press_key(key)
         APP_CONTROLLER.add_hotkey_skill_spawmmer(job_id, skill, key, self)

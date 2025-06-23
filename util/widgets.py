@@ -26,7 +26,7 @@ def build_painel(layout: QBoxLayout, title: str) -> QVBoxLayout:
 
 def build_label_subtitle(text: str) -> QLabel:
     label = QLabel(text)
-    label.setContentsMargins(0, 20, 0, 0)
+    label.setContentsMargins(0, 5, 0, 0)
     label.setStyleSheet("color: #d33e20;")
     return label
 
@@ -90,6 +90,7 @@ def build_badge_btn(parent, icon):
 def build_label_info(text: str) -> QLabel:
     label = QLabel(text)
     label.setWordWrap(True)
+    label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
     label.setStyleSheet("font-size: 12px; color: gray;")
     return label
 

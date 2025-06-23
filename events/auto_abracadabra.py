@@ -30,7 +30,7 @@ class AutoAbracadabra(BaseEvent):
             GAME_EVENT.sync_game_data()
             if GAME_EVENT.char.skill_using == SKILL_MVP:
                 break
-            if not CONFIG_FILE.get_value([SKILL_SPAWMMER, job_id, skill.id, MVP_ACTIVE]):
+            if not CONFIG_FILE.get_value([job_id, SKILL_SPAWMMER, skill.id, MVP_ACTIVE]):
                 break
             self.execute_action(key, job_id, skill)
         self.running = False
@@ -38,7 +38,7 @@ class AutoAbracadabra(BaseEvent):
     def execute_action(self, key, job_id, skill):
         if not skill and not job_id:
             return
-        cast_cancel_key = CONFIG_FILE.get_value([SKILL_SPAWMMER, job_id, SA_CASTCANCEL.id, KEY])
+        cast_cancel_key = CONFIG_FILE.get_value([job_id, SKILL_SPAWMMER, SA_CASTCANCEL.id, KEY])
         KEYBOARD.press_key(cast_cancel_key)
         time.sleep(0.1)
         KEYBOARD.press_key(key)

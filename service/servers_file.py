@@ -17,7 +17,7 @@ ITEM_BUFF = "item_buff"
 STATUS_DEBUFF = "status_debuff"
 
 
-TYPE_MAPS = ["BG", "WoE", "PvP", "PvM", "Cidade"]
+TYPE_MAPS = ["BG", "WoE", "PvP", "PvM"]
 
 
 class ServersFile(File):

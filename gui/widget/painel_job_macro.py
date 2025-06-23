@@ -54,7 +54,7 @@ class PainelJobMacro(QWidget):
 
     def _build_macro_inputs(self, macro, job_id):
         widget = QWidget()
-        key_seq = f"{MACRO}:{job_id}:{macro.id}:"
+        key_seq = f"{job_id}:{MACRO}:{macro.id}:"
         vbox = QVBoxLayout(widget)
         vbox.setSpacing(10)
         vbox.addWidget(self._build_title_macro(job_id, key_seq, macro))
@@ -146,7 +146,7 @@ class PainelJobMacro(QWidget):
         self.update_macros()
 
     def _on_add_macro(self, job_id, macro):
-        CONFIG_FILE.update_config(True, [MACRO, job_id, macro.id, ACTIVE])
+        CONFIG_FILE.update_config(True, [job_id, MACRO, macro.id, ACTIVE])
         APP_CONTROLLER.job_macros[job_id].append(macro)
         self.update_macros()
         APP_CONTROLLER.add_macro_select.emit(job_id, macro)

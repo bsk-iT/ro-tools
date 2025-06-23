@@ -44,8 +44,10 @@ class BaseEvent:
 
     @abstractmethod
     def execute_action(self):
-        if CONFIG_FILE.is_using_fly_wing():
+        from gui.app_controller import APP_CONTROLLER
+
+        if CONFIG_FILE.is_using_fly_wing(APP_CONTROLLER.job.id):
             time.sleep(0.1)
-            KEYBOARD.press_key(CONFIG_FILE.get_value([AUTO_ITEM, FLY_WING, KEY]))
+            KEYBOARD.press_key(CONFIG_FILE.get_value([APP_CONTROLLER.job.id, AUTO_ITEM, FLY_WING, KEY]))
         if CONFIG_FILE.is_block_chat_open(self.game_event, AUTO_CLOSE):
             self.game_event.char.close_chat_bar()

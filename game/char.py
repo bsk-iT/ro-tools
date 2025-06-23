@@ -23,7 +23,14 @@ class Char:
         self.sp = 0
         self.sp_max = 0
         self.sp_percent = 0
+        self.chat_bar_enabled = False
         self.raw_buffs = []
+        self.buffs = []
+        self.skill_buffs = []
+        self.item_buffs = []
+        self.status_debuff = []
+        self.job = None
+        self.skill_using = None
 
     def update(self):
         try:

@@ -10,6 +10,7 @@ class HotkeyEvent(BaseEvent):
 
     def __init__(self, game_event, name=HOTKEY, prop_seq=[HOTKEY], priority=Priority.REALTIME):
         super().__init__(game_event, name, prop_seq, priority)
+        self.macro_event =  MacroEvent(self.game_event)
 
     def stop(self, job_id, macro):
         self.running = False
@@ -24,4 +25,4 @@ class HotkeyEvent(BaseEvent):
         self.execute_action(macro)
 
     def execute_action(self, macro):
-        MacroEvent(self.game_event).start(macro.id)
+       self.macro_event.start(macro.id)

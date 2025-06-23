@@ -61,7 +61,7 @@ class PainelJobSkillSpawmmer(QWidget):
         hbox.setSpacing(5)
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(self._build_skill_icon(skill, job_id))
-        key_base = f"{SKILL_SPAWMMER}:{job_id}:{skill.id}:"
+        key_base = f"{job_id}:{SKILL_SPAWMMER}:{skill.id}:"
         hbox.addWidget(InputKeybind(self, key_base + KEY, True))
         hbox.addWidget(InputMouseClick(self, key_base, skill.is_clicked))
         hbox.addWidget(InputDelay(self, key_base))
@@ -90,10 +90,10 @@ class PainelJobSkillSpawmmer(QWidget):
     def _active_skill(self, skill: SpawnSkill, job_id, active=True):
         APP_CONTROLLER.update_skill_spawmmer(job_id, skill, active)
         self.update_skills_spawnner()
-        CONFIG_FILE.update_config(active, [SKILL_SPAWMMER, job_id, skill.id, ACTIVE])
+        CONFIG_FILE.update_config(active, [job_id, SKILL_SPAWMMER, skill.id, ACTIVE])
         self.cbox_skill.build_cbox(APP_CONTROLLER.job)
 
-    def _on_add_skill(self, skill: SpawnSkill, job_id):
+    def _on_add_skill(self, job_id, skill: SpawnSkill):
         self._active_skill(skill, job_id)
         APP_CONTROLLER.status_toggle.setFocus()
 

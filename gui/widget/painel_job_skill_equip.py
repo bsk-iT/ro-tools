@@ -24,23 +24,24 @@ class PainelJobEquipBuff(QWidget):
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self.layout.setSpacing(10)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        self.layout.addWidget(self._build_check_block_city())
         self.layout.addWidget(self.cbox_skill)
         self.update_skill_equips(APP_CONTROLLER.job)
         APP_CONTROLLER.added_skill_equip.connect(self._on_add_skill)
 
-    def _build_check_block_city(self):
+    def _build_check_block_city(self, job):
         check_city = QCheckBox("Bloquear uso em cidades?")
-        city_block = CONFIG_FILE.get_value([SKILL_EQUIP, CITY_BLOCK])
+        city_block = CONFIG_FILE.get_value([job.id, SKILL_EQUIP, CITY_BLOCK])
         check_city.setChecked(True if city_block else False)
-        check_city.checkStateChanged.connect(self._update_city_block)
+        check_city.checkStateChanged.connect(lambda state: self._update_city_block(job, state))
         return check_city
 
-    def _update_city_block(self, state):
-        CONFIG_FILE.update_config(state.value == 2, [SKILL_EQUIP, CITY_BLOCK])
+    def _update_city_block(self, job, state):
+        CONFIG_FILE.update_config(state.value == 2, [job.id, SKILL_EQUIP, CITY_BLOCK])
 
     def update_skill_equips(self, job):
         clear_layout(self.layout.takeAt(2))
+        clear_layout(self.layout.takeAt(1))
+        self.layout.addWidget(self._build_check_block_city(job))
         buff_equips_added = []
         (vbox, scroll) = build_scroll_vbox()
         while job is not None:
@@ -67,7 +68,7 @@ class PainelJobEquipBuff(QWidget):
         hbox.setSpacing(5)
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(self._build_skill_icon(skill, job_id))
-        key_base = f"{SKILL_EQUIP}:{job_id}:{skill.id}:"
+        key_base = f"{job_id}:{SKILL_EQUIP}:{skill.id}:"
         hbox.addWidget(CboxMacroSelect(self, key_base + MACRO))
         hbox.addWidget(InputMapCriteria(self, key_base))
         vbox.addLayout(hbox)
@@ -90,10 +91,10 @@ class PainelJobEquipBuff(QWidget):
 
     def _active_skill(self, skill: Buff, job_id, active=True):
         self.update_skill_equips(APP_CONTROLLER.job)
-        CONFIG_FILE.update_config(active, [SKILL_EQUIP, job_id, skill.id, ACTIVE])
+        CONFIG_FILE.update_config(active, [job_id, SKILL_EQUIP, skill.id, ACTIVE])
         self.cbox_skill.build_cbox(APP_CONTROLLER.job)
 
-    def _on_add_skill(self, skill: Buff, job_id):
+    def _on_add_skill(self, job_id, skill: Buff):
         APP_CONTROLLER.job_equip_skills[job_id].append(skill)
         self._active_skill(skill, job_id)
         APP_CONTROLLER.status_toggle.setFocus()

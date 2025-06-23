@@ -14,11 +14,12 @@ class AutoItemBuff(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         super().check_condition()
-        item = self.game_event.char.next_item_buff_to_use(APP_CONTROLLER.item_buffs)
+        item = self.game_event.char.next_item_buff_to_use(APP_CONTROLLER.job_item_buffs)
         if item is None:
             return False
-        is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, self.prop_seq)
-        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [AUTO_ITEM])
+        base_prop_seq = [APP_CONTROLLER.job.id, *self.prop_seq]
+        is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, base_prop_seq)
+        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, base_prop_seq)
         is_block_chat_waiting = CONFIG_FILE.is_block_chat_open(self.game_event, WAITING)
         return is_valid_map and not is_blocked_in_city and not is_block_chat_waiting
 
@@ -26,9 +27,9 @@ class AutoItemBuff(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         super().execute_action()
-        item = self.game_event.char.next_item_buff_to_use(APP_CONTROLLER.item_buffs)
+        item = self.game_event.char.next_item_buff_to_use(APP_CONTROLLER.job_item_buffs)
         if not item:
             return
-        base_prop_seq = [*self.prop_seq, item.id]
+        base_prop_seq = [APP_CONTROLLER.job.id, *self.prop_seq, item.id]
         KEYBOARD.press_key(CONFIG_FILE.get_value([*base_prop_seq, KEY]))
         time.sleep(CONFIG_FILE.get_delay(base_prop_seq, 0.2))

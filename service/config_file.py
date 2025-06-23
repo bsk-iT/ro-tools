@@ -73,10 +73,10 @@ class ConfigFile(File):
         block_chat = self.read(BLOCK_CHAT_INPUT)
         return block_chat == condition and game.char.chat_bar_enabled
 
-    def is_using_fly_wing(self) -> bool:
+    def is_using_fly_wing(self, job_id) -> bool:
         from service.keyboard import KEYBOARD
 
-        fly_wing_key = self.get_value([AUTO_ITEM, FLY_WING, KEY])
+        fly_wing_key = self.get_value([job_id, AUTO_ITEM, FLY_WING, KEY])
         if not fly_wing_key:
             return False
         return KEYBOARD.is_key_pressed(fly_wing_key)
@@ -95,7 +95,7 @@ class ConfigFile(File):
     def get_hotkeys(self, job):
         hotkeys = []
         while job is not None:
-            skills_data = self.get_value([SKILL_SPAWMMER, job.id])
+            skills_data = self.get_value([job.id, SKILL_SPAWMMER])
             if skills_data is None:
                 job = job.previous_job
                 continue
@@ -107,12 +107,12 @@ class ConfigFile(File):
     def _get_job_resource(self, job, resource, resource_map):
         job_resource = {}
         while job is not None:
-            resource_data = self.get_value([resource, job.id])
+            resource_data = self.get_value([job.id, resource])
             if resource_data is None:
                 job_resource[job.id] = []
                 job = job.previous_job
                 continue
-            resource_id = [_id for _id, resource in resource_data.items() if resource[ACTIVE]]
+            resource_id = [_id for _id, resource in resource_data.items() if _id != CITY_BLOCK and resource[ACTIVE]]
             job_resource[job.id] = [resource_map[_id] for _id in resource_id] or []
             job = job.previous_job
         return job_resource
@@ -132,18 +132,18 @@ class ConfigFile(File):
     def get_job_equip_skills(self, job):
         return self._get_job_resource(job, SKILL_EQUIP, AUTO_BUFF_MAP)
 
-    def _get_items(self, resource, map_item):
-        items_data = self.get_value([AUTO_ITEM, resource])
+    def _get_items(self, job, resource, map_item):
+        items_data = self.get_value([job.id, AUTO_ITEM, resource])
         if items_data is None:
             return []
-        items_id = [_id for _id, item in items_data.items() if item[ACTIVE]]
+        items_id = [_id for _id, item in items_data.items() if _id != CITY_BLOCK and item.get(ACTIVE, False)]
         return [map_item[_id] for _id in items_id] or []
 
-    def get_item_buffs(self):
-        return self._get_items(ITEM_BUFF, ITEM_BUFF_MAP)
+    def get_job_item_buffs(self, job):
+        return self._get_items(job, ITEM_BUFF, ITEM_BUFF_MAP)
 
-    def get_item_debuffs(self):
-        return self._get_items(ITEM_DEBUFF, ITEM_DEBUFF_MAP)
+    def get_job_item_debuffs(self, job):
+        return self._get_items(job, ITEM_DEBUFF, ITEM_DEBUFF_MAP)
 
 
 CONFIG_FILE = ConfigFile("config.json")
