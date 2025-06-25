@@ -10,7 +10,19 @@
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.0.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.0.0/RO_Tools_v1.0.0.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.1.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.1.0/ROTools_1.1.0.zip)
+
+### ⚠️ Atenção
+
+Para que este programa funcione corretamente, é **necessário executá-lo como administrador**.
+
+Sem privilégios administrativos, algumas funcionalidades podem não funcionar corretamente, como:
+
+- Leitura de memória de outros processos  
+- Simulação de teclas ou comandos no sistema  
+- Acesso a janelas de outros aplicativos
+
+> 💡 Clique com o botão direito no executável e selecione **"Executar como administrador"**.
 
 ## 🎮 Visão Geral
 
@@ -68,6 +80,19 @@ Ferramentas específicas por profissão.
 - **Hotkey**: Execução de comandos por atalho.
 - **Macro**: Sequência de ações automatizadas.
 
+---
+
+#### ✨ Novas funcionalidades
+
+- **Auto-Teleport por ID de monstros**  
+  Tele para encontrar os mobs automaticamente. Connfigure os IDs dos monstros e o sistema usará automaticamente a Asa de Mosca quando encontrar algum deles.
+
+- **Auto-Abracadabra**  
+  Use a habilidade Abracadabra automaticamente com controle de tempo e cancelamento seguro. Ideal para invocação contínua.
+
+- **Links úteis personalizados por servidor**  
+  Acesse ferramentas específicas do seu servidor (como sites de rankings, market, wiki, etc.) diretamente pelo app, com links configuráveis.
+  
 ---
 
 ## ⚙️ Eventos Disponíveis
