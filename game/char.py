@@ -2,7 +2,7 @@ import os
 
 from game.jobs import JOB_MAP, Job
 from gui.app_controller import APP_CONTROLLER
-from service.config_file import ITEM_BUFF
+from service.config_file import CONFIG_FILE, DEBUG_ACTIVE, ITEM_BUFF
 from service.memory import MEMORY
 from service.offsets import Offsets
 from service.servers_file import SKILL_BUFF, SERVERS_FILE, STATUS_DEBUFF
@@ -29,8 +29,9 @@ class Char:
         self.skill_buffs = []
         self.item_buffs = []
         self.status_debuff = []
+        self.entity_list = []
         self.job = None
-        self.skill_using = None
+        self.abracadabra_skill = None
 
     def update(self):
         try:
@@ -48,13 +49,35 @@ class Char:
             self.item_buffs = self._get_id_buffs(ITEM_BUFF)
             self.status_debuff = self._get_id_buffs(STATUS_DEBUFF)
             self.job = JOB_MAP.get(self.job_id, self.job_id)
-            self.skill_using = MEMORY.process.read_int(MEMORY.skill_address)
+            self.abracadabra_skill = MEMORY.process.read_int(MEMORY.abracadabra_address)
             self.chat_bar_enabled = MEMORY.process.read_bool(MEMORY.chat_address)
             self.monitoring_job_change_gui()
-            # os.system("cls")
-            # print(self)
+            self.entity_list = self._get_entity_list()
+            if CONFIG_FILE.read(DEBUG_ACTIVE):
+                APP_CONTROLLER.debug.emit(self.__str__())
         except BaseException:
             self.reset()
+
+    def _get_entity_list(self):
+        offset_base = MEMORY.process.read_uint(MEMORY.entity_list_address)
+        world = MEMORY.process.read_uint(offset_base + Offsets.WORLD)
+        entity_list = MEMORY.process.read_uint(world + Offsets.ENTITY_LIST)
+        prev_entity = MEMORY.process.read_uint(entity_list + Offsets.PREV_ENTITY)
+        entity = MEMORY.process.read_uint(prev_entity + Offsets.NEXT_ENTITY)
+        entities = []
+        while entity != 0:
+            mob_id = MEMORY.process.read_uint(entity + Offsets.ENTITY_ID)
+            # x_pos = MEMORY.process.read_uint(entity + Offsets.ENTITY_POS_X)
+            # y_pos = MEMORY.process.read_uint(entity + Offsets.ENTITY_POS_Y)
+            if mob_id > 1000:
+                sprite_res = MEMORY.process.read_uint(entity + Offsets.ENTITY_SPRITE_RES)
+                sprite_name = MEMORY.process.read_string(sprite_res + Offsets.SPRITE_NAME)
+                sprite_name = sprite_name.strip("\\").replace(".spr", "")
+                sprint_name = sprite_name.replace("_", " ").title()
+                entities.append((mob_id, sprint_name))
+            prev_entity = MEMORY.process.read_uint(prev_entity + Offsets.PREV_ENTITY)
+            entity = MEMORY.process.read_uint(prev_entity + Offsets.NEXT_ENTITY)
+        return entities
 
     def close_chat_bar(self):
         MEMORY.process.write_bool(MEMORY.chat_address, False)
@@ -128,4 +151,6 @@ class Char:
             MAP: {self.current_map}
             BUFFS: {self.buffs}
             CHAT_BAR_ENABLED: {self.chat_bar_enabled}
+            ABRACADABRA_SKILL: {self.abracadabra_skill}
+            ENTITY_LIST: \n{"\n".join([f"\t\t{id} - {name}" for id, name in self.entity_list])}
         """

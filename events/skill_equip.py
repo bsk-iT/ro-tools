@@ -5,15 +5,16 @@ from service.config_file import CONFIG_FILE, MACRO, SKILL_EQUIP, WAITING
 
 
 class SkillEquip(BaseEvent):
-    
-    def __init__(self, game_event, name=f"{SKILL_EQUIP}", prop_seq=[SKILL_EQUIP], priority=Priority.LOW):
+
+    def __init__(self, game_event, name=f"{SKILL_EQUIP}", prop_seq=[SKILL_EQUIP], priority=Priority.REALTIME):
         super().__init__(game_event, name, prop_seq, priority)
         self.macro_event = MacroEvent(self.game_event)
 
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        super().check_condition()
+        if not super().check_condition():
+            return False
         (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills)
         if buff_id is None:
             return False

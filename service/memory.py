@@ -4,7 +4,8 @@ import win32gui
 import win32process
 import pywintypes
 
-from service.servers_file import CHAT_OFFSET, HP_OFFSET, JOB_OFFSET, MAP_OFFSET, SERVERS_FILE, SKILL_ADDRESS
+from service.offsets import Offsets
+from service.servers_file import CHAT_OFFSET, ENTITY_LIST_OFFSET, HP_OFFSET, JOB_OFFSET, MAP_OFFSET, SERVERS_FILE, ABRACADABRA_ADDRESS
 
 
 class Memory:
@@ -16,7 +17,8 @@ class Memory:
         self.map_address = None
         self.job_address = None
         self.chat_address = None
-        self.skill_address = None
+        self.abracadabra_address = None
+        self.entity_list_address = None
 
     def is_valid(self) -> bool:
         return self.process.process_handle is not None
@@ -31,12 +33,14 @@ class Memory:
         map_offset = int(SERVERS_FILE.get_value(MAP_OFFSET), 16)
         job_offset = int(SERVERS_FILE.get_value(JOB_OFFSET), 16)
         chat_offset = int(SERVERS_FILE.get_value(CHAT_OFFSET), 16)
-        self.skill_address = int(SERVERS_FILE.get_value(SKILL_ADDRESS), 16)
+        entity_list_offset = int(SERVERS_FILE.get_value(ENTITY_LIST_OFFSET), 16)
         self.base_address = module.lpBaseOfDll
         self.hp_address = self.get_address([hp_offset])
         self.map_address = self.get_address([map_offset])
         self.job_address = self.get_address([job_offset])
         self.chat_address = self.get_address([chat_offset])
+        self.abracadabra_address = int(SERVERS_FILE.get_value(ABRACADABRA_ADDRESS), 16)
+        self.entity_list_address = self.get_address([entity_list_offset])
 
     def get_hwnd(self) -> None:
         if not self.is_valid():

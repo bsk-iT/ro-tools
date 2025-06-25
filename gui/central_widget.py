@@ -5,6 +5,7 @@ from config.icon import ICON_GITHUB
 from gui.widget.input_app_status import InputAppStatus
 from gui.widget.cbox_process import CboxProcess
 from gui.widget.painel_config import PainelConfig
+from gui.widget.painel_debug import PainelDebug
 from gui.widget.painel_home import PainelHome
 from gui.widget.painel_links import PainelLinks
 from util.widgets import build_link_icon
@@ -30,5 +31,6 @@ class CentralWidget(QWidget):
         tab_panel = QTabWidget()
         tab_panel.addTab(PainelHome(self), "Home")
         tab_panel.addTab(PainelLinks(self), "Links")
+        tab_panel.addTab(PainelDebug(self), "Debug")
         tab_panel.addTab(PainelConfig(self), "Settings")
         self.layout.addWidget(tab_panel)

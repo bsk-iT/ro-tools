@@ -12,7 +12,8 @@ class AutoPotSP(BaseEvent):
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        super().check_condition()
+        if not super().check_condition():
+            return False
         base_prop_seq = [APP_CONTROLLER.job.id, *self.prop_seq]
         sp_percent = CONFIG_FILE.get_value([*base_prop_seq, PERCENT]) or 0
         is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, base_prop_seq)

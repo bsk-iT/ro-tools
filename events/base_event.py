@@ -4,7 +4,7 @@ import threading
 import time
 from typing import List
 
-from service.config_file import AUTO_CLOSE, AUTO_ITEM, CONFIG_FILE, FLY_WING, KEY
+from service.config_file import AUTO_CLOSE, AUTO_ITEM, AUTO_TELEPORT, CONFIG_FILE, FLY_WING, KEY
 from service.keyboard import KEYBOARD
 
 
@@ -40,14 +40,15 @@ class BaseEvent:
     @abstractmethod
     def check_condition(self) -> bool:
         self.game_event.sync_game_data()
-        return False
+        return True
 
     @abstractmethod
     def execute_action(self):
         from gui.app_controller import APP_CONTROLLER
 
-        if CONFIG_FILE.is_using_fly_wing(APP_CONTROLLER.job.id):
+        if self.name != AUTO_TELEPORT and CONFIG_FILE.is_using_fly_wing(APP_CONTROLLER.job.id):
             time.sleep(0.1)
             KEYBOARD.press_key(CONFIG_FILE.get_value([APP_CONTROLLER.job.id, AUTO_ITEM, FLY_WING, KEY]))
+            time.sleep(0.5)
         if CONFIG_FILE.is_block_chat_open(self.game_event, AUTO_CLOSE):
             self.game_event.char.close_chat_bar()

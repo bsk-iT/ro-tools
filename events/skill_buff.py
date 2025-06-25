@@ -13,7 +13,8 @@ class SkillBuff(BaseEvent):
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        super().check_condition()
+        if not super().check_condition():
+            return False
         (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_buff_skills)
         if buff_id is None:
             return

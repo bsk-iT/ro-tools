@@ -49,6 +49,9 @@ DEFAULT = "default"
 AUTO_CLOSE = "auto_close"
 WAITING = "waiting"
 MVP_ACTIVE = "mvp_active"
+DEBUG_ACTIVE = "debug_active"
+AUTO_TELEPORT = "auto_teleport"
+MOB_IDS = "mob_ids"
 
 
 class ConfigFile(File):
@@ -79,7 +82,7 @@ class ConfigFile(File):
         fly_wing_key = self.get_value([job_id, AUTO_ITEM, FLY_WING, KEY])
         if not fly_wing_key:
             return False
-        return KEYBOARD.is_key_pressed(fly_wing_key)
+        return KEYBOARD.was_key_pressed_recently(fly_wing_key)
 
     def is_valid_map(self, game, prop_seq: List[str]) -> bool:
         map_active = self.get_value([*prop_seq, MAP_ACTIVE])
@@ -144,6 +147,12 @@ class ConfigFile(File):
 
     def get_job_item_debuffs(self, job):
         return self._get_items(job, ITEM_DEBUFF, ITEM_DEBUFF_MAP)
+
+    def get_job_fly_wing_key(self, job):
+        fly_wing_data = self.get_value([job.id, AUTO_ITEM, FLY_WING])
+        if fly_wing_data is None:
+            return None
+        return fly_wing_data.get(KEY, False)
 
 
 CONFIG_FILE = ConfigFile("config.json")

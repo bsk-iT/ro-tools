@@ -20,6 +20,10 @@ QT_TO_VK = {
 
 
 class Keyboard:
+
+    def __init__(self):
+        self._pressed_keys = {}
+
     def press_key(self, key_sequence: str) -> None:
         if not key_sequence:
             return
@@ -27,15 +31,20 @@ class Keyboard:
         [self._key_event(vk_code, False) for vk_code in vk_codes]
         [self._key_event(vk_code, True) for vk_code in vk_codes[::-1]]
 
-    def is_key_pressed(self, key_sequence: str) -> bool:
+    def add_pressed_key(self, key_sequence: str) -> bool:
+        if not key_sequence:
+            return
+        vk_codes = self._key_sequence_to_vk(key_sequence)
+        now = time.time()
+        for vk in vk_codes:
+            self._pressed_keys[vk] = now
+
+    def was_key_pressed_recently(self, key_sequence: str, threshold: float = 0.5) -> bool:
         if not key_sequence:
             return False
         vk_codes = self._key_sequence_to_vk(key_sequence)
-        return reduce(
-            lambda result, vk_code: result and win32api.GetAsyncKeyState(vk_code) & 0x8000 != 0,
-            vk_codes,
-            True,
-        )
+        now = time.time()
+        return any(vk in self._pressed_keys and now - self._pressed_keys[vk] <= threshold for vk in vk_codes)
 
     def _key_event(self, vk_code: Any, is_key_up: bool) -> None:
         time.sleep(APP_DELAY)

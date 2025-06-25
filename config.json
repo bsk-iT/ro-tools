@@ -14,6 +14,11 @@
             "ygg": {
                 "delay_active": false,
                 "map_active": false
+            },
+            "fly_wing": {
+                "auto_teleport": true,
+                "mob_ids": "",
+                "key": "Space"
             }
         },
         "hotkey": {
@@ -30,12 +35,14 @@
             "hp_potion": {
                 "delay_active": false,
                 "map_active": false,
-                "percent": 0
+                "percent": 80,
+                "key": "F9"
             },
             "sp_potion": {
                 "delay_active": false,
                 "map_active": false,
-                "percent": 0
+                "percent": 0,
+                "key": "F8"
             },
             "ygg": {
                 "delay_active": false,
@@ -43,9 +50,11 @@
                 "sp_percent": 0
             },
             "fly_wing": {
-                "key": "Space"
+                "key": "Space",
+                "auto_teleport": true,
+                "mob_ids": "1632"
             },
-            "city_block": true,
+            "city_block": false,
             "item_buff": {
                 "city_block": false,
                 "berserk_potion": {
@@ -75,11 +84,21 @@
                 "map_active": false,
                 "key": "7"
             },
-            "city_block": true,
+            "city_block": false,
             "bs_overthrust": {
                 "active": true,
                 "map_active": false,
                 "key": "8"
+            },
+            "bs_maximize": {
+                "active": true,
+                "map_active": false,
+                "key": "5"
+            },
+            "bs_weaponperfect": {
+                "active": true,
+                "map_active": false,
+                "key": "6"
             }
         },
         "skill_equip": {
@@ -88,7 +107,7 @@
                 "map_active": false,
                 "macro": "jaguar_hat"
             },
-            "city_block": true
+            "city_block": false
         },
         "macro": {
             "attack_1": {
@@ -96,7 +115,7 @@
                 "seq_0_delay_active": false
             },
             "jaguar_hat": {
-                "active": true,
+                "active": false,
                 "seq_0_delay_active": false,
                 "seq_1_active": true,
                 "seq_1_delay_active": false,
@@ -113,9 +132,23 @@
     "merchant": {
         "skill_buff": {
             "mc_loud": {
-                "active": false,
+                "active": true,
                 "map_active": false,
                 "key": "9"
+            }
+        },
+        "skill_spawmmer": {
+            "mc_mammonite": {
+                "active": true,
+                "mouse_click": true,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F1"
             }
         }
     },
@@ -132,28 +165,43 @@
             "ygg": {
                 "delay_active": false,
                 "map_active": false
+            },
+            "item_buff": {
+                "concentration_potion": {
+                    "active": false,
+                    "map_active": false
+                },
+                "awakening_potion": {
+                    "active": true,
+                    "map_active": false,
+                    "key": "O"
+                }
             }
         },
         "macro": {
             "jaguar_hat": {
                 "active": true,
-                "seq_0_delay_active": true,
+                "seq_0_delay_active": false,
                 "seq_1_active": true,
-                "seq_1_delay_active": false,
+                "seq_1_delay_active": true,
                 "seq_0_delay": 0.2,
-                "seq_1_key": "I",
+                "seq_1_key": "1",
                 "seq_2_active": true,
                 "seq_2_delay_active": false,
-                "seq_2_key": "R",
+                "seq_2_key": "I",
                 "seq_3_active": true,
                 "seq_3_delay_active": false,
-                "seq_3_key": "T",
+                "seq_3_key": "R",
                 "seq_4_active": true,
                 "seq_4_delay_active": false,
-                "seq_4_key": "Y"
+                "seq_4_key": "T",
+                "seq_1_delay": 0.2,
+                "seq_5_active": true,
+                "seq_5_delay_active": false,
+                "seq_5_key": "Y"
             },
             "attack_1": {
-                "active": true,
+                "active": false,
                 "seq_0_delay_active": false,
                 "seq_1_active": true,
                 "seq_1_delay_active": false,
@@ -163,7 +211,7 @@
                 "seq_2_key": "G"
             },
             "defense_1": {
-                "active": true,
+                "active": false,
                 "seq_0_delay_active": false,
                 "seq_1_active": true,
                 "seq_1_delay_active": false,
@@ -199,6 +247,18 @@
                 },
                 "key": "F2"
             }
+        },
+        "skill_buff": {
+            "sn_sight": {
+                "active": true,
+                "map_active": false,
+                "key": "8"
+            },
+            "sn_windwalk": {
+                "active": true,
+                "map_active": false,
+                "key": "7"
+            }
         }
     },
     "archer": {
@@ -208,14 +268,19 @@
                 "mouse_click": true,
                 "delay_active": false,
                 "swap_atk": {
-                    "active": true,
-                    "macro": "attack_1"
+                    "active": false
                 },
                 "swap_def": {
-                    "active": true,
-                    "macro": "defense_1"
+                    "active": false
                 },
                 "key": "F1"
+            }
+        },
+        "skill_buff": {
+            "ac_concentration": {
+                "active": true,
+                "map_active": false,
+                "key": "9"
             }
         }
     },
@@ -261,5 +326,38 @@
                 "key": "F2"
             }
         }
-    }
+    },
+    "swordman": {
+        "auto_item": {
+            "hp_potion": {
+                "delay_active": false,
+                "map_active": false
+            },
+            "sp_potion": {
+                "delay_active": false,
+                "map_active": false
+            },
+            "ygg": {
+                "delay_active": false,
+                "map_active": false
+            }
+        }
+    },
+    "champion": {
+        "auto_item": {
+            "hp_potion": {
+                "delay_active": false,
+                "map_active": false
+            },
+            "sp_potion": {
+                "delay_active": false,
+                "map_active": false
+            },
+            "ygg": {
+                "delay_active": false,
+                "map_active": false
+            }
+        }
+    },
+    "debug_active": true
 }

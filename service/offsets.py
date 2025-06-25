@@ -3,3 +3,12 @@ class Offsets:
     SP = 0x8
     MAX_SP = 0xC
     BUFF_LIST = 0x474
+    WORLD = 0xCC
+    ENTITY_LIST = 0x10
+    PREV_ENTITY = 0x0
+    NEXT_ENTITY = 0x8
+    ENTITY_ID = 0x10C
+    ENTITY_POS_X = 0x15C
+    ENTITY_POS_Y = 0x160
+    ENTITY_SPRITE_RES = 0x104
+    SPRITE_NAME = 0x21

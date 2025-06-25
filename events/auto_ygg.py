@@ -12,7 +12,8 @@ class AutoYgg(BaseEvent):
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        super().check_condition()
+        if not super().check_condition():
+            return False
         base_prop_seq = [APP_CONTROLLER.job.id, *self.prop_seq]
         hp_percent = CONFIG_FILE.get_value([*base_prop_seq, HP_PERCENT]) or 0
         sp_percent = CONFIG_FILE.get_value([*base_prop_seq, SP_PERCENT]) or 0

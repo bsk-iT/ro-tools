@@ -1,3 +1,4 @@
+import threading
 import keyboard
 from PyQt6.QtCore import pyqtSignal, QObject
 from events.hotkey_event import HotkeyEvent
@@ -5,6 +6,7 @@ from events.skill_spawmmer import SkillSpawmmer
 from game.jobs import NOVICE, Job
 from game.macro import Macro
 from service.config_file import CONFIG_FILE, HOTKEY, KEY, KEY_MONITORING, SKILL_SPAWMMER
+from service.keyboard import KEYBOARD
 from service.memory import MEMORY
 from PyQt6.QtGui import QIcon
 from config.icon import ICON_OFF, ICON_ON
@@ -24,6 +26,7 @@ class AppController(QObject):
     added_skill_equip = pyqtSignal(str, object)
     added_item_buff = pyqtSignal(object)
     added_item_debuff = pyqtSignal(object)
+    debug = pyqtSignal(str)
 
     def __init__(self):
         super().__init__(None)
@@ -37,10 +40,12 @@ class AppController(QObject):
         self.sync_data(NOVICE, False)
         self.sync_hotkeys()
         self.links = []
+        self.toggle_fly_wing = False
         self.updated_job.connect(self.sync_data)
 
     def sync_data(self, job, sync_hotkeys=True):
         self.job: Job = job
+        self.job_fly_wing_key = CONFIG_FILE.get_job_fly_wing_key(self.job)
         self.job_item_buffs = CONFIG_FILE.get_job_item_buffs(self.job)
         self.job_item_debuffs = CONFIG_FILE.get_job_item_debuffs(self.job)
         self.job_macros = CONFIG_FILE.get_job_macros(self.job)
@@ -106,6 +111,13 @@ class AppController(QObject):
         self.remove_all_hotkeys()
         self.sync_hotkey_events(self.job_spawn_skills, SKILL_SPAWMMER, SkillSpawmmer(None))
         self.sync_hotkey_events(self.job_hotkeys, HOTKEY, HotkeyEvent(None))
+        if self.job_fly_wing_key:
+            handler = keyboard.on_press_key(self.job_fly_wing_key, lambda _: self.on_fly_wing_key())
+            self.hotkeys_handler[self.job_fly_wing_key] = (handler, None)
+
+    def on_fly_wing_key(self):
+        KEYBOARD.add_pressed_key(self.job_fly_wing_key)
+        self.toggle_fly_wing = not self.toggle_fly_wing
 
     def sync_hotkey_events(self, events, resource, event_ctrl):
         for job_id, events in events.items():

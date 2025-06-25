@@ -11,7 +11,7 @@ from service.keyboard import KEYBOARD
 SKILL_MVP = 292
 
 
-class AutoAbracadabra(BaseEvent):
+class AutoAbracadabra:
 
     def __init__(self, game_event, name=ABRACADABRA, prop_seq=[], priority=Priority.REALTIME):
         super().__init__(game_event, name, prop_seq, priority)
@@ -28,7 +28,7 @@ class AutoAbracadabra(BaseEvent):
         self.running = True
         while self.running:
             GAME_EVENT.sync_game_data()
-            if GAME_EVENT.char.skill_using == SKILL_MVP:
+            if GAME_EVENT.char.abracadabra_skill == SKILL_MVP:
                 break
             if not CONFIG_FILE.get_value([job_id, SKILL_SPAWMMER, skill.id, MVP_ACTIVE]):
                 break

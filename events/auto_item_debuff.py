@@ -13,7 +13,8 @@ class AutoItemDebuff(BaseEvent):
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        super().check_condition()
+        if not super().check_condition():
+            return False
         item = self.game_event.char.next_item_debuff_to_use(APP_CONTROLLER.job_item_debuffs)
         if item is None:
             return False

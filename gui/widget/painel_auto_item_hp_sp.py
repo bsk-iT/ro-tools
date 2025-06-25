@@ -7,7 +7,8 @@ from gui.app_controller import APP_CONTROLLER
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
-from service.config_file import AUTO_ITEM, CITY_BLOCK, CONFIG_FILE, FLY_WING, HP_PERCENT, HP_POTION, KEY, MAP, MAP_ACTIVE, PERCENT, SP_PERCENT, SP_POTION, YGG
+from gui.widget.input_teleport import InputTeleport
+from service.config_file import AUTO_ITEM, CITY_BLOCK, CONFIG_FILE, FLY_WING, HP_PERCENT, HP_POTION, KEY, PERCENT, SP_PERCENT, SP_POTION, YGG
 from util.widgets import build_icon, build_label_info, build_label_subtitle, build_scroll_vbox, build_spinbox_percentage, clear_layout
 
 
@@ -91,7 +92,8 @@ class PainelAutoItemHpSp(QWidget):
         hbox.setSpacing(0)
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(build_icon(get_image(PATH_ITEM, "fly_wing")))
-        hbox.addWidget(InputKeybind(self, f"{job.id}:{AUTO_ITEM}:{FLY_WING}:{KEY}"))
+        hbox.addWidget(InputKeybind(self, f"{job.id}:{AUTO_ITEM}:{FLY_WING}:{KEY}", True))
+        hbox.addWidget(InputTeleport(self, f"{job.id}:{AUTO_ITEM}:{FLY_WING}:"))
         vbox.addLayout(hbox)
         return vbox
 
