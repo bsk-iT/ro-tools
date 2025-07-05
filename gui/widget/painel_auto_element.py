@@ -28,7 +28,7 @@ DEFAULT_FIRE = """--- Comum ---
 DEFAULT_WATER = """--- Comum ---
 
 --- MVP ---
-;1832; -> Ifrit [8]
+;1832; -> Ifrit [thor_v03]
 ;1115; -> Eddga [gld_dun01, pay_fild11]
 ;1086; -> Besouro-Ladrão Dourado [prt_sewb4]
 
