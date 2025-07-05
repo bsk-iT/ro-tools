@@ -2,7 +2,9 @@ class Offsets:
     MAX_HP = 0x4
     SP = 0x8
     MAX_SP = 0xC
+    Y_POSITION = 0x4
     BUFF_LIST = 0x474
+    BUFF_LIST_LATAM = 0x490
     WORLD = 0xCC
     ENTITY_LIST = 0x10
     PREV_ENTITY = 0x0

@@ -6,7 +6,7 @@ from events.base_event import BaseEvent, Priority
 
 from events.macro_event import MacroEvent
 from game.spawn_skill import SA_ABRACADABRA
-from service.config_file import ACTIVE, CONFIG_FILE, MACRO, MOUSE_CLICK, SKILL_SPAWMMER, SWAP_ATK, SWAP_DEF
+from service.config_file import ACTIVE, CONFIG_FILE, MACRO, MOUSE_CLICK, MOUSE_FLICK, SKILL_SPAWMMER, SWAP_ATK, SWAP_DEF
 from service.keyboard import KEYBOARD
 from service.mouse import MOUSE
 
@@ -24,9 +24,9 @@ class SkillSpawmmer(BaseEvent):
     def force_stop(self):
         self.running = False
         if self.auto_abracadabra:
-            self.auto_abracadabra.stop()
+            self.auto_abracadabra.stop(None, None)
 
-    def stop(self, job_id, skill):
+    def stop(self, key, job_id, skill):
         swap_def = CONFIG_FILE.get_value([job_id, *self.prop_seq, skill.id, SWAP_DEF])
         if swap_def and swap_def[ACTIVE] and self.running:
             time.sleep(0.1)
@@ -50,7 +50,7 @@ class SkillSpawmmer(BaseEvent):
             self.macro_atk.start(swap_attack[MACRO])
 
     def run(self, key, job_id, skill):
-        while self.running:
+        while self.running and not KEYBOARD.is_simulating_key(key):
             self.execute_action(key, job_id, skill)
 
     def execute_action(self, key, job_id, skill):
@@ -64,5 +64,6 @@ class SkillSpawmmer(BaseEvent):
         APP_CONTROLLER.add_hotkey_skill_spawmmer(job_id, skill, key, self)
         mouse_click = CONFIG_FILE.get_value([*base_prop_key, MOUSE_CLICK])
         if mouse_click or (mouse_click is None and skill.is_clicked):
-            MOUSE.click()
+            mouse_flick = CONFIG_FILE.get_value([*base_prop_key, MOUSE_FLICK])
+            MOUSE.click(mouse_flick)
         time.sleep(CONFIG_FILE.get_delay(base_prop_key))

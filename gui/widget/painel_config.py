@@ -1,9 +1,9 @@
 from PyQt6.QtWidgets import QVBoxLayout, QWidget, QLabel
 from PyQt6.QtCore import Qt
 
-from service.config_file import AUTO_CLOSE, BLOCK_CHAT_INPUT, CONFIG_FILE, DEFAULT, KEYBOARD_TYPE, PHYSICAL, VIRTUAL, WAITING
+from service.config_file import AUTO_CLOSE, BLOCK_CHAT_INPUT, CONFIG_FILE, DEFAULT, DRIVE, KEYBOARD_TYPE, PHYSICAL, VIRTUAL, WAITING
 from service.servers_file import SERVERS_FILE
-from util.widgets import build_link_file, build_radio_btn, build_scroll_vbox
+from util.widgets import build_link, build_link_file, build_radio_btn, build_scroll_vbox, is_interception_available
 
 
 class PainelConfig(QWidget):
@@ -39,10 +39,16 @@ class PainelConfig(QWidget):
         vbox.addWidget(QLabel("Tipo de simulação do teclado:"))
         self.rad_virtual = build_radio_btn("Virtual - Ações serão enviadas somente para o jogo | Não funciona combinações de tecla Ex: ALT+1")
         self.rad_physical = build_radio_btn("Físico - Afeta qualquer programa | Combinações de tecla são aceito Ex: ALT+1")
-        self.rad_virtual.toggled.connect(self.on_radio_keyboard_type)
-        self.rad_physical.toggled.connect(lambda: self.on_radio_keyboard_type)
+        self.rad_drive = build_radio_btn("Drive - Caso não funcione as opções acima. Requer instalação do Interception")
+        vbox_drive = QVBoxLayout()
+        vbox_drive.addWidget(self.rad_drive)
+        vbox_drive.addWidget(build_link("https://github.com/oblitum/Interception"))
+        self.rad_virtual.clicked.connect(self.on_radio_keyboard_type)
+        self.rad_physical.clicked.connect(self.on_radio_keyboard_type)
+        self.rad_drive.clicked.connect(self.on_radio_keyboard_type)
         vbox.addWidget(self.rad_virtual)
         vbox.addWidget(self.rad_physical)
+        vbox.addLayout(vbox_drive)
         layout.addWidget(widget)
 
     def on_radio_keyboard_type(self):
@@ -50,9 +56,15 @@ class PainelConfig(QWidget):
             CONFIG_FILE.update(KEYBOARD_TYPE, VIRTUAL)
         if self.rad_physical.isChecked():
             CONFIG_FILE.update(KEYBOARD_TYPE, PHYSICAL)
+        if self.rad_drive.isChecked():
+            CONFIG_FILE.update(KEYBOARD_TYPE, DRIVE)
 
     def sync_radio_keyboard_type(self):
         keyboard_type = CONFIG_FILE.read(KEYBOARD_TYPE)
+        if not is_interception_available():
+            keyboard_type = None if keyboard_type == DRIVE else keyboard_type
+            self.rad_drive.setDisabled(True)
+            self.rad_drive.setStyleSheet("color: #888;")
         if keyboard_type is None:
             keyboard_type = VIRTUAL
             CONFIG_FILE.update(KEYBOARD_TYPE, keyboard_type)
@@ -60,6 +72,9 @@ class PainelConfig(QWidget):
             self.rad_virtual.setChecked(True)
         if keyboard_type == PHYSICAL:
             self.rad_physical.setChecked(True)
+        if keyboard_type == DRIVE:
+            self.rad_drive.setChecked(True)
+
 
     def _build_radio_block_chat_input(self, layout):
         widget = QWidget()
@@ -69,9 +84,9 @@ class PainelConfig(QWidget):
         self.rad_chat_default = build_radio_btn("Continuar executando")
         self.rad_chat_auto_close = build_radio_btn("Bloquear automáticamente o chat do jogo")
         self.rad_chat_waiting = build_radio_btn("Aguardar o chat ser fechado para continuar executando")
-        self.rad_chat_default.toggled.connect(self.on_radio_block_chat_input)
-        self.rad_chat_auto_close.toggled.connect(self.on_radio_block_chat_input)
-        self.rad_chat_waiting.toggled.connect(self.on_radio_block_chat_input)
+        self.rad_chat_default.clicked.connect(self.on_radio_block_chat_input)
+        self.rad_chat_auto_close.clicked.connect(self.on_radio_block_chat_input)
+        self.rad_chat_waiting.clicked.connect(self.on_radio_block_chat_input)
         vbox.addWidget(self.rad_chat_default)
         vbox.addWidget(self.rad_chat_auto_close)
         vbox.addWidget(self.rad_chat_waiting)

@@ -10,7 +10,7 @@
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.1.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.1.0/ROTools_1.1.0.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.3.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.3.0/ROTools_1.3.0.zip)
 
 ### ⚠️ Atenção
 
@@ -85,7 +85,7 @@ Ferramentas específicas por profissão.
 #### ✨ Novas funcionalidades
 
 - **Auto-Teleport por ID de monstros**  
-  Tele para encontrar os mobs automaticamente. Connfigure os IDs dos monstros e o sistema usará automaticamente a Asa de Mosca quando encontrar algum deles.
+  Tele para encontrar os mobs automaticamente. Configure os IDs dos monstros e o sistema usará automaticamente a Asa de Mosca para encontrar algum deles.
 
 - **Auto-Abracadabra**  
   Use a habilidade Abracadabra automaticamente com controle de tempo e cancelamento seguro. Ideal para invocação contínua.
@@ -93,6 +93,11 @@ Ferramentas específicas por profissão.
 - **Links úteis personalizados por servidor**  
   Acesse ferramentas específicas do seu servidor (como sites de rankings, market, wiki, etc.) diretamente pelo app, com links configuráveis.
   
+- **Auto Switch para Elemento**  
+  Configure os IDs do monstros para que altere automaticamente os melhores equipes conforme a situação.
+
+- **Suporte com driver Intereception**  
+  Alguns jogos impede a simulação do clique dentro do jogo, o que requer algo mais robusto para funcionar.
 ---
 
 ## ⚙️ Eventos Disponíveis
@@ -130,6 +135,26 @@ ro-tools/
 └── util/ # Utilitários diversos
 ```
 
+## 🧩 Requisitos para o modo de simulação `"driver"` (Interception)
+
+Para que o modo `"driver"` funcione corretamente — utilizado para simular teclas e cliques de forma compatível com jogos que bloqueiam eventos simulados comuns (ex: `SendInput`, `keybd_event`) — é necessário instalar o driver **Interception** e sua respectiva biblioteca Python.
+
+### 📦 Instalação do driver Interception
+
+1. Baixe o driver a partir do repositório oficial:
+   [https://github.com/oblitum/Interception](https://github.com/oblitum/Interception)
+
+2. Extraia o conteúdo do arquivo `.zip`.
+
+3. Execute o instalador via terminal com permissão de administrador:
+
+  ```bash
+   install-interception.exe /install
+  ```
+4. Reinicie o computador após a instalação (recomendado).
+
+⚠️ Este driver atua em nível de kernel. É necessário permissão de administrador para funcionar corretamente.
+
 ## 🛠 Requisitos
 
 - Python 3.12+
@@ -138,6 +163,7 @@ ro-tools/
 - keyboard
 - pymem
 - psutil
+- interception-python
 
 Instale as dependências com:
 

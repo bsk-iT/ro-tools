@@ -33,7 +33,7 @@ def build_label_subtitle(text: str) -> QLabel:
 
 def get_color_by_id(_id) -> QColor:
     color = QColor()
-    for _type in ["attack", "defense", "song"]:
+    for _type in ["attack", "defense", "song", "element"]:
         if _id in [f"{_type}_1", f"{type}_1"]:
             color.setRgb(72, 133, 237)
             return color
@@ -45,6 +45,33 @@ def get_color_by_id(_id) -> QColor:
             return color
         if _id in [f"{_type}_4", f"{type}_4"]:
             color.setRgb(255, 99, 171)
+            return color
+        if _id in [f"{_type}_fire", f"{_type}_fire"]:
+            color.setRgb(255, 107, 74)
+            return color
+
+        if _id in [f"{_type}_water", f"{_type}_water"]:
+            color.setRgb(77, 166, 255)
+            return color
+
+        if _id in [f"{_type}_ground", f"{_type}_ground"]:
+            color.setRgb(167, 140, 107)
+            return color
+
+        if _id in [f"{_type}_wind", f"{_type}_wind"]:
+            color.setRgb(181, 227, 227)
+            return color
+
+        if _id in [f"{_type}_holy", f"{_type}_holy"]:
+            color.setRgb(255, 217, 106)
+            return color
+
+        if _id in [f"{_type}_dark", f"{_type}_dark"]:
+            color.setRgb(138, 108, 207)
+            return color
+
+        if _id in [f"{_type}_ghost", f"{_type}_ghost"]:
+            color.setRgb(204, 204, 255)
             return color
     return None
 
@@ -164,6 +191,8 @@ def build_spinbox_percentage(percentage_prop: str, label: str = None) -> QWidget
 
 
 def build_cbox_category(model, label):
+    if label is None:
+        return
     item = QStandardItem(label)
     item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEnabled)
     item.setFont(QFont(None, weight=QFont.Weight.Bold))
@@ -192,6 +221,15 @@ def build_link(link):
 
 def build_link_icon(icon_path: str, url: str, size=25) -> QLabel:
     return ClickableLabel(icon_path, url, size)
+
+
+def is_interception_available():
+    try:
+        from interception import Interception
+
+        return True
+    except Exception as e:
+        return False
 
 
 class ClickableLabel(QLabel):

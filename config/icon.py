@@ -30,6 +30,7 @@ ICON_SONG = resource_path(PATH_ICON + "song.png")
 ICON_GITHUB = resource_path(PATH_ICON + "github.png")
 ICON_MVP = resource_path(PATH_ICON + "mvp.png")
 ICON_TELEPORT = resource_path(PATH_ICON + "teleport.png")
+ICON_FLICK = resource_path(PATH_ICON + "flick.png")
 
 IMG_RED_POTION = resource_path(PATH_ITEM + "red_potion.gif")
 IMG_BLUE_POTION = resource_path(PATH_ITEM + "blue_potion.gif")

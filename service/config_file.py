@@ -1,3 +1,4 @@
+import re
 from typing import Any, List
 from config.app import APP_DELAY
 from game.buff import AUTO_BUFF_MAP, ITEM_BUFF_MAP, ITEM_DEBUFF_MAP
@@ -13,6 +14,7 @@ SKILL_BUFF = "skill_buff"
 SKILL_EQUIP = "skill_equip"
 MACRO = "macro"
 HOTKEY = "hotkey"
+AUTO_ELEMENT = "auto_element"
 ITEM_BUFF = "item_buff"
 ITEM_DEBUFF = "item_debuff"
 ABRACADABRA = "abracadabra"
@@ -31,6 +33,7 @@ KEY = "key"
 DELAY = "delay"
 DELAY_ACTIVE = "delay_active"
 MOUSE_CLICK = "mouse_click"
+MOUSE_FLICK = "mouse_flick"
 MAP = "map"
 MAP_ACTIVE = "map_active"
 KEY_MONITORING = "key_monitoring"
@@ -45,6 +48,7 @@ KNIFE_KEY = "knife_key"
 VIOLIN_KEY = "violin_key"
 VIRTUAL = "virtual"
 PHYSICAL = "physical"
+DRIVE = "drive"
 DEFAULT = "default"
 AUTO_CLOSE = "auto_close"
 WAITING = "waiting"
@@ -52,6 +56,7 @@ MVP_ACTIVE = "mvp_active"
 DEBUG_ACTIVE = "debug_active"
 AUTO_TELEPORT = "auto_teleport"
 MOB_IDS = "mob_ids"
+MACRO_KEY = "macro_key"
 
 
 class ConfigFile(File):
@@ -70,7 +75,8 @@ class ConfigFile(File):
         city_block = self.get_value([*prop_seq, CITY_BLOCK])
         if not city_block or not game:
             return False
-        return game.char.current_map in SERVERS_FILE.get_value(CITY)
+        maps = SERVERS_FILE.get_value(CITY)
+        return any(_map in game.char.current_map for _map in maps)
 
     def is_block_chat_open(self, game, condition) -> bool:
         block_chat = self.read(BLOCK_CHAT_INPUT)
@@ -88,8 +94,8 @@ class ConfigFile(File):
         map_active = self.get_value([*prop_seq, MAP_ACTIVE])
         if not map_active or game:
             return True
-        map_prop = self.get_value([*prop_seq, MAP])
-        return game.char.current_map in SERVERS_FILE.get_value(map_prop)
+        maps = SERVERS_FILE.get_value(self.get_value([*prop_seq, MAP]))
+        return any(_map in game.char.current_map for _map in maps)
 
     def update_config(self, value: Any, prop_seq: List[str]):
         config_key = ":".join(prop_seq)
@@ -126,6 +132,9 @@ class ConfigFile(File):
     def get_job_hotkeys(self, job):
         return self._get_job_resource(job, HOTKEY, MACRO_MAP)
 
+    def get_job_auto_elements(self, job):
+        return self._get_job_resource(job, AUTO_ELEMENT, MACRO_MAP)
+
     def get_job_buff_skills(self, job):
         return self._get_job_resource(job, SKILL_BUFF, AUTO_BUFF_MAP)
 
@@ -148,11 +157,14 @@ class ConfigFile(File):
     def get_job_item_debuffs(self, job):
         return self._get_items(job, ITEM_DEBUFF, ITEM_DEBUFF_MAP)
 
-    def get_job_fly_wing_key(self, job):
-        fly_wing_data = self.get_value([job.id, AUTO_ITEM, FLY_WING])
+    def get_fly_wing_key(self):
+        fly_wing_data = self.get_value([FLY_WING])
         if fly_wing_data is None:
             return None
         return fly_wing_data.get(KEY, False)
 
+    def get_mob_ids(self, key_base):
+        mob_ids_config = re.sub(r"[^0-9;]", "", CONFIG_FILE.get_value([*key_base, MOB_IDS]))
+        return [int(x) for x in mob_ids_config.split(";") if x.strip() != "" and (int(x) > 1000 or int(x) == 565)]
 
 CONFIG_FILE = ConfigFile("config.json")

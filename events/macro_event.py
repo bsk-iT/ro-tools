@@ -28,7 +28,7 @@ class MacroEvent(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         job_id = APP_CONTROLLER.get_job_id_by(macro_id)
-        if not macro_id and not job_id:
+        if not macro_id or not job_id:
             self.running = False
             return
         prop_seq = [job_id, *self.prop_seq, macro_id]

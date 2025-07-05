@@ -11,6 +11,7 @@ from gui.widget.cbox_skill import CboxSkill
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_mouse_click import InputMouseClick
+from gui.widget.input_mouse_flick import InputMouseFlick
 from gui.widget.input_mvp import InputMvp
 from gui.widget.input_swap import InputSwap
 from service.config_file import CONFIG_FILE, KEY, SKILL_SPAWMMER
@@ -64,6 +65,7 @@ class PainelJobSkillSpawmmer(QWidget):
         key_base = f"{job_id}:{SKILL_SPAWMMER}:{skill.id}:"
         hbox.addWidget(InputKeybind(self, key_base + KEY, True))
         hbox.addWidget(InputMouseClick(self, key_base, skill.is_clicked))
+        hbox.addWidget(InputMouseFlick(self, key_base))
         hbox.addWidget(InputDelay(self, key_base))
         if skill.id == SA_ABRACADABRA.id:
             hbox.addWidget(InputMvp(self, key_base))

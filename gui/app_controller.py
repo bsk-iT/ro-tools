@@ -1,4 +1,3 @@
-import threading
 import keyboard
 from PyQt6.QtCore import pyqtSignal, QObject
 from events.hotkey_event import HotkeyEvent
@@ -18,6 +17,7 @@ class AppController(QObject):
     updated_process = pyqtSignal()
     added_hotkey = pyqtSignal(str, Macro)
     added_macro = pyqtSignal(str, Macro)
+    added_auto_element = pyqtSignal(str, Macro)
     add_macro_select = pyqtSignal(str, Macro)
     removed_macro = pyqtSignal(Macro)
     updated_job = pyqtSignal(Job)
@@ -45,7 +45,8 @@ class AppController(QObject):
 
     def sync_data(self, job, sync_hotkeys=True):
         self.job: Job = job
-        self.job_fly_wing_key = CONFIG_FILE.get_job_fly_wing_key(self.job)
+        self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
+        self.job_auto_elements = CONFIG_FILE.get_job_auto_elements(self.job)
         self.job_item_buffs = CONFIG_FILE.get_job_item_buffs(self.job)
         self.job_item_debuffs = CONFIG_FILE.get_job_item_debuffs(self.job)
         self.job_macros = CONFIG_FILE.get_job_macros(self.job)
@@ -91,9 +92,9 @@ class AppController(QObject):
     def _add_hotkey(self, job_id, event, key, event_ctrl):
         if key is None or not self.running:
             return
-        handler = keyboard.on_press_key(key, lambda _: event_ctrl.start(key, job_id, event))
+        handler = keyboard.on_press_key(key, lambda _: {None if KEYBOARD.is_simulating_key(key) else event_ctrl.start(key, job_id, event)})
         self.hotkeys_handler[key] = (handler, event_ctrl)
-        keyboard.on_release_key(key, lambda _: event_ctrl.stop(job_id, event))
+        keyboard.on_release_key(key, lambda _: {None if KEYBOARD.is_simulating_key(key) else event_ctrl.stop(key, job_id, event)})
 
     def remove_hotkey(self, key):
         if key not in self.hotkeys_handler:
@@ -111,12 +112,12 @@ class AppController(QObject):
         self.remove_all_hotkeys()
         self.sync_hotkey_events(self.job_spawn_skills, SKILL_SPAWMMER, SkillSpawmmer(None))
         self.sync_hotkey_events(self.job_hotkeys, HOTKEY, HotkeyEvent(None))
-        if self.job_fly_wing_key:
-            handler = keyboard.on_press_key(self.job_fly_wing_key, lambda _: self.on_fly_wing_key())
-            self.hotkeys_handler[self.job_fly_wing_key] = (handler, None)
+        if self.fly_wing_key:
+            handler = keyboard.on_press_key(self.fly_wing_key, lambda _: self.on_fly_wing_key())
+            self.hotkeys_handler[self.fly_wing_key] = (handler, None)
 
     def on_fly_wing_key(self):
-        KEYBOARD.add_pressed_key(self.job_fly_wing_key)
+        KEYBOARD.add_pressed_key(self.fly_wing_key)
         self.toggle_fly_wing = not self.toggle_fly_wing
 
     def sync_hotkey_events(self, events, resource, event_ctrl):

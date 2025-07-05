@@ -13,14 +13,12 @@ class SkillBuff(BaseEvent):
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        if not super().check_condition():
-            return False
+        super().check_condition()
         (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_buff_skills)
         if buff_id is None:
-            return
-        base_prop_seq = [job_id, *self.prop_seq]
-        is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, base_prop_seq)
-        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, base_prop_seq)
+            return False
+        is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, [job_id, *self.prop_seq])
+        is_blocked_in_city = CONFIG_FILE.is_blocked_in_city(self.game_event, [APP_CONTROLLER.job.id, *self.prop_seq])
         is_block_chat_waiting = CONFIG_FILE.is_block_chat_open(self.game_event, WAITING)
         return is_valid_map and not is_blocked_in_city and not is_block_chat_waiting
 

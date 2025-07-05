@@ -13,8 +13,9 @@ SKILL_MVP = 292
 
 class AutoAbracadabra:
 
-    def __init__(self, game_event, name=ABRACADABRA, prop_seq=[], priority=Priority.REALTIME):
-        super().__init__(game_event, name, prop_seq, priority)
+    def __init__(self, game_event, name=ABRACADABRA):
+        self.game_event =game_event
+        self.name = name
 
     def stop(self, job_id, skill):
         self.running = False

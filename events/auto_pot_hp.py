@@ -13,8 +13,7 @@ class AutoPotHP(BaseEvent):
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        if not super().check_condition():
-            return False
+        super().check_condition()
         base_prop_seq = [APP_CONTROLLER.job.id, *self.prop_seq]
         hp_percent = CONFIG_FILE.get_value([*base_prop_seq, PERCENT]) or 0
         is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, base_prop_seq)

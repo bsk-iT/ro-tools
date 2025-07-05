@@ -44,4 +44,32 @@ APP_STYLE = """
     #attack_4, #defense_4, #song_4 {
         color: rgb(255, 99, 171);
     }
+    
+    #element_fire {
+        color: rgb(255, 107, 74);
+    }
+
+    #element_water {
+        color: rgb(77, 166, 255); 
+    }
+
+    #element_ground {
+        color: rgb(167, 140, 107);
+    }
+
+    #element_wind {
+        color: rgb(181, 227, 227);
+    }
+
+    #element_holy {
+        color: rgb(255, 217, 106);
+    }
+
+    #element_dark {
+        color: rgb(138, 108, 207);
+    }
+
+    #element_ghost {
+        color: rgb(204, 204, 255);
+    }
 """

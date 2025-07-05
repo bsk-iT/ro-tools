@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTabWidget
 from PyQt6.QtCore import Qt
 
 from gui.widget.cbox_jobs import CboxJobs
+from gui.widget.painel_auto_element import PainelAutoElement
 from gui.widget.painel_auto_item_buff import PainelAutoItemBuff
 from gui.widget.painel_auto_item_debuff import PainelAutoItemDebuff
 from gui.widget.painel_auto_item_hp_sp import PainelAutoItemHpSp
@@ -41,6 +42,7 @@ class PainelHome(QWidget):
         tab_panel.addTab(PainelJobSkillSpawmmer(self), "Skill Spawmmer")
         tab_panel.addTab(PainelJobSkillBuff(self), "Skill Buff")
         tab_panel.addTab(PainelJobEquipBuff(self), "Equip. Buff")
+        tab_panel.addTab(PainelAutoElement(self), "Auto Element")
         tab_panel.addTab(PainelJobHotkey(self), "Hotkey")
         tab_panel.addTab(PainelJobMacro(self), "Macro")
         return tab_panel

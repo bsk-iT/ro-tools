@@ -46,6 +46,8 @@ class BaseEvent:
     def execute_action(self):
         from gui.app_controller import APP_CONTROLLER
 
+        if not self.running:
+            return
         if self.name != AUTO_TELEPORT and CONFIG_FILE.is_using_fly_wing(APP_CONTROLLER.job.id):
             time.sleep(0.1)
             KEYBOARD.press_key(CONFIG_FILE.get_value([APP_CONTROLLER.job.id, AUTO_ITEM, FLY_WING, KEY]))

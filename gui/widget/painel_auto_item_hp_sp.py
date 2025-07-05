@@ -92,8 +92,8 @@ class PainelAutoItemHpSp(QWidget):
         hbox.setSpacing(0)
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         hbox.addWidget(build_icon(get_image(PATH_ITEM, "fly_wing")))
-        hbox.addWidget(InputKeybind(self, f"{job.id}:{AUTO_ITEM}:{FLY_WING}:{KEY}", True))
-        hbox.addWidget(InputTeleport(self, f"{job.id}:{AUTO_ITEM}:{FLY_WING}:"))
+        hbox.addWidget(InputKeybind(self, f"{FLY_WING}:{KEY}", True))
+        hbox.addWidget(InputTeleport(self, f"{FLY_WING}:"))
         vbox.addLayout(hbox)
         return vbox
 
