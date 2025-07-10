@@ -1,5 +1,5 @@
 import copy
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame, QScrollArea
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QPixmap, QIcon
 
@@ -21,6 +21,8 @@ class PainelJobMacro(QWidget):
         super().__init__(parent)
         self.layout: QVBoxLayout = QVBoxLayout(self)
         self.cbox_macro: CboxMacro = CboxMacro(self)
+        self.last_scroll: QScrollArea = None
+        self.last_pos_vertical_scroll = None
         self._config_layout()
         APP_CONTROLLER.updated_job.connect(self.update_macros)
 
@@ -50,7 +52,10 @@ class PainelJobMacro(QWidget):
                 vbox.addWidget(build_label_info(job.name))
                 vbox.addLayout(vbox_macro)
             job = job.previous_job
+        self.last_scroll = scroll
         self.layout.addWidget(scroll)
+        if self.last_pos_vertical_scroll:
+            scroll.verticalScrollBar().setValue(self.last_pos_vertical_scroll)
 
     def _build_macro_inputs(self, macro, job_id):
         widget = QWidget()
@@ -122,6 +127,7 @@ class PainelJobMacro(QWidget):
 
     def _on_add_remove_keybind(self, key_seq, active):
         CONFIG_FILE.update(key_seq + ACTIVE, active)
+        self.last_pos_vertical_scroll = self.last_scroll.verticalScrollBar().value()
         self.update_macros()
 
     def _build_btn_remove_macro(self, job_id, key_seq, macro):

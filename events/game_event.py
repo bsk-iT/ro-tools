@@ -3,6 +3,7 @@ import time
 from typing import List
 from config.app import APP_MONITORING_DELAY
 from events.auto_element import AutoElement
+from events.auto_halter_lead import AutoHalterLead
 from events.auto_item_buff import AutoItemBuff
 from events.auto_item_debuff import AutoItemDebuff
 from events.auto_pot_hp import AutoPotHP
@@ -18,7 +19,7 @@ from game.char import Char
 class GameEvent:
     def __init__(self):
         self.char = Char()
-        self.events_item: List[BaseEvent] = [AutoPotHP(self), AutoPotSP(self), AutoYgg(self), AutoItemBuff(self), AutoItemDebuff(self), AutoTeleport(self), AutoElement(self)]
+        self.events_item: List[BaseEvent] = [AutoPotHP(self), AutoPotSP(self), AutoYgg(self), AutoItemBuff(self), AutoItemDebuff(self), AutoTeleport(self), AutoElement(self), AutoHalterLead(self)]
         self.events_skill: List[BaseEvent] = [SkillBuff(self), SkillEquip(self)]
         self.running = False
 

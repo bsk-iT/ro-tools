@@ -24,6 +24,7 @@ HP_POTION = "hp_potion"
 SP_POTION = "sp_potion"
 YGG = "ygg"
 FLY_WING = "fly_wing"
+HALTER_LEAD = "halter_lead"
 
 # Properties
 HP_PERCENT = "hp_percent"
@@ -34,6 +35,9 @@ DELAY = "delay"
 DELAY_ACTIVE = "delay_active"
 MOUSE_CLICK = "mouse_click"
 MOUSE_FLICK = "mouse_flick"
+BLOCK_QUAGMIRE = "block_quagmire"
+USE_MOVIMENT = "use_moviment"
+MOVIMENT_CELLS = "moviment_cells"
 MAP = "map"
 MAP_ACTIVE = "map_active"
 KEY_MONITORING = "key_monitoring"
@@ -82,10 +86,10 @@ class ConfigFile(File):
         block_chat = self.read(BLOCK_CHAT_INPUT)
         return block_chat == condition and game.char.chat_bar_enabled
 
-    def is_using_fly_wing(self, job_id) -> bool:
+    def is_using_fly_wing(self) -> bool:
         from service.keyboard import KEYBOARD
 
-        fly_wing_key = self.get_value([job_id, AUTO_ITEM, FLY_WING, KEY])
+        fly_wing_key = self.get_value([AUTO_ITEM, FLY_WING, KEY])
         if not fly_wing_key:
             return False
         return KEYBOARD.was_key_pressed_recently(fly_wing_key)
@@ -158,7 +162,7 @@ class ConfigFile(File):
         return self._get_items(job, ITEM_DEBUFF, ITEM_DEBUFF_MAP)
 
     def get_fly_wing_key(self):
-        fly_wing_data = self.get_value([FLY_WING])
+        fly_wing_data = self.get_value([AUTO_ITEM, FLY_WING])
         if fly_wing_data is None:
             return None
         return fly_wing_data.get(KEY, False)

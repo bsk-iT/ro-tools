@@ -14,7 +14,7 @@ SKILL_MVP = 292
 class AutoAbracadabra:
 
     def __init__(self, game_event, name=ABRACADABRA):
-        self.game_event =game_event
+        self.game_event = game_event
         self.name = name
 
     def stop(self, job_id, skill):

@@ -98,6 +98,13 @@ Ferramentas específicas por profissão.
 
 - **Suporte com driver Intereception**  
   Alguns jogos impede a simulação do clique dentro do jogo, o que requer algo mais robusto para funcionar.
+
+- **Auto Rédea**  
+  Utiliza rédea automaticamente quando andar X células.
+
+- **Block Pantano dos Mortos**  
+  Evita utilizar certas skill quando estiver na área do Pantano dos Mortos
+
 ---
 
 ## ⚙️ Eventos Disponíveis

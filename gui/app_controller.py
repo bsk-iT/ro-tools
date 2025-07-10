@@ -113,6 +113,7 @@ class AppController(QObject):
         self.sync_hotkey_events(self.job_spawn_skills, SKILL_SPAWMMER, SkillSpawmmer(None))
         self.sync_hotkey_events(self.job_hotkeys, HOTKEY, HotkeyEvent(None))
         if self.fly_wing_key:
+            self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
             handler = keyboard.on_press_key(self.fly_wing_key, lambda _: self.on_fly_wing_key())
             self.hotkeys_handler[self.fly_wing_key] = (handler, None)
 
@@ -159,6 +160,7 @@ class AppController(QObject):
         from events.game_event import GAME_EVENT
 
         GAME_EVENT.stop()
+        self.toggle_fly_wing = False
         self.skill_spammer_event.force_stop()
         self.remove_all_hotkeys()
         self.status_toggle.setIcon(QIcon(ICON_OFF))

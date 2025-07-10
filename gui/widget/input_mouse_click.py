@@ -23,8 +23,8 @@ class InputMouseClick(QWidget):
         self.layout.addWidget(self.toggle)
 
     def _config_events(self) -> None:
-        self.toggle.toggled.connect(self._on_active_delay)
-        self._on_active_delay(self.toggle.isChecked())
+        self.toggle.toggled.connect(self._on_active_click)
+        self._on_active_click(self.toggle.isChecked())
 
     def _build_toggle(self) -> QToolButton:
         toggle = QToolButton()
@@ -36,6 +36,6 @@ class InputMouseClick(QWidget):
         toggle.setIconSize(ICON_BTN)
         return toggle
 
-    def _on_active_delay(self, value: bool) -> None:
-        self.toggle.setToolTip(f"Mouse click {"ON" if value else "OFF"}")
+    def _on_active_click(self, value: bool) -> None:
+        self.toggle.setToolTip(f"Mouse click - {"LIGADO" if value else "DESLIGADO"}")
         CONFIG_FILE.update(self.key_base + MOUSE_CLICK, value)

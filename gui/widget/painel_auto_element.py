@@ -19,7 +19,7 @@ DEFAULT_FIRE = """--- Comum ---
 ;1190; -> Senhor dos Orcs [gef_fild10]
 ;1312; -> General Tartaruga [tur_dun04]
 ;1885; -> Gopinich [mosk_dun03]
-;1719; -> Detardeurus [abyss03]
+;1648; -> Mestre Ferreiro Howard [lhz_dun03]
 
 --- Mini ---
 ;1289; -> Maya Puple [anthell01, gld_dun03]
@@ -31,6 +31,8 @@ DEFAULT_WATER = """--- Comum ---
 ;1832; -> Ifrit [thor_v03]
 ;1115; -> Eddga [gld_dun01, pay_fild11]
 ;1086; -> Besouro-Ladrão Dourado [prt_sewb4]
+;1652; -> Egnigem Cenia [lhz_dun02]
+;1646; -> Lorde Seyren [lhz_dun03]
 
 --- Mini ---
 """
@@ -43,6 +45,8 @@ DEFAULT_GROUND = """--- Comum ---
 ;1059; -> Abelha Rainha [mjolnir_04]
 ;1688; -> Lady Tanee [ayo_dun02]
 ;1630; -> Lady Branca [lou_dun03]
+;1650; -> Atiradora de Elite Ceci [lhz_dun03]
+
 
 --- Mini ---
 """
@@ -76,6 +80,9 @@ DEFAULT_HOLY = """--- Comum ---
 ;1583; -> Tao Gunka [beach_dun]
 ;1719; -> Detardeurus [abyss03]
 ;1734; -> Kiel D-01 [kh_dun02]
+;2022; -> Sombra de Nidhogg
+;1647; -> Algoz Eremes [lhz_dun03]
+;1785; -> Atroce [ra_fild02, ra_fild03, ra_fild04, ve_fild01, ve_fild02]
 
 --- Mini ---
 ;1582; -> Deviling [pay_fild04, yuno_fild03]
@@ -88,6 +95,7 @@ DEFAULT_DARK = """--- Comum ---
 --- MVP ---
 ;1751; -> Valquíria Randrige [odin_tem03]
 ;1685; -> Vesper [jupe_core]
+;1649; -> Suma-Sacerdote Margar [lhz_dun03]
 
 --- Mini ---
 ;1096; -> Angeling [pay_fild04, xmas_dun01, yuno_fild03]
@@ -101,6 +109,7 @@ DEFAULT_GHOST = """--- Comum ---
 ;1768; -> Pesar Noturno [ra_san05]
 ;1873; -> Beelzebub [abbey03]
 ;1418; -> Serpente Suprema [gon_dun03]
+;1651; -> Arquimaga Kathryne [lhz_dun03]
 
 --- Mini ---
 ;1120; -> Ghostring [pay_fild04, treasure02, prt_maze03, gld_dun04]

@@ -6,7 +6,7 @@ from events.base_event import BaseEvent, Priority
 
 from events.macro_event import MacroEvent
 from game.spawn_skill import SA_ABRACADABRA
-from service.config_file import ACTIVE, CONFIG_FILE, MACRO, MOUSE_CLICK, MOUSE_FLICK, SKILL_SPAWMMER, SWAP_ATK, SWAP_DEF
+from service.config_file import ACTIVE, AUTO_ITEM, CONFIG_FILE, HALTER_LEAD, KEY, MACRO, MOUSE_CLICK, MOUSE_FLICK, SKILL_SPAWMMER, SWAP_ATK, SWAP_DEF
 from service.keyboard import KEYBOARD
 from service.mouse import MOUSE
 
@@ -23,7 +23,7 @@ class SkillSpawmmer(BaseEvent):
 
     def force_stop(self):
         self.running = False
-        if self.auto_abracadabra:
+        if self.is_abracadabra_active:
             self.auto_abracadabra.stop(None, None)
 
     def stop(self, key, job_id, skill):
@@ -55,9 +55,13 @@ class SkillSpawmmer(BaseEvent):
 
     def execute_action(self, key, job_id, skill):
         from gui.app_controller import APP_CONTROLLER
+        from events.game_event import GAME_EVENT
 
         if not job_id or not skill:
             return
+        GAME_EVENT.sync_game_data()
+        if HALTER_LEAD in GAME_EVENT.char.item_buffs:
+            KEYBOARD.press_key(CONFIG_FILE.read(f"{AUTO_ITEM}:{HALTER_LEAD}:{KEY}"))
         base_prop_key = [job_id, *self.prop_seq, skill.id]
         APP_CONTROLLER.remove_hotkey(key)
         KEYBOARD.press_key(key)

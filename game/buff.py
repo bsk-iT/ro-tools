@@ -2,45 +2,46 @@ from config.icon import PATH_BUFF_SKILL, PATH_ITEM, get_image
 
 
 class Buff:
-    def __init__(self, id, name, priority=0):
+    def __init__(self, id, name, priority=0, block_quagmire=False):
         self.id = id
         self.name = name
         self.icon = None
         self.priority = priority
+        self.block_quagmire = block_quagmire
 
     def __str__(self):
         return self.name
 
 
 class Item(Buff):
-    def __init__(self, buff_id, name, priority=0):
-        super().__init__(buff_id, name, priority)
+    def __init__(self, buff_id, name, priority=0, block_quagmire=False):
+        super().__init__(buff_id, name, priority, block_quagmire)
         self.icon = get_image(PATH_ITEM, self.id)
 
 
 class Skill(Buff):
-    def __init__(self, buff_id, name, priority=0):
-        super().__init__(buff_id, name, priority)
+    def __init__(self, buff_id, name, priority=0, block_quagmire=False):
+        super().__init__(buff_id, name, priority, block_quagmire)
         self.icon = get_image(PATH_BUFF_SKILL, self.id)
 
 
 class Debuff(Buff):
-    def __init__(self, buff_id, name, recover_status, priority=0):
-        super().__init__(buff_id, name, priority)
+    def __init__(self, buff_id, name, recover_status, priority=0, block_quagmire=False):
+        super().__init__(buff_id, name, priority, block_quagmire)
         self.icon = get_image(PATH_ITEM, self.id)
         self.recover_status = recover_status
 
 
 # ----- Item -----
 BLESS_SCROLL = Item("bless_scroll", "Scroll de Benção")
-INC_AGI_UP_SCROLL = Item("inc_agi_up_scroll", "Scroll de Aumentar Agilidade")
+INC_AGI_UP_SCROLL = Item("inc_agi_up_scroll", "Scroll de Aumentar Agilidade", 0, True)
 CONCENTRATION_POTION = Item("concentration_potion", "Poção da Concentração")
 AWAKENING_POTION = Item("awakening_potion", "Poção do Despertar")
 BERSERK_POTION = Item("berserk_potion", "Poção da Fúria")
 RESENTMENT_BOX = Item("resentment_box", "Caixa do Ressentimento")
 THUNDER_BOX = Item("thunder_box", "Caixa do Trovão")
 DROWSINESS_BOX = Item("drowsiness_box", "Caixa da Sonolência")
-GLOOM_BOX = Item("gloom_box", "Caixa da Escuridão")
+GLOOM_BOX = Item("gloom_box", "Caixa da Escuridão", 0, True)
 SUNLIGHT_BOX = Item("sunlight_box", "Caixa da Luz do Sol")
 ALOE_VERA = Item("aloe_vera", "Aloe Vera")
 PAIN_KILLER = Item("pain_killer", "Analgésico")
@@ -62,6 +63,7 @@ VIT_FOOD = Item("vit_food", "VIT Food")
 INT_FOOD = Item("int_food", "INT Food")
 DEX_FOOD = Item("dex_food", "DEX Food")
 LUK_FOOD = Item("luk_food", "LUK Food")
+HALTER_LEAD = Item("halter_lead", "Rédeas")
 
 ITEM_BUFF_MAP = {
     "bless_scroll": BLESS_SCROLL,
@@ -94,6 +96,7 @@ ITEM_BUFF_MAP = {
     "int_food": INT_FOOD,
     "dex_food": DEX_FOOD,
     "luk_food": LUK_FOOD,
+    "halter_lead": HALTER_LEAD
 }
 
 ITEM_BUFF_GROUP = {
@@ -115,6 +118,7 @@ SILENCE = "silence"
 HALLUCINATION = "hallucination"
 HALLUCINATION_WALK = "hallucination_walk"
 SILENCE = "silence"
+QUAGMIRE = "quagmire"
 
 PANACEA = Debuff("panacea", "Panacea", [BLIND, CONFUSION, CURSE, POISON, SILENCE, HALLUCINATION, HALLUCINATION_WALK])
 GREEN_POTION = Debuff("green_potion", "Poção Verde", [BLIND, CONFUSION, POISON, SILENCE], 1)
@@ -147,16 +151,16 @@ MC_LOUD = Skill("mc_loud", "Grito de Guerra", 5)
 AL_ANGELUS = Skill("al_angelus", "Angelus")
 
 # Archer
-AC_CONCENTRATION = Skill("ac_concentration", "Concentrar", 5)
+AC_CONCENTRATION = Skill("ac_concentration", "Concentrar", 5, True)
 
 # Knight
-KN_TWOHANDQUICKEN = Skill("kn_twohandquicken", "Rapidez com Duas Mãos")
-KN_ONEHAND = Skill("kn_onehand", "Rapidez com Uma Mão")
+KN_TWOHANDQUICKEN = Skill("kn_twohandquicken", "Rapidez com Duas Mãos", 0, True)
+KN_ONEHAND = Skill("kn_onehand", "Rapidez com Uma Mão", 0, True)
 
 # Crusader
 CR_AUTOGUARD = Skill("cr_autoguard", "Bloqueio")
 CR_DEFENDER = Skill("cr_defender", "Aura Sagrada")
-CR_SPEARQUICKEN = Skill("cr_spearquicken", "Rapidez com Lança")
+CR_SPEARQUICKEN = Skill("cr_spearquicken", "Rapidez com Lança", 0, True)
 CR_REFLECTSHIELD = Skill("cr_reflectshield", "Escudo Refletor")
 CR_SHRINK = Skill("cr_shrink", "Escudo Refletor")
 
@@ -171,11 +175,11 @@ AS_CLOAKING = Skill("as_cloaking", "Furtividade")
 AS_POISONREACT = Skill("as_poisonreact", "Refletir Veneno")
 
 # Blacksmith
-BS_ADRENALINE = Skill("bs_adrenaline", "Adrenalina Pura")
+BS_ADRENALINE = Skill("bs_adrenaline", "Adrenalina Pura", 0, True)
 BS_MAXIMIZE = Skill("bs_maximize", "Amplificar Poder")
 BS_OVERTHRUST = Skill("bs_overthrust", "Força Violenta")
 BS_WEAPONPERFECT = Skill("bs_weaponperfect", "Manejo Perfeito")
-BS_ADRENALINE2 = Skill("bs_adrenaline2", "Adrenalina Concentrada")
+BS_ADRENALINE2 = Skill("bs_adrenaline2", "Adrenalina Concentrada", 0, True)
 
 # Alchemist
 AM_RESURRECTHOMUN = Skill("am_resurrecthomun", "Ressuscitar Homunculus")
@@ -212,7 +216,7 @@ ST_REJECTSWORD = Skill("st_rejectsword", "Instinto de Defesa")
 ST_PRESERVE = Skill("st_preserve", "Preservar")
 
 # Whiesmith
-WS_CARTBOOST = Skill("ws_cartboost", "Impulso no Carrinho")
+WS_CARTBOOST = Skill("ws_cartboost", "Impulso no Carrinho", 0, True)
 WS_MELTDOWN = Skill("ws_meltdown", "Golpe Estilhaçante")
 WS_OVERTHRUSTMAX = Skill("ws_overthrustmax", "Força Violentíssima")
 
@@ -220,8 +224,8 @@ WS_OVERTHRUSTMAX = Skill("ws_overthrustmax", "Força Violentíssima")
 HP_BASILICA = Skill("hp_basilica", "Basílica")
 
 # Sniper
-SN_SIGHT = Skill("sn_sight", "Visão Real", 4)
-SN_WINDWALK = Skill("sn_windwalk", "Caminho do Vento")
+SN_SIGHT = Skill("sn_sight", "Visão Real", 4, True)
+SN_WINDWALK = Skill("sn_windwalk", "Caminho do Vento", 0, True)
 
 # Taekwon
 TK_READYSTORM = Skill("tk_readystorm", "Postura do Tornado")

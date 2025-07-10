@@ -59,7 +59,7 @@ class InputKeybind(QPushButton):
             return
         self.listenning = False
         if key == Qt.Key.Key_Escape:
-            self.setText(self.key_sequence.toString())
+            self.setText(self.key_sequence.toString()) if self.key_sequence else self._remove_hotkey()
             return
         if key == Qt.Key.Key_Backspace:
             self._remove_hotkey()

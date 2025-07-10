@@ -1,7 +1,7 @@
 from events.base_event import BaseEvent, Priority
 
 from events.macro_event import MacroEvent
-from service.config_file import CONFIG_FILE, MACRO, SKILL_EQUIP, WAITING
+from service.config_file import CONFIG_FILE, HALTER_LEAD, MACRO, SKILL_EQUIP, WAITING
 
 
 class SkillEquip(BaseEvent):
@@ -14,7 +14,9 @@ class SkillEquip(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         super().check_condition()
-        (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills)
+        if HALTER_LEAD in self.game_event.char.item_buffs:
+            return False
+        (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills, self.prop_seq)
         if buff_id is None:
             return False
         is_valid_map = CONFIG_FILE.is_valid_map(self.game_event, [job_id, *self.prop_seq])
@@ -26,7 +28,7 @@ class SkillEquip(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         super().execute_action()
-        (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills)
+        (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills, self.prop_seq)
         if buff_id is None:
             return
         macro_id = CONFIG_FILE.get_value([job_id, *self.prop_seq, buff_id, MACRO])

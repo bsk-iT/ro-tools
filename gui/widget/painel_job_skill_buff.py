@@ -7,8 +7,10 @@ from config.icon import ICON_DELETE
 from game.buff import Buff
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_skill import CboxSkill
+from gui.widget.input_block_quagmire import InputBlockQuagmire
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
+from gui.widget.input_use_moviment import InputUseMoviment
 from service.config_file import ACTIVE, CITY_BLOCK, CONFIG_FILE, KEY, SKILL_BUFF
 from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
@@ -69,6 +71,8 @@ class PainelJobSkillBuff(QWidget):
         hbox.addWidget(self._build_skill_icon(skill, job_id))
         key_base = f"{job_id}:{SKILL_BUFF}:{skill.id}:"
         hbox.addWidget(InputKeybind(self, key_base + KEY))
+        hbox.addWidget(InputBlockQuagmire(self, key_base, skill.block_quagmire))
+        hbox.addWidget(InputUseMoviment(self, key_base))
         hbox.addWidget(InputMapCriteria(self, key_base))
         vbox.addLayout(hbox)
         vbox.addWidget(build_hr())

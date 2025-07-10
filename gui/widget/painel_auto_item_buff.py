@@ -7,8 +7,10 @@ from game.buff import ITEM_BUFF_GROUP, Buff, Buff
 from game.jobs import Job
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_item import CboxItem
+from gui.widget.input_block_quagmire import InputBlockQuagmire
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
+from gui.widget.input_use_moviment import InputUseMoviment
 from service.config_file import ACTIVE, AUTO_ITEM, CITY_BLOCK, CONFIG_FILE, ITEM_BUFF, KEY
 from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
@@ -58,6 +60,8 @@ class PainelAutoItemBuff(QWidget):
         hbox.addWidget(self._build_item_icon(job, item))
         key_base = f"{job.id}:{AUTO_ITEM}:{ITEM_BUFF}:{item.id}:"
         hbox.addWidget(InputKeybind(self, key_base + KEY))
+        hbox.addWidget(InputBlockQuagmire(self, key_base, item.block_quagmire))
+        hbox.addWidget(InputUseMoviment(self, key_base))
         hbox.addWidget(InputMapCriteria(self, key_base))
         vbox.addLayout(hbox)
         vbox.addWidget(build_hr())

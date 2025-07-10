@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QVBoxLayout, QWidget, QLabel
+from PyQt6.QtWidgets import QVBoxLayout, QWidget, QLabel, QHBoxLayout
 from PyQt6.QtCore import Qt
 
 from service.config_file import AUTO_CLOSE, BLOCK_CHAT_INPUT, CONFIG_FILE, DEFAULT, DRIVE, KEYBOARD_TYPE, PHYSICAL, VIRTUAL, WAITING
@@ -39,16 +39,16 @@ class PainelConfig(QWidget):
         vbox.addWidget(QLabel("Tipo de simulação do teclado:"))
         self.rad_virtual = build_radio_btn("Virtual - Ações serão enviadas somente para o jogo | Não funciona combinações de tecla Ex: ALT+1")
         self.rad_physical = build_radio_btn("Físico - Afeta qualquer programa | Combinações de tecla são aceito Ex: ALT+1")
-        self.rad_drive = build_radio_btn("Drive - Caso não funcione as opções acima. Requer instalação do Interception")
-        vbox_drive = QVBoxLayout()
-        vbox_drive.addWidget(self.rad_drive)
-        vbox_drive.addWidget(build_link("https://github.com/oblitum/Interception"))
+        self.rad_drive = build_radio_btn("Drive - Caso não funcione as opções acima. Requer instalação do Interception.\t")
+        hbox_drive = QHBoxLayout()
+        hbox_drive.addWidget(self.rad_drive)
+        hbox_drive.addWidget(build_link("https://github.com/oblitum/Interception", "Download"))
         self.rad_virtual.clicked.connect(self.on_radio_keyboard_type)
         self.rad_physical.clicked.connect(self.on_radio_keyboard_type)
         self.rad_drive.clicked.connect(self.on_radio_keyboard_type)
         vbox.addWidget(self.rad_virtual)
         vbox.addWidget(self.rad_physical)
-        vbox.addLayout(vbox_drive)
+        vbox.addLayout(hbox_drive)
         layout.addWidget(widget)
 
     def on_radio_keyboard_type(self):
@@ -64,7 +64,7 @@ class PainelConfig(QWidget):
         if not is_interception_available():
             keyboard_type = None if keyboard_type == DRIVE else keyboard_type
             self.rad_drive.setDisabled(True)
-            self.rad_drive.setStyleSheet("color: #888;")
+            self.rad_drive.setStyleSheet("font-size: 12px;color: #888;")
         if keyboard_type is None:
             keyboard_type = VIRTUAL
             CONFIG_FILE.update(KEYBOARD_TYPE, keyboard_type)

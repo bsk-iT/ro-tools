@@ -3,13 +3,13 @@ import time
 from events.base_event import BaseEvent, Priority
 
 
-from service.config_file import AUTO_TELEPORT, CONFIG_FILE, FLY_WING, KEY
+from service.config_file import AUTO_ITEM, AUTO_TELEPORT, CONFIG_FILE, FLY_WING, KEY
 from service.keyboard import KEYBOARD
 
 
 class AutoTeleport(BaseEvent):
 
-    def __init__(self, game_event, name=AUTO_TELEPORT, prop_seq=[FLY_WING], priority=Priority.REALTIME):
+    def __init__(self, game_event, name=AUTO_TELEPORT, prop_seq=[AUTO_ITEM, FLY_WING], priority=Priority.REALTIME):
         super().__init__(game_event, name, prop_seq, priority)
 
     def check_condition(self) -> bool:
@@ -29,8 +29,7 @@ class AutoTeleport(BaseEvent):
         return True
 
     def execute_action(self):
-        key_base = [*self.prop_seq]
-        macro_key = CONFIG_FILE.get_value([*key_base, KEY])
-        key = CONFIG_FILE.get_value([*key_base, KEY])
+        macro_key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
+        key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         KEYBOARD.press_key(macro_key or key)
-        time.sleep(0.1)
+        time.sleep(0.15)
