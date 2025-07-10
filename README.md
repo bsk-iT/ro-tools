@@ -10,7 +10,7 @@
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.3.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.3.0/ROTools_1.3.0.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.3.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.3.0/RO_Tools_1.3.0.zip)
 
 ### ⚠️ Atenção
 
@@ -33,7 +33,7 @@ O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok On
 
 ## 📸 Interface Principal
 
-![Interface Principal](assets/gui_example.png)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/INusWjFhUrw?si=_TVWapf0mQWgfOlh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Componentes da Interface
 
