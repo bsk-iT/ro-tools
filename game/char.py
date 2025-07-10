@@ -101,7 +101,7 @@ class Char:
                 entity_count += 1
         except:
             pass
-        distinct_entities = list({mob_id: (mob_id, sprite_name, distance) for mob_id, sprite_name, distance in entities}.values())
+        distinct_entities = list({f"{mob_id}:{distance}": (mob_id, sprite_name, distance) for mob_id, sprite_name, distance in entities}.values())
         sorted_entities_by_distance = sorted(distinct_entities, key=lambda entity: entity[2])
         return sorted_entities_by_distance
 

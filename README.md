@@ -30,11 +30,10 @@ Ferramenta de automação para jogadores de **Ragnarok Online** focada em buffs,
 
 O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok Online (pré-renovação). Ele automatiza ações como uso de poções, buffs, macros e alternância de equipamentos com base em condições personalizadas.
 
-## 📸 Assista ao vídeo demonstrativo
+## 📸 Vídeos
 
-[Clique para assistir](https://youtu.be/INusWjFhUrw)
-
-> Este vídeo apresenta uma visão geral do nosso projeto em funcionamento.
+[Demonstrativo da Ferramenta](https://youtu.be/INusWjFhUrw)
+[Configuração do arquivo servers.json](https://youtu.be/uHH97eWDVRE)
 
 ### Componentes da Interface
 
