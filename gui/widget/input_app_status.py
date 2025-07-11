@@ -1,8 +1,8 @@
 import keyboard
 
-from PyQt6.QtWidgets import QToolButton, QVBoxLayout, QHBoxLayout, QLabel, QWidget
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QToolButton, QVBoxLayout, QHBoxLayout, QLabel, QWidget
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt
 from config.icon import ICON_OFF
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.input_keybind import InputKeybind

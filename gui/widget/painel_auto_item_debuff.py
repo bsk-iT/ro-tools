@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QCheckBox
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QCheckBox
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QIcon
 
 from config.icon import ICON_DELETE
 from game.buff import ITEM_DEBUFF_GROUP, Buff, Buff
@@ -99,10 +99,10 @@ class PainelAutoItemDebuff(QWidget):
         check_city = QCheckBox("Bloquear uso em cidades?")
         city_block = CONFIG_FILE.get_value([job.id, AUTO_ITEM, ITEM_DEBUFF, CITY_BLOCK])
         check_city.setChecked(True if city_block else False)
-        check_city.checkStateChanged.connect(lambda state: self._update_city_block(state, job))
+        check_city.stateChanged.connect(lambda state: self._update_city_block(state, job))
         hbox_city.addWidget(check_city)
         vbox.addLayout(hbox_city)
         return widget
 
     def _update_city_block(self, state, job: Job):
-        CONFIG_FILE.update_config(state.value == 2, [job.id, AUTO_ITEM, ITEM_DEBUFF, CITY_BLOCK])
+        CONFIG_FILE.update_config(state == 2, [job.id, AUTO_ITEM, ITEM_DEBUFF, CITY_BLOCK])

@@ -1,4 +1,4 @@
-PyQt6>=6.0
+PyQt5>=5.0
 pywin32>=306
 keyboard>=0.13.5
 pymem>=1.9.4

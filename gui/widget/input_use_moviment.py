@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QToolButton, QHBoxLayout, QSizePolicy
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QToolButton, QHBoxLayout, QSizePolicy
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt
 
 from config.icon import ICON_FOOTPRINT
 from service.config_file import CONFIG_FILE, MOVIMENT_CELLS, USE_MOVIMENT

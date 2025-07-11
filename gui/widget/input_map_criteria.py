@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QWidget, QToolButton, QComboBox, QSizePolicy, QHBoxLayout
-from PyQt6.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QToolButton, QComboBox, QSizePolicy, QHBoxLayout
+from PyQt5.QtGui import QIcon
 
 from config.icon import ICON_MAP
 from service.config_file import CONFIG_FILE, MAP, MAP_ACTIVE

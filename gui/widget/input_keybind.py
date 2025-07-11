@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QPushButton, QSizePolicy, QWidget
-from PyQt6.QtGui import QKeySequence, QKeyEvent, QIcon
-from PyQt6.QtCore import Qt, QSize, pyqtSignal
+from PyQt5.QtWidgets import QPushButton, QSizePolicy, QWidget
+from PyQt5.QtGui import QKeySequence, QKeyEvent, QIcon
+from PyQt5.QtCore import Qt, QSize, pyqtSignal
 
 from config.app import APP_ICON_SIZE
 from config.icon import ICON_KEYBOARD
@@ -73,8 +73,8 @@ class InputKeybind(QPushButton):
         self._default_label()
         CONFIG_FILE.update(self.key_config, None)
 
-    def get_key_str(self, key, event):
-        modifiers = event.modifiers().value
+    def get_key_str(self, key, event: QKeyEvent):
+        modifiers = event.modifiers()
         self.key_sequence = QKeySequence(modifiers | key)
         return self.key_sequence.toString()
 

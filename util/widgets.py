@@ -1,8 +1,8 @@
 from functools import lru_cache
 import os
-from PyQt6.QtWidgets import QLabel, QSpinBox, QBoxLayout, QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QWidgetItem, QScrollArea, QFrame, QPushButton, QRadioButton
-from PyQt6.QtCore import QSize, Qt, QUrl
-from PyQt6.QtGui import QPixmap, QDesktopServices, QStandardItem, QFont, QColor, QIcon, QCursor
+from PyQt5.QtWidgets import QLabel, QSpinBox, QBoxLayout, QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QWidgetItem, QScrollArea, QFrame, QPushButton, QRadioButton
+from PyQt5.QtCore import QSize, Qt, QUrl
+from PyQt5.QtGui import QPixmap, QDesktopServices, QStandardItem, QFont, QColor, QIcon, QCursor
 
 from service.config_file import CONFIG_FILE
 from service.file import File
@@ -89,7 +89,7 @@ def build_scroll_vbox(heigth=300):
 
 def build_radio_btn(text):
     radio = QRadioButton(text)
-    radio.setStyleSheet("font-size: 12px; color: #ccc;")
+    radio.setStyleSheet("font-size: 12px;color: #888;")
     return radio
 
 

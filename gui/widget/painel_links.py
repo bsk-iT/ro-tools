@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QVBoxLayout, QWidget, QLabel
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QVBoxLayout, QWidget, QLabel
+from PyQt5.QtCore import Qt
 
 from gui.app_controller import APP_CONTROLLER
 from service.servers_file import NAME, URL

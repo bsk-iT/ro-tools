@@ -1,5 +1,5 @@
 import keyboard
-from PyQt6.QtCore import pyqtSignal, QObject
+from PyQt5.QtCore import pyqtSignal, QObject
 from events.hotkey_event import HotkeyEvent
 from events.skill_spawmmer import SkillSpawmmer
 from game.jobs import NOVICE, Job
@@ -7,7 +7,7 @@ from game.macro import Macro
 from service.config_file import CONFIG_FILE, HOTKEY, KEY, KEY_MONITORING, SKILL_SPAWMMER
 from service.keyboard import KEYBOARD
 from service.memory import MEMORY
-from PyQt6.QtGui import QIcon
+from PyQt5.QtGui import QIcon
 from config.icon import ICON_OFF, ICON_ON
 from service.servers_file import LINKS, SERVERS_FILE
 

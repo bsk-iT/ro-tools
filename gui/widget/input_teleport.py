@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QToolButton, QHBoxLayout, QVBoxLayout, QLabel, QPlainTextEdit
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QToolButton, QHBoxLayout, QVBoxLayout, QLabel, QPlainTextEdit
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt
 
 from config.icon import ICON_TELEPORT
 from gui.widget.input_keybind import InputKeybind

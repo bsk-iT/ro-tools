@@ -1,8 +1,8 @@
 import sys
 
 from gui.main_window import MainWindow
-from PyQt6.QtWidgets import QApplication
-from PyQt6.QtGui import QFontDatabase, QFont
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QFontDatabase, QFont
 from config.app import APP_FONT, APP_FONT_SIZE, APP_STYLE
 
 

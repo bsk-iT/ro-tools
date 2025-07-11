@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QVBoxLayout, QWidget, QLabel, QHBoxLayout
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QVBoxLayout, QWidget, QLabel, QHBoxLayout
+from PyQt5.QtCore import Qt
 
 from service.config_file import AUTO_CLOSE, BLOCK_CHAT_INPUT, CONFIG_FILE, DEFAULT, DRIVE, KEYBOARD_TYPE, PHYSICAL, VIRTUAL, WAITING
 from service.servers_file import SERVERS_FILE
@@ -64,7 +64,7 @@ class PainelConfig(QWidget):
         if not is_interception_available():
             keyboard_type = None if keyboard_type == DRIVE else keyboard_type
             self.rad_drive.setDisabled(True)
-            self.rad_drive.setStyleSheet("font-size: 12px;color: #888;")
+            self.rad_drive.setStyleSheet("font-size: 12px;color: #ccc;")
         if keyboard_type is None:
             keyboard_type = VIRTUAL
             CONFIG_FILE.update(KEYBOARD_TYPE, keyboard_type)

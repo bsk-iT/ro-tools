@@ -10,7 +10,7 @@
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.3.1-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.3.1/RO_Tools_1.3.1.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.4.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.4.0/RO_Tools_1.4.0.zip)
 
 ### ⚠️ Atenção
 
@@ -165,7 +165,7 @@ Para que o modo `"driver"` funcione corretamente — utilizado para simular tecl
 ## 🛠 Requisitos
 
 - Python 3.12+
-- PyQt6
+- PyQt5
 - pywin32
 - keyboard
 - pymem

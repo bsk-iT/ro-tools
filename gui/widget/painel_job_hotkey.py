@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QLabel
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QLabel
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QIcon
 
 from config.icon import ICON_DELETE
 from game.macro import MACRO_MAP, Macro

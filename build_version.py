@@ -1,4 +1,4 @@
-version_str = "1.3.1"
+version_str = "1.4.0"
 name = "RO Tools"
 
 version_parts = tuple(map(int, (version_str.split(".") + ["0", "0"])[:4]))

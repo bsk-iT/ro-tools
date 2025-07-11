@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QVBoxLayout, QWidget, QHBoxLayout, QSpinBox, QCheckBox
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QVBoxLayout, QWidget, QHBoxLayout, QSpinBox, QCheckBox
+from PyQt5.QtCore import Qt
 
 from config.icon import IMG_BLUE_POTION, IMG_RED_POTION, IMG_YGG, PATH_ITEM, get_image
 from game.jobs import Job
@@ -54,7 +54,7 @@ class PainelAutoItemHpSp(QWidget):
         self.layout.addWidget(scroll)
 
     def _update_active_city(self, state):
-        CONFIG_FILE.update_config(state.value == 2, [AUTO_ITEM, CITY_BLOCK])
+        CONFIG_FILE.update_config(state == 2, [AUTO_ITEM, CITY_BLOCK])
 
     def _build_layout_auto_potions(self):
         vbox_potion = QVBoxLayout()
@@ -132,10 +132,10 @@ class PainelAutoItemHpSp(QWidget):
         check_city = QCheckBox("Bloquear uso em cidades?")
         city_block = CONFIG_FILE.get_value([AUTO_ITEM, CITY_BLOCK])
         check_city.setChecked(True if city_block else False)
-        check_city.checkStateChanged.connect(lambda state: self._update_city_block(state))
+        check_city.stateChanged.connect(lambda state: self._update_city_block(state))
         hbox_city.addWidget(check_city)
         vbox.addLayout(hbox_city)
         return widget
 
     def _update_city_block(self, state):
-        CONFIG_FILE.update_config(state.value == 2, [AUTO_ITEM, CITY_BLOCK])
+        CONFIG_FILE.update_config(state == 2, [AUTO_ITEM, CITY_BLOCK])

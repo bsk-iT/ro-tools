@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QCheckBox
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QCheckBox
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QIcon
 
 from config.icon import ICON_DELETE
 from game.buff import EQUIP_BUFFS, Buff
@@ -32,11 +32,11 @@ class PainelJobEquipBuff(QWidget):
         check_city = QCheckBox("Bloquear uso em cidades?")
         city_block = CONFIG_FILE.get_value([job.id, SKILL_EQUIP, CITY_BLOCK])
         check_city.setChecked(True if city_block else False)
-        check_city.checkStateChanged.connect(lambda state: self._update_city_block(job, state))
+        check_city.stateChanged.connect(lambda state: self._update_city_block(job, state))
         return check_city
 
     def _update_city_block(self, job, state):
-        CONFIG_FILE.update_config(state.value == 2, [job.id, SKILL_EQUIP, CITY_BLOCK])
+        CONFIG_FILE.update_config(state == 2, [job.id, SKILL_EQUIP, CITY_BLOCK])
 
     def update_skill_equips(self, job):
         clear_layout(self.layout.takeAt(2))

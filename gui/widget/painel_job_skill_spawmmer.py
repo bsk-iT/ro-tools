@@ -1,8 +1,8 @@
 from itertools import chain
 from tkinter import ACTIVE
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QFrame
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QFrame
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QIcon
 
 from config.icon import ICON_DELETE, ICON_SHIELD, ICON_SWORD
 from game.spawn_skill import SA_ABRACADABRA, SpawnSkill

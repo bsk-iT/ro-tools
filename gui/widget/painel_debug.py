@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QVBoxLayout, QWidget, QPlainTextEdit, QCheckBox
-from PyQt6.QtCore import Qt
+from PyQt5.QtWidgets import QVBoxLayout, QWidget, QPlainTextEdit, QCheckBox
+from PyQt5.QtCore import Qt
 
 from gui.app_controller import APP_CONTROLLER
 from service.config_file import CONFIG_FILE, DEBUG_ACTIVE
@@ -27,8 +27,8 @@ class PainelDebug(QWidget):
         check_debug = QCheckBox("Debug habilitado?")
         active = CONFIG_FILE.read(DEBUG_ACTIVE)
         check_debug.setChecked(True if active else False)
-        check_debug.checkStateChanged.connect(self._update_check_debug)
+        check_debug.stateChanged.connect(self._update_check_debug)
         return check_debug
 
     def _update_check_debug(self, state):
-        CONFIG_FILE.update(DEBUG_ACTIVE, state.value == 2)
+        CONFIG_FILE.update(DEBUG_ACTIVE, state == 2)

@@ -1,7 +1,7 @@
 import copy
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame, QScrollArea
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame, QScrollArea
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QPixmap, QIcon
 
 from config.icon import ICON_ARROW_DOWN, ICON_ARROW_RIGHT, ICON_DELETE, PATH_ITEM, get_image
 from game.macro import MACRO_MAP, MAX_HOTKEY
