@@ -10,7 +10,7 @@
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.3.1-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.3.0/RO_Tools_1.3.1.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.3.1-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.3.1/RO_Tools_1.3.1.zip)
 
 ### ⚠️ Atenção
 
