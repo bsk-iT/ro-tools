@@ -85,3 +85,4 @@ class InputKeybind(QPushButton):
             return
         self.setText(key_str)
         CONFIG_FILE.update(self.key_config, key_str)
+        APP_CONTROLLER.sync_status_key()
