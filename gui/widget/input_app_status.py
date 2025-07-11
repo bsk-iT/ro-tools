@@ -17,10 +17,7 @@ class InputAppStatus(QWidget):
         self.layout = QHBoxLayout(self)
         self.status_key = CONFIG_FILE.read(KEY_MONITORING)
         self._config_layout()
-        if self.status_key:
-            self.on_change_keybind(self.status_key)
         self.status_toggle.toggled.connect(lambda value: APP_CONTROLLER.on_togle_monitoring(value))
-        self.input_keybind.updated_key.connect(self.on_change_keybind)
         APP_CONTROLLER.status_toggle = self.status_toggle
 
     def _config_layout(self) -> None:
@@ -33,16 +30,10 @@ class InputAppStatus(QWidget):
         toggle.setIconSize(ICON_STATUS)
         toggle.setToolTip("LIGAR/DESLIGAR o monitoramento e eventos do RO Tools")
         self.status_toggle = toggle
-        self.input_keybind = InputKeybind(None, KEY_MONITORING)
+        self.input_keybind = InputKeybind(None, KEY_MONITORING, True)
         vbox = QVBoxLayout()
         vbox.setSpacing(0)
         vbox.addWidget(QLabel("Status"))
         vbox.addWidget(self.input_keybind, alignment=Qt.AlignmentFlag.AlignRight)
         self.layout.addLayout(vbox)
         self.layout.addWidget(self.status_toggle)
-
-    def on_change_keybind(self, key: str):
-        if self.status_key != key and not self.status_key is None:
-            keyboard.remove_hotkey(self.status_key)
-        self.status_key = key
-        keyboard.add_hotkey(key, lambda: APP_CONTROLLER.on_togle_monitoring(None))

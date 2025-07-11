@@ -228,24 +228,18 @@ SN_SIGHT = Skill("sn_sight", "Visão Real", 4, True)
 SN_WINDWALK = Skill("sn_windwalk", "Caminho do Vento", 0, True)
 
 # Taekwon
-TK_READYSTORM = Skill("tk_readystorm", "Postura do Tornado")
-TK_READYDOWN = Skill("tk_readydown", "Postura da Patada Voadora")
-TK_READYTURN = Skill("tk_readyturn", "Postura da Rasteira")
-TK_READYCOUNTER = Skill("tk_readycounter", "Postura do Contrachute")
-TK_DODGE = Skill("tk_dodge", "Cambalhota")
-TK_SEVENWIND_EARTH = Skill("tk_sevenwind_earth", "Brisa Leve - Terra")
-TK_SEVENWIND_WIND = Skill("tk_sevenwind_earth", "Brisa Leve - Vento")
-TK_SEVENWIND_WATER = Skill("tk_sevenwind_earth", "Brisa Leve - Água")
-TK_SEVENWIND_FIRE = Skill("tk_sevenwind_earth", "Brisa Leve - Fogo")
-TK_SEVENWIND_GHOST = Skill("tk_sevenwind_earth", "Brisa Leve - Fantasma")
-TK_SEVENWIND_DARK = Skill("tk_sevenwind_earth", "Brisa Leve - Sombrio")
-TK_SEVENWIND_HOLY = Skill("tk_sevenwind_earth", "Brisa Leve - Sagrado")
+TK_SEVENWIND_EARTH = Skill("tk_sevenwind", "Brisa Leve - Terra")
+TK_SEVENWIND_WIND = Skill("tk_sevenwind", "Brisa Leve - Vento")
+TK_SEVENWIND_WATER = Skill("tk_sevenwind", "Brisa Leve - Água")
+TK_SEVENWIND_FIRE = Skill("tk_sevenwind", "Brisa Leve - Fogo")
+TK_SEVENWIND_GHOST = Skill("tk_sevenwind", "Brisa Leve - Fantasma")
+TK_SEVENWIND_DARK = Skill("tk_sevenwind", "Brisa Leve - Sombrio")
+TK_SEVENWIND_HOLY = Skill("tk_sevenwind", "Brisa Leve - Sagrado")
 
 # Gunslinger
 GS_GATLINGFEVER = Skill("gs_gatlingfever", "Ataque Gatling")
 GS_ADJUSTMENT = Skill("gs_adjustment", "Pânico do Justiceiro")
 GS_INCREASING = Skill("gs_increasing", "Aumentar Precisão")
-GS_MAGICALBULLET = Skill("gs_magicalbullet", "Bala Mágica")
 
 # Ninja
 NJ_UTSUSEMI = Skill("nj_utsusemi", "Troca de Pele")
@@ -300,11 +294,6 @@ AUTO_BUFF_MAP = {
     "hp_basilica": HP_BASILICA,
     "sn_sight": SN_SIGHT,
     "sn_windwalk": SN_WINDWALK,
-    "tk_readystorm": TK_READYSTORM,
-    "tk_readydown": TK_READYDOWN,
-    "tk_readyturn": TK_READYTURN,
-    "tk_readycounter": TK_READYCOUNTER,
-    "tk_dodge": TK_DODGE,
     "tk_sevenwind_earth": TK_SEVENWIND_EARTH,
     "tk_sevenwind_wind": TK_SEVENWIND_WIND,
     "tk_sevenwind_water": TK_SEVENWIND_WATER,
@@ -315,7 +304,6 @@ AUTO_BUFF_MAP = {
     "gs_gatlingfever": GS_GATLINGFEVER,
     "gs_adjustment": GS_ADJUSTMENT,
     "gs_increasing": GS_INCREASING,
-    "gs_magicalbullet": GS_MAGICALBULLET,
     "nj_utsusemi": NJ_UTSUSEMI,
     "nj_bunsinjyutsu": NJ_BUNSINJYUTSU,
     "nj_nen": NJ_NEN,

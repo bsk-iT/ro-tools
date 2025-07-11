@@ -45,6 +45,7 @@ class AppController(QObject):
 
     def sync_data(self, job, sync_hotkeys=True):
         self.job: Job = job
+        self.status_key = CONFIG_FILE.get_status_key()
         self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
         self.job_auto_elements = CONFIG_FILE.get_job_auto_elements(self.job)
         self.job_item_buffs = CONFIG_FILE.get_job_item_buffs(self.job)
@@ -54,6 +55,7 @@ class AppController(QObject):
         self.job_spawn_skills = CONFIG_FILE.get_job_spawm_skills(self.job)
         self.job_buff_skills = CONFIG_FILE.get_job_buff_skills(self.job)
         self.job_equip_skills = CONFIG_FILE.get_job_equip_skills(self.job)
+        self.sync_status_key()
         if sync_hotkeys:
             self.sync_hotkeys()
 
@@ -104,18 +106,26 @@ class AppController(QObject):
 
     def remove_all_hotkeys(self):
         for key in [*self.hotkeys_handler.keys()]:
-            self.remove_hotkey(key)
+            if key != self.status_key:
+                self.remove_hotkey(key)
 
     def sync_hotkeys(self):
         if not self.running:
             return
         self.remove_all_hotkeys()
-        self.sync_hotkey_events(self.job_spawn_skills, SKILL_SPAWMMER, SkillSpawmmer(None))
-        self.sync_hotkey_events(self.job_hotkeys, HOTKEY, HotkeyEvent(None))
+        self.sync_hotkey_events(self.job_spawn_skills, SKILL_SPAWMMER, self.skill_spammer_event)
+        self.sync_hotkey_events(self.job_hotkeys, HOTKEY, self.hotkey_event)
+        self.sync_status_key()
+        self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
         if self.fly_wing_key:
-            self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
             handler = keyboard.on_press_key(self.fly_wing_key, lambda _: self.on_fly_wing_key())
             self.hotkeys_handler[self.fly_wing_key] = (handler, None)
+
+    def sync_status_key(self):
+        self.status_key = CONFIG_FILE.get_status_key()
+        if self.status_key and not self.status_key in self.hotkeys_handler:
+            handler = keyboard.on_press_key(self.status_key, lambda _: self.on_togle_monitoring(None))
+            self.hotkeys_handler[self.status_key] = (handler, None)
 
     def on_fly_wing_key(self):
         KEYBOARD.add_pressed_key(self.fly_wing_key)

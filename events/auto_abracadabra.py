@@ -1,9 +1,6 @@
 import threading
 import time
 
-from events.base_event import BaseEvent, Priority
-
-
 from game.spawn_skill import SA_CASTCANCEL
 from service.config_file import ABRACADABRA, CONFIG_FILE, KEY, MVP_ACTIVE, SKILL_SPAWMMER
 from service.keyboard import KEYBOARD
@@ -13,8 +10,9 @@ SKILL_MVP = 292
 
 class AutoAbracadabra:
 
-    def __init__(self, game_event, name=ABRACADABRA):
+    def __init__(self, game_event, skill_spawmmer_event, name=ABRACADABRA):
         self.game_event = game_event
+        self.skill_spawmmer_event = skill_spawmmer_event
         self.name = name
 
     def stop(self, job_id, skill):
@@ -30,8 +28,10 @@ class AutoAbracadabra:
         while self.running:
             GAME_EVENT.sync_game_data()
             if GAME_EVENT.char.abracadabra_skill == SKILL_MVP:
+                self.skill_spawmmer_event.is_abracadabra_active = False
                 break
             if not CONFIG_FILE.get_value([job_id, SKILL_SPAWMMER, skill.id, MVP_ACTIVE]):
+                self.skill_spawmmer_event.is_abracadabra_active = False
                 break
             self.execute_action(key, job_id, skill)
         self.running = False
@@ -43,4 +43,4 @@ class AutoAbracadabra:
         KEYBOARD.press_key(cast_cancel_key)
         time.sleep(0.1)
         KEYBOARD.press_key(key)
-        time.sleep(0.3)
+        time.sleep(0.15)

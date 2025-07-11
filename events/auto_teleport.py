@@ -32,4 +32,4 @@ class AutoTeleport(BaseEvent):
         macro_key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         KEYBOARD.press_key(macro_key or key)
-        time.sleep(0.15)
+        time.sleep(0.1)

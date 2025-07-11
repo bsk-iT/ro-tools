@@ -201,7 +201,7 @@ class Char:
     def monitoring_job_change_gui(self):
         if MEMORY.job_address == 0x0:
             return
-        if APP_CONTROLLER.job.id != JOB_MAP[self.job_id].id and isinstance(self.job, Job):
+        if JOB_MAP.get(self.job_id, False) and APP_CONTROLLER.job.id != JOB_MAP[self.job_id].id and isinstance(self.job, Job):
             APP_CONTROLLER.updated_job.emit(self.job)
 
     def _get_buffs(self):

@@ -34,7 +34,7 @@ class SkillSpawmmer(BaseEvent):
         self.running = False
 
     def execute_abracadabra(self, key, job_id, skill):
-        self.auto_abracadabra = AutoAbracadabra(self.game_event) if self.auto_abracadabra is None else self.auto_abracadabra
+        self.auto_abracadabra = AutoAbracadabra(self.game_event, self) if self.auto_abracadabra is None else self.auto_abracadabra
         self.auto_abracadabra.stop(job_id, skill) if self.is_abracadabra_active else self.auto_abracadabra.start(key, job_id, skill)
         self.is_abracadabra_active = not self.is_abracadabra_active
 

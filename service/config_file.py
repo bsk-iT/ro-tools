@@ -167,8 +167,12 @@ class ConfigFile(File):
             return None
         return fly_wing_data.get(KEY, False)
 
+    def get_status_key(self):
+        return self.get_value([KEY_MONITORING])
+
     def get_mob_ids(self, key_base):
         mob_ids_config = re.sub(r"[^0-9;]", "", CONFIG_FILE.get_value([*key_base, MOB_IDS]))
         return [int(x) for x in mob_ids_config.split(";") if x.strip() != "" and (int(x) > 1000 or int(x) == 565)]
+
 
 CONFIG_FILE = ConfigFile("config.json")

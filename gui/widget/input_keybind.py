@@ -65,20 +65,23 @@ class InputKeybind(QPushButton):
             self._remove_hotkey()
         else:
             self._update_input_keybind(key, event)
-        if self.sync_hotkeys:
+        key_str = self.get_key_str(key, event)
+        if self.sync_hotkeys and not "+" in key_str:
             APP_CONTROLLER.sync_hotkeys()
 
     def _remove_hotkey(self):
         self._default_label()
         CONFIG_FILE.update(self.key_config, None)
 
-    def _update_input_keybind(self, key, event):
+    def get_key_str(self, key, event):
         modifiers = event.modifiers().value
         self.key_sequence = QKeySequence(modifiers | key)
-        key_str = self.key_sequence.toString()
-        if self.sync_hotkeys and key_str in APP_CONTROLLER.get_all_hotkeys():
+        return self.key_sequence.toString()
+
+    def _update_input_keybind(self, key, event):
+        key_str = self.get_key_str(key, event)
+        if self.sync_hotkeys and (key_str in APP_CONTROLLER.get_all_hotkeys() or "+" in key_str):
             self._remove_hotkey()
             return
         self.setText(key_str)
         CONFIG_FILE.update(self.key_config, key_str)
-        self.updated_key.emit(key_str)

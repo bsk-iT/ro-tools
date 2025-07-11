@@ -264,6 +264,7 @@ GS_FULLBUSTER = SpawnSkill("gs_fullbuster", "Ataque Total")
 GS_SPREADATTACK = SpawnSkill("gs_spreadattack", "Disparo Espalhado")
 GS_GROUNDDRIFT = SpawnSkill("gs_grounddrift", "Mina do Justiceiro")
 GS_GLITTERIN = SpawnSkill("gs_glitterin", "Cara ou Coroa", False)
+GS_MAGICALBULLET = SpawnSkill("gs_magicalbullet", "Bala Mágica")
 
 # Ninja
 NJ_KOUENKA = SpawnSkill("nj_kouenka", "Pétalas Flamejantes")
@@ -501,6 +502,7 @@ SPAWN_SKILL_MAP = {
     "gs_spreadattack": GS_SPREADATTACK,
     "gs_grounddrift": GS_GROUNDDRIFT,
     "gs_glitterin": GS_GLITTERIN,
+    "gs_magicalbullet": GS_MAGICALBULLET,
     "nj_kouenka": NJ_KOUENKA,
     "nj_kaensin": NJ_KAENSIN,
     "nj_bakuenryu": NJ_BAKUENRYU,
