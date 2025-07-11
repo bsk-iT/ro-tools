@@ -32,8 +32,8 @@ O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok On
 
 ## 📸 Vídeos
 
-[Demonstrativo da Ferramenta](https://youtu.be/INusWjFhUrw)
-[Configuração do arquivo servers.json](https://youtu.be/uHH97eWDVRE)
+- [Demonstrativo da Ferramenta](https://youtu.be/INusWjFhUrw)
+- [Configuração do arquivo servers.json](https://youtu.be/uHH97eWDVRE)
 
 ### Componentes da Interface
 
