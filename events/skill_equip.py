@@ -1,3 +1,4 @@
+import time
 from events.base_event import BaseEvent, Priority
 
 from events.macro_event import MacroEvent
@@ -31,5 +32,6 @@ class SkillEquip(BaseEvent):
         (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_equip_skills, self.prop_seq)
         if buff_id is None:
             return
+        self.game_event.char.index_last_time_buff[buff_id] = time.time()
         macro_id = CONFIG_FILE.get_value([job_id, *self.prop_seq, buff_id, MACRO])
         self.macro_event.start(macro_id)

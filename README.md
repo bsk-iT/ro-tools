@@ -1,16 +1,14 @@
 
-<h1 style="display:flex; align-items: center; gap: 1rem;">
+<div style="display:flex; align-items: center; gap: 1rem;">
   <img src="icon.ico"/>
-  <span>RO - Tools</span>
-</h1>
-
----
+  <span style="font-size: 40px; font-weight: bold;">RO - Tools</span>
+</div>
 
 ## 📦 Download
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.4.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.4.0/RO_Tools_1.4.0.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.5.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.5.0/RO_Tools_1.5.0.zip)
 
 ### ⚠️ Atenção
 
@@ -26,14 +24,11 @@ Sem privilégios administrativos, algumas funcionalidades podem não funcionar c
 
 ## 🎮 Visão Geral
 
+[Demonstrativo da Ferramenta](https://youtu.be/INusWjFhUrw)
+
 Ferramenta de automação para jogadores de **Ragnarok Online** focada em buffs, uso de itens automáticos, execução de macros e habilidades.
 
 O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok Online (pré-renovação). Ele automatiza ações como uso de poções, buffs, macros e alternância de equipamentos com base em condições personalizadas.
-
-## 📸 Vídeos
-
-- [Demonstrativo da Ferramenta](https://youtu.be/INusWjFhUrw)
-- [Configuração do arquivo servers.json](https://youtu.be/uHH97eWDVRE)
 
 ### Componentes da Interface
 
@@ -44,45 +39,44 @@ O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok On
 #### 🔧 Abas
 
 - **Início**: Painel de controle principal com eventos ativos.
+- **Debug**: Tela para verificar se informações são consistentes
 - **Links**: Acesso rápido a páginas úteis.
 - **Configurações**: Ajustes da aplicação.
 
-#### 🧪 Auto Item
+#### 🧪 Features
 
-Automatiza o uso de itens com base em condições personalizadas. Pode ser usado para restaurar HP/SP, aplicar efeitos de buff ou remover debuffs automaticamente. Inclui também configurações para itens especiais como Yggdrasil e Asa de Mosca.
+- **Potions**  
+  Usa poções configuradas com base em percentual de HP e SP.
 
-- 💉 **Potions**
-  - Usa poções configuradas com base em percentual de HP e SP.
-  - Suporte a múltiplas teclas configuráveis.
+- **YGG**  
+  Usa automaticamente sementes ou frutas de Yggdrasil ao atingir limiares críticos de HP/SP.
 
-- 🌿 **YGG**
-  - Usa automaticamente sementes ou frutas de Yggdrasil ao atingir limiares críticos de HP/SP.
+- **Itens de Buff**  
+  Aplica consumíveis que fornecem efeitos de buff (ex: Poção de Concentração, Poção de Despertar).
+  Pode ser configurado por tecla e tempo de recarga.
 
-- 🧪 **Itens de Buff**
-  - Aplica consumíveis que fornecem efeitos de buff (ex: Poção de Concentração, Poção de Despertar).
-  - Pode ser configurado por tecla e tempo de recarga.
+- **Itens para Curar Debuff**  
+  Usa itens que removem efeitos negativos automaticamente (ex: Panaceia, Poção Verde).
+  Pode ser configurado para remover tipos específicos de status (Silêncio, Cegueira, etc).
 
-- 💀 **Itens para Curar Debuff**
-  - Usa itens que removem efeitos negativos automaticamente (ex: Panaceia, Poção Verde).
-  - Pode ser configurado para remover tipos específicos de status (Silêncio, Cegueira, etc).
+- **Asa de Mosca**  
+  Configura uma tecla dedicada para o uso da Asa de Mosca, evitando conflito com o sistema de Auto Pot.
+  Necessário devido à limitação do jogo de usar apenas um item por vez.
 
-- 🦋 **Asa de Mosca**
-  - Configura uma tecla dedicada para o uso da Asa de Mosca, evitando conflito com o sistema de Auto Pot.
-  - Necessário devido à limitação do jogo de usar apenas um item por vez.
+- **Skill Spawmmer**  
+  Repetição de habilidades ofensivas.
 
-#### 🧰 Job Tools
+- **Skill Buff**  
+  Ativação periódica de buffs.
 
-Ferramentas específicas por profissão.
+- **Equip. Buff**  
+  Troca de equipamento para ativar efeitos.
 
-- **Skill Spawmmer**: Repetição de habilidades ofensivas.
-- **Skill Buff**: Ativação periódica de buffs.
-- **Equip. Buff**: Troca de equipamento para ativar efeitos.
-- **Hotkey**: Execução de comandos por atalho.
-- **Macro**: Sequência de ações automatizadas.
+- **Hotkey**  
+  Execução de comandos por atalho.
 
----
-
-#### ✨ Novas funcionalidades
+- **Macro**  
+  Sequência de ações automatizadas.
 
 - **Auto-Teleport por ID de monstros**  
   Tele para encontrar os mobs automaticamente. Configure os IDs dos monstros e o sistema usará automaticamente a Asa de Mosca para encontrar algum deles.
@@ -105,42 +99,50 @@ Ferramentas específicas por profissão.
 - **Block Pantano dos Mortos**  
   Evita utilizar certas skill quando estiver na área do Pantano dos Mortos
 
+- **Skill Timer**  
+  Configure o tempo que cada skill/item vai ser utilizado
+
+- **Auto Commands**  
+  Insere automaticamente comandos ou mensagens a ser exibida no chat
 ---
 
-## ⚙️ Eventos Disponíveis
+## ⚙️ Configuração do servers.json
 
-Abaixo a lista de eventos definidos no sistema:
+[Vídeo de configuração para um server](https://youtu.be/uHH97eWDVRE)
 
-| Evento              | Descrição |
-|---------------------|-----------|
-| `auto_item_buff`    | Aplica itens que fornecem efeitos de buff automaticamente. |
-| `auto_item_debuff`  | Usa itens que removem debuffs automaticamente. |
-| `auto_pot_hp`       | Usa potions com base em percentual de HP. |
-| `auto_pot_sp`       | Usa potions com base em percentual de SP. |
-| `auto_ygg`          | Usa sementes ou frutas de Yggdrasil conforme necessário. |
-| `hotkey_event`      | Executa ações com base em teclas de atalho personalizadas. |
-| `macro_event`       | Executa sequências personalizadas de ações (macros). |
-| `skill_buff`        | Aplica automaticamente habilidades de buff conforme a lista de buffs do personagem. |
-| `skill_equip`       | Troca de equipamento com base na ativação de skills. |
-| `skill_spawmmer`    | Automatiza o uso de habilidades ofensivas. |
-| `base_event`        | Classe base que define estrutura comum a todos os eventos. |
-| `game_event`        | Controla execução e sincronização dos eventos com o jogo. |
+Funcionalidade de cada offset, caso queira não utilizar alguma feature conforme o offset, atribui o valor `0x0`
 
----
+- [1] Dados que recupera do jogo  
+- [2] O que irá funcionar no RO Tools
 
-## 📁 Estrutura de Pastas
+**hp_offset**:  
+- [1] HP atual/max, SP atual/max e lista de Buffs (Ícones do lado direito)  
+- [2] Auto Pot HP/SP/YGG, Stuffs, Debuff, Skill Buff e Equip Buff
 
-```
-ro-tools/
-├── assets/ # Ícones e imagens de habilidades
-├── config/ # Arquivos de configuração e ícones
-├── events/ # Eventos principais que controlam ações automatizadas
-├── game/ # Estruturas e lógica de jogo (jobs, buffs, etc)
-├── gui/ # Interface gráfica (Qt)
-├── service/ # Serviços como teclado, mouse, memória
-├── tests/ # Testes automatizados
-└── util/ # Utilitários diversos
-```
+**x_pos_offset**:
+- [1] Posição do jogador no eixo X e Y  
+- [2] Rédeas (Auto buffar quando andar X células)  e Auto Element (Com a posição do jogador fica fácil saber qual o monstro que está mais próximo do jogador)
+
+**map_offset**:  
+- [1] Nome do mapa atual  
+- [2] Bloquear item em cidades e o Utilizar itens somente nos mapas definido (Identificar se o mapa condiz com os critérios)
+
+**job_offset**:
+- [1] Identificador da sprite da classe do jogador  
+- [2] Auto sincroniza a classe no RO Tools para as configurações da classe (Único trabalho seria toda vez que trocar de classe, ter que trocar manualmente)
+
+**chat_offset**:  
+- [1] Identificar se o chat está aberto ou fechado  
+- [2] Opções de esperar o chat fechar para continuar buffando ou forçar o fechamento via memória do jogo
+
+**entity_list_offset**:
+- [1] Listar todos monstros que aparecem na tela do jogador  
+- [2] Auto Tele e Auto Element (Para funcionar corretamente precisa saber quais IDs do monstro aparecem nessa lista)
+
+**abracadabra_address**:
+- [1] Identificar o ID da última habilidade utilizada pelo abracadabra  
+- [2] Auto Abracadabra (Sem essa informação a ferramenta não sabe quando ???? é do MVP,  utilizando infinitamente)
+
 
 ## 🧩 Requisitos para o modo de simulação `"driver"` (Interception)
 

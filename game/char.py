@@ -1,10 +1,11 @@
 import math
 import os
+import time
 
 from game.buff import QUAGMIRE, Buff
 from game.jobs import JOB_MAP, Job
 from gui.app_controller import APP_CONTROLLER
-from service.config_file import AUTO_ELEMENT, BLOCK_QUAGMIRE, CONFIG_FILE, DEBUG_ACTIVE, ITEM_BUFF, MOB_IDS, MOVIMENT_CELLS, USE_MOVIMENT
+from service.config_file import AUTO_ELEMENT, BLOCK_QUAGMIRE, CONFIG_FILE, COOLDOWN, DEBUG_ACTIVE, ITEM_BUFF, MOB_IDS, MOVIMENT_CELLS, TIMER_ACTIVE, USE_MOVIMENT
 from service.memory import MEMORY
 from service.offsets import Offsets
 from service.servers_file import NAME, SKILL_BUFF, SERVERS_FILE, STATUS_DEBUFF
@@ -37,6 +38,7 @@ class Char:
         self.job = None
         self.position = (0, 0)
         self.index_last_position_buff = {}
+        self.index_last_time_buff = {}
         self.abracadabra_skill = None
 
     def update(self):
@@ -117,6 +119,7 @@ class Char:
             buff = skill_buff_map.get(str(raw_buff), None) or item_buff_map.get(str(raw_buff), None) or status_debuff_map.get(str(raw_buff), raw_buff)
             buffs.append(buff)
             self.index_last_position_buff[buff] = (self.position[0], self.position[1])
+            self.index_last_time_buff[buff] = time.time()
         return buffs
 
     def _get_id_buffs(self, resource):
@@ -134,7 +137,7 @@ class Char:
             return None
         job_id = APP_CONTROLLER.job.id
         for item in list_items:
-            if item.id not in self.item_buffs and not self.is_quagmire_block(job_id, item, prop_seq) and self.is_moviment_cell_done(job_id, item, prop_seq):
+            if item.id not in self.item_buffs and not self.is_quagmire_block(job_id, item, prop_seq) and self.is_moviment_cell_done(job_id, item, prop_seq) and self.is_cooldown_finish(job_id, item, prop_seq):
                 return item
         return None
 
@@ -156,7 +159,7 @@ class Char:
         buffs_to_use = []
         for job_id, buffs in list_buff.items():
             for buff in buffs:
-                if buff.id not in self.skill_buffs and not self.is_quagmire_block(job_id, buff, prop_seq) and self.is_moviment_cell_done(job_id, buff, prop_seq):
+                if buff.id not in self.skill_buffs and not self.is_quagmire_block(job_id, buff, prop_seq) and self.is_moviment_cell_done(job_id, buff, prop_seq) and self.is_cooldown_finish(job_id, buff, prop_seq):
                     buffs_to_use.append((job_id, buff.id, buff.priority))
         if len(buffs_to_use) == 0:
             return (None, None, None)
@@ -183,6 +186,16 @@ class Char:
         x_distance = abs(last_position_buff[0] - self.position[0])
         y_distance = abs(last_position_buff[1] - self.position[1])
         return x_distance >= cells or y_distance >= cells
+
+    def is_cooldown_finish(self, job_id, buff, prop_seq):
+        active = CONFIG_FILE.get_value([job_id, *prop_seq, buff.id, TIMER_ACTIVE])
+        if not active:
+            return True
+        cooldown = CONFIG_FILE.get_value([job_id, *prop_seq, buff.id, COOLDOWN])
+        last_time_buff = self.index_last_time_buff.get(buff.id, None)
+        if not last_time_buff:
+            return True
+        return (time.time() - last_time_buff) >= cooldown
 
     def next_macro_element_to_use(self, list_auto_element) -> bool:
         macros_to_use = []

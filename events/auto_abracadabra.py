@@ -43,4 +43,4 @@ class AutoAbracadabra:
         KEYBOARD.press_key(cast_cancel_key)
         time.sleep(0.1)
         KEYBOARD.press_key(key)
-        time.sleep(0.15)
+        time.sleep(CONFIG_FILE.get_delay([job_id, SKILL_SPAWMMER, skill.id], 0.25))

@@ -31,6 +31,7 @@ class SkillBuff(BaseEvent):
         (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_buff_skills, self.prop_seq)
         if buff_id is None:
             return
+        self.game_event.char.index_last_time_buff[buff_id] = time.time()
         base_prop_seq = [job_id, *self.prop_seq, buff_id]
         KEYBOARD.press_key(CONFIG_FILE.get_value([*base_prop_seq, KEY]))
         time.sleep(CONFIG_FILE.get_delay(base_prop_seq, 0.2))

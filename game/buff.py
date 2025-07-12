@@ -2,32 +2,33 @@ from config.icon import PATH_BUFF_SKILL, PATH_ITEM, get_image
 
 
 class Buff:
-    def __init__(self, id, name, priority=0, block_quagmire=False):
+    def __init__(self, id, name, priority=0, block_quagmire=False, buff_timer=0):
         self.id = id
         self.name = name
         self.icon = None
         self.priority = priority
         self.block_quagmire = block_quagmire
+        self.buff_timer = buff_timer
 
     def __str__(self):
         return self.name
 
 
 class Item(Buff):
-    def __init__(self, buff_id, name, priority=0, block_quagmire=False):
-        super().__init__(buff_id, name, priority, block_quagmire)
+    def __init__(self, buff_id, name, priority=0, block_quagmire=False, buff_timer=0):
+        super().__init__(buff_id, name, priority, block_quagmire, buff_timer)
         self.icon = get_image(PATH_ITEM, self.id)
 
 
 class Skill(Buff):
-    def __init__(self, buff_id, name, priority=0, block_quagmire=False):
-        super().__init__(buff_id, name, priority, block_quagmire)
+    def __init__(self, buff_id, name, priority=0, block_quagmire=False, buff_timer=0):
+        super().__init__(buff_id, name, priority, block_quagmire, buff_timer)
         self.icon = get_image(PATH_BUFF_SKILL, self.id)
 
 
 class Debuff(Buff):
-    def __init__(self, buff_id, name, recover_status, priority=0, block_quagmire=False):
-        super().__init__(buff_id, name, priority, block_quagmire)
+    def __init__(self, buff_id, name, recover_status, priority=0, block_quagmire=False, buff_timer=0):
+        super().__init__(buff_id, name, priority, block_quagmire, buff_timer)
         self.icon = get_image(PATH_ITEM, self.id)
         self.recover_status = recover_status
 
@@ -64,6 +65,10 @@ INT_FOOD = Item("int_food", "INT Food")
 DEX_FOOD = Item("dex_food", "DEX Food")
 LUK_FOOD = Item("luk_food", "LUK Food")
 HALTER_LEAD = Item("halter_lead", "Rédeas")
+ITEM_1 = Item("item_1", "Item 1")
+ITEM_2 = Item("item_2", "Item 2")
+ITEM_3 = Item("item_3", "Item 3")
+ITEM_4 = Item("item_4", "Item 4")
 
 ITEM_BUFF_MAP = {
     "bless_scroll": BLESS_SCROLL,
@@ -96,7 +101,11 @@ ITEM_BUFF_MAP = {
     "int_food": INT_FOOD,
     "dex_food": DEX_FOOD,
     "luk_food": LUK_FOOD,
-    "halter_lead": HALTER_LEAD
+    "halter_lead": HALTER_LEAD,
+    "item_1": ITEM_1,
+    "item_2": ITEM_2,
+    "item_3": ITEM_3,
+    "item_4": ITEM_4
 }
 
 ITEM_BUFF_GROUP = {
@@ -107,6 +116,7 @@ ITEM_BUFF_GROUP = {
     "Elemento - Arma": [FIRE_ENCHANT_SCROLL, WATER_ENCHANT_SCROLL, WIND_ENCHANT_SCROLL, GROUND_ENCHANT_SCROLL, DARK_WATER],
     "Elemento - Resistência": [RESIST_PROPERTY_WATER, RESIST_PROPERTY_GROUND, RESIST_PROPERTY_FIRE, RESIST_PROPERTY_WIND],
     "Comidas": [STR_FOOD, AGI_FOOD, VIT_FOOD, INT_FOOD, DEX_FOOD, LUK_FOOD],
+    "Outros": [ITEM_1, ITEM_2, ITEM_3, ITEM_4]
 }
 
 # ----- Item cura debuff -----
@@ -194,7 +204,27 @@ PR_SUFFRAGIUM = Skill("pr_suffragium", "Suffragium")
 MO_EXPLOSIONSPIRITS = Skill("mo_explosionspirits", "Fúria Interior")
 
 # Bard
+BA_POEMBRAGI = Skill("ba_poembragi", "Poema de Bragi", buff_timer=180)
+BA_ASSASSINCROSS = Skill("ba_assassincross", "Crepúsculo Sangrento", buff_timer=180)
+BA_APPLEIDUN = Skill("ba_appleidun", "Maçãs de Idun", buff_timer=180)
+BA_WHISTLE = Skill("ba_whistle", "Assovio", buff_timer=180)
+
+# Dancer
+DC_DONTFORGETME = Skill("dc_dontforgetme", "Não me Abandones", buff_timer=60)
+DC_SERVICEFORYOU = Skill("dc_serviceforyou", "Dança Cigana", buff_timer=180)
+DC_FORTUNEKISS = Skill("dc_fortunekiss", "Beijo da Sorte", buff_timer=180)
+DC_HUMMING = Skill("dc_humming", "Sibilo", buff_timer=180)
+
+# Duet
 BD_ADAPTATION = Skill("bd_adaptation", "Aquecimento")
+BD_SIEGFRIED = Skill("bd_siegfried", "Ode a Siegfried - Dueto", buff_timer=180)
+BD_RICHMANKIM = Skill("bd_richmankim", "Banquete de Njord - Dueto", buff_timer=180)
+BD_DRUMBATTLEFIELD = Skill("bd_drumbattlefield", "Rufar dos Tambores - Dueto", buff_timer=180)
+BD_RINGNIBELUNGEN = Skill("bd_ringnibelungen", "Anel dos Nibelungos - Dueto", buff_timer=60)
+BD_ETERNALCHAOS = Skill("bd_eternalchaos", "Ritmo Caótico - Dueto", buff_timer=60)
+BD_ROKISWEIL = Skill("bd_rokisweil", "Lamento de Loki - Dueto", buff_timer=60)
+BD_INTOABYSS = Skill("bd_intoabyss", "Canção Preciosa - Dueto", buff_timer=180)
+BD_LULLABY = Skill("bd_lullaby", "Cantiga de Ninar - Dueto")
 
 # Lord
 LK_AURABLADE = Skill("lk_aurablade", "Lâmina de Aura")
@@ -307,4 +337,21 @@ AUTO_BUFF_MAP = {
     "nj_utsusemi": NJ_UTSUSEMI,
     "nj_bunsinjyutsu": NJ_BUNSINJYUTSU,
     "nj_nen": NJ_NEN,
+    "ba_poembragi": BA_POEMBRAGI,
+    "ba_assassincross": BA_ASSASSINCROSS,
+    "ba_appleidun": BA_APPLEIDUN,
+    "ba_whistle": BA_WHISTLE,
+    "dc_dontforgetme": DC_DONTFORGETME,
+    "dc_serviceforyou": DC_SERVICEFORYOU,
+    "dc_fortunekiss": DC_FORTUNEKISS,
+    "dc_humming": DC_HUMMING,
+    "bd_adaptation": BD_ADAPTATION,
+    "bd_siegfried": BD_SIEGFRIED,
+    "bd_richmankim": BD_RICHMANKIM,
+    "bd_drumbattlefield": BD_DRUMBATTLEFIELD,
+    "bd_ringnibelungen": BD_RINGNIBELUNGEN,
+    "bd_eternalchaos": BD_ETERNALCHAOS,
+    "bd_rokisweil": BD_ROKISWEIL,
+    "bd_intoabyss": BD_INTOABYSS,
+    "bd_lullaby": BD_LULLABY,
 }

@@ -6,6 +6,7 @@ from gui.widget.painel_auto_element import PainelAutoElement
 from gui.widget.painel_auto_item_buff import PainelAutoItemBuff
 from gui.widget.painel_auto_item_debuff import PainelAutoItemDebuff
 from gui.widget.painel_auto_item_hp_sp import PainelAutoItemHpSp
+from gui.widget.painel_utilities import PainelUtilities
 from gui.widget.painel_job_hotkey import PainelJobHotkey
 from gui.widget.painel_job_macro import PainelJobMacro
 from gui.widget.painel_job_skill_buff import PainelJobSkillBuff
@@ -30,7 +31,7 @@ class PainelHome(QWidget):
         vbox = QVBoxLayout()
         vbox.setContentsMargins(0, 0, 0, 0)
         vbox.setSpacing(0)
-        vbox.addWidget(QLabel("Select the job:"))
+        vbox.addWidget(QLabel("Selecione a classe:"))
         vbox.addWidget(CboxJobs(self))
         return vbox
 
@@ -45,4 +46,5 @@ class PainelHome(QWidget):
         tab_panel.addTab(PainelAutoElement(self), "Auto Element")
         tab_panel.addTab(PainelJobHotkey(self), "Hotkey")
         tab_panel.addTab(PainelJobMacro(self), "Macro")
+        tab_panel.addTab(PainelUtilities(self), "Utilidades")
         return tab_panel

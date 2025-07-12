@@ -3,6 +3,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 
 from config.icon import ICON_TELEPORT
+from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from service.config_file import AUTO_TELEPORT, CONFIG_FILE, MOB_IDS, MACRO_KEY
 from util.widgets import ICON_BTN, build_label
@@ -103,6 +104,7 @@ class InputTeleport(QWidget):
         hbox_macro_key.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignCenter)
         hbox_macro_key.addWidget(InputKeybind(self, self.key_base + MACRO_KEY))
         hbox_macro_key.addWidget(QLabel("Macro do Jogo"))
+        hbox_macro_key.addWidget(InputDelay(self, self.key_base))
         vbox_macro_text = QVBoxLayout()
         vbox_macro_text.addLayout(hbox_macro_key)
         vbox_macro_text.addWidget(self.text_edit)

@@ -18,6 +18,7 @@ AUTO_ELEMENT = "auto_element"
 ITEM_BUFF = "item_buff"
 ITEM_DEBUFF = "item_debuff"
 ABRACADABRA = "abracadabra"
+AUTO_COMMANDS = "auto_commands"
 
 # Resources
 HP_POTION = "hp_potion"
@@ -33,6 +34,8 @@ PERCENT = "percent"
 KEY = "key"
 DELAY = "delay"
 DELAY_ACTIVE = "delay_active"
+TIMER_ACTIVE = "timer_active"
+COOLDOWN = "cooldown"
 MOUSE_CLICK = "mouse_click"
 MOUSE_FLICK = "mouse_flick"
 BLOCK_QUAGMIRE = "block_quagmire"
@@ -61,6 +64,8 @@ DEBUG_ACTIVE = "debug_active"
 AUTO_TELEPORT = "auto_teleport"
 MOB_IDS = "mob_ids"
 MACRO_KEY = "macro_key"
+COMMANDS = "commands"
+DRAFT_COMMANDS = "draft_commands"
 
 
 class ConfigFile(File):
@@ -169,6 +174,9 @@ class ConfigFile(File):
 
     def get_status_key(self):
         return self.get_value([KEY_MONITORING])
+
+    def get_auto_commands_key(self):
+        return self.get_value([AUTO_COMMANDS, KEY])
 
     def get_mob_ids(self, key_base):
         mob_ids_config = re.sub(r"[^0-9;]", "", CONFIG_FILE.get_value([*key_base, MOB_IDS]))

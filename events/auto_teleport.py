@@ -15,12 +15,12 @@ class AutoTeleport(BaseEvent):
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
 
-        super().check_condition()
         key_base = [*self.prop_seq]
         if not CONFIG_FILE.get_value([*key_base, AUTO_TELEPORT]):
             return False
         if not APP_CONTROLLER.toggle_fly_wing:
             return False
+        super().check_condition()
         mob_ids = [id_ for id_, _, _ in self.game_event.char.entity_list]
         found_mob = any(id_ in mob_ids for id_ in CONFIG_FILE.get_mob_ids(key_base))
         if found_mob:
@@ -32,4 +32,4 @@ class AutoTeleport(BaseEvent):
         macro_key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         KEYBOARD.press_key(macro_key or key)
-        time.sleep(0.15)
+        time.sleep(CONFIG_FILE.get_delay(self.prop_seq, 0.25))

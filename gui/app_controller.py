@@ -1,5 +1,6 @@
 import keyboard
 from PyQt5.QtCore import pyqtSignal, QObject
+from events.auto_commands import AutoCommands
 from events.hotkey_event import HotkeyEvent
 from events.skill_spawmmer import SkillSpawmmer
 from game.jobs import NOVICE, Job
@@ -35,6 +36,7 @@ class AppController(QObject):
         self.cbox_macro = None
         self.skill_spammer_event = SkillSpawmmer(None)
         self.hotkey_event = HotkeyEvent(None)
+        self.auto_comands_event = AutoCommands(None)
         self.hotkeys_handler = {}
         self.running = False
         self.sync_data(NOVICE, False)
@@ -46,6 +48,7 @@ class AppController(QObject):
     def sync_data(self, job, sync_hotkeys=True):
         self.job: Job = job
         self.status_key = CONFIG_FILE.get_status_key()
+        self.auto_commands_key = CONFIG_FILE.get_auto_commands_key()
         self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
         self.job_auto_elements = CONFIG_FILE.get_job_auto_elements(self.job)
         self.job_item_buffs = CONFIG_FILE.get_job_item_buffs(self.job)
@@ -120,6 +123,9 @@ class AppController(QObject):
         if self.fly_wing_key:
             handler = keyboard.on_press_key(self.fly_wing_key, lambda _: self.on_fly_wing_key())
             self.hotkeys_handler[self.fly_wing_key] = (handler, None)
+        if self.auto_commands_key:
+            handler = keyboard.on_press_key(self.auto_commands_key, lambda _: self.on_auto_commands_key())
+            self.hotkeys_handler[self.auto_commands_key] = (handler, None)
 
     def sync_status_key(self):
         self.status_key = CONFIG_FILE.get_status_key()
@@ -128,8 +134,13 @@ class AppController(QObject):
             self.hotkeys_handler[self.status_key] = (handler, None)
 
     def on_fly_wing_key(self):
-        KEYBOARD.add_pressed_key(self.fly_wing_key)
         self.toggle_fly_wing = not self.toggle_fly_wing
+        KEYBOARD.add_pressed_key(self.fly_wing_key)
+
+    def on_auto_commands_key(self):
+        if self.auto_comands_event.running:
+            return
+        self.auto_comands_event.start()
 
     def sync_hotkey_events(self, events, resource, event_ctrl):
         for job_id, events in events.items():

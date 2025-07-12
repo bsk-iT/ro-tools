@@ -116,9 +116,9 @@ class PainelJobMacro(QWidget):
     def _build_add_btn(self, new_key_seq):
         add_btn = QPushButton("+")
         add_btn.setContentsMargins(0, 0, 0, 0)
-        add_btn.setStyleSheet("background-color: green;")
+        add_btn.setStyleSheet("background-color: green;color: white;border-radius: 5px;")
         add_btn.clicked.connect(lambda: self._on_add_remove_keybind(new_key_seq, True))
-        add_btn.setFixedSize(DEFAULT_SIZE + 4, DEFAULT_SIZE + 4)
+        add_btn.setFixedSize(DEFAULT_SIZE, DEFAULT_SIZE)
         return add_btn
 
     def _build_btn_remove_input_keybind(self, key_seq, parent):

@@ -21,7 +21,6 @@ QT_TO_VK = {
 
 class Keyboard:
     def __init__(self):
-        self._check_interception()
         self._pressed_keys = {}
         self._simulating_keys: Set[int] = set()
         if is_interception_available():
@@ -29,14 +28,6 @@ class Keyboard:
 
             self._interception = Interception()
             self._keyboard_id = self._interception.keyboard
-
-    def _check_interception(self):
-        try:
-            from interception import Interception
-
-            self.interception_avaliable = True
-        except Exception as e:
-            self.interception_avaliable = False
 
     def is_simulating_key(self, key: str) -> bool:
         vk_code = self._key_to_vk(key)
@@ -50,6 +41,18 @@ class Keyboard:
             self._key_event(vk, False)
         for vk in reversed(vk_codes):
             self._key_event(vk, True)
+
+    def send_text_as_paste(self, text: str):
+        import pyperclip
+
+        pyperclip.copy(text)
+        time.sleep(0.1)
+
+        win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
+        win32api.keybd_event(ord("V"), 0, 0, 0)
+        time.sleep(0.05)
+        win32api.keybd_event(ord("V"), 0, win32con.KEYEVENTF_KEYUP, 0)
+        win32api.keybd_event(win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
 
     def add_pressed_key(self, key_sequence: str) -> bool:
         if not key_sequence:

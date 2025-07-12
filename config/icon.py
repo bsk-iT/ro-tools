@@ -33,6 +33,7 @@ ICON_TELEPORT = resource_path(PATH_ICON + "teleport.png")
 ICON_FLICK = resource_path(PATH_ICON + "flick.png")
 ICON_BLOCK_QUAGMIRE = resource_path(PATH_ICON + "block_quagmire.png")
 ICON_FOOTPRINT = resource_path(PATH_ICON + "footprint.png")
+ICON_TIMER = resource_path(PATH_ICON + "timer.png")
 
 IMG_RED_POTION = resource_path(PATH_ITEM + "red_potion.gif")
 IMG_BLUE_POTION = resource_path(PATH_ITEM + "blue_potion.gif")
