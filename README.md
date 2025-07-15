@@ -8,7 +8,7 @@
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.5.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.5.0/RO_Tools_1.5.0.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.6.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.5.0/RO_Tools_1.6.0.zip)
 
 ### ⚠️ Atenção
 
@@ -82,7 +82,7 @@ O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok On
   Tele para encontrar os mobs automaticamente. Configure os IDs dos monstros e o sistema usará automaticamente a Asa de Mosca para encontrar algum deles.
 
 - **Auto-Abracadabra**  
-  Use a habilidade Abracadabra automaticamente com controle de tempo e cancelamento seguro. Ideal para invocação contínua.
+  Use a habilidade Abracadabra automaticamente com controle de tempo e cancelamento seguro. Ideal para invocação de MvP e domesticação de pets continua.
 
 - **Links úteis personalizados por servidor**  
   Acesse ferramentas específicas do seu servidor (como sites de rankings, market, wiki, etc.) diretamente pelo app, com links configuráveis.
@@ -104,6 +104,12 @@ O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok On
 
 - **Auto Commands**  
   Insere automaticamente comandos ou mensagens a ser exibida no chat
+
+- **Avisos Sonoros**  
+   Algumas features estão providas de avisos sonoros para identificar sua ativação
+
+- **Utilizar Buffs e Items ao Atacar**  
+   Evita se buffar quando não estiver atacando, voltando a se buffar quando utilizar uma Skill Spawmmer
 ---
 
 ## ⚙️ Configuração do servers.json
