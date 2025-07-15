@@ -13,11 +13,15 @@
             "map_active": false
         },
         "fly_wing": {
-            "mob_ids": "--- Comum ---\n;12;19; -> Cavaleiro do Abismo [gefenia04]\n;13;75; -> Papel [ama_dun02]\n;17;13; -> Acidus Dorada [abyss_03]\n;12;53; -> G\u00e1rgula [gl_sew02]\n;1090; -> Mastering\n;1250; -> Chepet\n;1249; -> Presente\n\n--- MVP ---\n;565; -> B Tomb\n;1087; -> Orc Hero [gef_fild02, gef_fild14]\n;1492; -> Samurai Encarnado [ama_dun03]\n;1832; -> Ifrit [8]\n;1112; -> Drake [treasure02]\n;1147; -> Maya [anthell02, gld_dun03]\n;1159; -> Freeoni [moc_fild17]\n;1251; -> Cavaleiro da Tempestade [xmas_dun02]\n;1252; -> Haitii [xmas_fild01]\n;1623; -> RSX-0806 [ein_dun02]\n;1157; -> Farao [in_sphinx5]\n;1038; -> Os\u00edris [moc_pryd04]\n;1511; -> Amon Ra [moc_pryd06]\n;1768; -> Pesar Noturno [ra_san05]\n;1115; -> Eddga [gld_dun01, pay_fild11]\n;1190; -> Senhor dos Orcs [gef_fild10]\n;1373; -> Senhor dos Mortos [niflheim]\n;1272; -> Senhor das Trevas [gl_chyard, gld_dun04]\n;1059; -> Abelha Rainha [mjolnir_04]\n;1871; -> Bispo Decadente [abbey02]\n;1873; -> Beelzebub [abbey03]\n;1779; -> Ktullanux [ice_dun03]\n;1751; -> Valqu\u00edria Randrige [odin_tem03]\n;1086; -> Besouro-Ladr\u00e3o Dourado [prt_sewb4]\n;1039; -> Bafom\u00e9 [prt_maze03]\n;1917; -> Morocc Ferido [moc_fild22]\n;1389; -> Dr\u00e1cula [gef_dun01]\n;1046; -> Doppelganger [gef_dun02, gld_dun02]\n;1583; -> Tao Gunka [beach_dun]\n;1312; -> General Tartaruga [tur_dun04]\n;1688; -> Lady Tanee [ayo_dun02]\n;1685; -> Vesper [jupe_core]\n;1418; -> Serpente Suprema [gon_dun03]\n;1885; -> Gopinich [mosk_dun03]\n;1719; -> Detardeurus [abyss03]\n;1734; -> Kiel D-01 [kh_dun02]\n;1630; -> Lady Branca [lou_dun03]\n\n--- Mini ---\n;1582; -> Deviling [pay_fild04, yuno_fild03]\n;1096; -> Angeling [pay_fild04, xmas_dun01, yuno_fild03]\n;1388; -> Archangeling [yuno_fild05]\n;1120; -> Ghostring [pay_fild04, treasure02, prt_maze03, gld_dun04]\n;1289; -> Maya Puple [anthell01, gld_dun03]\n;1765; -> Valqu\u00edria [odin_tem02, odin_tem03]\n;1302; -> Ilus\u00e3o das Trevas [gld_dun04, gl_church]\n",
-            "delay_active": false,
+            "mob_ids": "--- Comum ---\n;12;19; -> Cavaleiro do Abismo [gefenia04]\n;13;75; -> Papel [ama_dun02]\n;17;13; -> Acidus Dorada [abyss_03]\n;12;53; -> G\u00e1rgula [gl_sew02]\n;1090; -> Mastering\n;1250; -> Chepet\n\n--- MVP ---\n;565; -> B Tomb\n;1087; -> Orc Hero [gef_fild02, gef_fild14]\n;1492; -> Samurai Encarnado [ama_dun03]\n;1832; -> Ifrit [8]\n;1112; -> Drake [treasure02]\n;1147; -> Maya [anthell02, gld_dun03]\n;1159; -> Freeoni [moc_fild17]\n;1251; -> Cavaleiro da Tempestade [xmas_dun02]\n;1252; -> Haitii [xmas_fild01]\n;1623; -> RSX-0806 [ein_dun02]\n;1157; -> Farao [in_sphinx5]\n;1038; -> Os\u00edris [moc_pryd04]\n;1511; -> Amon Ra [moc_pryd06]\n;1768; -> Pesar Noturno [ra_san05]\n;1115; -> Eddga [gld_dun01, pay_fild11]\n;1190; -> Senhor dos Orcs [gef_fild10]\n;1373; -> Senhor dos Mortos [niflheim]\n;1272; -> Senhor das Trevas [gl_chyard, gld_dun04]\n;1059; -> Abelha Rainha [mjolnir_04]\n;1871; -> Bispo Decadente [abbey02]\n;1873; -> Beelzebub [abbey03]\n;1779; -> Ktullanux [ice_dun03]\n;1751; -> Valqu\u00edria Randrige [odin_tem03]\n;1086; -> Besouro-Ladr\u00e3o Dourado [prt_sewb4]\n;1039; -> Bafom\u00e9 [prt_maze03]\n;1917; -> Morocc Ferido [moc_fild22]\n;1389; -> Dr\u00e1cula [gef_dun01]\n;1046; -> Doppelganger [gef_dun02, gld_dun02]\n;1583; -> Tao Gunka [beach_dun]\n;1312; -> General Tartaruga [tur_dun04]\n;1688; -> Lady Tanee [ayo_dun02]\n;1685; -> Vesper [jupe_core]\n;1418; -> Serpente Suprema [gon_dun03]\n;1885; -> Gopinich [mosk_dun03]\n;1719; -> Detardeurus [abyss03]\n;1734; -> Kiel D-01 [kh_dun02]\n;1630; -> Lady Branca [lou_dun03]\n\n--- Mini ---\n;1582; -> Deviling [pay_fild04, yuno_fild03]\n;1096; -> Angeling [pay_fild04, xmas_dun01, yuno_fild03]\n;1388; -> Archangeling [yuno_fild05]\n;1120; -> Ghostring [pay_fild04, treasure02, prt_maze03, gld_dun04]\n;1289; -> Maya Puple [anthell01, gld_dun03]\n;1765; -> Valqu\u00edria [odin_tem02, odin_tem03]\n;1302; -> Ilus\u00e3o das Trevas [gld_dun04, gl_church]\n",
+            "delay_active": true,
             "auto_teleport": false,
             "key": "Space",
-            "delay": 0.03
+            "delay": 0.15
+        },
+        "city_block": false,
+        "halter_lead": {
+            "moviment_cells": 1
         }
     },
     "keyboard_type": "virtual",
@@ -29,8 +33,8 @@
                 "active": true,
                 "mouse_click": false,
                 "mouse_flick": false,
-                "delay_active": true,
-                "mvp_active": true,
+                "delay_active": false,
+                "mvp_active": false,
                 "swap_atk": {
                     "active": false
                 },
@@ -38,7 +42,8 @@
                     "active": false
                 },
                 "key": "F1",
-                "delay": 0.25
+                "delay": 0.25,
+                "pet_active": true
             },
             "sa_castcancel": {
                 "active": true,
@@ -52,6 +57,189 @@
                     "active": false
                 },
                 "key": "F2"
+            }
+        }
+    },
+    "auto_element": {
+        "element_dark": {
+            "mob_ids": "--- Comum ---\n;17;13; -> Acidus Dorada [abyss_03]\n\n--- MVP ---\n;1751; -> Valqu\u00edria Randrige [odin_tem03]\n;1685; -> Vesper [jupe_core]\n;1649; -> Suma-Sacerdote Margar [lhz_dun03]\n\n--- Mini ---\n;1096; -> Angeling [pay_fild04, xmas_dun01, yuno_fild03]\n;1388; -> Archangeling [yuno_fild05]\n;1765; -> Valqu\u00edria [odin_tem02, odin_tem03]\n"
+        },
+        "element_fire": {
+            "mob_ids": "--- Comum ---\n;1055; -> Muka\n\n--- MVP ---\n;1087; -> Orc Hero [gef_fild02, gef_fild14]\n;1147; -> Maya [anthell02, gld_dun03]\n;1159; -> Freeoni [moc_fild17]\n;1511; -> Amon Ra [moc_pryd06]\n;1190; -> Senhor dos Orcs [gef_fild10]\n;1312; -> General Tartaruga [tur_dun04]\n;1885; -> Gopinich [mosk_dun03]\n;1648; -> Mestre Ferreiro Howard [lhz_dun03]\n\n--- Mini ---\n;1289; -> Maya Puple [anthell01, gld_dun03]\n"
+        },
+        "element_wind": {
+            "mob_ids": "--- Comum ---\n;1138; -> Magn\u00f3lia\n\n--- MVP ---\n;1252; -> Haitii [xmas_fild01]\n;1779; -> Ktullanux [ice_dun03]\n\n--- Mini ---\n"
+        }
+    },
+    "sniper": {
+        "auto_element": {
+            "element_dark": {
+                "active": false
+            },
+            "element_fire": {
+                "active": true
+            },
+            "element_wind": {
+                "active": true
+            }
+        },
+        "macro": {
+            "element_dark": {
+                "active": false,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_1_key": "3"
+            },
+            "element_holy": {
+                "active": false,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_1_key": "Q",
+                "seq_2_active": true,
+                "seq_2_delay_active": false,
+                "seq_2_key": "R",
+                "seq_3_active": true,
+                "seq_3_delay_active": false,
+                "seq_3_key": "4"
+            },
+            "element_fire": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_1_key": "2"
+            },
+            "element_wind": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_1_key": "1"
+            },
+            "jaguar_hat": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": true,
+                "seq_1_key": "Y",
+                "seq_1_delay": 0.2,
+                "seq_2_active": true,
+                "seq_2_delay_active": false,
+                "seq_2_key": "6",
+                "seq_3_active": true,
+                "seq_3_delay_active": false,
+                "seq_3_key": "U",
+                "seq_4_active": true,
+                "seq_4_delay_active": false,
+                "seq_4_key": "I",
+                "seq_5_active": true,
+                "seq_5_delay_active": false,
+                "seq_5_key": "O"
+            }
+        },
+        "skill_buff": {
+            "sn_sight": {
+                "active": true,
+                "cooldown": 30,
+                "timer_active": false,
+                "block_quagmire": true,
+                "use_moviment": false,
+                "map_active": false,
+                "key": "8",
+                "attack_use": true
+            },
+            "sn_windwalk": {
+                "active": true,
+                "cooldown": 30,
+                "timer_active": false,
+                "block_quagmire": true,
+                "use_moviment": false,
+                "map_active": false,
+                "key": "7",
+                "attack_use": true
+            }
+        },
+        "auto_item": {
+            "item_buff": {
+                "awakening_potion": {
+                    "active": true,
+                    "cooldown": 30,
+                    "timer_active": false,
+                    "block_quagmire": false,
+                    "use_moviment": false,
+                    "map_active": false,
+                    "key": "5",
+                    "attack_use": true
+                },
+                "resentment_box": {
+                    "active": true,
+                    "cooldown": 30,
+                    "timer_active": false,
+                    "block_quagmire": false,
+                    "attack_use": true,
+                    "use_moviment": false,
+                    "map_active": false,
+                    "key": "S"
+                }
+            }
+        },
+        "skill_equip": {
+            "mc_loud": {
+                "active": true,
+                "cooldown": 30,
+                "timer_active": false,
+                "block_quagmire": false,
+                "attack_use": true,
+                "use_moviment": false,
+                "map_active": false,
+                "macro": "jaguar_hat"
+            }
+        }
+    },
+    "archer": {
+        "skill_spawmmer": {
+            "ac_double": {
+                "active": true,
+                "mouse_click": true,
+                "mouse_flick": false,
+                "delay_active": false,
+                "swap_atk": {
+                    "active": false
+                },
+                "swap_def": {
+                    "active": false
+                },
+                "key": "F1"
+            }
+        },
+        "skill_buff": {
+            "ac_concentration": {
+                "active": true,
+                "cooldown": 30,
+                "timer_active": false,
+                "block_quagmire": true,
+                "use_moviment": false,
+                "map_active": false,
+                "key": "9",
+                "attack_use": true
+            }
+        }
+    },
+    "debug_active": true,
+    "novice": {
+        "auto_item": {
+            "item_buff": {
+                "concentration_potion": {
+                    "active": false,
+                    "cooldown": 30,
+                    "timer_active": false,
+                    "block_quagmire": false,
+                    "attack_use": false,
+                    "use_moviment": false,
+                    "map_active": false
+                }
             }
         }
     }

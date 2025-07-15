@@ -7,7 +7,11 @@ from game.buff import EQUIP_BUFFS, Buff
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_macro_select import CboxMacroSelect
 from gui.widget.cbox_skill import CboxSkill
+from gui.widget.input_attack_use import InputAttackUse
+from gui.widget.input_block_quagmire import InputBlockQuagmire
 from gui.widget.input_map_criteria import InputMapCriteria
+from gui.widget.input_timer import InputTimer
+from gui.widget.input_use_moviment import InputUseMoviment
 from service.config_file import ACTIVE, CITY_BLOCK, CONFIG_FILE, MACRO, SKILL_EQUIP
 from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
@@ -70,6 +74,10 @@ class PainelJobEquipBuff(QWidget):
         hbox.addWidget(self._build_skill_icon(skill, job_id))
         key_base = f"{job_id}:{SKILL_EQUIP}:{skill.id}:"
         hbox.addWidget(CboxMacroSelect(self, key_base + MACRO))
+        hbox.addWidget(InputTimer(self, key_base, skill.buff_timer))
+        hbox.addWidget(InputBlockQuagmire(self, key_base, skill.block_quagmire))
+        hbox.addWidget(InputAttackUse(self, key_base))
+        hbox.addWidget(InputUseMoviment(self, key_base))
         hbox.addWidget(InputMapCriteria(self, key_base))
         vbox.addLayout(hbox)
         vbox.addWidget(build_hr())

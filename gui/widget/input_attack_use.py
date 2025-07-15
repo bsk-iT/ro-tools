@@ -2,12 +2,12 @@ from PyQt5.QtWidgets import QWidget, QToolButton, QHBoxLayout
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 
-from config.icon import ICON_MVP
-from service.config_file import CONFIG_FILE, MVP_ACTIVE
+from config.icon import ICON_SWORD
+from service.config_file import ATTACK_USE, CONFIG_FILE
 from util.widgets import ICON_BTN
 
 
-class InputMvp(QWidget):
+class InputAttackUse(QWidget):
     def __init__(self, parent, key_base):
         super().__init__(parent)
         self.key_base = key_base
@@ -23,18 +23,18 @@ class InputMvp(QWidget):
         self.layout.addWidget(self.toggle)
 
     def _config_events(self) -> None:
-        self.toggle.toggled.connect(self._on_active_mvp)
-        self._on_active_mvp(self.toggle.isChecked())
+        self.toggle.toggled.connect(self._on_active_pet)
+        self._on_active_pet(self.toggle.isChecked())
 
     def _build_toggle(self) -> QToolButton:
         toggle = QToolButton()
         toggle.setCheckable(True)
-        active = CONFIG_FILE.read(self.key_base + MVP_ACTIVE)
+        active = CONFIG_FILE.read(self.key_base + ATTACK_USE)
         toggle.setChecked(active if active else False)
-        toggle.setIcon(QIcon(ICON_MVP))
+        toggle.setIcon(QIcon(ICON_SWORD))
         toggle.setIconSize(ICON_BTN)
         return toggle
 
-    def _on_active_mvp(self, value: bool) -> None:
-        self.toggle.setToolTip(f"Auto summonar MvP - {"LIGADO" if value else "DESLIGADO"}")
-        CONFIG_FILE.update(self.key_base + MVP_ACTIVE, value)
+    def _on_active_pet(self, value: bool) -> None:
+        self.toggle.setToolTip(f"Utilizar somente após o uso de uma Skill Spawmmer - {"LIGADO" if value else "DESLIGADO"}")
+        CONFIG_FILE.update(self.key_base + ATTACK_USE, value)

@@ -5,7 +5,7 @@ import time
 from game.buff import QUAGMIRE, Buff
 from game.jobs import JOB_MAP, Job
 from gui.app_controller import APP_CONTROLLER
-from service.config_file import AUTO_ELEMENT, BLOCK_QUAGMIRE, CONFIG_FILE, COOLDOWN, DEBUG_ACTIVE, ITEM_BUFF, MOB_IDS, MOVIMENT_CELLS, TIMER_ACTIVE, USE_MOVIMENT
+from service.config_file import ATTACK_USE, AUTO_ELEMENT, BLOCK_QUAGMIRE, CONFIG_FILE, COOLDOWN, DEBUG_ACTIVE, ITEM_BUFF, MOB_IDS, MOVIMENT_CELLS, TIMER_ACTIVE, USE_MOVIMENT
 from service.memory import MEMORY
 from service.offsets import Offsets
 from service.servers_file import NAME, SKILL_BUFF, SERVERS_FILE, STATUS_DEBUFF
@@ -39,6 +39,7 @@ class Char:
         self.position = (0, 0)
         self.index_last_position_buff = {}
         self.index_last_time_buff = {}
+        self.index_skill_use_spawmmer = {}
         self.abracadabra_skill = None
 
     def update(self):
@@ -71,6 +72,12 @@ class Char:
         if MEMORY.x_pos_address == 0x0:
             return (0, 0)
         return (MEMORY.process.read_int(MEMORY.x_pos_address), MEMORY.process.read_int(MEMORY.x_pos_address + Offsets.Y_POSITION))
+
+    def execute_use_skill_spawmmer(self):
+        for skill_id in self.index_skill_use_spawmmer:
+            (has_buff, _) = self.index_skill_use_spawmmer[skill_id]
+            if not has_buff:
+                self.index_skill_use_spawmmer[skill_id] = (has_buff, True)
 
     def _get_entity_list(self):
         entities = []
@@ -120,6 +127,7 @@ class Char:
             buffs.append(buff)
             self.index_last_position_buff[buff] = (self.position[0], self.position[1])
             self.index_last_time_buff[buff] = time.time()
+            self.index_skill_use_spawmmer[buff] = (True, False)
         return buffs
 
     def _get_id_buffs(self, resource):
@@ -137,7 +145,7 @@ class Char:
             return None
         job_id = APP_CONTROLLER.job.id
         for item in list_items:
-            if item.id not in self.item_buffs and not self.is_quagmire_block(job_id, item, prop_seq) and self.is_moviment_cell_done(job_id, item, prop_seq) and self.is_cooldown_finish(job_id, item, prop_seq):
+            if item.id not in self.item_buffs and not self.is_quagmire_block(job_id, item, prop_seq) and self.is_moviment_cell_done(job_id, item, prop_seq) and self.is_cooldown_finish(job_id, item, prop_seq) and self.is_attack_use_spawmmer(job_id, item.id, prop_seq):
                 return item
         return None
 
@@ -159,11 +167,21 @@ class Char:
         buffs_to_use = []
         for job_id, buffs in list_buff.items():
             for buff in buffs:
-                if buff.id not in self.skill_buffs and not self.is_quagmire_block(job_id, buff, prop_seq) and self.is_moviment_cell_done(job_id, buff, prop_seq) and self.is_cooldown_finish(job_id, buff, prop_seq):
+                if buff.id not in self.skill_buffs and not self.is_quagmire_block(job_id, buff, prop_seq) and self.is_moviment_cell_done(job_id, buff, prop_seq) and self.is_cooldown_finish(job_id, buff, prop_seq) and self.is_attack_use_spawmmer(job_id, buff.id, prop_seq):
                     buffs_to_use.append((job_id, buff.id, buff.priority))
         if len(buffs_to_use) == 0:
             return (None, None, None)
         return sorted(buffs_to_use, key=lambda x: x[2], reverse=True)[0]
+
+    def is_attack_use_spawmmer(self, job_id, buff_id, prop_seq):
+        key_base = [job_id, *prop_seq, buff_id, ATTACK_USE]
+        if not CONFIG_FILE.get_value(key_base):
+            return True
+        if not self.index_skill_use_spawmmer.get(buff_id, False):
+            self.index_skill_use_spawmmer[buff_id] = (False, False)
+        (_, is_used_skill_spawmmer) = self.index_skill_use_spawmmer[buff_id]
+        self.index_skill_use_spawmmer[buff_id] = (False, is_used_skill_spawmmer)
+        return is_used_skill_spawmmer
 
     def is_quagmire_block(self, job_id, buff: Buff, prop_seq):
         key_base = [job_id, *prop_seq, buff.id, BLOCK_QUAGMIRE]

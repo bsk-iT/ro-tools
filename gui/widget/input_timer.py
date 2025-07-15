@@ -40,7 +40,6 @@ class InputTimer(QWidget):
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(ICON_TIMER))
         toggle.setIconSize(ICON_BTN)
-        toggle.setToolTip("Cooldown para reutilizar novamente o Buff")
         return toggle
 
     def _build_spinbox(self) -> QDoubleSpinBox:
@@ -63,4 +62,5 @@ class InputTimer(QWidget):
 
     def _on_active_delay(self, value: bool) -> None:
         self.spinbox.setVisible(value)
+        self.toggle.setToolTip(f"Cooldown para reutilizar novamente o Buff - {"LIGADO" if value else "DESLIGADO"}")
         CONFIG_FILE.update(self.key_seq + TIMER_ACTIVE, value)

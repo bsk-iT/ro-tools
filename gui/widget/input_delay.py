@@ -39,7 +39,6 @@ class InputDelay(QWidget):
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(ICON_QUICK))
         toggle.setIconSize(ICON_BTN)
-        toggle.setToolTip("Delay de uso em segundos")
         return toggle
 
     def _build_spinbox(self) -> QDoubleSpinBox:
@@ -61,4 +60,5 @@ class InputDelay(QWidget):
 
     def _on_active_delay(self, value: bool) -> None:
         self.spinbox.setVisible(value)
+        self.toggle.setToolTip(f"Delay de uso em segundos - {"LIGADO" if value else "DESLIGADO"}")
         CONFIG_FILE.update(self.key_seq + DELAY_ACTIVE, value)

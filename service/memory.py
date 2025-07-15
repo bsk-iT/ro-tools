@@ -43,7 +43,7 @@ class Memory:
         self.chat_address = 0x0 if chat_offset == 0 else self.get_address([chat_offset])
         self.abracadabra_address = int(SERVERS_FILE.get_value(ABRACADABRA_ADDRESS), 16)
         self.abracadabra_address = 0x0 if self.abracadabra_address == 0 else self.abracadabra_address
-        self.entity_list_address = 0x0 if entity_list_offset == 0 else  self.get_address([entity_list_offset])
+        self.entity_list_address = 0x0 if entity_list_offset == 0 else self.get_address([entity_list_offset])
 
     def get_hwnd(self) -> None:
         if not self.is_valid():

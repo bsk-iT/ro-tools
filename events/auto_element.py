@@ -1,3 +1,4 @@
+from config.icon import play_sfx
 from events.base_event import BaseEvent, Priority
 from events.macro_event import MacroEvent
 from service.config_file import AUTO_ELEMENT, CONFIG_FILE, WAITING
@@ -26,3 +27,4 @@ class AutoElement(BaseEvent):
         (job_id, macro_id, _) = self.game_event.char.next_macro_element_to_use(APP_CONTROLLER.job_auto_elements)
         self.last_macro_id = macro_id
         self.macro_event.start(macro_id)
+        play_sfx(macro_id)

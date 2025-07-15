@@ -9,7 +9,7 @@ from service.config_file import CONFIG_FILE, HOTKEY, KEY, KEY_MONITORING, SKILL_
 from service.keyboard import KEYBOARD
 from service.memory import MEMORY
 from PyQt5.QtGui import QIcon
-from config.icon import ICON_OFF, ICON_ON
+from config.icon import ICON_OFF, ICON_ON, play_sfx
 from service.servers_file import LINKS, SERVERS_FILE
 
 
@@ -185,6 +185,7 @@ class AppController(QObject):
         self.skill_spammer_event.force_stop()
         self.remove_all_hotkeys()
         self.status_toggle.setIcon(QIcon(ICON_OFF))
+        play_sfx("off")
 
     def start_all_events(self):
         from events.game_event import GAME_EVENT
@@ -192,6 +193,7 @@ class AppController(QObject):
         GAME_EVENT.start()
         self.sync_hotkeys()
         self.status_toggle.setIcon(QIcon(ICON_ON))
+        play_sfx("on")
 
 
 APP_CONTROLLER = AppController()

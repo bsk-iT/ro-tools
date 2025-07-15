@@ -126,9 +126,9 @@ class InputTeleport(QWidget):
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(ICON_TELEPORT))
         toggle.setIconSize(ICON_BTN)
-        toggle.setToolTip(f"Auto teleport MOB")
         return toggle
 
     def _on_active_auto_teleport(self, value: bool) -> None:
         self.config.setVisible(value)
+        self.toggle.setToolTip(f"Auto teleport MOB - {"LIGADO" if value else "DESLIGADO"}")
         CONFIG_FILE.update(self.key_base + AUTO_TELEPORT, value)

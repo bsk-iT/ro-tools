@@ -7,6 +7,7 @@ from config.icon import ICON_DELETE
 from game.buff import Buff
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_skill import CboxSkill
+from gui.widget.input_attack_use import InputAttackUse
 from gui.widget.input_block_quagmire import InputBlockQuagmire
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_criteria import InputMapCriteria
@@ -74,6 +75,7 @@ class PainelJobSkillBuff(QWidget):
         hbox.addWidget(InputKeybind(self, key_base + KEY))
         hbox.addWidget(InputTimer(self, key_base, skill.buff_timer))
         hbox.addWidget(InputBlockQuagmire(self, key_base, skill.block_quagmire))
+        hbox.addWidget(InputAttackUse(self, key_base))
         hbox.addWidget(InputUseMoviment(self, key_base))
         hbox.addWidget(InputMapCriteria(self, key_base))
         vbox.addLayout(hbox)

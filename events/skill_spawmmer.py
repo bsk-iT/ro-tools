@@ -70,4 +70,5 @@ class SkillSpawmmer(BaseEvent):
         if mouse_click or (mouse_click is None and skill.is_clicked):
             mouse_flick = CONFIG_FILE.get_value([*base_prop_key, MOUSE_FLICK])
             MOUSE.click(mouse_flick)
+        GAME_EVENT.char.execute_use_skill_spawmmer()
         time.sleep(CONFIG_FILE.get_delay(base_prop_key))

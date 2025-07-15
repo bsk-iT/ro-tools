@@ -1,5 +1,9 @@
 import os
 import sys
+import pygame
+
+pygame.init()
+pygame.mixer.init()
 
 
 def resource_path(relative_path: str) -> str:
@@ -42,3 +46,8 @@ IMG_YGG = resource_path(PATH_ITEM + "ygg_berry.png")
 
 def get_image(path: str, file_name: str):
     return resource_path(f"{path}{file_name}.png")
+
+
+def play_sfx(sfx_name):
+    pygame.mixer.music.load(resource_path(f"assets/sfx/{sfx_name}.wav"))
+    pygame.mixer.music.play()

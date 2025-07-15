@@ -35,7 +35,6 @@ class InputMapCriteria(QWidget):
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(ICON_MAP))
         toggle.setIconSize(ICON_BTN)
-        toggle.setToolTip("Ativo somente nesse tipo de mapa")
         return toggle
 
     def _build_cbox_map(self) -> QComboBox:
@@ -51,6 +50,7 @@ class InputMapCriteria(QWidget):
 
     def _on_active_map(self, value: bool) -> None:
         self.cbox_map.setVisible(value)
+        self.toggle.setToolTip(f"Ativo somente nesse tipo de mapa - {"LIGADO" if value else "DESLIGADO"}")
         CONFIG_FILE.update(self.key_seq + MAP_ACTIVE, value)
 
     def _on_change_map(self, index: int) -> None:

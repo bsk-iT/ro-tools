@@ -37,9 +37,9 @@ class InputSwap(QWidget):
         toggle.setChecked(active if active else False)
         toggle.setIcon(QIcon(self.icon))
         toggle.setIconSize(ICON_BTN)
-        toggle.setToolTip(f"Macro Swap para equipe de {self.resource.upper()}")
         return toggle
 
     def _on_active_swap(self, value: bool) -> None:
         self.cbox_macro.setVisible(value)
+        self.toggle.setToolTip(f"Macro Swap para equipe de {self.resource.upper()} - {"LIGADO" if value else "DESLIGADO"}")
         CONFIG_FILE.update(self.key_base + ACTIVE, value)
