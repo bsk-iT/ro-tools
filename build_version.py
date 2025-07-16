@@ -1,7 +1,7 @@
-version_str = "1.5.0"
-name = "RO Tools"
+from config.app import APP_NAME, APP_VERSION
 
-version_parts = tuple(map(int, (version_str.split(".") + ["0", "0"])[:4]))
+
+version_parts = tuple(map(int, (APP_VERSION.split(".") + ["0", "0"])[:4]))
 
 version_txt_content = f"""VSVersionInfo(
   ffi=FixedFileInfo(
@@ -20,12 +20,12 @@ version_txt_content = f"""VSVersionInfo(
         '040904B0',
         [
           StringStruct('CompanyName', 'Deco - uniaodk@gmail.com'),
-          StringStruct('FileDescription', '{name}'),
-          StringStruct('FileVersion', '{version_str}'),
-          StringStruct('InternalName', '{name}'),
-          StringStruct('OriginalFilename', '{name}.exe'),
-          StringStruct('ProductName', '{name}'),
-          StringStruct('ProductVersion', '{version_str}')
+          StringStruct('FileDescription', '{APP_NAME}'),
+          StringStruct('FileVersion', '{APP_VERSION}'),
+          StringStruct('InternalName', '{APP_NAME}'),
+          StringStruct('OriginalFilename', '{APP_NAME}.exe'),
+          StringStruct('ProductName', '{APP_NAME}'),
+          StringStruct('ProductVersion', '{APP_VERSION}')
         ]
       )
     ]),
