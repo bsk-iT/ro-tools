@@ -5,3 +5,4 @@ pymem>=1.9.4
 psutil>=5.9.0
 interception-python>=1.13.5
 py-game>=2.6.1
+pyperclip>=1.9.0

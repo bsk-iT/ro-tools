@@ -3,7 +3,7 @@ import time
 from events.base_event import BaseEvent, Priority
 
 
-from service.config_file import AUTO_ITEM, AUTO_TELEPORT, CONFIG_FILE, FLY_WING, KEY
+from service.config_file import AUTO_ITEM, AUTO_TELEPORT, CONFIG_FILE, FLY_WING, KEY, MACRO_KEY
 from service.keyboard import KEYBOARD
 
 
@@ -29,7 +29,7 @@ class AutoTeleport(BaseEvent):
         return True
 
     def execute_action(self):
-        macro_key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
+        macro_key = CONFIG_FILE.get_value([*self.prop_seq, MACRO_KEY])
         key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         KEYBOARD.press_key(macro_key or key)
         time.sleep(CONFIG_FILE.get_delay(self.prop_seq, 0.25))

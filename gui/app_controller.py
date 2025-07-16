@@ -1,3 +1,4 @@
+import time
 import keyboard
 from PyQt5.QtCore import pyqtSignal, QObject
 from events.auto_commands import AutoCommands
@@ -134,8 +135,9 @@ class AppController(QObject):
             self.hotkeys_handler[self.status_key] = (handler, None)
 
     def on_fly_wing_key(self):
-        self.toggle_fly_wing = not self.toggle_fly_wing
         KEYBOARD.add_pressed_key(self.fly_wing_key)
+        time.sleep(0.35)
+        self.toggle_fly_wing = not self.toggle_fly_wing
 
     def on_auto_commands_key(self):
         if self.auto_comands_event.running:
