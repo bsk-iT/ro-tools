@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QLabel, QPlainTextEdit
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QIcon
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QLabel, QPlainTextEdit
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QIcon
 
 from config.icon import ICON_DELETE
 from game.macro import ELEMENT_DARK, ELEMENT_FIRE, ELEMENT_GHOST, ELEMENT_GROUND, ELEMENT_HOLY, ELEMENT_WATER, ELEMENT_WIND, MACRO_MAP, Macro

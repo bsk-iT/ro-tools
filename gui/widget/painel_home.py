@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QTabWidget
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTabWidget
+from PySide6.QtCore import Qt
 
 from gui.widget.cbox_jobs import CboxJobs
 from gui.widget.painel_auto_element import PainelAutoElement

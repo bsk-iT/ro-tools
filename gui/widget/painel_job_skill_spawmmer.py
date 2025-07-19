@@ -1,8 +1,7 @@
 from itertools import chain
-from tkinter import ACTIVE
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QFrame, QLabel
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QIcon
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QSizePolicy, QFrame, QLabel
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QIcon
 
 from config.icon import ICON_DELETE, ICON_SHIELD, ICON_SWORD
 from game.spawn_skill import SA_ABRACADABRA, SA_CASTCANCEL, SpawnSkill
@@ -15,7 +14,7 @@ from gui.widget.input_mouse_flick import InputMouseFlick
 from gui.widget.input_mvp import InputMvp
 from gui.widget.input_pet import InputPet
 from gui.widget.input_swap import InputSwap
-from service.config_file import CONFIG_FILE, KEY, SKILL_SPAWMMER
+from service.config_file import ACTIVE, CONFIG_FILE, KEY, SKILL_SPAWMMER
 from util.widgets import build_hr, build_icon, build_label, build_label_info, build_scroll_vbox, clear_layout
 
 

@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QPushButton, QSizePolicy, QWidget
-from PyQt5.QtGui import QKeySequence, QKeyEvent, QIcon
-from PyQt5.QtCore import Qt, QSize, pyqtSignal
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QWidget
+from PySide6.QtGui import QKeySequence, QKeyEvent, QIcon
+from PySide6.QtCore import Qt, QSize, Signal
 
 from config.app import APP_ICON_SIZE
 from config.icon import ICON_KEYBOARD
@@ -10,7 +10,7 @@ from service.config_file import CONFIG_FILE
 
 class InputKeybind(QPushButton):
 
-    updated_key = pyqtSignal(str)
+    updated_key = Signal(str)
 
     def __init__(self, parent: QWidget, key_config=None, sync_hotkeys=False) -> None:
         super().__init__(parent)
@@ -75,7 +75,7 @@ class InputKeybind(QPushButton):
 
     def get_key_str(self, key, event: QKeyEvent):
         modifiers = event.modifiers()
-        self.key_sequence = QKeySequence(modifiers | key)
+        self.key_sequence = QKeySequence(modifiers | Qt.Key(key))
         return self.key_sequence.toString()
 
     def _update_input_keybind(self, key, event):

@@ -1,9 +1,9 @@
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QPlainTextEdit, QLabel
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QPlainTextEdit, QLabel
+from PySide6.QtCore import Qt
 
 from gui.widget.input_keybind import InputKeybind
 from service.config_file import AUTO_COMMANDS, COMMANDS, CONFIG_FILE, DRAFT_COMMANDS, KEY
-from util.widgets import build_label_info, build_label_subtitle
+from util.widgets import build_label_info, build_label_subtitle, build_scroll_vbox
 
 DEFAULT_DRAFT = """--- Autoloot Types ---
 @aloottype + 0 -> Items de Cura
@@ -49,7 +49,9 @@ class PainelUtilities(QWidget):
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.layout.setSpacing(15)
-        self.layout.addLayout(self.build_auto_commands())
+        (vbox, scroll) = build_scroll_vbox()
+        vbox.addLayout(self.build_auto_commands())
+        self.layout.addWidget(scroll)
 
     def build_auto_commands(self):
         vbox_commands = QVBoxLayout()
@@ -89,4 +91,3 @@ class PainelUtilities(QWidget):
 
         vbox_commands.addLayout(hbox_commands)
         return vbox_commands
-

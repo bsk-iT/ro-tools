@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QVBoxLayout, QWidget, QPlainTextEdit, QCheckBox
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QVBoxLayout, QWidget, QPlainTextEdit, QCheckBox
+from PySide6.QtCore import Qt
 
 from gui.app_controller import APP_CONTROLLER
 from service.config_file import CONFIG_FILE, DEBUG_ACTIVE

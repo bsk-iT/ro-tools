@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTabWidget
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTabWidget
+from PySide6.QtCore import Qt
 
 from config.icon import ICON_GITHUB
 from gui.widget.input_app_status import InputAppStatus

@@ -1,8 +1,8 @@
 from typing import Any, List
 import psutil
 
-from PyQt5.QtWidgets import QVBoxLayout, QComboBox, QPushButton, QSizePolicy, QWidget, QLabel, QHBoxLayout
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QVBoxLayout, QComboBox, QPushButton, QSizePolicy, QWidget, QLabel, QHBoxLayout
+from PySide6.QtCore import Qt
 from config.app import APP_CBOX_WIDTH, APP_ICON_SIZE
 from gui.app_controller import APP_CONTROLLER
 from service.servers_file import SERVERS_FILE

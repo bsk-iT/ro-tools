@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QVBoxLayout, QWidget, QHBoxLayout, QSpinBox, QCheckBox
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QVBoxLayout, QWidget, QHBoxLayout, QSpinBox, QCheckBox
+from PySide6.QtCore import Qt
 
 from config.icon import IMG_BLUE_POTION, IMG_RED_POTION, IMG_YGG, PATH_ITEM, get_image
 from game.jobs import Job

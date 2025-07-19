@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QToolButton, QHBoxLayout, QVBoxLayout, QLabel, QPlainTextEdit
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QToolButton, QHBoxLayout, QVBoxLayout, QLabel, QPlainTextEdit
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
 
 from config.icon import ICON_TELEPORT
 from gui.widget.input_delay import InputDelay

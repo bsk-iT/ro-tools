@@ -1,6 +1,6 @@
 from typing import Any
-from PyQt5.QtWidgets import QMenu, QSystemTrayIcon, QApplication, QWidget, QAction
-from PyQt5.QtGui import QIcon
+from PySide6.QtWidgets import QMenu, QSystemTrayIcon, QApplication, QWidget
+from PySide6.QtGui import QIcon, QAction
 
 from config.app import APP_ICON
 

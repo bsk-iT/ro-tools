@@ -1,7 +1,7 @@
 from itertools import chain
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QCheckBox
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QIcon
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QFrame, QPushButton, QCheckBox
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QIcon
 
 from config.icon import ICON_DELETE
 from game.buff import Buff

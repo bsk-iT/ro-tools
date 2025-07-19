@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import QEvent
+from PySide6.QtWidgets import QMainWindow
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import QEvent
 
 from config.app import APP_NAME, APP_ICON
 from events.game_event import GAME_EVENT

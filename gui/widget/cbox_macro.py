@@ -1,6 +1,6 @@
 from itertools import chain
-from PyQt5.QtWidgets import QComboBox
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
+from PySide6.QtWidgets import QComboBox
+from PySide6.QtGui import QStandardItemModel, QStandardItem, QIcon
 
 from config.app import APP_CBOX_WIDTH
 from gui.app_controller import APP_CONTROLLER

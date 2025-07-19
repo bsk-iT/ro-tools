@@ -1,6 +1,6 @@
 import time
 import keyboard
-from PyQt5.QtCore import pyqtSignal, QObject
+from PySide6.QtCore import Signal, QObject
 from events.auto_commands import AutoCommands
 from events.hotkey_event import HotkeyEvent
 from events.skill_spawmmer import SkillSpawmmer
@@ -9,26 +9,26 @@ from game.macro import Macro
 from service.config_file import CONFIG_FILE, HOTKEY, KEY, KEY_MONITORING, SKILL_SPAWMMER
 from service.keyboard import KEYBOARD
 from service.memory import MEMORY
-from PyQt5.QtGui import QIcon
+from PySide6.QtGui import QIcon
 from config.icon import ICON_OFF, ICON_ON, play_sfx
 from service.servers_file import LINKS, SERVERS_FILE
 
 
 class AppController(QObject):
 
-    updated_process = pyqtSignal()
-    added_hotkey = pyqtSignal(str, Macro)
-    added_macro = pyqtSignal(str, Macro)
-    added_auto_element = pyqtSignal(str, Macro)
-    add_macro_select = pyqtSignal(str, Macro)
-    removed_macro = pyqtSignal(Macro)
-    updated_job = pyqtSignal(Job)
-    added_skill_spawmmer = pyqtSignal(str, object)
-    added_skill_buff = pyqtSignal(str, object)
-    added_skill_equip = pyqtSignal(str, object)
-    added_item_buff = pyqtSignal(object)
-    added_item_debuff = pyqtSignal(object)
-    debug = pyqtSignal(str)
+    updated_process = Signal()
+    added_hotkey = Signal(str, Macro)
+    added_macro = Signal(str, Macro)
+    added_auto_element = Signal(str, Macro)
+    add_macro_select = Signal(str, Macro)
+    removed_macro = Signal(Macro)
+    updated_job = Signal(Job)
+    added_skill_spawmmer = Signal(str, object)
+    added_skill_buff = Signal(str, object)
+    added_skill_equip = Signal(str, object)
+    added_item_buff = Signal(object)
+    added_item_debuff = Signal(object)
+    debug = Signal(str)
 
     def __init__(self):
         super().__init__(None)

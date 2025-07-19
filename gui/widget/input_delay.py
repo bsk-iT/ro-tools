@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout, QSizePolicy
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout, QSizePolicy
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
 
 from config.app import APP_DELAY, APP_MAX_DELAY, APP_MIN_DELAY
 from config.icon import ICON_QUICK

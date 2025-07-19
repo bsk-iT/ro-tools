@@ -1,8 +1,8 @@
 import sys
 
 from gui.main_window import MainWindow
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtGui import QFontDatabase, QFont
+from PySide6.QtWidgets import QApplication
+from PySide6.QtGui import QFontDatabase, QFont
 from config.app import APP_FONT, APP_FONT_SIZE, APP_STYLE
 
 
@@ -16,6 +16,7 @@ def main():
 
 
 def _build_font():
+    print(APP_FONT)
     font = QFontDatabase.addApplicationFont(APP_FONT)
     font_family = QFontDatabase.applicationFontFamilies(font)[0]
     return QFont(font_family, APP_FONT_SIZE)
