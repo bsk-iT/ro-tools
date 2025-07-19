@@ -2,7 +2,8 @@ from PySide6.QtWidgets import QVBoxLayout, QWidget, QLabel
 from PySide6.QtCore import Qt
 
 from gui.app_controller import APP_CONTROLLER
-from service.servers_file import NAME, URL
+from gui.widget.input_notification import InputNotification
+from service.servers_file import LINKS, NAME, TYPE, URL, VOTE
 from util.widgets import build_link, build_scroll_vbox, clear_layout
 
 
@@ -23,14 +24,16 @@ class PainelLinks(QWidget):
         (vbox, scroll) = build_scroll_vbox(100)
         vbox.setSpacing(15)
         for link in APP_CONTROLLER.links:
-            self._add_link(link[NAME], link[URL], vbox)
+            self._add_link(link[NAME], link[URL], vbox, link.get(TYPE, None))
         self._add_link("MvP Timer", "https://www.ragnarokmvptimer.com/", vbox)
         self.layout.addWidget(scroll)
 
-    def _add_link(self, name, link, layout):
+    def _add_link(self, name, link, layout, _type = None):
         widget = QWidget()
         vbox = QVBoxLayout(widget)
         vbox.setSpacing(5)
+        if _type == VOTE:
+            vbox.addWidget(InputNotification(self, f"{LINKS}:{VOTE}:", link))
         vbox.addWidget(QLabel(name))
         vbox.addWidget(build_link(link))
         layout.addWidget(widget)

@@ -4,6 +4,7 @@ from PySide6.QtCore import QEvent
 
 from config.app import APP_NAME, APP_ICON
 from events.game_event import GAME_EVENT
+from gui.app_controller import APP_CONTROLLER
 from gui.central_widget import CentralWidget
 from gui.widget.tray_menu import TrayMenu
 
@@ -27,4 +28,4 @@ class MainWindow(QMainWindow):
         self.setMinimumWidth(1000)
         self.setWindowIcon(QIcon(APP_ICON))
         self.setCentralWidget(CentralWidget(self))
-        self.tray_menu = TrayMenu(self)
+        APP_CONTROLLER.tray_menu = TrayMenu(self)

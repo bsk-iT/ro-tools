@@ -142,7 +142,7 @@
     },
     "links": [
       { "name": "Site", "url": "https://www.legionbr.net/" },
-      { "name": "Vote 4 Point", "url": "https://www.legionbr.net/master-account/vote4points" },
+      { "name": "Vote 4 Point", "type": "vote", "url": "https://www.legionbr.net/master-account/vote4points" },
       { "name": "Wiki", "url": "https://wiki.legionbr.net/" },
       { "name": "Daily Quests", "url": "https://uniaodk.github.io/ro-wiki/assets/view/daily_quest.html" },
       { "name": "Item Quest Simulator", "url": "https://uniaodk.github.io/ro-item-quest-simulator/" }
@@ -288,7 +288,11 @@
       "887": "blind",
       "1141": "misty_frost"
     },
-    "links": [ ]
+    "links": [
+      { "name": "Site", "url": "https://retrommo.com.br/" },
+      { "name": "Vote 4 Point", "type": "vote", "url": "https://account.retrommo.com.br/votar" },
+      { "name": "Wiki", "url": "https://retrommo.com.br/wiki/index.php/P%C3%A1gina_principal" }
+    ]
   },
   "NostalgiRO.exe": {
     "name": "NostalgiRO",

@@ -189,11 +189,11 @@ def build_spinbox_percentage(percentage_prop: str, label: str = None) -> QWidget
     hbox.addWidget(spinbox)
     return widget
 
+
 def build_spinbox_cells(cell_prop: str, label: str = None) -> QWidget:
     widget = QWidget()
     hbox = QHBoxLayout(widget)
-    hbox.setSpacing(0)
-    hbox.setContentsMargins(0,0,0,0)
+    hbox.setContentsMargins(0, 0, 0, 0)
     spinbox = QSpinBox()
     spinbox.setFixedWidth(130)
     spinbox.setRange(1, 99)
@@ -202,6 +202,23 @@ def build_spinbox_cells(cell_prop: str, label: str = None) -> QWidget:
     if value is not None:
         spinbox.setValue(clamp(value))
     spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(cell_prop, value))
+    if label:
+        hbox.addWidget(QLabel(label))
+    hbox.addWidget(spinbox)
+    return widget
+
+
+def build_spinbox_position(position_prop: str, label: str = None) -> QWidget:
+    widget = QWidget()
+    hbox = QHBoxLayout(widget)
+    hbox.setContentsMargins(0, 0, 0, 0)
+    spinbox = QSpinBox()
+    spinbox.setFixedWidth(80)
+    spinbox.setRange(1, 500)
+    value = CONFIG_FILE.read(position_prop)
+    if value is not None:
+        spinbox.setValue(clamp(value))
+    spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(position_prop, value))
     if label:
         hbox.addWidget(QLabel(label))
     hbox.addWidget(spinbox)
@@ -228,7 +245,7 @@ def build_link_file(file: File):
     return link_label
 
 
-def build_link(link, name = None):
+def build_link(link, name=None):
     link_label = QLabel()
     link_label.setText(f'<a href="{link}">{name or link}</a>')
     link_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextBrowserInteraction)

@@ -1,6 +1,7 @@
 import time
 import keyboard
-from PySide6.QtCore import Signal, QObject
+from PySide6.QtCore import Signal, QObject, QThread
+from PySide6.QtWidgets import QSystemTrayIcon
 from events.auto_commands import AutoCommands
 from events.hotkey_event import HotkeyEvent
 from events.skill_spawmmer import SkillSpawmmer
@@ -34,6 +35,7 @@ class AppController(QObject):
         super().__init__(None)
         self.process_name = None
         self.status_toggle = None
+        self.tray_menu: QSystemTrayIcon = None
         self.cbox_macro = None
         self.skill_spammer_event = SkillSpawmmer(None)
         self.hotkey_event = HotkeyEvent(None)
@@ -198,4 +200,22 @@ class AppController(QObject):
         play_sfx("on")
 
 
+class TimerThread(QThread):
+    timeout = Signal()
+
+    def __init__(self, parent=None, delay=10):
+        super().__init__(parent)
+        self.active = True
+        self.delay = delay
+
+    def run(self):
+        while self.active:
+            self.timeout.emit()
+            time.sleep(self.delay)
+
+    def stop(self):
+        self.active = False
+
 APP_CONTROLLER = AppController()
+TIMER_PER_10_SEC = TimerThread()
+TIMER_PER_10_SEC.start()

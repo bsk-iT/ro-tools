@@ -16,7 +16,6 @@ def main():
 
 
 def _build_font():
-    print(APP_FONT)
     font = QFontDatabase.addApplicationFont(APP_FONT)
     font_family = QFontDatabase.applicationFontFamilies(font)[0]
     return QFont(font_family, APP_FONT_SIZE)

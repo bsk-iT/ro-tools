@@ -1,14 +1,11 @@
-
-<div style="display:flex; align-items: center; gap: 1rem;">
-  <img src="icon.ico"/>
-  <span style="font-size: 40px; font-weight: bold;">RO - Tools</span>
-</div>
+![Icon](icon.ico)
+# RO Tools
 
 ## 📦 Download
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.6.1-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.6.1/RO_Tools_1.6.1.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.7.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.7.0/RO_Tools_v1.7.0.zip)
 
 ### ⚠️ Atenção
 
@@ -25,6 +22,8 @@ Sem privilégios administrativos, algumas funcionalidades podem não funcionar c
 ## 🎮 Visão Geral
 
 [Demonstrativo da Ferramenta](https://youtu.be/INusWjFhUrw)
+
+![GUI_Example](/assets/gui_example.png)
 
 Ferramenta de automação para jogadores de **Ragnarok Online** focada em buffs, uso de itens automáticos, execução de macros e habilidades.
 
@@ -110,6 +109,13 @@ O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok On
 
 - **Utilizar Buffs e Items ao Atacar**  
    Evita se buffar quando não estiver atacando, voltando a se buffar quando utilizar uma Skill Spawmmer
+
+- **Auto Teleporte por Região ou Coordenadas**  
+  Agora é possível configurar o auto teleporte com base nas regiões do mapa, seguindo o layout do teclado numérico (ex: 7 para canto superior esquerdo) ou por coordenadas X e Y, informando também uma área de alcance (em células) para definir o range aceito
+
+- **Notificação de Voto no Servidor**  
+  Um ícone de notificação será exibido na aba de link liberado, indicando quando estiver no horário de votar no servidor
+
 ---
 
 ## ⚙️ Configuração do servers.json

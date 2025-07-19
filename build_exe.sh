@@ -11,11 +11,11 @@ python -m nuitka --standalone \
   --enable-plugin=pyside6 \
   --company-name="Deco - decospdl@gmail.com" \
   --product-name="RO Tools" \
-  --product-version=1.6.1.0 \
+  --product-version=1.7.0.0 \
   main.py
 
 cp servers.json dist/
 cp -r assets/ dist/assets
 cd dist
-powershell -Command "Compress-Archive -Path RO_Tools.exe,servers.json,assets -DestinationPath RO_Tools_v1.6.1.0.zip"
+powershell -Command "Compress-Archive -Path RO_Tools.exe,servers.json,assets -DestinationPath RO_Tools_v1.7.0.zip"
 cd ..
