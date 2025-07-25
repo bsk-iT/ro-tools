@@ -1,5 +1,3 @@
-import keyboard
-
 from PySide6.QtWidgets import QToolButton, QVBoxLayout, QHBoxLayout, QLabel, QWidget
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
@@ -33,7 +31,7 @@ class InputAppStatus(QWidget):
         self.input_keybind = InputKeybind(None, KEY_MONITORING, True)
         vbox = QVBoxLayout()
         vbox.setSpacing(0)
-        vbox.addWidget(QLabel("Status"))
+        vbox.addWidget(QLabel("Atalho"))
         vbox.addWidget(self.input_keybind, alignment=Qt.AlignmentFlag.AlignRight)
         self.layout.addLayout(vbox)
         self.layout.addWidget(self.status_toggle)

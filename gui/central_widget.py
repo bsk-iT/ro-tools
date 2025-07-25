@@ -4,6 +4,7 @@ from PySide6.QtCore import Qt
 from config.icon import ICON_GITHUB
 from gui.widget.input_app_status import InputAppStatus
 from gui.widget.cbox_process import CboxProcess
+from gui.widget.input_auto_tele import InputAutoTele
 from gui.widget.painel_config import PainelConfig
 from gui.widget.painel_debug import PainelDebug
 from gui.widget.painel_home import PainelHome
@@ -26,7 +27,11 @@ class CentralWidget(QWidget):
         hbox.addWidget(build_link_icon(ICON_GITHUB, "https://github.com/uniaodk/ro-tools", 50))
         hbox.addWidget(self.cbox_process)
         header_hbox.addLayout(hbox)
-        header_hbox.addWidget(InputAppStatus(self))
+        hbox_status = QHBoxLayout()
+        hbox_status.setAlignment(Qt.AlignmentFlag.AlignRight)
+        hbox_status.addWidget(InputAutoTele(self))
+        hbox_status.addWidget(InputAppStatus(self))
+        header_hbox.addLayout(hbox_status)
         self.layout.addLayout(header_hbox)
         tab_panel = QTabWidget()
         tab_panel.addTab(PainelHome(self), "Home")

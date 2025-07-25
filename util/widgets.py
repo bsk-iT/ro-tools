@@ -200,7 +200,7 @@ def build_spinbox_cells(cell_prop: str, label: str = None) -> QWidget:
     spinbox.setSuffix(" células")
     value = CONFIG_FILE.read(cell_prop)
     if value is not None:
-        spinbox.setValue(clamp(value))
+        spinbox.setValue(clamp(value, 1, 99))
     spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(cell_prop, value))
     if label:
         hbox.addWidget(QLabel(label))
@@ -214,11 +214,28 @@ def build_spinbox_position(position_prop: str, label: str = None) -> QWidget:
     hbox.setContentsMargins(0, 0, 0, 0)
     spinbox = QSpinBox()
     spinbox.setFixedWidth(80)
-    spinbox.setRange(1, 500)
     value = CONFIG_FILE.read(position_prop)
     if value is not None:
-        spinbox.setValue(clamp(value))
+        spinbox.setValue(clamp(value, 0,  500))
     spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(position_prop, value))
+    if label:
+        hbox.addWidget(QLabel(label))
+    hbox.addWidget(spinbox)
+    return widget
+
+
+def build_spinbox_times(time_prop: str, label: str = None) -> QWidget:
+    widget = QWidget()
+    hbox = QHBoxLayout(widget)
+    hbox.setContentsMargins(0, 0, 0, 0)
+    spinbox = QSpinBox()
+    spinbox.setFixedWidth(130)
+    spinbox.setRange(1, 9999)
+    spinbox.setSuffix(" vezes")
+    value = CONFIG_FILE.read(time_prop)
+    if value is not None:
+        spinbox.setValue(clamp(value, 1, 9999))
+    spinbox.valueChanged.connect(lambda value: CONFIG_FILE.update(time_prop, value))
     if label:
         hbox.addWidget(QLabel(label))
     hbox.addWidget(spinbox)

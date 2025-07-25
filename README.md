@@ -5,7 +5,7 @@
 
 Você pode baixar a versão mais recente do RO Tools clicando no botão abaixo:
 
-[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.7.0-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.7.0/RO_Tools_v1.7.0.zip)
+[![Download](https://img.shields.io/badge/⬇️%20Download-RO__Tools__v1.8.0.FINAL-blue?style=for-the-badge)](https://github.com/uniaodk/ro-tools/releases/download/v1.8.0.FINAL/RO_Tools_v1.8.0.FINAL.zip)
 
 ### ⚠️ Atenção
 
@@ -115,6 +115,9 @@ O RO-Tools foi criado para facilitar a jogabilidade em servidores de Ragnarok On
 
 - **Notificação de Voto no Servidor**  
   Um ícone de notificação será exibido na aba de link liberado, indicando quando estiver no horário de votar no servidor
+
+- **Macros para Refine/Craft Potion/NPC chat**
+  Agilize a conversa com NPC repetíveis e criação de itens
 
 ---
 

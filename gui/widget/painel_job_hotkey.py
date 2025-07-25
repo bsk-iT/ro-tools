@@ -7,8 +7,9 @@ from game.macro import MACRO_MAP, Macro
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_macro import CboxMacro
 from gui.widget.input_keybind import InputKeybind
-from service.config_file import ACTIVE, CONFIG_FILE, HOTKEY, KEY
-from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
+from gui.widget.input_repeat_times import InputRepeatTimes
+from service.config_file import ACTIVE, CONFIG_FILE, HOTKEY, KEY, REPEAT
+from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, build_spinbox_times, clear_layout
 
 
 class PainelJobHotkey(QWidget):
@@ -58,6 +59,7 @@ class PainelJobHotkey(QWidget):
         label.setObjectName(macro.id)
         hbox.addWidget(label)
         hbox.addWidget(InputKeybind(self, key_base + KEY, True))
+        hbox.addWidget(InputRepeatTimes(self, key_base))
         vbox.addLayout(hbox)
         vbox.addWidget(build_hr())
         return widget

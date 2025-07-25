@@ -1,14 +1,13 @@
 import math
-import os
 import time
 
 from game.buff import QUAGMIRE, Buff
 from game.jobs import JOB_MAP, Job
+from game.map_buffs import DIC_ITEM_BUFF, DIC_SKILL_BUFF, DIC_STATUS_DEBUFF
 from gui.app_controller import APP_CONTROLLER
-from service.config_file import ATTACK_USE, AUTO_ELEMENT, BLOCK_QUAGMIRE, CONFIG_FILE, COOLDOWN, DEBUG_ACTIVE, ITEM_BUFF, MOB_IDS, MOVIMENT_CELLS, TIMER_ACTIVE, USE_MOVIMENT
+from service.config_file import ATTACK_USE, AUTO_ELEMENT, BLOCK_QUAGMIRE, CONFIG_FILE, COOLDOWN, DEBUG_ACTIVE, MOVIMENT_CELLS, TIMER_ACTIVE, USE_MOVIMENT
 from service.memory import MEMORY
 from service.offsets import Offsets
-from service.servers_file import NAME, SKILL_BUFF, SERVERS_FILE, STATUS_DEBUFF
 from util.number import calculate_percent
 
 MAX_ENTITY = 50
@@ -55,9 +54,9 @@ class Char:
             self.position = self._get_position()
             self.raw_buffs = self._get_buffs()
             self.buffs = self._get_id_buffs_all()
-            self.skill_buffs = self._get_id_buffs(SKILL_BUFF)
-            self.item_buffs = self._get_id_buffs(ITEM_BUFF)
-            self.status_debuff = self._get_id_buffs(STATUS_DEBUFF)
+            self.skill_buffs = self._get_id_buffs(DIC_SKILL_BUFF)
+            self.item_buffs = self._get_id_buffs(DIC_ITEM_BUFF)
+            self.status_debuff = self._get_id_buffs(DIC_STATUS_DEBUFF)
             self.job = JOB_MAP.get(self.job_id, self.job_id)
             self.abracadabra_skill = None if MEMORY.abracadabra_address == 0x0 else MEMORY.process.read_int(MEMORY.abracadabra_address)
             self.chat_bar_enabled = False if MEMORY.chat_address == 0x0 else MEMORY.process.read_bool(MEMORY.chat_address)
@@ -119,22 +118,18 @@ class Char:
 
     def _get_id_buffs_all(self):
         buffs = []
-        skill_buff_map = SERVERS_FILE.get_value(SKILL_BUFF)
-        item_buff_map = SERVERS_FILE.get_value(ITEM_BUFF)
-        status_debuff_map = SERVERS_FILE.get_value(STATUS_DEBUFF)
         for raw_buff in self.raw_buffs:
-            buff = skill_buff_map.get(str(raw_buff), None) or item_buff_map.get(str(raw_buff), None) or status_debuff_map.get(str(raw_buff), raw_buff)
+            buff = DIC_SKILL_BUFF.get(str(raw_buff), None) or DIC_ITEM_BUFF.get(str(raw_buff), None) or DIC_STATUS_DEBUFF.get(str(raw_buff), raw_buff)
             buffs.append(buff)
             self.index_last_position_buff[buff] = (self.position[0], self.position[1])
             self.index_last_time_buff[buff] = time.time()
             self.index_skill_use_spawmmer[buff] = (True, False)
         return buffs
 
-    def _get_id_buffs(self, resource):
+    def _get_id_buffs(self, dic_skills):
         skill_buffs = []
-        skills_map = SERVERS_FILE.get_value(resource)
         for buff in self.raw_buffs:
-            skill_buff = skills_map.get(str(buff), None)
+            skill_buff = dic_skills.get(str(buff), None)
             if not skill_buff:
                 continue
             skill_buffs.append(skill_buff)
@@ -240,9 +235,8 @@ class Char:
         if MEMORY.hp_address == 0x0:
             return buffs
         buff_index = 0
-        buff_offset = Offsets.BUFF_LIST_LATAM if SERVERS_FILE.get_value(NAME) == "LATAM" else Offsets.BUFF_LIST
         while True:
-            buff = MEMORY.process.read_int(MEMORY.hp_address + buff_offset + (0x4 * buff_index))
+            buff = MEMORY.process.read_int(MEMORY.hp_address + Offsets.BUFF_LIST + (0x4 * buff_index))
             if buff == -1:
                 break
             buffs.append(buff)

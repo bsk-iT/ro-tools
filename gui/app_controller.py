@@ -7,7 +7,7 @@ from events.hotkey_event import HotkeyEvent
 from events.skill_spawmmer import SkillSpawmmer
 from game.jobs import NOVICE, Job
 from game.macro import Macro
-from service.config_file import CONFIG_FILE, HOTKEY, KEY, KEY_MONITORING, SKILL_SPAWMMER
+from service.config_file import AUTO_ITEM, AUTO_TELEPORT, CONFIG_FILE, FLY_WING, HOTKEY, KEY, KEY_MONITORING, SHORTCUT_KEY, SKILL_SPAWMMER
 from service.keyboard import KEYBOARD
 from service.memory import MEMORY
 from PySide6.QtGui import QIcon
@@ -29,6 +29,7 @@ class AppController(QObject):
     added_skill_equip = Signal(str, object)
     added_item_buff = Signal(object)
     added_item_debuff = Signal(object)
+    toogled_auto_tele = Signal(bool)
     debug = Signal(str)
 
     def __init__(self):
@@ -53,6 +54,7 @@ class AppController(QObject):
         self.status_key = CONFIG_FILE.get_status_key()
         self.auto_commands_key = CONFIG_FILE.get_auto_commands_key()
         self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
+        self.auto_tele_shortcut_key = CONFIG_FILE.get_auto_tele_shortcut_key()
         self.job_auto_elements = CONFIG_FILE.get_job_auto_elements(self.job)
         self.job_item_buffs = CONFIG_FILE.get_job_item_buffs(self.job)
         self.job_item_debuffs = CONFIG_FILE.get_job_item_debuffs(self.job)
@@ -123,9 +125,13 @@ class AppController(QObject):
         self.sync_hotkey_events(self.job_hotkeys, HOTKEY, self.hotkey_event)
         self.sync_status_key()
         self.fly_wing_key = CONFIG_FILE.get_fly_wing_key()
+        self.auto_tele_shortcut_key = CONFIG_FILE.get_auto_tele_shortcut_key()
         if self.fly_wing_key:
             handler = keyboard.on_press_key(self.fly_wing_key, lambda _: self.on_fly_wing_key())
             self.hotkeys_handler[self.fly_wing_key] = (handler, None)
+        if self.auto_tele_shortcut_key:
+            handler = keyboard.on_press_key(self.auto_tele_shortcut_key, lambda _: self.on_auto_tele_shortcut_key())
+            self.hotkeys_handler[self.auto_tele_shortcut_key] = (handler, None)
         if self.auto_commands_key:
             handler = keyboard.on_press_key(self.auto_commands_key, lambda _: self.on_auto_commands_key())
             self.hotkeys_handler[self.auto_commands_key] = (handler, None)
@@ -140,6 +146,11 @@ class AppController(QObject):
         KEYBOARD.add_pressed_key(self.fly_wing_key)
         time.sleep(0.35)
         self.toggle_fly_wing = not self.toggle_fly_wing
+
+    def on_auto_tele_shortcut_key(self):
+        active = CONFIG_FILE.read(f"{AUTO_ITEM}:{FLY_WING}:{AUTO_TELEPORT}")
+        play_sfx(f"auto_tele_{'on' if not active else 'off'}")
+        self.toogled_auto_tele.emit(not active)
 
     def on_auto_commands_key(self):
         if self.auto_comands_event.running:
@@ -215,6 +226,7 @@ class TimerThread(QThread):
 
     def stop(self):
         self.active = False
+
 
 APP_CONTROLLER = AppController()
 TIMER_PER_10_SEC = TimerThread()

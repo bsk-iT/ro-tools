@@ -2,7 +2,8 @@ from PySide6.QtWidgets import QWidget, QToolButton, QHBoxLayout, QVBoxLayout, QL
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 
-from config.icon import ICON_TELEPORT
+from config.icon import ICON_TELEPORT, play_sfx
+from gui.app_controller import APP_CONTROLLER
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
 from gui.widget.input_map_region import InputMapRegion
@@ -76,6 +77,7 @@ class InputTeleport(QWidget):
         self._config_layout()
         self.sync_radio_teleport_type()
         self._config_events()
+        APP_CONTROLLER.toogled_auto_tele.connect(self._on_active_auto_teleport)
 
     def _config_layout(self) -> None:
         self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)

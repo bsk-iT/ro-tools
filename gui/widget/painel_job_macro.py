@@ -3,13 +3,14 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QL
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QPixmap, QIcon
 
-from config.icon import ICON_ARROW_DOWN, ICON_ARROW_RIGHT, ICON_DELETE, PATH_ITEM, get_image
+from config.app import APP_ICON_SIZE
+from config.icon import ICON_ARROW_DOWN, ICON_ARROW_RIGHT, ICON_DELETE, ICON_KEYBOARD, ICON_MOUSE, PATH_ITEM, get_image
 from game.macro import MACRO_MAP, MAX_HOTKEY
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_macro import CboxMacro
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
-from service.config_file import ACTIVE, CONFIG_FILE, KEY, KNIFE_KEY, MACRO, VIOLIN_KEY
+from service.config_file import ACTIVE, CONFIG_FILE, KEY, KNIFE_KEY, MACRO, MOUSE_CLICK, VIOLIN_KEY
 from util.widgets import build_action_badge, build_badge_btn, build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
 
@@ -90,15 +91,19 @@ class PainelJobMacro(QWidget):
 
     def _add_vbox_inputs(self, key_seq, index, macro):
         new_key_seq = f"{key_seq}seq_{index}_"
-        is_active = CONFIG_FILE.read(new_key_seq + ACTIVE)
-        next_is_active = CONFIG_FILE.read(f"{key_seq}seq_{index + 1}_" + ACTIVE)
+        keyboard_active = CONFIG_FILE.read(new_key_seq + ACTIVE)
+        click_active = CONFIG_FILE.read(new_key_seq + MOUSE_CLICK)
+        is_active = keyboard_active or click_active
+        next_keyboard_active = CONFIG_FILE.read(f"{key_seq}seq_{index + 1}_" + ACTIVE)
+        next_click_active = CONFIG_FILE.read(f"{key_seq}seq_{index + 1}_" + MOUSE_CLICK)
+        next_is_active = next_keyboard_active or next_click_active
         is_last_key = index == MAX_HOTKEY - 1
         vbox = QVBoxLayout()
         vbox.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
         vbox.setContentsMargins(0, 0, 0, 0)
         vbox.setSpacing(0)
         if index > 0 and not is_active:
-            vbox.addWidget(self._build_add_btn(new_key_seq))
+            vbox.addLayout(self._build_add_btn(new_key_seq))
             self._build_empty_widgets(vbox)
             return (vbox, True)
         if index == 0:
@@ -114,19 +119,43 @@ class PainelJobMacro(QWidget):
         return (vbox, is_last_key)
 
     def _build_add_btn(self, new_key_seq):
-        add_btn = QPushButton("+")
-        add_btn.setContentsMargins(0, 0, 0, 0)
-        add_btn.setStyleSheet("background-color: green;color: white;border-radius: 5px;")
+        hbox = QHBoxLayout()
+        add_click = self._build_add_btn_type(ICON_MOUSE)
+        add_click.setToolTip("Clique do Mouse")
+        add_click.clicked.connect(lambda: self._on_add_remove_mouse_click(new_key_seq, True))
+        hbox.addWidget(add_click)
+
+        add_btn = self._build_add_btn_type(ICON_KEYBOARD)
+        add_click.setToolTip("Tecla")
         add_btn.clicked.connect(lambda: self._on_add_remove_keybind(new_key_seq, True))
-        add_btn.setFixedSize(DEFAULT_SIZE, DEFAULT_SIZE)
-        return add_btn
+        hbox.addWidget(add_btn)
+        return hbox
 
-    def _build_btn_remove_input_keybind(self, key_seq, parent):
+    def _build_add_btn_type(self, icon):
+        btn = QPushButton("")
+        btn.setIcon(QIcon(icon))
+        btn.setMinimumWidth(APP_ICON_SIZE)
+        btn.setFixedHeight(APP_ICON_SIZE)
+        btn.setIconSize(QSize(APP_ICON_SIZE - 6, APP_ICON_SIZE))
+        btn.setContentsMargins(0, 0, 0, 0)
+        return btn
+
+    def _build_btn_remove_input_keybind(self, key_seq, parent, is_mouse_click):
         btn = build_badge_btn(parent, ICON_DELETE)
-        btn.clicked.connect(lambda: self._on_add_remove_keybind(key_seq, False))
+        if is_mouse_click:
+            btn.clicked.connect(lambda: self._on_add_remove_mouse_click(key_seq, False, True))
+        else:
+            btn.clicked.connect(lambda: self._on_add_remove_keybind(key_seq, False, True))
 
-    def _on_add_remove_keybind(self, key_seq, active):
-        CONFIG_FILE.update(key_seq + ACTIVE, active)
+    def _on_add_remove_mouse_click(self, key_seq, active, forceRemove = False):
+        CONFIG_FILE.update(key_seq + MOUSE_CLICK, not forceRemove and active)
+        CONFIG_FILE.update(key_seq + ACTIVE, not forceRemove and not active)
+        self.last_pos_vertical_scroll = self.last_scroll.verticalScrollBar().value()
+        self.update_macros()
+
+    def _on_add_remove_keybind(self, key_seq, active, forceRemove = False):
+        CONFIG_FILE.update(key_seq + ACTIVE, not forceRemove and active)
+        CONFIG_FILE.update(key_seq + MOUSE_CLICK, not forceRemove and not active)
         self.last_pos_vertical_scroll = self.last_scroll.verticalScrollBar().value()
         self.update_macros()
 
@@ -159,9 +188,15 @@ class PainelJobMacro(QWidget):
 
     def _build_input_keybind(self, new_key_seq, next_is_active) -> QFrame:
         (widget, layout) = build_action_badge()
-        layout.addWidget(InputKeybind(widget, new_key_seq + KEY))
+        is_mouse_click = CONFIG_FILE.read(new_key_seq + MOUSE_CLICK)
+        if is_mouse_click:
+            widget_mouse = self._build_add_btn_type(ICON_MOUSE)
+            widget_mouse.setDisabled(True)
+            layout.addWidget(widget_mouse)
+        else:
+            layout.addWidget(InputKeybind(widget, new_key_seq + KEY))
         if not next_is_active:
-            self._build_btn_remove_input_keybind(new_key_seq, widget)
+            self._build_btn_remove_input_keybind(new_key_seq, widget, is_mouse_click)
         return widget
 
     def _build_empty_widgets(self, vbox):

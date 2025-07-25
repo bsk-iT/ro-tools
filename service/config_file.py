@@ -32,6 +32,9 @@ HP_PERCENT = "hp_percent"
 SP_PERCENT = "sp_percent"
 PERCENT = "percent"
 KEY = "key"
+SHORTCUT_KEY = "shortcut_key"
+REPEAT_ACTIVE = "repeat_active"
+REPEAT = "repeat"
 DELAY = "delay"
 DELAY_ACTIVE = "delay_active"
 TIMER_ACTIVE = "timer_active"
@@ -181,6 +184,12 @@ class ConfigFile(File):
         if fly_wing_data is None:
             return None
         return fly_wing_data.get(KEY, False)
+
+    def get_auto_tele_shortcut_key(self):
+        fly_wing_data = self.get_value([AUTO_ITEM, FLY_WING])
+        if fly_wing_data is None:
+            return None
+        return fly_wing_data.get(SHORTCUT_KEY, False)
 
     def get_status_key(self):
         return self.get_value([KEY_MONITORING])

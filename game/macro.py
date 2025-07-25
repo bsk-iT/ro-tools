@@ -1,4 +1,4 @@
-from config.icon import ICON_SHIELD, ICON_SONG, ICON_SWORD, PATH_ITEM, get_image
+from config.icon import ICON_CHAT, ICON_SHIELD, ICON_SONG, ICON_SWORD, PATH_ITEM, PATH_SPAWN_SKILL, get_image
 
 
 class Macro:
@@ -8,7 +8,7 @@ class Macro:
         self.icon = icon
 
 
-MAX_HOTKEY = 10
+MAX_HOTKEY = 15
 ICON_CLIP = get_image(PATH_ITEM, "clip")
 ICON_FIRE = get_image(PATH_ITEM, "fire_enchant_scroll")
 ICON_WATER = get_image(PATH_ITEM, "water_enchant_scroll")
@@ -40,9 +40,13 @@ SONG_2 = Macro("song_2", "Playlist 2", ICON_SONG)
 SONG_3 = Macro("song_3", "Playlist 3", ICON_SONG)
 SONG_4 = Macro("song_4", "Playlist 4", ICON_SONG)
 
+AM_PHARMACY = Macro("am_pharmacy", "Preparar Poção", get_image(PATH_SPAWN_SKILL, "am_pharmacy"))
+WS_WEAPONREFINE = Macro("ws_weaponrefine", "Aprimorar Armamento", get_image(PATH_SPAWN_SKILL, "ws_weaponrefine"))
+
+CHAT = Macro("chat", "NPC Conversa", ICON_CHAT)
 SMOKIE = Macro("smokie", "Acessório c/ Fumacento", ICON_CLIP)
 HORONG = Macro("horong", "Acessório c/ Horong", ICON_CLIP)
-JAGUAR_HAT = Macro("jaguar_hat", "Máscara de Onça-Pintada", get_image(PATH_ITEM, "JAGUAR_HAT"))
+JAGUAR_HAT = Macro("jaguar_hat", "Máscara de Onça-Pintada", get_image(PATH_ITEM, "jaguar_hat"))
 
 MACRO_ELEMENTS = [ELEMENT_FIRE, ELEMENT_WATER, ELEMENT_GROUND, ELEMENT_WIND, ELEMENT_HOLY, ELEMENT_DARK, ELEMENT_GHOST]
 
@@ -51,7 +55,8 @@ MACRO_TYPES = {
     "Elementos": MACRO_ELEMENTS,
     "Defesa": [DEF_1, DEF_2, DEF_3, DEF_4],
     "Songs Clown | Gypsy": [SONG_1, SONG_2, SONG_3, SONG_4],
-    "Outros": [JAGUAR_HAT, SMOKIE, HORONG],
+    "Craft": [AM_PHARMACY, WS_WEAPONREFINE],
+    "Outros": [CHAT, JAGUAR_HAT, SMOKIE, HORONG],
 }
 
 MACRO_MAP = {
@@ -74,7 +79,10 @@ MACRO_MAP = {
     "song_2": SONG_2,
     "song_3": SONG_3,
     "song_4": SONG_4,
+    "am_pharmacy": AM_PHARMACY,
+    "ws_weaponrefine": WS_WEAPONREFINE,
     "jaguar_hat": JAGUAR_HAT,
     "smokie": SMOKIE,
     "horong": HORONG,
+    "chat": CHAT
 }

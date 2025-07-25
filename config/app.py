@@ -1,6 +1,6 @@
 from config.icon import resource_path
 
-APP_VERSION = "1.6.1"
+APP_VERSION = "1.8.0.FINAL"
 APP_NAME = f"RO - Tools v{APP_VERSION}"
 APP_ICON = resource_path("assets/icon/icon.png")
 APP_DELAY = 0.02

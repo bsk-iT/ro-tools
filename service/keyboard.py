@@ -16,6 +16,7 @@ QT_TO_VK = {
     "Meta": win32con.VK_LWIN,
     "Space": win32con.VK_SPACE,
     "Enter": win32con.VK_RETURN,
+    "Return": win32con.VK_RETURN,
 }
 
 

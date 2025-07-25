@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QWidget, QToolButton, QDoubleSpinBox, QHBoxLayout,
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 
-from config.app import APP_DELAY, APP_MAX_TIMER, APP_MIN_TIMER
+from config.app import APP_MAX_TIMER, APP_MIN_TIMER
 from config.icon import ICON_TIMER
 from service.config_file import CONFIG_FILE, COOLDOWN, TIMER_ACTIVE
 from util.number import clamp
