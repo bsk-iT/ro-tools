@@ -230,6 +230,11 @@ BD_LULLABY = Skill("bd_lullaby", "Cantiga de Ninar - Dueto")
 LK_AURABLADE = Skill("lk_aurablade", "Lâmina de Aura")
 LK_PARRYING = Skill("lk_parrying", "Aparar Golpe")
 LK_CONCENTRATION = Skill("lk_concentration", "Dedicação")
+LK_JUSTA = Skill("lk_justa", "Justa")
+LK_GIANTGROWTH = Skill("lk_giant_growth", "Força Titânica")
+KN_AUTOCOUNTER = Skill("lk_autocounter", "Contra-Ataque")
+LK_TENSIONRELAX = Skill("lk_tensionrelax", "Relaxar")
+LK_BERSERK = Skill("lk_frenesi", "Frenesi")
 
 # High Wizard
 HW_MAGICPOWER = Skill("hw_magicpower", "Amplificação Mística")
@@ -312,6 +317,11 @@ AUTO_BUFF_MAP = {
     "lk_aurablade": LK_AURABLADE,
     "lk_parrying": LK_PARRYING,
     "lk_concentration": LK_CONCENTRATION,
+    "lk_justa": LK_JUSTA,
+    "lk_giant_growth": LK_GIANTGROWTH,
+    "lk_autocounter": KN_AUTOCOUNTER,
+    "lk_tensionrelax": LK_TENSIONRELAX,
+    "lk_frenesi": LK_BERSERK,
     "hw_magicpower": HW_MAGICPOWER,
     "pf_doublecasting": PF_DOUBLECASTING,
     "pf_memorize": PF_MEMORIZE,
