@@ -1,44 +1,66 @@
 {
-  "LegionBR.exe": {
-    "name": "LegionBR",
-    "hp_offset": "0xCDCE10",
-    "x_pos_offset": "0xCC5CA4",
-    "map_offset": "0xCD856C",
-    "job_offset": "0xCD93D8",
-    "chat_offset": "0xB33B48",
-    "entity_list_offset": "0x00A43F44",
-    "abracadabra_address": "0x00182870",
-    "bg": [ ],
-    "woe": [ ],
-    "pvp": [ ],
-    "pvm": [ ],
-    "city": [ "prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis", "serene" ],
+  "rtales.bin": {
+    "name": "RagnaTales",
+    "hp_offset": "0x00A8E434",
+    "x_pos_offset": "0x00A77288",
+    "map_offset": "0x00A89BD4",
+    "job_offset": "0x00A8AA50",
+    "chat_offset": "0x008E5B48",
+    "entity_list_offset": "0x003F1FAC",
+    "abracadabra_address": "0x0",
+    "bg": [],
+    "woe": [],
+    "pvp": [],
+    "pvm": [],
+    "city": [
+      "prontera",
+      "morocc",
+      "geffen",
+      "payon",
+      "alberta",
+      "izlude",
+      "aldebaran",
+      "xmas",
+      "comodo",
+      "yuno",
+      "amatsu",
+      "gonryun",
+      "umbala",
+      "niflheim",
+      "louyang",
+      "jawaii",
+      "ayothaya",
+      "einbroch",
+      "lighthalzen",
+      "einbech",
+      "hugel",
+      "rachel",
+      "veins",
+      "moscovia",
+      "brasilis",
+      "harboro1",
+      "wave_vip",
+      "moc_para01",
+      "party_room",
+      "market_01",
+      "market_02",
+      "verus04",
+      "map_events"
+    ],
     "links": [
-      { "name": "Site", "url": "https://www.legionbr.net/" },
-      { "name": "Vote 4 Point", "type": "vote", "url": "https://www.legionbr.net/master-account/vote4points" },
-      { "name": "Wiki", "url": "https://wiki.legionbr.net/" },
-      { "name": "Daily Quests", "url": "https://uniaodk.github.io/ro-wiki/assets/view/daily_quest.html" },
-      { "name": "Item Quest Simulator", "url": "https://uniaodk.github.io/ro-item-quest-simulator/" }
-    ]
-  },
-  "#Retro.exe": {
-    "name": "RetroMMO",
-    "hp_offset": "0x11874D0",
-    "x_pos_offset": "0x116FD4C",
-    "map_offset": "0x1183574",
-    "job_offset": "0x1183590",
-    "chat_offset": "0xEA714C",
-    "entity_list_offset": "0x00D9FE2C",
-    "abracadabra_address": "0x0019ADC8",
-    "bg": [ ],
-    "woe": [ ],
-    "pvp": [ ],
-    "pvm": [ ],
-    "city": [ "prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis" ],
-    "links": [
-      { "name": "Site", "url": "https://retrommo.com.br/" },
-      { "name": "Vote 4 Point", "type": "vote", "url": "https://account.retrommo.com.br/votar" },
-      { "name": "Wiki", "url": "https://retrommo.com.br/wiki/index.php/P%C3%A1gina_principal" }
+      {
+        "name": "Site",
+        "url": "https://ragnatales.com.br/"
+      },
+      {
+        "name": "Vote 4 Point",
+        "type": "vote",
+        "url": "https://ragnatales.com.br/vote"
+      },
+      {
+        "name": "Wiki",
+        "url": "https://ragnatales.com.br/wiki"
+      }
     ]
   }
 }

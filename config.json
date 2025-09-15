@@ -35,7 +35,7 @@
     "links": {
         "vote": {
             "delay_active": true,
-            "time": "2025-07-25T08:21:00.631459",
+            "time": "2025-09-16T02:34:16.513239",
             "delay": 12
         }
     },
@@ -46,7 +46,7 @@
     "novice": {
         "skill_spawmmer": {
             "attack_1": {
-                "active": true,
+                "active": false,
                 "mouse_click": true,
                 "mouse_flick": false,
                 "delay_active": false,
