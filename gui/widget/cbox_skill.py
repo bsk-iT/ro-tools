@@ -82,10 +82,19 @@ class CboxSkill(QComboBox):
             self.add_item(skill, job)
 
     def build_by_job_category(self, job, active_skills):
-        while job is not None:
-            build_cbox_category(self.model, job.name)
-            for skill in self._get_job_skills(job):
+        # Coletar todas as skills de todos os jobs
+        all_skills = []
+        current_job = job
+        while current_job is not None:
+            for skill in self._get_job_skills(current_job):
                 if skill in active_skills:
                     continue
-                self.add_item(skill, job)
-            job = job.previous_job
+                all_skills.append((skill, current_job))
+            current_job = current_job.previous_job
+        
+        # Ordenar por nome da skill, sem separação por classe
+        all_skills.sort(key=lambda x: x[0].name)
+        
+        # Adicionar todas as skills ordenadas
+        for skill, skill_job in all_skills:
+            self.add_item(skill, skill_job)
