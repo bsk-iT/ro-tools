@@ -16,6 +16,7 @@ PATH_ICON = resource_path("assets/icon/")
 PATH_ITEM = resource_path("assets/items/")
 PATH_SPAWN_SKILL = resource_path("assets/spawn_skill/")
 PATH_BUFF_SKILL = resource_path("assets/buff_skill/")
+PATH_DEBUFF = resource_path("assets/debuff/")
 PATH_JOB_ICON = resource_path("assets/job_icon/")
 
 ICON_KEYBOARD = resource_path(PATH_ICON + "keyboard.png")
