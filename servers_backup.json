@@ -1,0 +1,22 @@
+{
+  "rtales.bin": {
+    "name": "RagnaTales",
+    "hp_offset": "0x00E8E434",
+    "x_pos_offset": "0x00E77288",
+    "map_offset": "0x00E89BD4",
+    "job_offset": "0x00E8AA50",
+    "chat_offset": "0x00CE5B48",
+    "entity_list_offset": "0x007F1FAC",
+    "abracadabra_address": "0x0",
+    "bg": [],
+    "woe": [],
+    "pvp": [],
+    "pvm": [],
+    "city": ["prontera", "morocc", "geffen", "payon", "alberta", "izlude", "aldebaran", "xmas", "comodo", "yuno", "amatsu", "gonryun", "umbala", "niflheim", "louyang", "jawaii", "ayothaya", "einbroch", "lighthalzen", "einbech", "hugel", "rachel", "veins", "moscovia", "brasilis", "harboro1", "wave_vip", "moc_para01", "party_room", "market_01", "market_02", "verus04", "map_events"],
+    "links": [
+      { "name": "Site", "url": "https://ragnatales.com.br/" },
+      { "name": "Vote 4 Point", "type": "vote", "url": "https://ragnatales.com.br/vote" },
+      { "name": "Wiki", "url": "https://ragnatales.com.br/wiki" }
+    ]
+  }
+}

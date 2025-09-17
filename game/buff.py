@@ -273,15 +273,15 @@ ITEM_DEBUFF_MAP = {
 # ----- Skill -----
 
 # Swordman
-SM_MAGNUM = Skill("sm_magnum", "Impacto Explosivo")
-SM_ENDURE = Skill("sm_endure", "Vigor", 1)
+SM_MAGNUM = Skill("sm_magnum", "Impacto Explosivo", 0, False, 180)
+SM_ENDURE = Skill("sm_endure", "Vigor", 1, False, 37)
 SM_AUTOBERSERK = Skill("sm_autoberserk", "Instinto de Sobrevivência")
 
 # Mage
 MG_ENERGYCOAT = Skill("mg_energycoat", "Proteção Arcana")
 
 # Merchat
-MC_LOUD = Skill("mc_loud", "Grito de Guerra", 5)
+MC_LOUD = Skill("mc_loud", "Grito de Guerra", 5, False, 300)
 
 # Acolyte
 AL_ANGELUS = Skill("al_angelus", "Angelus")
@@ -353,12 +353,12 @@ BD_INTOABYSS = Skill("bd_intoabyss", "Canção Preciosa - Dueto", buff_timer=180
 BD_LULLABY = Skill("bd_lullaby", "Cantiga de Ninar - Dueto")
 
 # Lord
-LK_AURABLADE = Skill("lk_aurablade", "Lâmina de Aura")
-LK_PARRYING = Skill("lk_parrying", "Aparar Golpe")
-LK_CONCENTRATION = Skill("lk_concentration", "Dedicação")
+LK_AURABLADE = Skill("lk_aurablade", "Lâmina de Aura", 1, False, 120)
+LK_PARRYING = Skill("lk_parrying", "Aparar Golpe", False, 60)
+LK_CONCENTRATION = Skill("lk_concentration", "Dedicação", 1, False, 120)
 LK_JUSTA = Skill("lk_justa", "Justa")
-LK_GIANTGROWTH = Skill("lk_giant_growth", "Força Titânica")
-KN_AUTOCOUNTER = Skill("lk_autocounter", "Contra-Ataque")
+LK_GIANTGROWTH = Skill("lk_giant_growth", "Força Titânica", 2, False, 180)
+KN_AUTOCOUNTER = Skill("lk_autocounter", "Contra-Ataque", False, 2)
 LK_TENSIONRELAX = Skill("lk_tensionrelax", "Relaxar")
 LK_BERSERK = Skill("lk_frenesi", "Frenesi")
 
@@ -407,7 +407,7 @@ NJ_UTSUSEMI = Skill("nj_utsusemi", "Troca de Pele")
 NJ_BUNSINJYUTSU = Skill("nj_bunsinjyutsu", "Imagem Falsa")
 NJ_NEN = Skill("nj_nen", "Aura Ninja")
 
-EQUIP_BUFFS = [MC_LOUD]
+EQUIP_BUFFS = []
 
 AUTO_BUFF_MAP = {
     "sm_magnum": SM_MAGNUM,
