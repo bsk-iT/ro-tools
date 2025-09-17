@@ -81,6 +81,7 @@ REGENERATION = Item("regeneration", "Poção de Regeneração")
 GOLDEN_X = Item("golden_x", "Poção X Dourada")
 MEGA_RESIST_POTION = Item("mega_resist_potion", "Poção de Mega Resistência")
 ALMIGHTY = Item("almighty", "Elixir Ultra Milagroso")
+OH_HOLY_NIGHT = Item("oh_holy_night", "Caixinha Noite Feliz")
 CASH_FOOD = Item("cash_food", "Comida Premium")
 ACARAJE = Item("acaraje", "Acarajé")
 STR_BISCUIT = Item("str_biscuit", "Palitos de Laranja")
@@ -162,6 +163,7 @@ ITEM_BUFF_MAP = {
     "golden_x": GOLDEN_X,
     "mega_resist_potion": MEGA_RESIST_POTION,
     "almighty": ALMIGHTY,
+    "oh_holy_night": OH_HOLY_NIGHT,
     "cash_food": CASH_FOOD,
     "acaraje": ACARAJE,
     "str_biscuit": STR_BISCUIT,
@@ -206,7 +208,7 @@ ITEM_BUFF_GROUP = {
         RESENTMENT_BOX, THUNDER_BOX, DROWSINESS_BOX, GLOOM_BOX, SUNLIGHT_BOX
     ],
     "Consumíveis": [
-        ALOE_VERA, PAIN_KILLER, ABRASIVE, CAT_CAN, CASH_FOOD, COMBAT_PILL, ACARAJE, HALOHALO, GUARANA, ALMIGHTY
+        ALOE_VERA, PAIN_KILLER, ABRASIVE, CAT_CAN, CASH_FOOD, COMBAT_PILL, ACARAJE, HALOHALO, GUARANA, ALMIGHTY, OH_HOLY_NIGHT
     ],
     "Scrolls": [
         BLESS_SCROLL, INC_AGI_UP_SCROLL, ASPERSIO_SCROLL,
