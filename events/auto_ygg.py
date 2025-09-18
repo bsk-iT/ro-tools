@@ -1,5 +1,7 @@
 import time
 from events.base_event import BaseEvent, Priority
+from util.antibot import has_antibot, check_antibot_and_log
+from util.competitive import has_competitive_instance, check_competitive_and_log
 from service.config_file import AUTO_ITEM, CONFIG_FILE, HP_PERCENT, KEY, SP_PERCENT, WAITING, YGG
 from service.keyboard import KEYBOARD
 
@@ -10,6 +12,14 @@ class AutoYgg(BaseEvent):
         super().__init__(game_event, name, prop_seq, priority)
 
     def check_condition(self) -> bool:
+        # Verifica se o antibot está ativo
+        if check_antibot_and_log(self.game_event, "AutoYgg"):
+            return False
+            
+        # Verifica se está em instância competitiva
+        if check_competitive_and_log(self.game_event, "AutoYgg"):
+            return False
+            
         key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         if not key:
             return False

@@ -1,5 +1,7 @@
 import time
 from events.base_event import BaseEvent, Priority
+from util.antibot import has_antibot, check_antibot_and_log
+from util.competitive import has_competitive_instance, check_competitive_and_log
 
 from service.config_file import AUTO_ITEM, AUTO_TELEPORT, CONFIG_FILE, FLY_WING, HALTER_LEAD, KEY, MOVIMENT_CELLS, WAITING
 from service.keyboard import KEYBOARD
@@ -16,6 +18,15 @@ class AutoHalterLead(BaseEvent):
         key = CONFIG_FILE.get_value([*self.prop_seq, KEY])
         if not key:
             return False
+            
+        # Verifica se o antibot está ativo
+        if check_antibot_and_log(self.game_event, "AutoHalterLead"):
+            return False
+            
+        # Verifica se está em instância competitiva
+        if check_competitive_and_log(self.game_event, "AutoHalterLead"):
+            return False
+            
         super().check_condition()
         is_block_chat_waiting = CONFIG_FILE.is_block_chat_open(self.game_event, WAITING)
         if is_block_chat_waiting:

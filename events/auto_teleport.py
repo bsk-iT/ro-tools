@@ -1,6 +1,8 @@
 import time
 
 from events.base_event import BaseEvent, Priority
+from util.antibot import has_antibot, check_antibot_and_log
+from util.competitive import has_competitive_instance, check_competitive_and_log
 
 
 from service.config_file import AUTO_ITEM, AUTO_TELEPORT, CELL_RADIUS, CONFIG_FILE, COORDINATE, FLY_WING, KEY, MACRO_KEY, MOB_IDS, REGION_IDS, REGIONS, TELEPORT_TYPE, X_POSITION, Y_POSITION
@@ -14,6 +16,14 @@ class AutoTeleport(BaseEvent):
 
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
+
+        # Verifica se o antibot está ativo
+        if check_antibot_and_log(self.game_event, "AutoTeleport"):
+            return False
+            
+        # Verifica se está em instância competitiva
+        if check_competitive_and_log(self.game_event, "AutoTeleport"):
+            return False
 
         key_base = [*self.prop_seq]
         if not CONFIG_FILE.get_value([*key_base, AUTO_TELEPORT]):

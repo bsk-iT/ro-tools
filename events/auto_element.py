@@ -2,6 +2,8 @@ from config.icon import play_sfx
 from events.base_event import BaseEvent, Priority
 from events.macro_event import MacroEvent
 from service.config_file import AUTO_ELEMENT, CONFIG_FILE, WAITING
+from util.antibot import has_antibot, check_antibot_and_log
+from util.competitive import has_competitive_instance, check_competitive_and_log
 
 
 class AutoElement(BaseEvent):
@@ -13,6 +15,14 @@ class AutoElement(BaseEvent):
 
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
+
+        # Verifica se o antibot está ativo
+        if check_antibot_and_log(self.game_event, "AutoElement"):
+            return False
+            
+        # Verifica se está em instância competitiva
+        if check_competitive_and_log(self.game_event, "AutoElement"):
+            return False
 
         super().check_condition()
         is_block_chat_waiting = CONFIG_FILE.is_block_chat_open(self.game_event, WAITING)

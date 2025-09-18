@@ -1,5 +1,7 @@
 import time
 from events.base_event import BaseEvent, Priority
+from util.antibot import has_antibot, check_antibot_and_log
+from util.competitive import has_competitive_instance, check_competitive_and_log
 
 from service.config_file import AUTO_ITEM, CONFIG_FILE, ITEM_DEBUFF, KEY, WAITING
 from service.keyboard import KEYBOARD
@@ -12,6 +14,14 @@ class AutoItemDebuff(BaseEvent):
 
     def check_condition(self) -> bool:
         from gui.app_controller import APP_CONTROLLER
+
+        # Verifica se o antibot está ativo
+        if check_antibot_and_log(self.game_event, "AutoItemDebuff"):
+            return False
+            
+        # Verifica se está em instância competitiva
+        if check_competitive_and_log(self.game_event, "AutoItemDebuff"):
+            return False
 
         super().check_condition()
         item = self.game_event.char.next_item_debuff_to_use(APP_CONTROLLER.job_item_debuffs)

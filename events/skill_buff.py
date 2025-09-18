@@ -1,5 +1,7 @@
 import time
 from events.base_event import BaseEvent, Priority
+from util.antibot import has_antibot, check_antibot_and_log
+from util.competitive import has_competitive_instance, check_competitive_and_log
 
 from service.config_file import CONFIG_FILE, HALTER_LEAD, KEY, SKILL_BUFF, WAITING
 from service.keyboard import KEYBOARD
@@ -14,6 +16,15 @@ class SkillBuff(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         super().check_condition()
+        
+        # Verifica se o antibot está ativo
+        if check_antibot_and_log(self.game_event, "SkillBuff"):
+            return False
+            
+        # Verifica se está em instância competitiva
+        if check_competitive_and_log(self.game_event, "SkillBuff"):
+            return False
+            
         if HALTER_LEAD in self.game_event.char.item_buffs:
             return False
         (job_id, buff_id, _) = self.game_event.char.next_skill_buff_to_use(APP_CONTROLLER.job_buff_skills, self.prop_seq)

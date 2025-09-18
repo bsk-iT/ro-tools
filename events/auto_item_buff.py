@@ -1,5 +1,7 @@
 import time
 from events.base_event import BaseEvent, Priority
+from util.antibot import has_antibot, check_antibot_and_log
+from util.competitive import has_competitive_instance, check_competitive_and_log
 
 from service.config_file import AUTO_ITEM, CONFIG_FILE, ITEM_BUFF, KEY, WAITING
 from service.keyboard import KEYBOARD
@@ -14,6 +16,15 @@ class AutoItemBuff(BaseEvent):
         from gui.app_controller import APP_CONTROLLER
 
         super().check_condition()
+        
+        # Verifica se o antibot está ativo
+        if check_antibot_and_log(self.game_event, "AutoItemBuff"):
+            return False
+            
+        # Verifica se está em instância competitiva
+        if check_competitive_and_log(self.game_event, "AutoItemBuff"):
+            return False
+            
         item = self.game_event.char.next_item_buff_to_use(APP_CONTROLLER.job_item_buffs, self.prop_seq)
         if item is None:
             return False
