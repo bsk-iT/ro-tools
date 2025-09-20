@@ -30,7 +30,8 @@ class CboxJobs(QComboBox):
 
     def on_change_job(self, index):
         job = self.model.item(index, 0).data()
-        APP_CONTROLLER.status_toggle.setFocus()
+        if APP_CONTROLLER.status_toggle is not None:
+            APP_CONTROLLER.status_toggle.setFocus()
         APP_CONTROLLER.updated_job.emit(job)
 
     def _add_item(self, job: Job):

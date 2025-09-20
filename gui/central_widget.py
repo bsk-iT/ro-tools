@@ -15,16 +15,16 @@ from util.widgets import build_link_icon
 class CentralWidget(QWidget):
     def __init__(self, parent: QWidget) -> None:
         super().__init__(parent)
-        self.layout = QVBoxLayout(self)
+        self.main_layout = QVBoxLayout(self)
         self.cbox_process = CboxProcess(self)
         self._config_layout()
 
     def _config_layout(self) -> None:
-        self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.main_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         header_hbox = QHBoxLayout()
         hbox = QHBoxLayout()
         hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        hbox.addWidget(build_link_icon(ICON_GITHUB, "https://github.com/uniaodk/ro-tools", 50))
+        hbox.addWidget(build_link_icon(ICON_GITHUB, "", 50))
         hbox.addWidget(self.cbox_process)
         header_hbox.addLayout(hbox)
         hbox_status = QHBoxLayout()
@@ -32,10 +32,10 @@ class CentralWidget(QWidget):
         hbox_status.addWidget(InputAutoTele(self))
         hbox_status.addWidget(InputAppStatus(self))
         header_hbox.addLayout(hbox_status)
-        self.layout.addLayout(header_hbox)
+        self.main_layout.addLayout(header_hbox)
         tab_panel = QTabWidget()
         tab_panel.addTab(PainelHome(self), "Home")
         tab_panel.addTab(PainelLinks(self), "Links")
         tab_panel.addTab(PainelDebug(self), "Debug")
         tab_panel.addTab(PainelConfig(self), "Settings")
-        self.layout.addWidget(tab_panel)
+        self.main_layout.addWidget(tab_panel)

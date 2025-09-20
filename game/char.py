@@ -43,11 +43,11 @@ class Char:
 
     def update(self):
         try:
-            self.hp = 0 if MEMORY.hp_address == 0x0 else MEMORY.process.read_int(MEMORY.hp_address)
-            self.hp_max = 0 if MEMORY.hp_address == 0x0 else MEMORY.process.read_int(MEMORY.hp_address + Offsets.MAX_HP)
+            self.hp = 0 if MEMORY.hp_address == 0x0 or MEMORY.hp_address is None else MEMORY.process.read_int(MEMORY.hp_address)
+            self.hp_max = 0 if MEMORY.hp_address == 0x0 or MEMORY.hp_address is None else MEMORY.process.read_int(MEMORY.hp_address + int(Offsets.MAX_HP))
             self.hp_percent = calculate_percent(self.hp, self.hp_max)
-            self.sp = 0 if MEMORY.hp_address == 0x0 else MEMORY.process.read_int(MEMORY.hp_address + Offsets.SP)
-            self.sp_max = 0 if MEMORY.hp_address == 0x0 else MEMORY.process.read_int(MEMORY.hp_address + Offsets.MAX_SP)
+            self.sp = 0 if MEMORY.hp_address == 0x0 or MEMORY.hp_address is None else MEMORY.process.read_int(MEMORY.hp_address + int(Offsets.SP))
+            self.sp_max = 0 if MEMORY.hp_address == 0x0 or MEMORY.hp_address is None else MEMORY.process.read_int(MEMORY.hp_address + int(Offsets.MAX_SP))
             self.sp_percent = calculate_percent(self.sp, self.sp_max)
             self.current_map = "" if MEMORY.map_address == 0x0 else MEMORY.process.read_string(MEMORY.map_address)
             self.job_id = None if MEMORY.job_address == 0x0 else MEMORY.process.read_int(MEMORY.job_address)
@@ -57,7 +57,7 @@ class Char:
             self.skill_buffs = self._get_id_buffs(DIC_SKILL_BUFF)
             self.item_buffs = self._get_id_buffs(DIC_ITEM_BUFF)
             self.status_debuff = self._get_id_buffs(DIC_STATUS_DEBUFF)
-            self.job = JOB_MAP.get(self.job_id, self.job_id)
+            self.job = JOB_MAP.get(int(self.job_id) if self.job_id is not None else 0, self.job_id)
             self.abracadabra_skill = None if MEMORY.abracadabra_address == 0x0 else MEMORY.process.read_int(MEMORY.abracadabra_address)
             self.chat_bar_enabled = False if MEMORY.chat_address == 0x0 else MEMORY.process.read_bool(MEMORY.chat_address)
             self.monitoring_job_change_gui()
@@ -68,9 +68,9 @@ class Char:
             self.reset()
 
     def _get_position(self):
-        if MEMORY.x_pos_address == 0x0:
+        if MEMORY.x_pos_address == 0x0 or MEMORY.x_pos_address is None:
             return (0, 0)
-        return (MEMORY.process.read_int(MEMORY.x_pos_address), MEMORY.process.read_int(MEMORY.x_pos_address + Offsets.Y_POSITION))
+        return (MEMORY.process.read_int(MEMORY.x_pos_address), MEMORY.process.read_int(MEMORY.x_pos_address + int(Offsets.Y_POSITION)))
 
     def execute_use_skill_spawmmer(self):
         for skill_id in self.index_skill_use_spawmmer:
@@ -84,28 +84,28 @@ class Char:
             return entities
         entity_count = 0
         try:
-            offset_base = MEMORY.process.read_uint(MEMORY.entity_list_address)
-            world = MEMORY.process.read_uint(offset_base + Offsets.WORLD)
-            entity_list = MEMORY.process.read_uint(world + Offsets.ENTITY_LIST)
-            prev_entity = MEMORY.process.read_uint(entity_list + Offsets.PREV_ENTITY)
-            entity = MEMORY.process.read_uint(prev_entity + Offsets.NEXT_ENTITY)
+            offset_base = int(MEMORY.process.read_uint(MEMORY.entity_list_address))
+            world = int(MEMORY.process.read_uint(offset_base + int(Offsets.WORLD)))
+            entity_list = int(MEMORY.process.read_uint(world + int(Offsets.ENTITY_LIST)))
+            prev_entity = int(MEMORY.process.read_uint(entity_list + int(Offsets.PREV_ENTITY)))
+            entity = int(MEMORY.process.read_uint(prev_entity + int(Offsets.NEXT_ENTITY)))
             while entity != 0 and entity_count <= MAX_ENTITY:
-                mob_id = MEMORY.process.read_uint(entity + Offsets.ENTITY_ID)
-                x_pos = MEMORY.process.read_uint(entity + Offsets.ENTITY_POS_X)
-                y_pos = MEMORY.process.read_uint(entity + Offsets.ENTITY_POS_Y)
+                mob_id = int(MEMORY.process.read_uint(entity + int(Offsets.ENTITY_ID)))
+                x_pos = int(MEMORY.process.read_uint(entity + int(Offsets.ENTITY_POS_X)))
+                y_pos = int(MEMORY.process.read_uint(entity + int(Offsets.ENTITY_POS_Y)))
                 sprite_name = ""
                 distance = 0
                 try:
-                    sprite_res = MEMORY.process.read_uint(entity + Offsets.ENTITY_SPRITE_RES)
-                    sprite_name = MEMORY.process.read_string(sprite_res + Offsets.SPRITE_NAME)
+                    sprite_res = int(MEMORY.process.read_uint(entity + int(Offsets.ENTITY_SPRITE_RES)))
+                    sprite_name = MEMORY.process.read_string(sprite_res + int(Offsets.SPRITE_NAME))
                     sprite_name = sprite_name.strip("\\").replace(".spr", "")
                     sprite_name = sprite_name.replace("_", " ").title()
-                    distance = 0 if MEMORY.x_pos_address == 0x0 else math.hypot(x_pos - self.position[0], y_pos - self.position[1])
+                    distance = 0 if MEMORY.x_pos_address == 0x0 else math.hypot(x_pos - int(self.position[0]), y_pos - int(self.position[1]))
                     entities.append((mob_id, sprite_name, distance))
                 except:
                     pass
-                prev_entity = MEMORY.process.read_uint(prev_entity + Offsets.PREV_ENTITY)
-                entity = MEMORY.process.read_uint(prev_entity + Offsets.NEXT_ENTITY)
+                prev_entity = int(MEMORY.process.read_uint(prev_entity + int(Offsets.PREV_ENTITY)))
+                entity = int(MEMORY.process.read_uint(prev_entity + int(Offsets.NEXT_ENTITY)))
                 entity_count += 1
         except:
             pass
@@ -135,7 +135,7 @@ class Char:
             skill_buffs.append(skill_buff)
         return skill_buffs
 
-    def next_item_buff_to_use(self, list_items, prop_seq) -> bool:
+    def next_item_buff_to_use(self, list_items, prop_seq):
         if MEMORY.hp_address == 0x0:
             return None
         job_id = APP_CONTROLLER.job.id
@@ -144,7 +144,7 @@ class Char:
                 return item
         return None
 
-    def next_item_debuff_to_use(self, list_items) -> bool:
+    def next_item_debuff_to_use(self, list_items):
         if MEMORY.hp_address == 0x0:
             return None
         items_to_use = []
@@ -156,7 +156,7 @@ class Char:
             return None
         return sorted(items_to_use, key=lambda item: item.priority, reverse=True)[0]
 
-    def next_skill_buff_to_use(self, list_buff, prop_seq) -> bool:
+    def next_skill_buff_to_use(self, list_buff, prop_seq):
         if MEMORY.hp_address == 0x0:
             return (None, None, None)
         buffs_to_use = []
@@ -210,7 +210,7 @@ class Char:
             return True
         return (time.time() - last_time_buff) >= cooldown
 
-    def next_macro_element_to_use(self, list_auto_element) -> bool:
+    def next_macro_element_to_use(self, list_auto_element):
         macros_to_use = []
         if MEMORY.entity_list_address == 0x0:
             return (None, None, None)
@@ -227,16 +227,17 @@ class Char:
     def monitoring_job_change_gui(self):
         if MEMORY.job_address == 0x0:
             return
-        if JOB_MAP.get(self.job_id, False) and APP_CONTROLLER.job.id != JOB_MAP[self.job_id].id and isinstance(self.job, Job):
+        job_id_int = int(self.job_id) if self.job_id is not None else 0
+        if JOB_MAP.get(job_id_int, False) and APP_CONTROLLER.job.id != JOB_MAP[job_id_int].id and isinstance(self.job, Job):
             APP_CONTROLLER.updated_job.emit(self.job)
 
     def _get_buffs(self):
         buffs = []
-        if MEMORY.hp_address == 0x0:
+        if MEMORY.hp_address == 0x0 or MEMORY.hp_address is None:
             return buffs
         buff_index = 0
         while True:
-            buff = MEMORY.process.read_int(MEMORY.hp_address + Offsets.BUFF_LIST + (0x4 * buff_index))
+            buff = MEMORY.process.read_int(MEMORY.hp_address + int(Offsets.BUFF_LIST) + (0x4 * buff_index))
             if buff == -1:
                 break
             buffs.append(buff)

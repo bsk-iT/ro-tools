@@ -1,8 +1,8 @@
 from config.icon import resource_path
 
-APP_VERSION = "1.8.0.FINAL"
-APP_NAME = f"RO - Tools v{APP_VERSION}"
-APP_ICON = resource_path("assets/icon/icon.png")
+APP_VERSION = "2.0"
+APP_NAME = f"BSK - Tools v{APP_VERSION}"
+APP_ICON = resource_path("assets/icon/berserk-icon.png")
 APP_DELAY = 0.02
 APP_MONITORING_DELAY = 0.2
 APP_CBOX_WIDTH = 250

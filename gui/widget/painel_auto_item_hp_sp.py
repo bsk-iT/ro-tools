@@ -85,7 +85,7 @@ class PainelAutoItemHpSp(QWidget):
         layout.addWidget(InputMapCriteria(self, key_seq))
         return layout
 
-    def _build_ygg_widget(self, resource: str) -> QSpinBox:
+    def _build_ygg_widget(self, resource: str) -> QWidget:
         widget = QWidget()
         hp_percent = f"{AUTO_ITEM}:{resource}:{HP_PERCENT}"
         sp_percent = f"{AUTO_ITEM}:{resource}:{SP_PERCENT}"

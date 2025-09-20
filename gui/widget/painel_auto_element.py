@@ -3,7 +3,7 @@ from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QIcon
 
 from config.icon import ICON_DELETE
-from game.macro import ELEMENT_DARK, ELEMENT_FIRE, ELEMENT_GHOST, ELEMENT_GROUND, ELEMENT_HOLY, ELEMENT_WATER, ELEMENT_WIND, MACRO_MAP, Macro
+from game.macro import ELEMENT_DARK, ELEMENT_FIRE, ELEMENT_GHOST, ELEMENT_EARTH, ELEMENT_HOLY, ELEMENT_WATER, ELEMENT_WIND, MACRO_MAP, Macro
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.cbox_macro import CboxMacro
 from service.config_file import ACTIVE, AUTO_ELEMENT, CONFIG_FILE, MOB_IDS
@@ -176,7 +176,7 @@ class PainelAutoElement(QWidget):
         return {
             ELEMENT_FIRE.id: DEFAULT_FIRE,
             ELEMENT_WATER.id: DEFAULT_WATER,
-            ELEMENT_GROUND.id: DEFAULT_GROUND,
+            ELEMENT_EARTH.id: DEFAULT_GROUND,
             ELEMENT_WIND.id: DEFAULT_WIND,
             ELEMENT_HOLY.id: DEFAULT_HOLY,
             ELEMENT_DARK.id: DEFAULT_DARK,
@@ -208,7 +208,8 @@ class PainelAutoElement(QWidget):
     def _on_add_auto_element(self, job_id, macro: Macro):
         APP_CONTROLLER.job_auto_elements[job_id].append(macro)
         self._active_auto_element(job_id, macro)
-        APP_CONTROLLER.status_toggle.setFocus()
+        if APP_CONTROLLER.status_toggle is not None:
+            APP_CONTROLLER.status_toggle.setFocus()
 
     def _on_remove_auto_element(self, job_id, macro: Macro):
         APP_CONTROLLER.job_auto_elements[job_id].remove(macro)

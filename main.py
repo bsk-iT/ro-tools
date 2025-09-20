@@ -58,7 +58,7 @@ def main():
             # Se falhar, mostrar mensagem de erro
             app = QApplication(sys.argv)
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
+            msg.setIcon(QMessageBox.Icon.Critical)
             msg.setWindowTitle("RO Tools - Erro de Permissão")
             msg.setText("O RO Tools precisa ser executado como administrador!")
             msg.setInformativeText(

@@ -12,15 +12,15 @@ class InputBlockQuagmire(QWidget):
         super().__init__(parent)
         self.key_base = key_base
         self.block_quagmire = block_quagmire
-        self.layout = QHBoxLayout(self)
+        self.main_layout = QHBoxLayout(self)
         self.toggle = self._build_toggle()
         self._config_layout()
         self._config_events()
 
     def _config_layout(self) -> None:
-        self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.layout.setContentsMargins(0, 0, 0, 0)
-        self.layout.addWidget(self.toggle)
+        self.main_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.addWidget(self.toggle)
 
     def _config_events(self) -> None:
         self.toggle.toggled.connect(self._on_active_delay)
@@ -31,7 +31,7 @@ class InputBlockQuagmire(QWidget):
         toggle.setCheckable(True)
         active = CONFIG_FILE.read(self.key_base + BLOCK_QUAGMIRE)
         active = self.block_quagmire if active is None else active
-        toggle.setChecked(active if active else False)
+        toggle.setChecked(bool(active))
         toggle.setIcon(QIcon(ICON_BLOCK_QUAGMIRE))
         toggle.setIconSize(ICON_BTN)
         return toggle

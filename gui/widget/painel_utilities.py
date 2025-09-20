@@ -74,7 +74,7 @@ class PainelUtilities(QWidget):
         vbox_text.setContentsMargins(0, 0, 0, 0)
         vbox_text.addWidget(build_label_info("Commandos"))
         commands = CONFIG_FILE.read(self.key_base + COMMANDS)
-        self.auto_commands.setPlainText(commands)
+        self.auto_commands.setPlainText(commands or "")
         self.auto_commands.textChanged.connect(lambda: CONFIG_FILE.update(self.key_base + COMMANDS, self.auto_commands.toPlainText()))
         vbox_text.addWidget(self.auto_commands)
         hbox_commands.addLayout(vbox_text)

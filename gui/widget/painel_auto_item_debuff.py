@@ -65,7 +65,8 @@ class PainelAutoItemDebuff(QWidget):
 
     def _build_item_icon(self, job: Job, item: Buff) -> QFrame:
         frame = QFrame()
-        icon = build_icon(item.icon, item.id, 25, frame)
+        icon_path = item.icon if item.icon is not None else ""
+        icon = build_icon(icon_path, item.id, 25, frame)
         icon.move(9, 9)
         frame.setFixedSize(35, 40)
         btn_delete = QPushButton(frame)
@@ -85,7 +86,8 @@ class PainelAutoItemDebuff(QWidget):
     def _on_add_skill(self, item: Buff):
         APP_CONTROLLER.job_item_debuffs.append(item)
         self._active_skill(APP_CONTROLLER.job, item)
-        APP_CONTROLLER.status_toggle.setFocus()
+        if APP_CONTROLLER.status_toggle is not None:
+            APP_CONTROLLER.status_toggle.setFocus()
 
     def _on_remove_item(self, job: Job, item: Buff):
         APP_CONTROLLER.job_item_debuffs.remove(item)

@@ -14,26 +14,27 @@ class CboxItem(QComboBox):
         super().__init__(parent)
         self.resource = resource
         self.setFixedWidth(APP_CBOX_WIDTH)
-        self.model = QStandardItemModel()
+        self.item_model = QStandardItemModel()
         self.currentIndexChanged.connect(self._on_changed)
         self.build_cbox()
 
     def _on_changed(self, index):
         if index < 1:
             return
-        item = self.model.takeItem(index, 0).data()
-        self.model.takeRow(index)
+        item = self.item_model.takeItem(index, 0).data()
+        self.item_model.takeRow(index)
         CONFIG_FILE.update_config(True, [APP_CONTROLLER.job.id, AUTO_ITEM, self.resource, item.id, ACTIVE])
         self._emit_event(item)
-        APP_CONTROLLER.status_toggle.setFocus()
+        if APP_CONTROLLER.status_toggle is not None:
+            APP_CONTROLLER.status_toggle.setFocus()
 
     def add_item(self, item):
         if not item:
-            return self.model.appendRow(QStandardItem(""))
+            return self.item_model.appendRow(QStandardItem(""))
         q_item = QStandardItem(item.name)
         q_item.setIcon(QIcon(item.icon))
         q_item.setData(item)
-        self.model.appendRow(q_item)
+        self.item_model.appendRow(q_item)
 
     def _emit_event(self, item):
         if self.resource == ITEM_BUFF:
@@ -51,15 +52,15 @@ class CboxItem(QComboBox):
         return APP_CONTROLLER.job_item_debuffs
 
     def build_cbox(self):
-        self.model.clear()
+        self.item_model.clear()
         self.currentIndexChanged.disconnect()
         self.add_item(None)
         self.setCurrentIndex(0)
         for group, items in self._get_items():
-            build_cbox_category(self.model, group)
+            build_cbox_category(self.item_model, group)
             for item in items:
                 if item in self._get_active_items():
                     continue
                 self.add_item(item)
-        self.setModel(self.model)
+        self.setModel(self.item_model)
         self.currentIndexChanged.connect(self._on_changed)

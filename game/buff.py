@@ -34,167 +34,172 @@ class Debuff(Buff):
 
 
 # ----- Item -----
-BLESS_SCROLL = Item("bless_scroll", "Scroll de Benção")
-INC_AGI_UP_SCROLL = Item("inc_agi_up_scroll", "Scroll de Aumentar Agilidade", 0, True)
-CONCENTRATION_POTION = Item("concentration_potion", "Poção da Concentração")
+ABRASIVE = Item("abrasive", "Abrasivo")
+ACARAJE = Item("acaraje", "Acarajé")
+ACCURACY_SCROLL = Item("accuracy_scroll", "Pergaminho de Precisão")
+AGI_BISCUIT = Item("agi_biscuit", "Palitos de Baunilha")
+AGI_FOOD = Item("agi_food_nv10", "AGI Food")
+ALOE_VERA = Item("aloe_vera", "Aloe Vera")
+ALMIGHTY = Item("almighty", "Elixir Ultra Milagroso")
+ASPERSIO_SCROLL = Item("holy_enchant_scroll", "Conversor Elemental Sagrado")
+ASSUMPTIO_SCROLL = Item("assumptio_scroll", "Pergaminho de Assumptio")
 AWAKENING_POTION = Item("awakening_potion", "Poção do Despertar")
 BERSERK_POTION = Item("berserk_potion", "Poção da Fúria Selvagem")
-RESENTMENT_BOX = Item("resentment_box", "Caixa do Ressentimento")
-THUNDER_BOX = Item("thunder_box", "Caixa do Trovão")
-DROWSINESS_BOX = Item("drowsiness_box", "Caixa da Sonolência")
-GLOOM_BOX = Item("gloom_box", "Caixa da Escuridão", 0, True)
-SUNLIGHT_BOX = Item("sunlight_box", "Caixa da Luz do Sol")
-ALOE_VERA = Item("aloe_vera", "Aloe Vera")
-PAIN_KILLER = Item("pain_killer", "Analgésico")
-ASPERSIO_SCROLL = Item("holy_enchant_scroll", "Aspersio")
-SPEED_POTION = Item("speed_potion", "Poção do Vento")
-FIRE_ENCHANT_SCROLL = Item("fire_enchant_scroll", "Conversor Elemental Fogo")
-WATER_ENCHANT_SCROLL = Item("water_enchant_scroll", "Conversor Elemental Água")
-EARTH_ENCHANT_SCROLL = Item("earth_enchant_scroll", "Conversor Elemental Terra")
-WIND_ENCHANT_SCROLL = Item("wind_enchant_scroll", "Conversor Elemental Vento")
-DARK_WATER = Item("dark_water", "Água Amaldiçoada")
-ABRASIVE = Item("abrasive", "Abrasivo")
-RESIST_PROPERTY_WATER = Item("resist_property_water", "Poção Anti-Água")
-RESIST_PROPERTY_EARTH = Item("resist_property_earth", "Poção Anti-Terra")
-RESIST_PROPERTY_FIRE = Item("resist_property_fire", "Poção Anti-Fogo")
-RESIST_PROPERTY_WIND = Item("resist_property_wind", "Poção Anti-Vento")
-STR_FOOD = Item("str_food_nv10", "STR Food")
-AGI_FOOD = Item("agi_food_nv10", "AGI Food")
-VIT_FOOD = Item("vit_food_nv10", "VIT Food")
-INT_FOOD = Item("int_food_nv10", "INT Food")
-DEX_FOOD = Item("dex_food_nv10", "DEX Food")
-LUK_FOOD = Item("luk_food_nv10", "LUK Food")
-HALTER_LEAD = Item("halter_lead", "Rédeas")
-GHP = Item("ghp", "Poção Grande de HP")
-GSP = Item("gsp", "Poção Grande de SP")
-RED_HERB_ACTIVADOR = Item("red_herb_activator", "Ativador de Erva Vermelha")
+BLESS_SCROLL = Item("bless_scroll", "Scroll de Benção")
 BLUE_HERB_ACTIVADOR = Item("blue_herb_activator", "Ativador de Erva Azul")
-SWING_K = Item("swing_k", "Poção do Furor Físico")
-MANA_PLUS = Item("mana_plus", "Poção do Furor Mágico")
-SPELLBREAKER = Item("spellbreaker", "Suco de Gato")
-MENTAL_POTION = Item("mental_potion", "Poção Mental")
-VITATA_POTION = Item("vitata_potion", "Poção Vitata")
-RED_BOOSTER_POTION = Item("red_booster_potion", "Elixir Rubro")
 BOVINE_POTION = Item("bovine_potion", "Poção do Bovino Furioso")
-DRAGON_POTION = Item("dragon_potion", "Poção do Dragão Místico")
-REGENERATION = Item("regeneration", "Poção de Regeneração")
-GOLDEN_X = Item("golden_x", "Poção X Dourada")
-MEGA_RESIST_POTION = Item("mega_resist_potion", "Poção de Mega Resistência")
-ALMIGHTY = Item("almighty", "Elixir Ultra Milagroso")
-OH_HOLY_NIGHT = Item("oh_holy_night", "Caixinha Noite Feliz")
-CASH_FOOD = Item("cash_food", "Comida Premium")
-ACARAJE = Item("acaraje", "Acarajé")
-STR_BISCUIT = Item("str_biscuit", "Palitos de Laranja")
-AGI_BISCUIT = Item("agi_biscuit", "Palitos de Baunilha")
-VIT_BISCUIT = Item("vit_biscuit", "Palitos de Cassis")
-INT_BISCUIT = Item("int_biscuit", "Palitos de Chocolate")
-DEX_BISCUIT = Item("dex_biscuit", "Palitos de Limão")
-LUK_BISCUIT = Item("luk_biscuit", "Palitos de Morango")
-HALOHALO = Item("halohalo", "Salada de Frutas Tropicais")
-GUARANA = Item("guarana", "Bala de Guaraná")
-GUYAK_POTION = Item("guyak_potion", "Poção de Guyak")
-COMBAT_PILL = Item("combat_pill", "Pílula de Combate")
-CELERMINE = Item("celermine", "Suco Celular Enriquecido")
-POISON = Item("poison", "Garrafa de Veneno")
-EDEN_SCROLL = Item("eden_scroll", "Pergaminho do Éden")
 BURNT_INCENSE = Item("burnt_incense", "Incenso Queimado")
-MOB_TRANSFORM = Item("mob_transform", "Transformação de Monstro")
-ASSUMPTIO_SCROLL = Item("assumptio_scroll", "Pergaminho de Assumptio")
-FLEE_SCROLL = Item("flee_scroll", "Pergaminho de Esquiva")
-ACCURACY_SCROLL = Item("accuracy_scroll", "Pergaminho de Precisão")
-LUX_AMINA = Item("lux_amina", "Lux Amina Rune")
+CASH_FOOD = Item("cash_food", "Comida Premium")
 CAT_CAN = Item("cat_can", "Khiskas Sache")
+CELERMINE = Item("celermine", "Suco Celular Enriquecido")
 COMBAT_MANUAL_BASE = Item("combat_manual_base", "Manual de Combate")
 COMBAT_MANUAL_CLASSES = Item("combat_manual_class", "Manual de Combate de Classe")
+COMBAT_PILL = Item("combat_pill", "Pílula de Combate")
+CONCENTRATION_POTION = Item("concentration_potion", "Poção da Concentração")
+DARK_ENCHANT_SCROLL = Item("dark_enchant_scroll", "Conversor Elemental Sombrio")
+DARK_WATER = Item("dark_water", "Água Amaldiçoada")
+DEX_BISCUIT = Item("dex_biscuit", "Palitos de Limão")
+DEX_FOOD = Item("dex_food_nv10", "DEX Food")
+DRAGON_POTION = Item("dragon_potion", "Poção do Dragão Místico")
+DROWSINESS_BOX = Item("drowsiness_box", "Caixa da Sonolência")
+EARTH_ENCHANT_SCROLL = Item("earth_enchant_scroll", "Conversor Elemental Terra")
+EDEN_SCROLL = Item("eden_scroll", "Pergaminho do Éden", 0, True)
+ELVIRA_CANDY = Item("elvira_candy", "Doce de Elvira")
+FIRE_ENCHANT_SCROLL = Item("fire_enchant_scroll", "Conversor Elemental Fogo")
+FLEE_SCROLL = Item("flee_scroll", "Pergaminho de Esquiva")
+GHP = Item("ghp", "Poção Grande de HP")
+GHOST_ENCHANT_SCROLL = Item("ghost_enchant_scroll", "Conversor Elemental Fantasma")
+GLOOM_BOX = Item("gloom_box", "Caixa da Escuridão", 1, True)
+GOLDEN_X = Item("golden_x", "Poção X Dourada")
+GSP = Item("gsp", "Poção Grande de SP")
+GUARANA = Item("guarana", "Bala de Guaraná")
+GUYAK_POTION = Item("guyak_potion", "Poção de Guyak", 2, True)
+HALOHALO = Item("halohalo", "Salada de Frutas Tropicais")
+HALTER_LEAD = Item("halter_lead", "Rédeas")
 HE_BUBBLE_GUM = Item("he_bubble_gum", "Goma de Mascar")
-PERG_GHOSTRING = Item("perg_ghostring", "Pergaminho de Ghostring")
-PERG_ANGELING = Item("perg_angeling", "Pergaminho de Angeling")
-PERG_TAOGUNKA = Item("perg_taogunka", "Pergaminho de Tao Gunka")
-PERG_SENHORORC = Item("perg_senhororc", "Pergaminho de Senhor dos Orcs")
-PERG_ORCHEROIL = Item("perg_orcheroil", "Pergaminho de Orc Herói")
+INC_AGI_UP_SCROLL = Item("inc_agi_up_scroll", "Scroll de Aumentar Agilidade", 0, True)
+INT_BISCUIT = Item("int_biscuit", "Palitos de Chocolate")
+INT_FOOD = Item("int_food_nv10", "INT Food")
+LUK_BISCUIT = Item("luk_biscuit", "Palitos de Morango")
+LUK_FOOD = Item("luk_food_nv10", "LUK Food")
+LUX_AMINA = Item("lux_amina", "Lux Amina Rune")
+MANA_PLUS = Item("mana_plus", "Poção do Furor Mágico")
+MEGA_RESIST_POTION = Item("mega_resist_potion", "Poção de Mega Resistência")
+MENTAL_POTION = Item("mental_potion", "Poção Mental")
+MOB_TRANSFORM = Item("mob_transform", "Transformação de Monstro")
+OH_HOLY_NIGHT = Item("oh_holy_night", "Caixinha Noite Feliz")
+PAIN_KILLER = Item("pain_killer", "Analgésico")
 PERG_ABELHA = Item("perg_abelha", "Pergaminho de Abelha Rainha")
+PERG_ANGELING = Item("perg_angeling", "Pergaminho de Angeling")
+PERG_GHOSTRING = Item("perg_ghostring", "Pergaminho de Ghostring")
+PERG_ORCHEROIL = Item("perg_orcheroil", "Pergaminho de Orc Herói")
+PERG_SENHORORC = Item("perg_senhororc", "Pergaminho de Senhor dos Orcs")
+PERG_TAOGUNKA = Item("perg_taogunka", "Pergaminho de Tao Gunka")
+POISON = Item("poison", "Garrafa de Veneno")
+RED_BOOSTER_POTION = Item("red_booster_potion", "Elixir Rubro")
+RED_HERB_ACTIVADOR = Item("red_herb_activator", "Ativador de Erva Vermelha")
+REGENERATION = Item("regeneration", "Poção de Regeneração")
+RESENTMENT_BOX = Item("resentment_box", "Caixa do Ressentimento")
+RESIST_PROPERTY_EARTH = Item("resist_property_earth", "Poção Anti-Terra")
+RESIST_PROPERTY_FIRE = Item("resist_property_fire", "Poção Anti-Fogo")
+RESIST_PROPERTY_WATER = Item("resist_property_water", "Poção Anti-Água")
+RESIST_PROPERTY_WIND = Item("resist_property_wind", "Poção Anti-Vento")
+SPELLBREAKER = Item("spellbreaker", "Suco de Gato")
+SPEED_POTION = Item("speed_potion", "Poção do Vento", 0, True)
+STR_BISCUIT = Item("str_biscuit", "Palitos de Laranja")
+STR_FOOD = Item("str_food_nv10", "STR Food")
+SUNLIGHT_BOX = Item("sunlight_box", "Caixa da Luz do Sol")
+SWING_K = Item("swing_k", "Poção do Furor Físico")
+THUNDER_BOX = Item("thunder_box", "Caixa do Trovão")
+VITATA_POTION = Item("vitata_potion", "Poção Vitata")
+VIT_BISCUIT = Item("vit_biscuit", "Palitos de Cassis")
+VIT_FOOD = Item("vit_food_nv10", "VIT Food")
+WATER_ENCHANT_SCROLL = Item("water_enchant_scroll", "Conversor Elemental Água")
+WIND_ENCHANT_SCROLL = Item("wind_enchant_scroll", "Conversor Elemental Vento")
 
 
 ITEM_BUFF_MAP = {
-    "bless_scroll": BLESS_SCROLL,
-    "inc_agi_up_scroll": INC_AGI_UP_SCROLL,
-    "concentration_potion": CONCENTRATION_POTION,
+    "abrasive": ABRASIVE,
+    "acaraje": ACARAJE,
+    "accuracy_scroll": ACCURACY_SCROLL,
+    "agi_biscuit": AGI_BISCUIT,
+    "agi_food": AGI_FOOD,
+    "almighty": ALMIGHTY,
+    "assumptio_scroll": ASSUMPTIO_SCROLL,
     "awakening_potion": AWAKENING_POTION,
     "berserk_potion": BERSERK_POTION,
-    "resentment_box": RESENTMENT_BOX,
-    "thunder_box": THUNDER_BOX,
-    "aloe_vera": ALOE_VERA,
-    "pain_killer": PAIN_KILLER,
-    "aspersio": ASPERSIO_SCROLL,
-    "speed_potion": SPEED_POTION,
-    "fire_enchant_scroll": FIRE_ENCHANT_SCROLL,
-    "water_enchant_scroll": WATER_ENCHANT_SCROLL,
-    "wind_enchant_scroll": WIND_ENCHANT_SCROLL,
-    "earth_enchant_scroll": EARTH_ENCHANT_SCROLL,
-    "dark_water": DARK_WATER,
-    "drowsiness_box": DROWSINESS_BOX,
-    "gloom_box": GLOOM_BOX,
-    "sunlight_box": SUNLIGHT_BOX,
-    "abrasive": ABRASIVE,
-    "resist_property_water": RESIST_PROPERTY_WATER,
-    "resist_property_earth": RESIST_PROPERTY_EARTH,
-    "resist_property_fire": RESIST_PROPERTY_FIRE,
-    "resist_property_wind": RESIST_PROPERTY_WIND,
-    "str_food": STR_FOOD,
-    "agi_food": AGI_FOOD,
-    "vit_food": VIT_FOOD,
-    "int_food": INT_FOOD,
-    "dex_food": DEX_FOOD,
-    "luk_food": LUK_FOOD,
-    "halter_lead": HALTER_LEAD,
-    "ghp": GHP,
-    "gsp": GSP,
-    "red_herb_activator": RED_HERB_ACTIVADOR,
+    "bless_scroll": BLESS_SCROLL,
     "blue_herb_activator": BLUE_HERB_ACTIVADOR,
-    "swing_k": SWING_K,
-    "mana_plus": MANA_PLUS,
-    "spellbreaker": SPELLBREAKER,
-    "mental_potion": MENTAL_POTION,
-    "vitata_potion": VITATA_POTION,
-    "red_booster_potion": RED_BOOSTER_POTION,
     "bovine_potion": BOVINE_POTION,
-    "dragon_potion": DRAGON_POTION,
-    "regeneration": REGENERATION,
-    "golden_x": GOLDEN_X,
-    "mega_resist_potion": MEGA_RESIST_POTION,
-    "almighty": ALMIGHTY,
-    "oh_holy_night": OH_HOLY_NIGHT,
-    "cash_food": CASH_FOOD,
-    "acaraje": ACARAJE,
-    "str_biscuit": STR_BISCUIT,
-    "agi_biscuit": AGI_BISCUIT,
-    "vit_biscuit": VIT_BISCUIT,
-    "int_biscuit": INT_BISCUIT,
-    "dex_biscuit": DEX_BISCUIT,
-    "luk_biscuit": LUK_BISCUIT,
-    "halohalo": HALOHALO,
-    "guarana": GUARANA,
-    "guyak_potion": GUYAK_POTION,
-    "combat_pill": COMBAT_PILL,
-    "celermine": CELERMINE,
-    "poison": POISON,
-    "eden_scroll": EDEN_SCROLL,
     "burnt_incense": BURNT_INCENSE,
-    "mob_transform": MOB_TRANSFORM,
-    "assumptio_scroll": ASSUMPTIO_SCROLL,
-    "flee_scroll": FLEE_SCROLL,
-    "accuracy_scroll": ACCURACY_SCROLL,
-    "lux_amina": LUX_AMINA,
+    "cash_food": CASH_FOOD,
     "cat_can": CAT_CAN,
+    "celermine": CELERMINE,
     "combat_manual_base": COMBAT_MANUAL_BASE,
     "combat_manual_class": COMBAT_MANUAL_CLASSES,
+    "combat_pill": COMBAT_PILL,
+    "concentration_potion": CONCENTRATION_POTION,
+    "dark_enchant_scroll": DARK_ENCHANT_SCROLL,
+    "dark_water": DARK_WATER,
+    "dex_biscuit": DEX_BISCUIT,
+    "dex_food": DEX_FOOD,
+    "dragon_potion": DRAGON_POTION,
+    "drowsiness_box": DROWSINESS_BOX,
+    "earth_enchant_scroll": EARTH_ENCHANT_SCROLL,
+    "eden_scroll": EDEN_SCROLL,
+    "elvira_candy": ELVIRA_CANDY,
+    "fire_enchant_scroll": FIRE_ENCHANT_SCROLL,
+    "flee_scroll": FLEE_SCROLL,
+    "ghp": GHP,
+    "ghost_enchant_scroll": GHOST_ENCHANT_SCROLL,
+    "gloom_box": GLOOM_BOX,
+    "golden_x": GOLDEN_X,
+    "gsp": GSP,
+    "guarana": GUARANA,
+    "guyak_potion": GUYAK_POTION,
+    "halohalo": HALOHALO,
+    "halter_lead": HALTER_LEAD,
     "he_bubble_gum": HE_BUBBLE_GUM,
-    "perg_ghostring": PERG_GHOSTRING,
-    "perg_angeling": PERG_ANGELING,
-    "perg_taogunka": PERG_TAOGUNKA,
-    "perg_senhororc": PERG_SENHORORC,
-    "perg_orcheroil": PERG_ORCHEROIL,
+    "holy_enchant_scroll": ASPERSIO_SCROLL,
+    "inc_agi_up_scroll": INC_AGI_UP_SCROLL,
+    "int_biscuit": INT_BISCUIT,
+    "int_food": INT_FOOD,
+    "luk_biscuit": LUK_BISCUIT,
+    "luk_food": LUK_FOOD,
+    "lux_amina": LUX_AMINA,
+    "mana_plus": MANA_PLUS,
+    "mega_resist_potion": MEGA_RESIST_POTION,
+    "mental_potion": MENTAL_POTION,
+    "mob_transform": MOB_TRANSFORM,
+    "oh_holy_night": OH_HOLY_NIGHT,
+    "pain_killer": PAIN_KILLER,
     "perg_abelha": PERG_ABELHA,
+    "perg_angeling": PERG_ANGELING,
+    "perg_ghostring": PERG_GHOSTRING,
+    "perg_orcheroil": PERG_ORCHEROIL,
+    "perg_senhororc": PERG_SENHORORC,
+    "perg_taogunka": PERG_TAOGUNKA,
+    "poison": POISON,
+    "red_booster_potion": RED_BOOSTER_POTION,
+    "red_herb_activator": RED_HERB_ACTIVADOR,
+    "regeneration": REGENERATION,
+    "resentment_box": RESENTMENT_BOX,
+    "resist_property_earth": RESIST_PROPERTY_EARTH,
+    "resist_property_fire": RESIST_PROPERTY_FIRE,
+    "resist_property_water": RESIST_PROPERTY_WATER,
+    "resist_property_wind": RESIST_PROPERTY_WIND,
+    "speed_potion": SPEED_POTION,
+    "spellbreaker": SPELLBREAKER,
+    "str_biscuit": STR_BISCUIT,
+    "str_food": STR_FOOD,
+    "sunlight_box": SUNLIGHT_BOX,
+    "swing_k": SWING_K,
+    "thunder_box": THUNDER_BOX,
+    "vitata_potion": VITATA_POTION,
+    "vit_biscuit": VIT_BISCUIT,
+    "vit_food": VIT_FOOD,
+    "water_enchant_scroll": WATER_ENCHANT_SCROLL,
+    "wind_enchant_scroll": WIND_ENCHANT_SCROLL,
 }
 
 ITEM_BUFF_GROUP = {
@@ -208,7 +213,7 @@ ITEM_BUFF_GROUP = {
         RESENTMENT_BOX, THUNDER_BOX, DROWSINESS_BOX, GLOOM_BOX, SUNLIGHT_BOX
     ],
     "Consumíveis": [
-        ALOE_VERA, PAIN_KILLER, ABRASIVE, CAT_CAN, CASH_FOOD, COMBAT_PILL, ACARAJE, HALOHALO, GUARANA, ALMIGHTY, OH_HOLY_NIGHT
+        ALOE_VERA, PAIN_KILLER, ABRASIVE, CAT_CAN, CASH_FOOD, COMBAT_PILL, ACARAJE, HALOHALO, GUARANA, ALMIGHTY, OH_HOLY_NIGHT, ELVIRA_CANDY
     ],
     "Scrolls": [
         BLESS_SCROLL, INC_AGI_UP_SCROLL, ASPERSIO_SCROLL,
@@ -216,7 +221,7 @@ ITEM_BUFF_GROUP = {
         PERG_GHOSTRING, PERG_ANGELING, PERG_TAOGUNKA, PERG_SENHORORC, PERG_ORCHEROIL, PERG_ABELHA
     ],
     "Elemento - Arma": [
-        FIRE_ENCHANT_SCROLL, WATER_ENCHANT_SCROLL, WIND_ENCHANT_SCROLL, EARTH_ENCHANT_SCROLL, DARK_WATER
+        FIRE_ENCHANT_SCROLL, WATER_ENCHANT_SCROLL, WIND_ENCHANT_SCROLL, EARTH_ENCHANT_SCROLL, ASPERSIO_SCROLL, DARK_ENCHANT_SCROLL, GHOST_ENCHANT_SCROLL, DARK_WATER
     ],
     "Elemento - Resistência": [
         RESIST_PROPERTY_WATER, RESIST_PROPERTY_EARTH, RESIST_PROPERTY_FIRE, RESIST_PROPERTY_WIND, MEGA_RESIST_POTION
@@ -256,18 +261,22 @@ TO_SIT = "to_sit"
 
 GREEN_POTION = Debuff("green_potion", "Poção Verde", [BLIND, CHAOS, POISON_STATUS, SILENCE], 3)
 GREEN_HERB = Debuff("green_herb", "Erva Verde", [POISON_STATUS], 4)
-GUYAK_POTION = Debuff("guyak_potion", "Poção de Guyak", [SLOW_CASTING, CRITICAL_WOUNDS, HYPOTHERMIA, TO_SIT, HOWLING, CURSED_FIELD, BURNING, SLEEP, CHAOS], 1)
-PANACEA = Debuff("panacea", "Panacéia", [BLIND, CHAOS, CURSE, POISON_STATUS, SILENCE], 2)
+ELVIRA_CANDY = Debuff("elvira_candy", "Doce de Elvira", [SLOW_CASTING, CRITICAL_WOUNDS, HYPOTHERMIA, TO_SIT, HOWLING, CURSED_FIELD, BURNING, SLEEP, CHAOS], 1)
+PANACEA = Debuff("panacea", "Panacéia", [BLIND, CHAOS, CURSE, POISON_STATUS, SILENCE], 1)
+SPEED_POTION = Debuff("speed_potion", "Poção do Vento", [DECREASE_AGI, QUAGMIRE], 2)
+GUYAK_POTION = Debuff("guyak_potion", "Poção de Guyak", [DECREASE_AGI, QUAGMIRE], 2)
 
 ITEM_DEBUFF_GROUP = {
-    "Consumíveis": [GUYAK_POTION, PANACEA, GREEN_POTION, GREEN_HERB],
+    "Consumíveis": [ELVIRA_CANDY, PANACEA, GREEN_POTION, GREEN_HERB, GUYAK_POTION, SPEED_POTION],
 }
 
 ITEM_DEBUFF_MAP = {
-    "guyak_potion": GUYAK_POTION,
+    "elvira_candy": ELVIRA_CANDY,
     "panacea": PANACEA,
     "green_potion": GREEN_POTION,
     "green_herb": GREEN_HERB,
+    "speed_potion": SPEED_POTION,
+    "guyak_potion": GUYAK_POTION,
 }
 
 # ----- Skill -----

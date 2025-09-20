@@ -1,5 +1,10 @@
 import os
 import sys
+import warnings
+
+# Suprimir warnings do pygame sobre pkg_resources deprecated
+warnings.filterwarnings("ignore", category=UserWarning, module="pygame.pkgdata")
+
 import pygame
 
 pygame.init()
@@ -7,8 +12,10 @@ pygame.mixer.init()
 
 
 def resource_path(relative_path: str) -> str:
+    """Get absolute path to resource, works for dev and for PyInstaller"""
     if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, relative_path)
+        # PyInstaller cria este atributo quando o programa é empacotado
+        return os.path.join(getattr(sys, "_MEIPASS"), relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
 
@@ -32,7 +39,7 @@ ICON_SHIELD = resource_path(PATH_ICON + "shield.png")
 ICON_ARROW_RIGHT = resource_path(PATH_ICON + "arrow_right.png")
 ICON_ARROW_DOWN = resource_path(PATH_ICON + "arrow_down.png")
 ICON_SONG = resource_path(PATH_ICON + "song.png")
-ICON_GITHUB = resource_path(PATH_ICON + "github.png")
+ICON_GITHUB = resource_path(PATH_ICON + "berserk-icon2.png")
 ICON_MVP = resource_path(PATH_ICON + "mvp.png")
 ICON_TELEPORT = resource_path(PATH_ICON + "teleport.png")
 ICON_FLICK = resource_path(PATH_ICON + "flick.png")

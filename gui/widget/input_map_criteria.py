@@ -11,17 +11,17 @@ class InputMapCriteria(QWidget):
     def __init__(self, parent: QWidget, key_seq: str) -> None:
         super().__init__(parent)
         self.key_seq = key_seq
-        self.layout = QHBoxLayout(self)
+        self.main_layout = QHBoxLayout(self)
         self.toggle = self._build_toggle()
         self.cbox_map = self._build_cbox_map()
         self._config_layout()
         self._config_events()
 
     def _config_layout(self) -> None:
-        self.layout.setSpacing(5)
-        self.layout.setContentsMargins(0, 0, 0, 0)
-        self.layout.addWidget(self.toggle)
-        self.layout.addWidget(self.cbox_map)
+        self.main_layout.setSpacing(5)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.addWidget(self.toggle)
+        self.main_layout.addWidget(self.cbox_map)
 
     def _config_events(self) -> None:
         self.toggle.toggled.connect(self._on_active_map)
@@ -32,14 +32,14 @@ class InputMapCriteria(QWidget):
         toggle = QToolButton()
         toggle.setCheckable(True)
         active = CONFIG_FILE.read(self.key_seq + MAP_ACTIVE)
-        toggle.setChecked(active if active else False)
+        toggle.setChecked(bool(active) if active else False)
         toggle.setIcon(QIcon(ICON_MAP))
         toggle.setIconSize(ICON_BTN)
         return toggle
 
     def _build_cbox_map(self) -> QComboBox:
         cbox = QComboBox()
-        cbox.addItem(None)
+        cbox.addItem("")  # Substituindo None por string vazia
         cbox.setCurrentIndex(0)
         cbox.addItems(TYPE_MAPS)
         cbox.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)

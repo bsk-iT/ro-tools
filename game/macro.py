@@ -12,11 +12,13 @@ MAX_HOTKEY = 15
 ICON_CLIP = get_image(PATH_ITEM, "clip")
 ICON_FIRE = get_image(PATH_ITEM, "fire_enchant_scroll")
 ICON_WATER = get_image(PATH_ITEM, "water_enchant_scroll")
-ICON_GROUND = get_image(PATH_ITEM, "ground_enchant_scroll")
+ICON_EARTH = get_image(PATH_ITEM, "earth_enchant_scroll")
 ICON_WIND = get_image(PATH_ITEM, "wind_enchant_scroll")
-ICON_HOLY = get_image(PATH_ITEM, "holy_water")
-ICON_DARK = get_image(PATH_ITEM, "dark_water")
+ICON_HOLY = get_image(PATH_ITEM, "holy_enchant_scroll")
 ICON_GHOST = get_image(PATH_ITEM, "ghost_enchant_scroll")
+ICON_DARK = get_image(PATH_ITEM, "dark_enchant_scroll")
+ICON_DARK_WATER = get_image(PATH_ITEM, "dark_water")
+
 
 ATK_1 = Macro("attack_1", "Equipes de Ataque 1", ICON_SWORD)
 ATK_2 = Macro("attack_2", "Equipes de Ataque 2", ICON_SWORD)
@@ -24,11 +26,12 @@ ATK_3 = Macro("attack_3", "Equipes de Ataque 3", ICON_SWORD)
 ATK_4 = Macro("attack_4", "Equipes de Ataque 4", ICON_SWORD)
 ELEMENT_FIRE = Macro("element_fire", "Equipes (Fogo)", ICON_FIRE)
 ELEMENT_WATER = Macro("element_water", "Equipes (Água)", ICON_WATER)
-ELEMENT_GROUND = Macro("element_ground", "Equipes (Terra)", ICON_GROUND)
+ELEMENT_EARTH = Macro("element_earth", "Equipes (Terra)", ICON_EARTH)
 ELEMENT_WIND = Macro("element_wind", "Equipes (Vento)", ICON_WIND)
 ELEMENT_HOLY = Macro("element_holy", "Equipes (Sagrado)", ICON_HOLY)
 ELEMENT_DARK = Macro("element_dark", "Equipes (Sombrio)", ICON_DARK)
 ELEMENT_GHOST = Macro("element_ghost", "Equipes (Fantasma)", ICON_GHOST)
+ELEMENT_DARK_WATER = Macro("element_dark_water", "Equipes (Sombrio)", ICON_DARK_WATER)
 
 DEF_1 = Macro("defense_1", "Equipes de Defesa 1", ICON_SHIELD)
 DEF_2 = Macro("defense_2", "Equipes de Defesa 2", ICON_SHIELD)
@@ -48,7 +51,7 @@ SMOKIE = Macro("smokie", "Acessório c/ Fumacento", ICON_CLIP)
 HORONG = Macro("horong", "Acessório c/ Horong", ICON_CLIP)
 JAGUAR_HAT = Macro("jaguar_hat", "Máscara de Onça-Pintada", get_image(PATH_ITEM, "jaguar_hat"))
 
-MACRO_ELEMENTS = [ELEMENT_FIRE, ELEMENT_WATER, ELEMENT_GROUND, ELEMENT_WIND, ELEMENT_HOLY, ELEMENT_DARK, ELEMENT_GHOST]
+MACRO_ELEMENTS = [ELEMENT_FIRE, ELEMENT_WATER, ELEMENT_EARTH, ELEMENT_WIND, ELEMENT_HOLY, ELEMENT_DARK, ELEMENT_GHOST, ELEMENT_DARK_WATER]
 
 MACRO_TYPES = {
     "Ataque": [ATK_1, ATK_2, ATK_3, ATK_4],
@@ -70,7 +73,7 @@ MACRO_MAP = {
     "defense_4": DEF_4,
     "element_fire": ELEMENT_FIRE,
     "element_water": ELEMENT_WATER,
-    "element_ground": ELEMENT_GROUND,
+    "element_earth": ELEMENT_EARTH,
     "element_wind": ELEMENT_WIND,
     "element_holy": ELEMENT_HOLY,
     "element_dark": ELEMENT_DARK,
