@@ -199,7 +199,13 @@ class ConfigFile(File):
 
     def get_mob_ids(self, key_base):
         mob_ids_config = re.sub(r"[^0-9;]", "", CONFIG_FILE.get_value([*key_base, MOB_IDS]))
-        return [int(x) for x in mob_ids_config.split(";") if x.strip() != "" and (int(x) > 1000 or int(x) == 565)]
+        print(f"🔍 get_mob_ids: key_base={key_base}")
+        print(f"🔍 get_mob_ids: texto original após regex={mob_ids_config}")
+        
+        mob_ids = [int(x) for x in mob_ids_config.split(";") if x.strip() != "" and (int(x) > 1000 or int(x) == 565)]
+        print(f"🔍 get_mob_ids: IDs finais extraídos={mob_ids}")
+        
+        return mob_ids
 
 
 CONFIG_FILE = ConfigFile("config.json")

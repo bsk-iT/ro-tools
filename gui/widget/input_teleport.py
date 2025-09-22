@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QWidget, QToolButton, QHBoxLayout, QVBoxLayout, QL
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 
-from config.icon import ICON_TELEPORT, play_sfx
+from config.icon import ICON_TELEPORT
 from gui.app_controller import APP_CONTROLLER
 from gui.widget.input_delay import InputDelay
 from gui.widget.input_keybind import InputKeybind
@@ -70,7 +70,7 @@ class InputTeleport(QWidget):
     def __init__(self, parent, key_base):
         super().__init__(parent)
         self.key_base = key_base
-        self.layout = QHBoxLayout(self)
+        self.main_layout = QHBoxLayout(self)
         self.text_edit = QPlainTextEdit()
         self.toggle = self._build_toggle()
         self.config = self._build_config()
@@ -80,11 +80,11 @@ class InputTeleport(QWidget):
         APP_CONTROLLER.toogled_auto_tele.connect(self._on_active_auto_teleport)
 
     def _config_layout(self) -> None:
-        self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.layout.setSpacing(10)
-        self.layout.setContentsMargins(0, 0, 0, 0)
-        self.layout.addWidget(self.toggle)
-        self.layout.addWidget(self.config)
+        self.main_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.main_layout.setSpacing(10)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.addWidget(self.toggle)
+        self.main_layout.addWidget(self.config)
 
     def _build_config(self):
         widget = QWidget()
@@ -202,7 +202,7 @@ class InputTeleport(QWidget):
         toggle = QToolButton()
         toggle.setCheckable(True)
         active = CONFIG_FILE.read(self.key_base + AUTO_TELEPORT)
-        toggle.setChecked(active if active else False)
+        toggle.setChecked(bool(active) if active else False)
         toggle.setIcon(QIcon(ICON_TELEPORT))
         toggle.setIconSize(ICON_BTN)
         return toggle

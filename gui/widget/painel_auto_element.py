@@ -9,110 +9,166 @@ from gui.widget.cbox_macro import CboxMacro
 from service.config_file import ACTIVE, AUTO_ELEMENT, CONFIG_FILE, MOB_IDS
 from util.widgets import build_hr, build_icon, build_label_info, build_scroll_vbox, clear_layout
 
-DEFAULT_FIRE = """--- Comum ---
+DEFAULT_FIRE = """--- Cheffênia ---
 
---- MVP ---
-;1087; -> Orc Hero [gef_fild02, gef_fild14]
-;1147; -> Maya [anthell02, gld_dun03]
-;1159; -> Freeoni [moc_fild17]
-;1511; -> Amon Ra [moc_pryd06]
-;1190; -> Senhor dos Orcs [gef_fild10]
-;1312; -> General Tartaruga [tur_dun04]
-;1885; -> Gopinich [mosk_dun03]
-;1648; -> Mestre Ferreiro Howard [lhz_dun03]
+Tier S:
+;2087; -> Queen Scaraba [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20202; -> Mestre-Ferreiro Howard [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
---- Mini ---
-;1289; -> Maya Puple [anthell01, gld_dun03]
+Tier A:
+;20194; -> Senhor dos Orcs [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier B:
+;20181; -> Amon Ra [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20200; -> General Tartaruga [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20191; -> Maya [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21284; -> E Cowraiders1 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21285; -> E Cowraiders2 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;3749; -> E Cowraiders3 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20239; -> Gorynynch [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20195; -> Orc Herói [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21281; -> Outono Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier C:
+;20236; -> Lady Branca [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 """
 
-DEFAULT_WATER = """--- Comum ---
+DEFAULT_WATER = """--- Cheffênia ---
 
---- MVP ---
-;1832; -> Ifrit [thor_v03]
-;1115; -> Eddga [gld_dun01, pay_fild11]
-;1086; -> Besouro-Ladrão Dourado [prt_sewb4]
-;1652; -> Egnigem Cenia [lhz_dun02]
-;1646; -> Lorde Seyren [lhz_dun03]
+Tier S:
+;20220; -> Ifrit [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20201; -> Lorde Seyren [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20227; -> Criador Flamel [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
---- Mini ---
+Tier A:
+;20243; -> Skoll [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21301; -> Presa Flamejante [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier B:
+;20215; -> Egnigem Cenia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20187; -> Eddga [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20193; -> Flor do Luar [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20240; -> Boitata [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20189; -> Besouro-Ladrão Dourado [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21282; -> Verão Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier C:
+;20247; -> Mestre Chen [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 """
 
-DEFAULT_GROUND = """--- Comum ---
-;12;53; -> Gárgula [gl_sew02]
+DEFAULT_EARTH = """--- Cheffênia ---
 
---- MVP ---
-;1251; -> Cavaleiro da Tempestade [xmas_dun02]
-;1059; -> Abelha Rainha [mjolnir_04]
-;1688; -> Lady Tanee [ayo_dun02]
-;1630; -> Lady Branca [lou_dun03]
-;1650; -> Atiradora de Elite Ceci [lhz_dun03]
+Tier S:
+;20225; -> Atiradora de Elite Cecil [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20248; -> Menestrel Alphochio [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
+Tier A:
+;20228; -> Cigana Trentini [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
---- Mini ---
+Tier B:
+;20192; -> Abelha-Rainha [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20190; -> Cavaleiro da Tempestade [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20236; -> Lady Tanee [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21280; -> Primavera Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier C:
+;20236; -> Lady Branca [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 """
 
-DEFAULT_WIND = """--- Comum ---
+DEFAULT_WIND = """--- Cheffênia ---
 
---- MVP ---
-;1252; -> Haitii [xmas_fild01]
-;1779; -> Ktullanux [ice_dun03]
+Tier S:
+;20233; -> Kraken [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20221; -> Ktullanux [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
---- Mini ---
+Tier B:
+;20188; -> Hatii [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20251; -> Polvo Gigante [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21283; -> Inverno Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;2538; -> Rei Poring [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier C:
+;20247; -> Mestre Chen [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 """
 
-DEFAULT_HOLY = """--- Comum ---
-;12;19; -> Cavaleiro do Abismo [gefenia04]
-;13;75; -> Papel [ama_dun02]
+DEFAULT_HOLY = """--- Cheffênia ---
 
---- MVP ---
-;1492; -> Samurai Encarnado [ama_dun03]
-;1112; -> Drake [treasure02]
-;1623; -> RSX-0806 [ein_dun02]
-;1157; -> Faraó [in_sphinx5]
-;1038; -> Osíris [moc_pryd04]
-;1373; -> Senhor dos Mortos [niflheim]
-;1272; -> Senhor das Trevas [gl_chyard, gld_dun04]
-;1871; -> Bispo Decadente [abbey02]
-;1039; -> Bafomé [prt_maze03]
-;1917; -> Morocc Ferido [moc_fild22]
-;1389; -> Drácula [gef_dun01]
-;1046; -> Doppelganger [gef_dun02, gld_dun02]
-;1583; -> Tao Gunka [beach_dun]
-;1719; -> Detardeurus [abyss03]
-;1734; -> Kiel D-01 [kh_dun02]
-;2022; -> Sombra de Nidhogg
-;1647; -> Algoz Eremes [lhz_dun03]
-;1785; -> Atroce [ra_fild02, ra_fild03, ra_fild04, ve_fild01, ve_fild02]
+Tier S:
+;2529; -> Rainha Verme [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20180; -> Morroc Ferido [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;21287; -> Amdarais Corrompido [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20203; -> Algoz Eremes [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
---- Mini ---
-;1582; -> Deviling [pay_fild04, yuno_fild03]
-;1302; -> Ilusão das Trevas [gld_dun04, gl_church]
+Tier A:
+;20216; -> Atroce [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20218; -> Bispo Decadente [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20212; -> Kiel D-01 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;3659; -> Rei da Noite [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20230; -> Réquiem de Marfim [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;2131; -> Drogon [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20891; -> Venomorfo Perfeito [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;2476; -> Amdarais [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier B:
+;20206; -> Senhor dos Mortos [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20182; -> Bafomé [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20183; -> Senhor das Trevas [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20209; -> Detardeurus [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier C:
+;20185; -> Drácula [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20186; -> Drake [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20197; -> Faraó [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20235; -> Samurai Encarnado [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20184; -> Doppelganger [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20196; -> Osíris [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 """
 
-DEFAULT_DARK = """--- Comum ---
-;17;13; -> Acidus Dorada [abyss_03]
+DEFAULT_DARK = """--- Cheffênia ---
 
---- MVP ---
-;1751; -> Valquíria Randrige [odin_tem03]
-;1685; -> Vesper [jupe_core]
-;1649; -> Suma-Sacerdote Margar [lhz_dun03]
+Tier S:
+;20213; -> Valquíria Randgris [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20242; -> Avatar de Freya [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20205; -> Sacerdotisa Margaretha [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20226; -> Paladino Randel [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
---- Mini ---
-;1096; -> Angeling [pay_fild04, xmas_dun01, yuno_fild03]
-;1388; -> Archangeling [yuno_fild05]
-;1765; -> Valquíria [odin_tem02, odin_tem03]
+Tier B:
+;20211; -> Vesper [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 """
 
-DEFAULT_GHOST = """--- Comum ---
+DEFAULT_GHOST = """--- Cheffênia ---
 
---- MVP ---
-;1768; -> Pesar Noturno [ra_san05]
-;1873; -> Beelzebub [abbey03]
-;1418; -> Serpente Suprema [gon_dun03]
-;1651; -> Arquimaga Kathryne [lhz_dun03]
+Tier S:
+;20217; -> Belzebu [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20208; -> Naght Sieger [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20244; -> Gioia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
 
---- Mini ---
-;1120; -> Ghostring [pay_fild04, treasure02, prt_maze03, gld_dun04]
+Tier A:
+;20252; -> Celine Kimi [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20219; -> Pesar Noturno [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20618; -> Detardeurus Esquelético [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20241; -> Groteskia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20210; -> Memória de Thanatos [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+
+Tier B:
+;20237; -> Serpente Suprema [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20198; -> Freeoni [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20204; -> Arquimaga Kathryne [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20246; -> Professora Celia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20253; -> Fenrir [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+;20199; -> Tao Gunka [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]
+"""
+
+DEFAULT_ATTACK_TEAM = """--- IDs de Monstros para Equipes de Ataque ---;1001; -> Escorpião
+;1002; -> Aranha
+;1004; -> Erva Daninha
+"""
+
+DEFAULT_DEFENSE_TEAM = """--- IDs de Monstros para Equipes de Defesa ---
+
+;1087; -> Herói Orc
+;1112; -> Drake
+;1115; -> Eddga
 """
 
 
@@ -173,15 +229,31 @@ class PainelAutoElement(QWidget):
         return widget
 
     def _get_default_text(self, macro_id):
-        return {
+        from game.macro import ATK_1, ATK_2, ATK_3, ATK_4, ATK_5, DEF_1, DEF_2, DEF_3, DEF_4, DEF_5
+        
+        defaults = {
             ELEMENT_FIRE.id: DEFAULT_FIRE,
             ELEMENT_WATER.id: DEFAULT_WATER,
-            ELEMENT_EARTH.id: DEFAULT_GROUND,
+            ELEMENT_EARTH.id: DEFAULT_EARTH,
             ELEMENT_WIND.id: DEFAULT_WIND,
             ELEMENT_HOLY.id: DEFAULT_HOLY,
             ELEMENT_DARK.id: DEFAULT_DARK,
             ELEMENT_GHOST.id: DEFAULT_GHOST,
-        }[macro_id]
+            # Equipes de Ataque
+            ATK_1.id: DEFAULT_ATTACK_TEAM,
+            ATK_2.id: DEFAULT_ATTACK_TEAM,
+            ATK_3.id: DEFAULT_ATTACK_TEAM,
+            ATK_4.id: DEFAULT_ATTACK_TEAM,
+            ATK_5.id: DEFAULT_ATTACK_TEAM,
+            # Equipes de Defesa
+            DEF_1.id: DEFAULT_DEFENSE_TEAM,
+            DEF_2.id: DEFAULT_DEFENSE_TEAM,
+            DEF_3.id: DEFAULT_DEFENSE_TEAM,
+            DEF_4.id: DEFAULT_DEFENSE_TEAM,
+            DEF_5.id: DEFAULT_DEFENSE_TEAM,
+        }
+        
+        return defaults.get(macro_id, "")
 
     def change_mob_id(self, mob_ids_key_base, mob_text):
         CONFIG_FILE.update(mob_ids_key_base, mob_text.toPlainText())

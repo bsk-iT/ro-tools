@@ -1,7 +1,6 @@
 import threading
 import time
 
-from config.icon import play_sfx
 from game.spawn_skill import SA_CASTCANCEL
 from service.config_file import ABRACADABRA, CONFIG_FILE, KEY, MVP_ACTIVE, PET_ACTIVE, SKILL_SPAWMMER
 from service.keyboard import KEYBOARD
@@ -37,7 +36,6 @@ class AutoAbracadabra:
             is_mvp_skill = mvp_active and GAME_EVENT.char.abracadabra_skill == SKILL_MVP
             is_pet_skill = mvp_active and GAME_EVENT.char.abracadabra_skill == SKILL_PET_CAPTURE
             if is_mvp_skill or is_pet_skill:
-                play_sfx(SKILL_MVP if is_mvp_skill else SKILL_PET_CAPTURE)
                 self.skill_spawmmer_event.is_abracadabra_active = False
                 break
             self.execute_action(key, job_id, skill)

@@ -24,6 +24,7 @@ ATK_1 = Macro("attack_1", "Equipes de Ataque 1", ICON_SWORD)
 ATK_2 = Macro("attack_2", "Equipes de Ataque 2", ICON_SWORD)
 ATK_3 = Macro("attack_3", "Equipes de Ataque 3", ICON_SWORD)
 ATK_4 = Macro("attack_4", "Equipes de Ataque 4", ICON_SWORD)
+ATK_5 = Macro("attack_5", "Equipes de Ataque 5", ICON_SWORD)
 ELEMENT_FIRE = Macro("element_fire", "Equipes (Fogo)", ICON_FIRE)
 ELEMENT_WATER = Macro("element_water", "Equipes (Água)", ICON_WATER)
 ELEMENT_EARTH = Macro("element_earth", "Equipes (Terra)", ICON_EARTH)
@@ -37,6 +38,7 @@ DEF_1 = Macro("defense_1", "Equipes de Defesa 1", ICON_SHIELD)
 DEF_2 = Macro("defense_2", "Equipes de Defesa 2", ICON_SHIELD)
 DEF_3 = Macro("defense_3", "Equipes de Defesa 3", ICON_SHIELD)
 DEF_4 = Macro("defense_4", "Equipes de Defesa 4", ICON_SHIELD)
+DEF_5 = Macro("defense_5", "Equipes de Defesa 5", ICON_SHIELD)
 
 SONG_1 = Macro("song_1", "Playlist 1", ICON_SONG)
 SONG_2 = Macro("song_2", "Playlist 2", ICON_SONG)
@@ -54,9 +56,9 @@ JAGUAR_HAT = Macro("jaguar_hat", "Máscara de Onça-Pintada", get_image(PATH_ITE
 MACRO_ELEMENTS = [ELEMENT_FIRE, ELEMENT_WATER, ELEMENT_EARTH, ELEMENT_WIND, ELEMENT_HOLY, ELEMENT_DARK, ELEMENT_GHOST, ELEMENT_DARK_WATER]
 
 MACRO_TYPES = {
-    "Ataque": [ATK_1, ATK_2, ATK_3, ATK_4],
+    "Ataque": [ATK_1, ATK_2, ATK_3, ATK_4, ATK_5],
     "Elementos": MACRO_ELEMENTS,
-    "Defesa": [DEF_1, DEF_2, DEF_3, DEF_4],
+    "Defesa": [DEF_1, DEF_2, DEF_3, DEF_4, DEF_5],
     "Songs Clown | Gypsy": [SONG_1, SONG_2, SONG_3, SONG_4],
     "Craft": [AM_PHARMACY, WS_WEAPONREFINE],
     "Outros": [CHAT, JAGUAR_HAT, SMOKIE, HORONG],
@@ -67,10 +69,12 @@ MACRO_MAP = {
     "attack_2": ATK_2,
     "attack_3": ATK_3,
     "attack_4": ATK_4,
+    "attack_5": ATK_5,
     "defense_1": DEF_1,
     "defense_2": DEF_2,
     "defense_3": DEF_3,
     "defense_4": DEF_4,
+    "defense_5": DEF_5,
     "element_fire": ELEMENT_FIRE,
     "element_water": ELEMENT_WATER,
     "element_earth": ELEMENT_EARTH,

@@ -1,4 +1,7 @@
 {
+    "sounds": {
+        "enabled": true
+    },
     "auto_item": {
         "hp_potion": {
             "delay_active": false,
@@ -27,18 +30,17 @@
             "active": true,
             "shortcut": {
                 "": "Home"
-            },
-            "key": "2"
+            }
         },
         "halter_lead": {
             "moviment_cells": 4
         },
-        "city_block": true
+        "city_block": false
     },
     "links": {
         "vote": {
             "delay_active": true,
-            "time": "2025-09-17T12:53:38.276740",
+            "time": "2025-09-22T04:06:21.911478",
             "delay": 12
         }
     },
@@ -205,6 +207,15 @@
             "chat": {
                 "repeat_active": false,
                 "active": false
+            },
+            "element_dark": {
+                "repeat_active": false,
+                "active": false
+            }
+        },
+        "auto_element": {
+            "element_holy": {
+                "active": false
             }
         }
     },
@@ -235,7 +246,7 @@
                     "key": "O"
                 },
                 "awakening_potion": {
-                    "active": true,
+                    "active": false,
                     "cooldown": 30,
                     "timer_active": false,
                     "block_quagmire": false,
@@ -261,6 +272,9 @@
                 },
                 "key": "F1"
             }
+        },
+        "skill_equip": {
+            "city_block": true
         }
     },
     "archer": {
@@ -380,7 +394,7 @@
                 "map_active": false
             },
             "lk_aurablade": {
-                "active": false,
+                "active": true,
                 "cooldown": 30,
                 "timer_active": false,
                 "block_quagmire": false,
@@ -390,7 +404,7 @@
                 "key": "6"
             },
             "lk_giant_growth": {
-                "active": false,
+                "active": true,
                 "cooldown": 1.0,
                 "timer_active": false,
                 "block_quagmire": false,
@@ -401,7 +415,7 @@
             },
             "city_block": true,
             "lk_concentration": {
-                "active": false,
+                "active": true,
                 "cooldown": 30,
                 "timer_active": false,
                 "block_quagmire": false,
@@ -409,12 +423,22 @@
                 "use_moviment": false,
                 "map_active": false,
                 "key": "7"
+            },
+            "mc_loud": {
+                "active": true,
+                "cooldown": 300,
+                "timer_active": false,
+                "block_quagmire": false,
+                "attack_use": false,
+                "use_moviment": false,
+                "map_active": false,
+                "key": "9"
             }
         },
         "skill_equip": {
             "city_block": true,
             "mc_loud": {
-                "active": true,
+                "active": false,
                 "cooldown": 30,
                 "timer_active": false,
                 "block_quagmire": false,
@@ -426,7 +450,7 @@
         "auto_item": {
             "item_debuff": {
                 "guyak_potion": {
-                    "active": true,
+                    "active": false,
                     "map_active": false,
                     "key": "H"
                 },
@@ -435,12 +459,17 @@
                     "active": true,
                     "map_active": false,
                     "key": "G"
+                },
+                "elvira_candy": {
+                    "active": true,
+                    "map_active": false,
+                    "key": "H"
                 }
             },
             "item_buff": {
                 "eden_scroll": {
                     "active": false,
-                    "cooldown": 30,
+                    "cooldown": 24.0,
                     "timer_active": true,
                     "block_quagmire": false,
                     "attack_use": false,
@@ -448,22 +477,193 @@
                     "map_active": false,
                     "key": "N"
                 },
-                "city_block": true
+                "city_block": true,
+                "inc_agi_up_scroll": {
+                    "active": false,
+                    "cooldown": 30,
+                    "timer_active": false,
+                    "block_quagmire": false,
+                    "attack_use": false,
+                    "use_moviment": false,
+                    "map_active": false,
+                    "key": "N"
+                },
+                "fire_enchant_scroll": {
+                    "active": false,
+                    "cooldown": 30,
+                    "timer_active": false,
+                    "block_quagmire": false,
+                    "attack_use": false,
+                    "use_moviment": false,
+                    "map_active": false
+                }
             }
         },
         "auto_element": {
             "element_fire": {
+                "active": true
+            },
+            "element_holy": {
+                "active": true
+            },
+            "element_dark": {
+                "active": true
+            },
+            "element_water": {
+                "active": true
+            },
+            "element_earth": {
+                "active": true
+            },
+            "element_wind": {
+                "active": true
+            },
+            "element_ghost": {
+                "active": true
+            },
+            "attack_1": {
+                "active": false
+            }
+        },
+        "hotkey": {
+            "element_fire": {
+                "repeat_active": false,
+                "active": false,
+                "key": "Space"
+            },
+            "smokie": {
+                "repeat_active": false,
                 "active": false
             },
             "element_holy": {
+                "repeat_active": false,
+                "active": false,
+                "key": "S"
+            },
+            "element_ghost": {
+                "repeat_active": false,
+                "active": false,
+                "key": "F"
+            },
+            "attack_1": {
+                "repeat_active": false,
                 "active": false
+            }
+        },
+        "macro": {
+            "element_fire": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_mouse_click": false,
+                "seq_1_active": true,
+                "seq_1_delay_active": false,
+                "seq_2_active": true,
+                "seq_2_mouse_click": false,
+                "seq_2_delay_active": false,
+                "seq_1_key": "Space",
+                "seq_2_key": "S",
+                "seq_3_active": true,
+                "seq_3_mouse_click": false,
+                "seq_3_delay_active": false,
+                "seq_3_key": "Space"
+            },
+            "defense_1": {
+                "active": false,
+                "seq_0_delay_active": false
+            },
+            "attack_1": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_mouse_click": false,
+                "seq_1_delay_active": false,
+                "seq_1_key": "R"
+            },
+            "ws_weaponrefine": {
+                "active": false,
+                "seq_0_delay_active": false
+            },
+            "element_holy": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_mouse_click": false,
+                "seq_1_delay_active": false,
+                "seq_2_mouse_click": false,
+                "seq_2_active": false,
+                "seq_2_delay_active": false,
+                "seq_1_key": "S"
+            },
+            "element_water": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_mouse_click": false,
+                "seq_1_delay_active": false,
+                "seq_1_key": "Space",
+                "seq_2_active": true,
+                "seq_2_mouse_click": false,
+                "seq_2_delay_active": false,
+                "seq_2_key": "G",
+                "seq_3_active": true,
+                "seq_3_mouse_click": false,
+                "seq_3_delay_active": false,
+                "seq_3_key": "Space"
+            },
+            "element_earth": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_mouse_click": false,
+                "seq_1_delay_active": false,
+                "seq_2_active": true,
+                "seq_2_mouse_click": false,
+                "seq_2_delay_active": false,
+                "seq_3_active": true,
+                "seq_3_mouse_click": false,
+                "seq_3_delay_active": false,
+                "seq_1_key": "Space",
+                "seq_2_key": "D",
+                "seq_3_key": "Space"
+            },
+            "element_wind": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_mouse_click": false,
+                "seq_1_delay_active": false,
+                "seq_2_active": true,
+                "seq_2_mouse_click": false,
+                "seq_2_delay_active": false,
+                "seq_3_active": true,
+                "seq_3_mouse_click": false,
+                "seq_3_delay_active": false,
+                "seq_1_key": "Space",
+                "seq_2_key": "F",
+                "seq_3_key": "Space"
+            },
+            "element_dark": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_mouse_click": false,
+                "seq_1_delay_active": false,
+                "seq_1_key": "D"
+            },
+            "element_ghost": {
+                "active": true,
+                "seq_0_delay_active": false,
+                "seq_1_active": true,
+                "seq_1_mouse_click": false,
+                "seq_1_delay_active": false,
+                "seq_1_key": "F"
             }
         }
     },
     "swordman": {
         "skill_spawmmer": {
             "sm_provoke": {
-                "active": false,
+                "active": true,
                 "mouse_click": true,
                 "mouse_flick": false,
                 "delay_active": false,
@@ -478,7 +678,7 @@
         },
         "skill_buff": {
             "sm_magnum": {
-                "active": false,
+                "active": true,
                 "cooldown": 175.0,
                 "timer_active": false,
                 "block_quagmire": false,
@@ -488,7 +688,7 @@
                 "key": "8"
             },
             "sm_autoberserk": {
-                "active": false,
+                "active": true,
                 "cooldown": 30,
                 "timer_active": false,
                 "block_quagmire": false,
@@ -511,7 +711,7 @@
     "knight": {
         "skill_spawmmer": {
             "kn_brandishspear": {
-                "active": false,
+                "active": true,
                 "mouse_click": true,
                 "mouse_flick": false,
                 "delay_active": false,
@@ -528,16 +728,31 @@
     "key_monitoring": "\\",
     "auto_element": {
         "element_fire": {
-            "mob_ids": "--- Comum ---\n\n--- MVP ---\n;1087; -> Orc Hero [gef_fild02, gef_fild14]\n;1147; -> Maya [anthell02, gld_dun03]\n;1159; -> Freeoni [moc_fild17]\n;1511; -> Amon Ra [moc_pryd06]\n;1190; -> Senhor dos Orcs [gef_fild10]\n;1312; -> General Tartaruga [tur_dun04]\n;1885; -> Gopinich [mosk_dun03]\n;1648; -> Mestre Ferreiro Howard [lhz_dun03]\n\n--- Mini ---\n;1289; -> Maya Puple [anthell01, gld_dun03]\n"
+            "mob_ids": "--- Cheff\u00eania ---\n\nTier S:\n;2087; -> Queen Scaraba [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20202; -> Mestre-Ferreiro Howard [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;21281; -> Outono Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier A:\n\n\nTier B:\n;20181; -> Amon Ra [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;3747; -> E Cowraiders1 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;3748; -> E Cowraiders2 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;3749; -> E Cowraiders3 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20194; -> Senhor dos Orcs [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier C:\n;20198; -> Freeoni [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20200; -> General Tartaruga [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20191; -> Maya [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20195; -> Orc Her\u00f3i [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20239; -> Gorynynch [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]"
         },
         "element_holy": {
-            "mob_ids": "--- Comum ---\n;12;19; -> Cavaleiro do Abismo [gefenia04]\n;13;75; -> Papel [ama_dun02]\n\n--- MVP ---\n;1492; -> Samurai Encarnado [ama_dun03]\n;1112; -> Drake [treasure02]\n;1623; -> RSX-0806 [ein_dun02]\n;1157; -> Fara\u00f3 [in_sphinx5]\n;1038; -> Os\u00edris [moc_pryd04]\n;1373; -> Senhor dos Mortos [niflheim]\n;1272; -> Senhor das Trevas [gl_chyard, gld_dun04]\n;1871; -> Bispo Decadente [abbey02]\n;1039; -> Bafom\u00e9 [prt_maze03]\n;1917; -> Morocc Ferido [moc_fild22]\n;1389; -> Dr\u00e1cula [gef_dun01]\n;1046; -> Doppelganger [gef_dun02, gld_dun02]\n;1583; -> Tao Gunka [beach_dun]\n;1719; -> Detardeurus [abyss03]\n;1734; -> Kiel D-01 [kh_dun02]\n;2022; -> Sombra de Nidhogg\n;1647; -> Algoz Eremes [lhz_dun03]\n;1785; -> Atroce [ra_fild02, ra_fild03, ra_fild04, ve_fild01, ve_fild02]\n\n--- Mini ---\n;1582; -> Deviling [pay_fild04, yuno_fild03]\n;1302; -> Ilus\u00e3o das Trevas [gld_dun04, gl_church]\n"
+            "mob_ids": "--- Cheff\u00eania ---\n\nTier S:\n;2529; -> Rainha Verme [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;3098; -> Morroc Ferido [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20573; -> Amdarais Corrompido [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20249; -> Algoz Eremes [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20203; -> Desordeira Gertie [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier A:\n;20216; -> Atroce [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20218; -> Bispo Decadente [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20212; -> Kiel D-01 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;3659; -> Rei da Noite [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20230; -> R\u00e9quiem de Marfim [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;2131; -> Drogon [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20891; -> Venomorfo Perfeito [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;2476; -> Amdarais [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier B:\n;20206; -> Senhor dos Mortos [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20182; -> Bafom\u00e9 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20183; -> Senhor das Trevas [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20209; -> Detardeurus [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier C:\n;20185; -> Dr\u00e1cula [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20186; -> Drake [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20197; -> Fara\u00f3 [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20235; -> Samurai Encarnado [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20184; -> Doppelganger [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20196; -> Os\u00edris [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20199; -> Tao Gunka [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]"
         },
         "element_ground": {
             "mob_ids": "--- Comum ---\n;12;53; -> G\u00e1rgula [gl_sew02]\n\n--- MVP ---\n;1251; -> Cavaleiro da Tempestade [xmas_dun02]\n;1059; -> Abelha Rainha [mjolnir_04]\n;1688; -> Lady Tanee [ayo_dun02]\n;1630; -> Lady Branca [lou_dun03]\n;1650; -> Atiradora de Elite Ceci [lhz_dun03]\n\n\n--- Mini ---\n"
         },
         "element_ghost": {
-            "mob_ids": "--- Comum ---\n\n--- MVP ---\n;1768; -> Pesar Noturno [ra_san05]\n;1873; -> Beelzebub [abbey03]\n;1418; -> Serpente Suprema [gon_dun03]\n;1651; -> Arquimaga Kathryne [lhz_dun03]\n\n--- Mini ---\n;1120; -> Ghostring [pay_fild04, treasure02, prt_maze03, gld_dun04]\n"
+            "mob_ids": "--- Cheff\u00eania ---\n\nTier S:\n;20217; -> Belzebu [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20208; -> Naght Sieger [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20244; -> Gioia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20204; -> Arquimaga Kathryne [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20246; -> Professora Celia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier A:\n;2996; -> Celine Kimi [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20219; -> Pesar Noturno [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20618; -> Detardeurus Esquel\u00e9tico [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20381; -> Groteskia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20210; -> Mem\u00f3ria de Thanatos [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier B:\n\n\nTier C:\n;20237; -> Serpente Suprema [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;2564; -> Fenrir [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]"
+        },
+        "element_dark": {
+            "mob_ids": "--- Cheff\u00eania ---\n\nTier S:\n;20213; -> Valqu\u00edria Randgris [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;21315; -> Avatar de Freya [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20205; -> Sacerdotisa Margaretha [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20226; -> Paladino Randel [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier B:\n;20211; -> Vesper [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]"
+        },
+        "element_water": {
+            "mob_ids": "--- Cheff\u00eania ---\n\nTier S:\n;20220; -> Ifrit [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20201; -> Lorde Seyren [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20227; -> Criador Flamel [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;21282; -> Ver\u00e3o Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier A:\n;3092; -> Skoll [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;21301; -> Presa Flamejante [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier B:\n;20215; -> Egnigem Cenia [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier C:\n;20187; -> Eddga [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20193; -> Flor do Luar [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20240; -> Boitata [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20189; -> Besouro-Ladr\u00e3o Dourado [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]"
+        },
+        "element_earth": {
+            "mob_ids": "--- Cheff\u00eania ---\n\nTier S:\n;20225; -> Atiradora de Elite Cecil [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20248; -> Menestrel Alphochio [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20228; -> Cigana Trentini [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;21280; -> Primavera Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier A:\n\n\nTier B:\n\n\nTier C:\n;20236; -> Lady Branca [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20238; -> Lady Tanee [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20192; -> Abelha-Rainha [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20190; -> Cavaleiro da Tempestade [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]"
+        },
+        "element_wind": {
+            "mob_ids": "--- Cheff\u00eania ---\n\nTier S:\n;20233; -> Kraken [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20221; -> Ktullanux [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;20247; -> Mestre Chen [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;21283; -> Inverno Ancestral [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier B:\n;20251; -> Polvo Gigante [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n\nTier C:\n;20188; -> Hatii [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]\n;2538; -> Rei Poring [cheffenia01, cheffenia02, cheffenia03, cheffenia04, cheffenia05, cheffenia06]"
+        },
+        "attack_1": {
+            "mob_ids": "--- IDs de Monstros para Equipes de Ataque ---\n\n;1001; -> Escorpi\u00e3o\n;1002; -> Aranha\n;1004; -> Erva Daninha\n;1014; -> Esporo [pay_fild01]\n"
         }
     }
 }

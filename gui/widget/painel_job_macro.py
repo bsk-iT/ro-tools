@@ -1,4 +1,5 @@
 import copy
+from typing import Optional
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, QLabel, QPushButton, QFrame, QScrollArea
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QPixmap, QIcon
@@ -22,7 +23,7 @@ class PainelJobMacro(QWidget):
         super().__init__(parent)
         self.layout: QVBoxLayout = QVBoxLayout(self)
         self.cbox_macro: CboxMacro = CboxMacro(self)
-        self.last_scroll: QScrollArea = None
+        self.last_scroll: Optional[QScrollArea] = None
         self.last_pos_vertical_scroll = None
         self._config_layout()
         APP_CONTROLLER.updated_job.connect(self.update_macros)
@@ -150,13 +151,15 @@ class PainelJobMacro(QWidget):
     def _on_add_remove_mouse_click(self, key_seq, active, forceRemove = False):
         CONFIG_FILE.update(key_seq + MOUSE_CLICK, not forceRemove and active)
         CONFIG_FILE.update(key_seq + ACTIVE, not forceRemove and not active)
-        self.last_pos_vertical_scroll = self.last_scroll.verticalScrollBar().value()
+        if self.last_scroll is not None:
+            self.last_pos_vertical_scroll = self.last_scroll.verticalScrollBar().value()
         self.update_macros()
 
     def _on_add_remove_keybind(self, key_seq, active, forceRemove = False):
         CONFIG_FILE.update(key_seq + ACTIVE, not forceRemove and active)
         CONFIG_FILE.update(key_seq + MOUSE_CLICK, not forceRemove and not active)
-        self.last_pos_vertical_scroll = self.last_scroll.verticalScrollBar().value()
+        if self.last_scroll is not None:
+            self.last_pos_vertical_scroll = self.last_scroll.verticalScrollBar().value()
         self.update_macros()
 
     def _build_btn_remove_macro(self, job_id, key_seq, macro):
@@ -186,7 +189,7 @@ class PainelJobMacro(QWidget):
         self.update_macros()
         APP_CONTROLLER.add_macro_select.emit(job_id, macro)
 
-    def _build_input_keybind(self, new_key_seq, next_is_active) -> QFrame:
+    def _build_input_keybind(self, new_key_seq, next_is_active) -> QWidget:
         (widget, layout) = build_action_badge()
         is_mouse_click = CONFIG_FILE.read(new_key_seq + MOUSE_CLICK)
         if is_mouse_click:

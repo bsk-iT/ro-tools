@@ -36,7 +36,7 @@ class AppController(QObject):
         super().__init__(None)
         self.process_name = None
         self.status_toggle = None
-        self.tray_menu: QSystemTrayIcon = None
+        self.tray_menu: QSystemTrayIcon | None = None
         self.cbox_macro = None
         self.skill_spammer_event = SkillSpawmmer(None)
         self.hotkey_event = HotkeyEvent(None)
@@ -102,9 +102,9 @@ class AppController(QObject):
     def _add_hotkey(self, job_id, event, key, event_ctrl):
         if key is None or not self.running:
             return
-        handler = keyboard.on_press_key(key, lambda _: {None if KEYBOARD.is_simulating_key(key) else event_ctrl.start(key, job_id, event)})
+        handler = keyboard.on_press_key(key, lambda _: None if KEYBOARD.is_simulating_key(key) else event_ctrl.start(key, job_id, event))
         self.hotkeys_handler[key] = (handler, event_ctrl)
-        keyboard.on_release_key(key, lambda _: {None if KEYBOARD.is_simulating_key(key) else event_ctrl.stop(key, job_id, event)})
+        keyboard.on_release_key(key, lambda _: None if KEYBOARD.is_simulating_key(key) else event_ctrl.stop(key, job_id, event))
 
     def remove_hotkey(self, key):
         if key not in self.hotkeys_handler:
@@ -143,13 +143,14 @@ class AppController(QObject):
             self.hotkeys_handler[self.status_key] = (handler, None)
 
     def on_fly_wing_key(self):
-        KEYBOARD.add_pressed_key(self.fly_wing_key)
-        time.sleep(0.35)
-        self.toggle_fly_wing = not self.toggle_fly_wing
+        if self.fly_wing_key:
+            KEYBOARD.add_pressed_key(self.fly_wing_key)
+            time.sleep(0.35)
+            self.toggle_fly_wing = not self.toggle_fly_wing
 
     def on_auto_tele_shortcut_key(self):
         active = CONFIG_FILE.read(f"{AUTO_ITEM}:{FLY_WING}:{AUTO_TELEPORT}")
-        play_sfx(f"auto_tele_{'on' if not active else 'off'}")
+        play_sfx("off" if active else "on")
         self.toogled_auto_tele.emit(not active)
 
     def on_auto_commands_key(self):
@@ -186,11 +187,12 @@ class AppController(QObject):
     def on_togle_monitoring(self, value=None):
         if not MEMORY.is_valid():
             return
-        if value is None:
+        if value is None and self.status_toggle:
             self.status_toggle.toggle()
             return
-        self.running = self.status_toggle.isChecked()
-        self.start_all_events() if self.running else self.stop_all_events()
+        if self.status_toggle:
+            self.running = self.status_toggle.isChecked()
+            self.start_all_events() if self.running else self.stop_all_events()
 
     def stop_all_events(self):
         from events.game_event import GAME_EVENT
@@ -199,7 +201,8 @@ class AppController(QObject):
         self.toggle_fly_wing = False
         self.skill_spammer_event.force_stop()
         self.remove_all_hotkeys()
-        self.status_toggle.setIcon(QIcon(ICON_OFF))
+        if self.status_toggle:
+            self.status_toggle.setIcon(QIcon(ICON_OFF))
         play_sfx("off")
 
     def start_all_events(self):
@@ -207,7 +210,8 @@ class AppController(QObject):
 
         GAME_EVENT.start()
         self.sync_hotkeys()
-        self.status_toggle.setIcon(QIcon(ICON_ON))
+        if self.status_toggle:
+            self.status_toggle.setIcon(QIcon(ICON_ON))
         play_sfx("on")
 
 

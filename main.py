@@ -48,9 +48,9 @@ def run_as_admin():
 def main():
     # Verificar se está rodando como administrador
     if not is_admin():
-        print("🔒 RO Tools precisa de privilégios de administrador para acessar a memória do jogo.")
-        print("🚀 Reiniciando como administrador...")
-        
+        print("RO Tools precisa de privilegios de administrador para acessar a memoria do jogo.")
+        print("Reiniciando como administrador...")
+
         # Tentar reiniciar como administrador
         if run_as_admin():
             sys.exit(0)  # Encerrar a instância atual
@@ -79,9 +79,18 @@ def main():
 
 
 def _build_font():
-    font = QFontDatabase.addApplicationFont(APP_FONT)
-    font_family = QFontDatabase.applicationFontFamilies(font)[0]
-    return QFont(font_family, APP_FONT_SIZE)
+    try:
+        font = QFontDatabase.addApplicationFont(APP_FONT)
+        font_families = QFontDatabase.applicationFontFamilies(font)
+        if font_families and len(font_families) > 0:
+            font_family = font_families[0]
+            return QFont(font_family, APP_FONT_SIZE)
+        else:
+            print("⚠️ Fonte customizada não encontrada, usando fonte padrão")
+            return QFont("Arial", APP_FONT_SIZE)
+    except Exception as e:
+        print(f"⚠️ Erro ao carregar fonte: {e}")
+        return QFont("Arial", APP_FONT_SIZE)
 
 
 if __name__ == "__main__":

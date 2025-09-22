@@ -213,16 +213,37 @@ class Char:
     def next_macro_element_to_use(self, list_auto_element):
         macros_to_use = []
         if MEMORY.entity_list_address == 0x0:
+            print("🚫 next_macro_element_to_use: Entity list address é 0x0")
             return (None, None, None)
+            
+        total_entities = len(self.entity_list)
+        if total_entities == 0:
+            print("🚫 next_macro_element_to_use: Nenhuma entidade detectada")
+            return (None, None, None)
+            
+        print(f"🔍 next_macro_element_to_use: Verificando {total_entities} entidades contra auto elements configurados")
+        
         for job, macros in list_auto_element.items():
             for macro in macros:
                 mob_ids = CONFIG_FILE.get_mob_ids([AUTO_ELEMENT, macro.id])
+                print(f"🎯 Macro {macro.id}: IDs configurados = {mob_ids}")
+                
                 for entity in self.entity_list:
-                    if entity[0] in mob_ids:
-                        macros_to_use.append((job, macro.id, entity[2]))
+                    entity_id = entity[0]
+                    entity_distance = entity[2]
+                    
+                    if entity_id in mob_ids:
+                        print(f"✅ MATCH! Entidade {entity_id} ({entity[1]}) a {entity_distance:.2f} unidades corresponde ao macro {macro.id}")
+                        macros_to_use.append((job, macro.id, entity_distance))
+                        
         if len(macros_to_use) == 0:
+            print("❌ next_macro_element_to_use: Nenhuma entidade corresponde aos IDs configurados")
             return (None, None, None)
-        return sorted(macros_to_use, key=lambda x: x[2])[0]
+            
+        # Ordena por distância (mais próximo primeiro)
+        result = sorted(macros_to_use, key=lambda x: x[2])[0]
+        print(f"🏆 next_macro_element_to_use: Selecionado macro {result[1]} (distância: {result[2]:.2f})")
+        return result
 
     def monitoring_job_change_gui(self):
         if MEMORY.job_address == 0x0:

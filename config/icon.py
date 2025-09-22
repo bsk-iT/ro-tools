@@ -60,5 +60,23 @@ def get_image(path: str, file_name: str):
 
 
 def play_sfx(sfx_name):
-    pygame.mixer.music.load(resource_path(f"assets/sfx/{sfx_name}.wav"))
-    pygame.mixer.music.play()
+    from service.config_file import CONFIG_FILE
+    
+    # Verifica se os sons estão habilitados
+    try:
+        sounds_enabled = CONFIG_FILE.get_value(['sounds', 'enabled'])
+        if not sounds_enabled:
+            return
+    except:
+        # Se não conseguir ler a configuração, assume que está habilitado
+        pass
+    
+    # Apenas permite sons 'on' e 'off'
+    if sfx_name not in ['on', 'off']:
+        return
+        
+    try:
+        pygame.mixer.music.load(resource_path(f"assets/sfx/{sfx_name}.wav"))
+        pygame.mixer.music.play()
+    except:
+        pass  # Ignora erros de som silenciosamente
